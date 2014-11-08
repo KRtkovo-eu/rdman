@@ -1,0 +1,12 @@
+C:\git\rdman\rdman\bin\Release\icons\android.ico
+C:\git\rdman\rdman\bin\Release\icons\apple.ico
+C:\git\rdman\rdman\bin\Release\icons\linux.ico
+C:\git\rdman\rdman\bin\Release\icons\rdman.ico
+C:\git\rdman\rdman\bin\Release\icons\unknown.ico
+C:\git\rdman\rdman\bin\Release\icons\windows.ico
+C:\git\rdman\rdman\bin\Release\sources.xml
+C:\git\rdman\rdman\bin\Release\rdman.exe
+C:\git\rdman\rdman\obj\Release\rdman.mainForm.resources
+C:\git\rdman\rdman\obj\Release\rdman.Resources.resources
+C:\git\rdman\rdman\obj\Release\rdman.vbproj.GenerateResource.Cache
+C:\git\rdman\rdman\obj\Release\rdman.exe
