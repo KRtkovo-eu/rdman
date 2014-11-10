@@ -1,12 +1,3 @@
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\bin\Debug\rdman.exe
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\bin\Debug\rdman.pdb
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\bin\Debug\rdman.xml
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\obj\Debug\rdman.mainForm.resources
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\obj\Debug\rdman.Resources.resources
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\obj\Debug\rdman.vbproj.GenerateResource.Cache
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\obj\Debug\rdman.exe
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\obj\Debug\rdman.xml
-c:\users\administrator\documents\visual studio 2013\Projects\rdman\rdman\obj\Debug\rdman.pdb
 C:\git\rdman\rdman\bin\Debug\icons\android.ico
 C:\git\rdman\rdman\bin\Debug\icons\apple.ico
 C:\git\rdman\rdman\bin\Debug\icons\linux.ico
@@ -27,3 +18,23 @@ C:\git\rdman\rdman\bin\Debug\asciiGraphics\2.txt
 C:\git\rdman\rdman\bin\Debug\asciiGraphics\3.txt
 C:\git\rdman\rdman\bin\Debug\asciiGraphics\1.txt
 C:\git\rdman\rdman\obj\Debug\rdman.aboutForm.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\asciiGraphics\4.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\asciiGraphics\2.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\asciiGraphics\3.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\asciiGraphics\1.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\android.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\apple.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\linux.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\rdman.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\unknown.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\windows.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\asciiGraphics\0.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\sources.csv
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\rdman.exe
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\rdman.pdb
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.aboutForm.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.mainForm.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.Resources.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.vbproj.GenerateResource.Cache
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.exe
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.pdb

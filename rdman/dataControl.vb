@@ -5,39 +5,92 @@ Module dataControl
     Dim mstscPath As String = windir + "\system32\mstsc.exe"
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
-    Dim sourcesArray As ArrayList
+    Dim nodes As List(Of String())
 
-    Function csvArray(ByVal sources As String)
+    Function csvArray(ByVal sources As String) As List(Of String())
         Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
-        Dim CurrentRecord As String() ' this array will hold each line of data
-        Dim arrayComplete As ArrayList
+        Dim csvLine As String()
 
-        'afile.TextFieldType = FileIO.FieldType.Delimited
-        'afile.Delimiters = New String() {";"}
-        'afile.HasFieldsEnclosedInQuotes = False
+        afile.TextFieldType = FileIO.FieldType.Delimited
+        afile.Delimiters = New String() {";"}
+        afile.HasFieldsEnclosedInQuotes = False
 
-        '' parse the actual file
-        'Do While Not afile.EndOfData
-        '    CurrentRecord = afile.ReadFields
-        '    arrayComplete.Add(CurrentRecord)
-        'Loop
+        nodes = New List(Of String())
 
-        Return arrayComplete
+        ' parse the actual file
+        Do While Not afile.EndOfData
+            csvLine = afile.ReadFields
+            nodes.Add(csvLine)
+        Loop
+
+        Return nodes
     End Function
 
     Public Sub statistics(ByVal newLine As String)
         mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss> ") + newLine + vbNewLine)
     End Sub
 
-    Public Sub saveSource(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeName As String, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeSystem As String, ByVal nodeVersion As String, ByVal nodeDescription As String, ByVal nodeFullscreen As Boolean)
+    Public Function statisticsEnvironment() As String
+        Dim compTitle As String
 
+        compTitle = "Environment: "
+        compTitle += My.Computer.Name
+        compTitle += " (system: "
+        compTitle += My.Computer.Info.OSFullName
+        compTitle += "| locale: "
+        compTitle += My.Computer.Info.InstalledUICulture.EnglishName
+        compTitle += "| memory: "
+        compTitle += SetBytes(My.Computer.Info.AvailablePhysicalMemory)
+        compTitle += "/"
+        compTitle += SetBytes(My.Computer.Info.TotalPhysicalMemory)
+        compTitle += ")"
+
+        If My.Computer.Network.IsAvailable = True Then
+            compTitle += " is connected to network. Ready to work!"
+
+        Else
+            compTitle += "is not connected to network."
+        End If
+
+        Return compTitle
+    End Function
+
+    Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
+        deleteSource(nodeName)
+
+        Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text}
+
+        nodes.Add(sourceData)
+
+        Dim objWriter As New System.IO.StreamWriter(sourcesDb)
+
+        For Each element In nodes
+            Dim line As String
+            line = element(0) + ";"
+            line += element(1) + ";"
+            line += element(2) + ";"
+            line += element(3) + ";"
+            line += element(4) + ";"
+            line += element(5) + ";"
+            line += element(6) + ";"
+            line += element(7) + ";"
+            line += element(8)
+
+            objWriter.WriteLine(line)
+        Next
+
+        objWriter.Close()
+        statistics("Node ~" + nodeName + "~ successfully saved.")
+
+        LoadSources(sourcesDb)
     End Sub
 
     Public Sub LoadSources(ByVal sources As String)
-        sourcesArray = csvArray(sources)
+        mainForm.sourcesList.Clear()
+        mainForm.sourcesList.Items.Add("Add New Node", 5)
 
-        For Each element In sourcesArray
-            mainForm.sourcesList.Items.Add(element(0), 0)
+        For Each element In csvArray(sources)
+            mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(6)))
         Next
 
         statistics("Loaded Sources Database file from " + sources)
@@ -46,9 +99,9 @@ Module dataControl
     Public Sub loadSourceData(ByVal nodeName As String)
         Dim nodeIP, nodePort, nodeSystem, nodeVersion, nodeDescription, nodeWidth, nodeHeight As String
         Dim nodeFullscreen As Boolean
+        Dim nodeSystemNum As Integer
 
         If nodeName = "EMPTY" Then
-            mainForm.boxName.Text = "New node"
             nodeName = "New node"
             nodeIP = "127.0.0.1"
             nodePort = "3389"
@@ -58,17 +111,22 @@ Module dataControl
             nodeFullscreen = False
             nodeWidth = "1024"
             nodeHeight = "768"
+            nodeSystemNum = 4
         Else
-            'mainForm.boxName.Text = "New node"
-            'nodeName = "New node"
-            'nodeIP = "127.0.0.1"
-            'nodePort = "3389"
-            'nodeSystem = "other"
-            'nodeVersion = "unknown system"
-            'nodeDescription = "Node description"
-            'nodeFullscreen = False
-            'nodeWidth = "1024"
-            'nodeHeight = "768"
+            For Each element In nodes
+                If element(0) = nodeName Then
+                    nodeName = element(0)
+                    nodeIP = element(1)
+                    nodePort = element(2)
+                    nodeSystem = element(6)
+                    nodeVersion = element(7)
+                    nodeDescription = element(8)
+                    nodeFullscreen = element(3)
+                    nodeWidth = element(4)
+                    nodeHeight = element(5)
+                    nodeSystemNum = systemToIndexNum(element(6))
+                End If
+            Next
         End If
 
         mainForm.boxName.Text = nodeName
@@ -80,11 +138,23 @@ Module dataControl
         mainForm.boxFullscreen.Checked = nodeFullscreen
         mainForm.boxWidth.Text = nodeWidth
         mainForm.boxHeight.Text = nodeHeight
-        mainForm.boxPicture.Image = mainForm.operatingSystemsImages.Images.Item(mainForm.boxSystem.SelectedIndex)
+        mainForm.boxPicture.Image = mainForm.operatingSystemsImages.Images.Item(nodeSystemNum)
         statistics("Loaded source ~" + nodeName + "~ (system: " + nodeSystem + "| IP or hostname: " + nodeIP + ":" + nodePort + ")")
     End Sub
 
     Public Sub deleteSource(ByVal nodeName As String)
+        Try
+            Dim marker As Integer
+
+            For Each element In nodes
+                If element(0) = nodeName Then
+                    nodes.RemoveAt(marker)
+                End If
+                marker = marker + 1
+            Next
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
     End Sub
 
@@ -127,5 +197,34 @@ Module dataControl
 
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean)
         Return runRemote(nodeIP, nodePort, nodeFullscreen, "1024", "768")
+    End Function
+
+
+    Public Function SetBytes(ByVal number As ULong) As String
+        Select Case number
+            Case Is >= 1073741824
+                Return (number / 1024 / 1024 / 1024).ToString("F2") + " GB"
+            Case Is >= 1048576
+                Return (number / 1024 / 1024).ToString("F2") + " MB"
+            Case Is >= 1024
+                Return (number / 1024).ToString("F2") + " KB"
+            Case Else
+                Return number.ToString + " Bytes"
+        End Select
+    End Function
+
+    Public Function systemToIndexNum(ByVal system As String) As Integer
+        Select Case system
+            Case "Windows"
+                Return 0
+            Case "Linux"
+                Return 1
+            Case "Android"
+                Return 2
+            Case "MacOS"
+                Return 3
+            Case Else
+                Return 4
+        End Select
     End Function
 End Module

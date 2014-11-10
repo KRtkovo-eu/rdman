@@ -10,3 +10,21 @@ C:\git\rdman\rdman\obj\Release\rdman.mainForm.resources
 C:\git\rdman\rdman\obj\Release\rdman.Resources.resources
 C:\git\rdman\rdman\obj\Release\rdman.vbproj.GenerateResource.Cache
 C:\git\rdman\rdman\obj\Release\rdman.exe
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\asciiGraphics\4.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\asciiGraphics\2.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\asciiGraphics\3.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\asciiGraphics\1.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\icons\android.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\icons\apple.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\icons\linux.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\icons\rdman.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\icons\unknown.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\icons\windows.ico
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\asciiGraphics\0.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\sources.csv
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\rdman.exe
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.aboutForm.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.mainForm.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.Resources.resources
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.vbproj.GenerateResource.Cache
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.exe
