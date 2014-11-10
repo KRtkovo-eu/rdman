@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.container = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
@@ -73,6 +73,8 @@ Partial Class mainForm
         Me.statisticTimer = New System.Windows.Forms.Timer(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.EditSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.container, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.container.Panel1.SuspendLayout()
         Me.container.Panel2.SuspendLayout()
@@ -114,7 +116,7 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
@@ -122,6 +124,7 @@ Partial Class mainForm
         Me.sourcesList.ShowGroups = False
         Me.sourcesList.Size = New System.Drawing.Size(204, 487)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
+        Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.sourcesList.TabIndex = 0
         Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
         Me.sourcesList.UseCompatibleStateImageBehavior = False
@@ -475,7 +478,7 @@ Partial Class mainForm
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.AddNodeToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.EditSourcesDatabaseToolStripMenuItem, Me.ToolStripSeparator3, Me.AddNodeToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -572,6 +575,17 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(233, 6)
+        '
+        'EditSourcesDatabaseToolStripMenuItem
+        '
+        Me.EditSourcesDatabaseToolStripMenuItem.Name = "EditSourcesDatabaseToolStripMenuItem"
+        Me.EditSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.EditSourcesDatabaseToolStripMenuItem.Text = "&Edit sources database"
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -654,5 +668,7 @@ Partial Class mainForm
     Friend WithEvents saveStatistics As System.Windows.Forms.SaveFileDialog
     Friend WithEvents SaveNodeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents sourcesList As System.Windows.Forms.ListView
+    Friend WithEvents EditSourcesDatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
 
 End Class

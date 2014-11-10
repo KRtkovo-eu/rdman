@@ -124,4 +124,8 @@
     Private Sub ViewHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHelpToolStripMenuItem.Click
         Process.Start("https://github.com/KRtkovo-eu/rdman/wiki")
     End Sub
+
+    Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
+        Process.Start(sourcesDb)
+    End Sub
 End Class
