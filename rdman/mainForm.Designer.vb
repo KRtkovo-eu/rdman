@@ -23,8 +23,11 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.container = New System.Windows.Forms.SplitContainer()
+        Me.sourcesList = New System.Windows.Forms.ListView()
+        Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
         Me.groupResolutionSettings = New System.Windows.Forms.GroupBox()
@@ -39,20 +42,19 @@ Partial Class mainForm
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.boxSystemVersion = New System.Windows.Forms.TextBox()
         Me.lblVersion = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.buttonNewNode = New System.Windows.Forms.Button()
+        Me.buttonSave = New System.Windows.Forms.Button()
         Me.boxSystem = New System.Windows.Forms.ComboBox()
         Me.lblSystem = New System.Windows.Forms.Label()
         Me.groupConnectionSettings = New System.Windows.Forms.GroupBox()
         Me.boxPort = New System.Windows.Forms.TextBox()
         Me.lblPort = New System.Windows.Forms.Label()
+        Me.buttonConnect = New System.Windows.Forms.Button()
         Me.boxIP = New System.Windows.Forms.TextBox()
         Me.lblIP = New System.Windows.Forms.Label()
         Me.boxName = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.buttonNewNode = New System.Windows.Forms.Button()
-        Me.buttonSave = New System.Windows.Forms.Button()
-        Me.buttonConnect = New System.Windows.Forms.Button()
-        Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.groupImage = New System.Windows.Forms.GroupBox()
         Me.boxPicture = New System.Windows.Forms.PictureBox()
         Me.menuBar = New System.Windows.Forms.MenuStrip()
@@ -73,13 +75,14 @@ Partial Class mainForm
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
         CType(Me.container, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.container.Panel1.SuspendLayout()
         Me.container.Panel2.SuspendLayout()
         Me.container.SuspendLayout()
         Me.groupStatistics.SuspendLayout()
         Me.groupResolutionSettings.SuspendLayout()
         Me.groupAdditionalInformations.SuspendLayout()
-        Me.groupConnectionSettings.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.groupConnectionSettings.SuspendLayout()
         Me.groupImage.SuspendLayout()
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuBar.SuspendLayout()
@@ -91,6 +94,10 @@ Partial Class mainForm
         Me.container.Location = New System.Drawing.Point(0, 24)
         Me.container.Name = "container"
         '
+        'container.Panel1
+        '
+        Me.container.Panel1.Controls.Add(Me.sourcesList)
+        '
         'container.Panel2
         '
         Me.container.Panel2.Controls.Add(Me.groupStatistics)
@@ -100,6 +107,36 @@ Partial Class mainForm
         Me.container.Size = New System.Drawing.Size(792, 449)
         Me.container.SplitterDistance = 204
         Me.container.TabIndex = 1
+        '
+        'sourcesList
+        '
+        Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid
+        Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.sourcesList.HideSelection = False
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.LabelWrap = False
+        Me.sourcesList.Location = New System.Drawing.Point(0, 0)
+        Me.sourcesList.MultiSelect = False
+        Me.sourcesList.Name = "sourcesList"
+        Me.sourcesList.ShowGroups = False
+        Me.sourcesList.Size = New System.Drawing.Size(204, 449)
+        Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
+        Me.sourcesList.TabIndex = 0
+        Me.sourcesList.TileSize = New System.Drawing.Size(100, 20)
+        Me.sourcesList.UseCompatibleStateImageBehavior = False
+        Me.sourcesList.View = System.Windows.Forms.View.SmallIcon
+        '
+        'operatingSystemsIcons
+        '
+        Me.operatingSystemsIcons.ImageStream = CType(resources.GetObject("operatingSystemsIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.operatingSystemsIcons.TransparentColor = System.Drawing.Color.Transparent
+        Me.operatingSystemsIcons.Images.SetKeyName(0, "windows.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(1, "linux.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(2, "android.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
         '
         'groupStatistics
         '
@@ -115,8 +152,8 @@ Partial Class mainForm
         '
         'boxStatistics
         '
+        Me.boxStatistics.AutoWordSelection = True
         Me.boxStatistics.BackColor = System.Drawing.Color.Black
-        Me.boxStatistics.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.boxStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.boxStatistics.Font = New System.Drawing.Font("Lucida Console", 8.0!)
         Me.boxStatistics.ForeColor = System.Drawing.Color.LawnGreen
@@ -124,6 +161,7 @@ Partial Class mainForm
         Me.boxStatistics.Name = "boxStatistics"
         Me.boxStatistics.ReadOnly = True
         Me.boxStatistics.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
+        Me.boxStatistics.ShowSelectionMargin = True
         Me.boxStatistics.Size = New System.Drawing.Size(578, 103)
         Me.boxStatistics.TabIndex = 0
         Me.boxStatistics.Text = ""
@@ -262,6 +300,42 @@ Partial Class mainForm
         Me.lblVersion.TabIndex = 2
         Me.lblVersion.Text = "Version:"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.buttonNewNode)
+        Me.GroupBox1.Controls.Add(Me.buttonSave)
+        Me.GroupBox1.Location = New System.Drawing.Point(303, 0)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(120, 90)
+        Me.GroupBox1.TabIndex = 6
+        Me.GroupBox1.TabStop = False
+        '
+        'buttonNewNode
+        '
+        Me.buttonNewNode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.buttonNewNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.buttonNewNode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonNewNode.ForeColor = System.Drawing.SystemColors.GrayText
+        Me.buttonNewNode.Location = New System.Drawing.Point(19, 47)
+        Me.buttonNewNode.Name = "buttonNewNode"
+        Me.buttonNewNode.Size = New System.Drawing.Size(75, 23)
+        Me.buttonNewNode.TabIndex = 8
+        Me.buttonNewNode.Text = "New node"
+        Me.buttonNewNode.UseVisualStyleBackColor = True
+        '
+        'buttonSave
+        '
+        Me.buttonSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.buttonSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonSave.Location = New System.Drawing.Point(19, 20)
+        Me.buttonSave.Name = "buttonSave"
+        Me.buttonSave.Size = New System.Drawing.Size(75, 23)
+        Me.buttonSave.TabIndex = 7
+        Me.buttonSave.Text = "Save Node"
+        Me.buttonSave.UseVisualStyleBackColor = True
+        '
         'boxSystem
         '
         Me.boxSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -320,6 +394,18 @@ Partial Class mainForm
         Me.lblPort.TabIndex = 4
         Me.lblPort.Text = "Port:"
         '
+        'buttonConnect
+        '
+        Me.buttonConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.buttonConnect.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonConnect.ForeColor = System.Drawing.Color.Green
+        Me.buttonConnect.Location = New System.Drawing.Point(322, 21)
+        Me.buttonConnect.Name = "buttonConnect"
+        Me.buttonConnect.Size = New System.Drawing.Size(75, 23)
+        Me.buttonConnect.TabIndex = 0
+        Me.buttonConnect.Text = "Connect"
+        Me.buttonConnect.UseVisualStyleBackColor = True
+        '
         'boxIP
         '
         Me.boxIP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
@@ -355,61 +441,6 @@ Partial Class mainForm
         Me.lblName.Size = New System.Drawing.Size(38, 13)
         Me.lblName.TabIndex = 0
         Me.lblName.Text = "Name:"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.buttonNewNode)
-        Me.GroupBox1.Controls.Add(Me.buttonSave)
-        Me.GroupBox1.Location = New System.Drawing.Point(303, 0)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(120, 90)
-        Me.GroupBox1.TabIndex = 6
-        Me.GroupBox1.TabStop = False
-        '
-        'buttonNewNode
-        '
-        Me.buttonNewNode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.buttonNewNode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonNewNode.Location = New System.Drawing.Point(19, 21)
-        Me.buttonNewNode.Name = "buttonNewNode"
-        Me.buttonNewNode.Size = New System.Drawing.Size(75, 23)
-        Me.buttonNewNode.TabIndex = 8
-        Me.buttonNewNode.Text = "New node"
-        Me.buttonNewNode.UseVisualStyleBackColor = True
-        '
-        'buttonSave
-        '
-        Me.buttonSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.buttonSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonSave.Location = New System.Drawing.Point(19, 48)
-        Me.buttonSave.Name = "buttonSave"
-        Me.buttonSave.Size = New System.Drawing.Size(75, 23)
-        Me.buttonSave.TabIndex = 7
-        Me.buttonSave.Text = "Save Node"
-        Me.buttonSave.UseVisualStyleBackColor = True
-        '
-        'buttonConnect
-        '
-        Me.buttonConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.buttonConnect.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonConnect.ForeColor = System.Drawing.Color.Green
-        Me.buttonConnect.Location = New System.Drawing.Point(322, 21)
-        Me.buttonConnect.Name = "buttonConnect"
-        Me.buttonConnect.Size = New System.Drawing.Size(75, 23)
-        Me.buttonConnect.TabIndex = 0
-        Me.buttonConnect.Text = "Connect"
-        Me.buttonConnect.UseVisualStyleBackColor = True
-        '
-        'operatingSystemsIcons
-        '
-        Me.operatingSystemsIcons.ImageStream = CType(resources.GetObject("operatingSystemsIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.operatingSystemsIcons.TransparentColor = System.Drawing.Color.Transparent
-        Me.operatingSystemsIcons.Images.SetKeyName(0, "windows.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(1, "linux.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(2, "android.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         '
         'groupImage
         '
@@ -561,6 +592,7 @@ Partial Class mainForm
         Me.Name = "mainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Remote Desktop Manager"
+        Me.container.Panel1.ResumeLayout(False)
         Me.container.Panel2.ResumeLayout(False)
         CType(Me.container, System.ComponentModel.ISupportInitialize).EndInit()
         Me.container.ResumeLayout(False)
@@ -569,9 +601,9 @@ Partial Class mainForm
         Me.groupResolutionSettings.PerformLayout()
         Me.groupAdditionalInformations.ResumeLayout(False)
         Me.groupAdditionalInformations.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         Me.groupConnectionSettings.ResumeLayout(False)
         Me.groupConnectionSettings.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
         Me.groupImage.ResumeLayout(False)
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuBar.ResumeLayout(False)
@@ -628,5 +660,6 @@ Partial Class mainForm
     Friend WithEvents SaveStatisticsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents saveStatistics As System.Windows.Forms.SaveFileDialog
     Friend WithEvents SaveNodeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents sourcesList As System.Windows.Forms.ListView
 
 End Class

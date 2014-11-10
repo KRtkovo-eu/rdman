@@ -16,34 +16,42 @@
         End Select
     End Function
 
+    Private Function statisticsEnvironment() As String
+        Dim compTitle As String
+
+        compTitle = "Environment: "
+        compTitle += My.Computer.Name
+        compTitle += " (system: "
+        compTitle += My.Computer.Info.OSFullName
+        compTitle += "| locale: "
+        compTitle += My.Computer.Info.InstalledUICulture.EnglishName
+        compTitle += "| memory: "
+        compTitle += SetBytes(My.Computer.Info.AvailablePhysicalMemory)
+        compTitle += "/"
+        compTitle += SetBytes(My.Computer.Info.TotalPhysicalMemory)
+        compTitle += ")"
+
+        If My.Computer.Network.IsAvailable = True Then
+            compTitle += " is connected to network. Ready to work!"
+
+        Else
+            compTitle += "is not connected to network."
+        End If
+
+        Return compTitle
+    End Function
+
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim username As String = My.User.Name
         username = username.ToUpper()
         username = username.Replace(My.Computer.Name.ToUpper + "\", "")
 
         statistics("HELLO " + username + "! Have a nice day with " + Me.Text + " " + Me.ProductVersion + ". So let's play the Game! I hope, You will enjoy it ;-)")
+        statistics(statisticsEnvironment())
         Me.Text = Me.Text + " " + Me.ProductVersion
-        Me.boxSystem.SelectedIndex = 4
 
         LoadSources(sourcesDb)
-
-        If My.Computer.Network.IsAvailable = True Then
-            Dim compTitle As String
-
-            compTitle = "Environment: "
-            compTitle += My.Computer.Name
-            compTitle += " (system: "
-            compTitle += My.Computer.Info.OSFullName
-            compTitle += "| locale: "
-            compTitle += My.Computer.Info.InstalledUICulture.EnglishName
-            compTitle += "| memory: "
-            compTitle += SetBytes(My.Computer.Info.AvailablePhysicalMemory)
-            compTitle += "/"
-            compTitle += SetBytes(My.Computer.Info.TotalPhysicalMemory)
-            compTitle += ")"
-
-            statistics(compTitle + " is connected to network. Ready to work!")
-        End If
+        loadSourceData("EMPTY")
     End Sub
 
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
@@ -67,10 +75,6 @@
 
     Private Sub boxSystem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles boxSystem.SelectedIndexChanged
         boxPicture.Image = operatingSystemsImages.Images.Item(boxSystem.SelectedIndex)
-    End Sub
-
-    Public Sub statistics(ByVal newLine As String)
-        Me.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss> ") + newLine + vbNewLine)
     End Sub
 
     Private Sub boxStatistics_TextChanged(sender As Object, e As EventArgs) Handles boxStatistics.TextChanged
@@ -133,5 +137,9 @@
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
         aboutForm.ShowDialog()
+    End Sub
+
+    Private Sub sourcesList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles sourcesList.SelectedIndexChanged
+
     End Sub
 End Class

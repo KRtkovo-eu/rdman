@@ -5,31 +5,83 @@ Module dataControl
     Dim mstscPath As String = windir + "\system32\mstsc.exe"
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
+    Dim sourcesArray As ArrayList
+
+    Function csvArray(ByVal sources As String)
+        Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
+        Dim CurrentRecord As String() ' this array will hold each line of data
+        Dim arrayComplete As ArrayList
+
+        'afile.TextFieldType = FileIO.FieldType.Delimited
+        'afile.Delimiters = New String() {";"}
+        'afile.HasFieldsEnclosedInQuotes = False
+
+        '' parse the actual file
+        'Do While Not afile.EndOfData
+        '    CurrentRecord = afile.ReadFields
+        '    arrayComplete.Add(CurrentRecord)
+        'Loop
+
+        Return arrayComplete
+    End Function
+
+    Public Sub statistics(ByVal newLine As String)
+        mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss> ") + newLine + vbNewLine)
+    End Sub
 
     Public Sub saveSource(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeName As String, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeSystem As String, ByVal nodeVersion As String, ByVal nodeDescription As String, ByVal nodeFullscreen As Boolean)
 
     End Sub
 
     Public Sub LoadSources(ByVal sources As String)
-        mainForm.statistics("Loading Sources Database file from " + sources)
-        'Dim reader As IO.StreamReader = New IO.StreamReader(sourcesDb)
-        'Do While reader.EndOfStream = False
-        '    mainForm.sourcesList.Items.Add(reader.ReadLine)
-        'Loop
-        'reader.Close()
+        sourcesArray = csvArray(sources)
+
+        For Each element In sourcesArray
+            mainForm.sourcesList.Items.Add(element(0), 0)
+        Next
+
+        statistics("Loaded Sources Database file from " + sources)
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String)
-        'mainForm.boxName.Text = nodeName
-        'mainForm.boxIP.Text = nodeIP
-        'mainForm.boxPort.Text = nodePort
-        'mainForm.boxSystem.Text = nodeSystem
-        'mainForm.boxSystemVersion.Text = nodeVersion
-        'mainForm.boxDescription.Text = nodeDescription
-        'mainForm.boxFullscreen.Checked = nodeFullscreen
-        'mainForm.boxWidth.Text = nodeWidth
-        'mainForm.boxHeight.Text = nodeHeight
-        'mainForm.boxPicture.Image = mainForm.operatingSystemsImages.Images.Item(mainForm.boxSystem.SelectedIndex)
+        Dim nodeIP, nodePort, nodeSystem, nodeVersion, nodeDescription, nodeWidth, nodeHeight As String
+        Dim nodeFullscreen As Boolean
+
+        If nodeName = "EMPTY" Then
+            mainForm.boxName.Text = "New node"
+            nodeName = "New node"
+            nodeIP = "127.0.0.1"
+            nodePort = "3389"
+            nodeSystem = "other"
+            nodeVersion = "unknown system"
+            nodeDescription = "Node description"
+            nodeFullscreen = False
+            nodeWidth = "1024"
+            nodeHeight = "768"
+        Else
+            'mainForm.boxName.Text = "New node"
+            'nodeName = "New node"
+            'nodeIP = "127.0.0.1"
+            'nodePort = "3389"
+            'nodeSystem = "other"
+            'nodeVersion = "unknown system"
+            'nodeDescription = "Node description"
+            'nodeFullscreen = False
+            'nodeWidth = "1024"
+            'nodeHeight = "768"
+        End If
+
+        mainForm.boxName.Text = nodeName
+        mainForm.boxIP.Text = nodeIP
+        mainForm.boxPort.Text = nodePort
+        mainForm.boxSystem.Text = nodeSystem
+        mainForm.boxSystemVersion.Text = nodeVersion
+        mainForm.boxDescription.Text = nodeDescription
+        mainForm.boxFullscreen.Checked = nodeFullscreen
+        mainForm.boxWidth.Text = nodeWidth
+        mainForm.boxHeight.Text = nodeHeight
+        mainForm.boxPicture.Image = mainForm.operatingSystemsImages.Images.Item(mainForm.boxSystem.SelectedIndex)
+        statistics("Loaded source ~" + nodeName + "~ (system: " + nodeSystem + "| IP or hostname: " + nodeIP + ":" + nodePort + ")")
     End Sub
 
     Public Sub deleteSource(ByVal nodeName As String)
@@ -60,10 +112,10 @@ Module dataControl
 
             mstsc = Process.Start(ProcessProperties)
             If mstsc.HasExited = False Then
-                mainForm.statistics("Execution > " + mstscPath + " " + ProcessProperties.Arguments)
+                statistics("Execution > " + mstscPath + " " + ProcessProperties.Arguments)
                 Return mstsc.Id
             Else
-                mainForm.statistics("Execution ends with error.")
+                statistics("Execution ends with error.")
                 Return 0
             End If
 

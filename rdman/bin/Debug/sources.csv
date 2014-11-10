@@ -1,2 +1,7 @@
 name;ipAddress;port;fullscreen;width;height;system;version;description
 localhost;127.0.0.1;3389;True;1024;768;unknown;unknown;Example of remote node stored in Remote Desktop Manager.
+localhost1;127.0.0.1;3389;True;1024;768;unknown;unknown;Example of remote node stored in Remote Desktop Manager.
+localhost2;127.0.0.1;3389;True;1024;768;unknown;unknown;Example of remote node stored in Remote Desktop Manager.
+localhost3;127.0.0.1;3389;True;1024;768;unknown;unknown;Example of remote node stored in Remote Desktop Manager.
+localhost4;127.0.0.1;3389;True;1024;768;unknown;unknown;Example of remote node stored in Remote Desktop Manager.
+localhost5;127.0.0.1;3389;True;1024;768;unknown;unknown;Example of remote node stored in Remote Desktop Manager.
