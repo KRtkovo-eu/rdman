@@ -43,7 +43,7 @@ Partial Class mainForm
         Me.boxSystemVersion = New System.Windows.Forms.TextBox()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.buttonDelNode = New System.Windows.Forms.Button()
+        Me.buttonNewNode = New System.Windows.Forms.Button()
         Me.buttonSave = New System.Windows.Forms.Button()
         Me.boxSystem = New System.Windows.Forms.ComboBox()
         Me.lblSystem = New System.Windows.Forms.Label()
@@ -303,7 +303,7 @@ Partial Class mainForm
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.buttonDelNode)
+        Me.GroupBox1.Controls.Add(Me.buttonNewNode)
         Me.GroupBox1.Controls.Add(Me.buttonSave)
         Me.GroupBox1.Location = New System.Drawing.Point(303, 0)
         Me.GroupBox1.Name = "GroupBox1"
@@ -311,19 +311,18 @@ Partial Class mainForm
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         '
-        'buttonDelNode
+        'buttonNewNode
         '
-        Me.buttonDelNode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.buttonDelNode.Enabled = False
-        Me.buttonDelNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.buttonDelNode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonDelNode.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.buttonDelNode.Location = New System.Drawing.Point(19, 47)
-        Me.buttonDelNode.Name = "buttonDelNode"
-        Me.buttonDelNode.Size = New System.Drawing.Size(75, 23)
-        Me.buttonDelNode.TabIndex = 8
-        Me.buttonDelNode.Text = "Delete node"
-        Me.buttonDelNode.UseVisualStyleBackColor = True
+        Me.buttonNewNode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.buttonNewNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.buttonNewNode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonNewNode.ForeColor = System.Drawing.SystemColors.GrayText
+        Me.buttonNewNode.Location = New System.Drawing.Point(19, 47)
+        Me.buttonNewNode.Name = "buttonNewNode"
+        Me.buttonNewNode.Size = New System.Drawing.Size(75, 23)
+        Me.buttonNewNode.TabIndex = 8
+        Me.buttonNewNode.Text = "New Node"
+        Me.buttonNewNode.UseVisualStyleBackColor = True
         '
         'buttonSave
         '
@@ -649,7 +648,7 @@ Partial Class mainForm
     Friend WithEvents ViewHelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents buttonDelNode As System.Windows.Forms.Button
+    Friend WithEvents buttonNewNode As System.Windows.Forms.Button
     Friend WithEvents buttonSave As System.Windows.Forms.Button
     Friend WithEvents operatingSystemsIcons As System.Windows.Forms.ImageList
     Friend WithEvents operatingSystemsImages As System.Windows.Forms.ImageList

@@ -111,9 +111,7 @@
         End If
     End Sub
 
-    Private Sub buttonDelNode_Click(sender As Object, e As EventArgs) Handles buttonDelNode.Click
-        deleteSource(Me.boxName.Text)
-        loadSourceData(sourcesDb)
-        loadSourceData("EMPTY")
+    Private Sub buttonDelNode_Click(sender As Object, e As EventArgs) Handles buttonNewNode.Click
+        AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
     End Sub
 End Class

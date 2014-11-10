@@ -144,7 +144,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Remote Desktop Manager.zip" />
     <None Include="sources.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
