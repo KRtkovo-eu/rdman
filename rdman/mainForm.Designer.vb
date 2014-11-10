@@ -110,7 +110,8 @@ Partial Class mainForm
         '
         'sourcesList
         '
-        Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid
+        Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.Left
+        Me.sourcesList.AutoArrange = False
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
@@ -123,7 +124,7 @@ Partial Class mainForm
         Me.sourcesList.Size = New System.Drawing.Size(204, 449)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.TabIndex = 0
-        Me.sourcesList.TileSize = New System.Drawing.Size(100, 20)
+        Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
         Me.sourcesList.UseCompatibleStateImageBehavior = False
         Me.sourcesList.View = System.Windows.Forms.View.SmallIcon
         '
