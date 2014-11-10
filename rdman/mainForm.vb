@@ -18,8 +18,10 @@
 
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
         Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text)
-        If processPid > 0 Then
+        If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
+        ElseIf processPid = 1 Then
+
         Else
             statistics("[ERROR] Unable to open remote session.")
         End If

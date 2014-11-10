@@ -159,7 +159,7 @@ Module dataControl
     End Sub
 
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String) As Integer
-        If nodeIP <> "" Then
+        If nodeIP <> "" And nodeIP <> "127.0.0.1" Then
             If nodePort = "" Then
                 nodePort = "3389"
             End If
@@ -188,7 +188,9 @@ Module dataControl
                 statistics("Execution ends with error.")
                 Return 0
             End If
-
+        ElseIf nodeIP = "127.0.0.1" Then
+            'MessageBox.Show("Connecting to localhost is not allowed.", "Cannot connect to localhost", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 1
         Else
             MessageBox.Show("IP Address cannot be empty.", "IP Address null", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return 0
