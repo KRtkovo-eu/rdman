@@ -10,7 +10,7 @@
 
         statistics("HELLO " + username + "! Have a nice day with " + Me.Text + " " + Me.ProductVersion + ". So let's play the Game! I hope, You will enjoy it ;-)")
         statistics(statisticsEnvironment())
-        Me.Text = Me.Text + " " + Me.ProductVersion
+        Me.Text = Me.Text + " v" + Me.ProductVersion
 
         LoadSources(sourcesDb)
         loadSourceData("EMPTY")
@@ -119,5 +119,9 @@
         Else
             loadSourceData(nodeName)
         End If
+    End Sub
+
+    Private Sub ViewHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHelpToolStripMenuItem.Click
+        Process.Start("https://github.com/KRtkovo-eu/rdman/wiki")
     End Sub
 End Class

@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.container = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
@@ -63,7 +63,6 @@ Partial Class mainForm
         Me.AddNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveStatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -104,7 +103,7 @@ Partial Class mainForm
         Me.container.Panel2.Controls.Add(Me.groupResolutionSettings)
         Me.container.Panel2.Controls.Add(Me.groupAdditionalInformations)
         Me.container.Panel2.Controls.Add(Me.groupConnectionSettings)
-        Me.container.Size = New System.Drawing.Size(792, 449)
+        Me.container.Size = New System.Drawing.Size(792, 487)
         Me.container.SplitterDistance = 204
         Me.container.TabIndex = 1
         '
@@ -115,13 +114,13 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
         Me.sourcesList.Name = "sourcesList"
         Me.sourcesList.ShowGroups = False
-        Me.sourcesList.Size = New System.Drawing.Size(204, 449)
+        Me.sourcesList.Size = New System.Drawing.Size(204, 487)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.TabIndex = 0
         Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
@@ -146,7 +145,7 @@ Partial Class mainForm
         Me.groupStatistics.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupStatistics.Location = New System.Drawing.Point(0, 327)
         Me.groupStatistics.Name = "groupStatistics"
-        Me.groupStatistics.Size = New System.Drawing.Size(584, 122)
+        Me.groupStatistics.Size = New System.Drawing.Size(584, 160)
         Me.groupStatistics.TabIndex = 5
         Me.groupStatistics.TabStop = False
         Me.groupStatistics.Text = "Statistics"
@@ -163,7 +162,7 @@ Partial Class mainForm
         Me.boxStatistics.ReadOnly = True
         Me.boxStatistics.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.boxStatistics.ShowSelectionMargin = True
-        Me.boxStatistics.Size = New System.Drawing.Size(578, 103)
+        Me.boxStatistics.Size = New System.Drawing.Size(578, 141)
         Me.boxStatistics.TabIndex = 0
         Me.boxStatistics.Text = ""
         '
@@ -476,7 +475,7 @@ Partial Class mainForm
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.AddNodeToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.OptionsToolStripMenuItem, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.AddNodeToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -506,12 +505,6 @@ Partial Class mainForm
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(233, 6)
-        '
-        'OptionsToolStripMenuItem
-        '
-        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
-        Me.OptionsToolStripMenuItem.Text = "&Options"
         '
         'SaveStatisticsToolStripMenuItem
         '
@@ -584,7 +577,7 @@ Partial Class mainForm
         Me.AcceptButton = Me.buttonConnect
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(792, 473)
+        Me.ClientSize = New System.Drawing.Size(792, 511)
         Me.Controls.Add(Me.groupImage)
         Me.Controls.Add(Me.container)
         Me.Controls.Add(Me.menuBar)
@@ -643,7 +636,6 @@ Partial Class mainForm
     Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddNodeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ViewHelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
