@@ -98,6 +98,14 @@
     End Sub
 
     Private Sub sourcesList_DoubleClick(sender As Object, e As EventArgs) Handles sourcesList.DoubleClick
+        buttonConnect_Click(sender, New System.EventArgs())
+    End Sub
+
+    Private Sub buttonDelNode_Click(sender As Object, e As EventArgs) Handles buttonNewNode.Click
+        AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
+    End Sub
+
+    Private Sub sourcesList_Click(sender As Object, e As EventArgs) Handles sourcesList.Click
         Dim nodeName As String = "Add New Node"
 
         For Each item As ListViewItem In sourcesList.SelectedItems()
@@ -109,9 +117,5 @@
         Else
             loadSourceData(nodeName)
         End If
-    End Sub
-
-    Private Sub buttonDelNode_Click(sender As Object, e As EventArgs) Handles buttonNewNode.Click
-        AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
     End Sub
 End Class
