@@ -60,6 +60,8 @@ Partial Class mainForm
         Me.menuBar = New System.Windows.Forms.MenuStrip()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.AddNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -73,8 +75,6 @@ Partial Class mainForm
         Me.statisticTimer = New System.Windows.Forms.Timer(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.EditSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.container, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.container.Panel1.SuspendLayout()
         Me.container.Panel2.SuspendLayout()
@@ -490,6 +490,17 @@ Partial Class mainForm
         Me.LoadSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.LoadSourcesDatabaseToolStripMenuItem.Text = "&Load sources database"
         '
+        'EditSourcesDatabaseToolStripMenuItem
+        '
+        Me.EditSourcesDatabaseToolStripMenuItem.Name = "EditSourcesDatabaseToolStripMenuItem"
+        Me.EditSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.EditSourcesDatabaseToolStripMenuItem.Text = "&Edit sources database"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(233, 6)
+        '
         'AddNodeToolStripMenuItem
         '
         Me.AddNodeToolStripMenuItem.Name = "AddNodeToolStripMenuItem"
@@ -574,17 +585,6 @@ Partial Class mainForm
         Me.saveStatistics.FileName = "statistics.txt"
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(233, 6)
-        '
-        'EditSourcesDatabaseToolStripMenuItem
-        '
-        Me.EditSourcesDatabaseToolStripMenuItem.Name = "EditSourcesDatabaseToolStripMenuItem"
-        Me.EditSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
-        Me.EditSourcesDatabaseToolStripMenuItem.Text = "&Edit sources database"
         '
         'mainForm
         '
