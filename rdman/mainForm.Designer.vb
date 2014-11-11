@@ -30,13 +30,15 @@ Partial Class mainForm
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
+        Me.statisticsCommandLine = New System.Windows.Forms.TextBox()
         Me.groupResolutionSettings = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.boxFullscreen = New System.Windows.Forms.CheckBox()
         Me.lblWindowSizePix = New System.Windows.Forms.Label()
         Me.lblWindowSizeX = New System.Windows.Forms.Label()
         Me.boxHeight = New System.Windows.Forms.TextBox()
-        Me.boxFullscreen = New System.Windows.Forms.CheckBox()
+        Me.boxMultimon = New System.Windows.Forms.CheckBox()
         Me.boxWidth = New System.Windows.Forms.TextBox()
-        Me.lblWindowSize = New System.Windows.Forms.Label()
         Me.groupAdditionalInformations = New System.Windows.Forms.GroupBox()
         Me.boxDescription = New System.Windows.Forms.TextBox()
         Me.lblDescription = New System.Windows.Forms.Label()
@@ -75,7 +77,6 @@ Partial Class mainForm
         Me.statisticTimer = New System.Windows.Forms.Timer(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
-        Me.boxSourcesPath = New System.Windows.Forms.ToolStripTextBox()
         CType(Me.container, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.container.Panel1.SuspendLayout()
         Me.container.Panel2.SuspendLayout()
@@ -145,11 +146,12 @@ Partial Class mainForm
         'groupStatistics
         '
         Me.groupStatistics.Controls.Add(Me.boxStatistics)
+        Me.groupStatistics.Controls.Add(Me.statisticsCommandLine)
         Me.groupStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.groupStatistics.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupStatistics.Location = New System.Drawing.Point(0, 327)
+        Me.groupStatistics.Location = New System.Drawing.Point(0, 318)
         Me.groupStatistics.Name = "groupStatistics"
-        Me.groupStatistics.Size = New System.Drawing.Size(584, 160)
+        Me.groupStatistics.Size = New System.Drawing.Size(584, 169)
         Me.groupStatistics.TabIndex = 5
         Me.groupStatistics.TabStop = False
         Me.groupStatistics.Text = "Statistics"
@@ -166,55 +168,49 @@ Partial Class mainForm
         Me.boxStatistics.ReadOnly = True
         Me.boxStatistics.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.boxStatistics.ShowSelectionMargin = True
-        Me.boxStatistics.Size = New System.Drawing.Size(578, 141)
+        Me.boxStatistics.Size = New System.Drawing.Size(578, 132)
         Me.boxStatistics.TabIndex = 0
         Me.boxStatistics.Text = ""
         '
+        'statisticsCommandLine
+        '
+        Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
+        Me.statisticsCommandLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.statisticsCommandLine.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
+        Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 148)
+        Me.statisticsCommandLine.Name = "statisticsCommandLine"
+        Me.statisticsCommandLine.Size = New System.Drawing.Size(578, 18)
+        Me.statisticsCommandLine.TabIndex = 1
+        '
         'groupResolutionSettings
         '
+        Me.groupResolutionSettings.Controls.Add(Me.Label1)
+        Me.groupResolutionSettings.Controls.Add(Me.boxFullscreen)
         Me.groupResolutionSettings.Controls.Add(Me.lblWindowSizePix)
         Me.groupResolutionSettings.Controls.Add(Me.lblWindowSizeX)
         Me.groupResolutionSettings.Controls.Add(Me.boxHeight)
-        Me.groupResolutionSettings.Controls.Add(Me.boxFullscreen)
+        Me.groupResolutionSettings.Controls.Add(Me.boxMultimon)
         Me.groupResolutionSettings.Controls.Add(Me.boxWidth)
-        Me.groupResolutionSettings.Controls.Add(Me.lblWindowSize)
         Me.groupResolutionSettings.Dock = System.Windows.Forms.DockStyle.Top
         Me.groupResolutionSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 275)
+        Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 242)
         Me.groupResolutionSettings.Name = "groupResolutionSettings"
-        Me.groupResolutionSettings.Size = New System.Drawing.Size(584, 52)
+        Me.groupResolutionSettings.Size = New System.Drawing.Size(584, 76)
         Me.groupResolutionSettings.TabIndex = 1
         Me.groupResolutionSettings.TabStop = False
         Me.groupResolutionSettings.Text = "Resolution settings"
         '
-        'lblWindowSizePix
+        'Label1
         '
-        Me.lblWindowSizePix.AutoSize = True
-        Me.lblWindowSizePix.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.lblWindowSizePix.Location = New System.Drawing.Point(300, 23)
-        Me.lblWindowSizePix.Name = "lblWindowSizePix"
-        Me.lblWindowSizePix.Size = New System.Drawing.Size(33, 13)
-        Me.lblWindowSizePix.TabIndex = 5
-        Me.lblWindowSizePix.Text = "pixels"
-        '
-        'lblWindowSizeX
-        '
-        Me.lblWindowSizeX.AutoSize = True
-        Me.lblWindowSizeX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.lblWindowSizeX.Location = New System.Drawing.Point(233, 23)
-        Me.lblWindowSizeX.Name = "lblWindowSizeX"
-        Me.lblWindowSizeX.Size = New System.Drawing.Size(12, 13)
-        Me.lblWindowSizeX.TabIndex = 3
-        Me.lblWindowSizeX.Text = "x"
-        '
-        'boxHeight
-        '
-        Me.boxHeight.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxHeight.Location = New System.Drawing.Point(248, 20)
-        Me.boxHeight.Name = "boxHeight"
-        Me.boxHeight.ReadOnly = True
-        Me.boxHeight.Size = New System.Drawing.Size(48, 20)
-        Me.boxHeight.TabIndex = 4
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.Label1.Location = New System.Drawing.Point(173, 23)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(70, 13)
+        Me.Label1.TabIndex = 8
+        Me.Label1.Text = "Window size:"
         '
         'boxFullscreen
         '
@@ -225,28 +221,58 @@ Partial Class mainForm
         Me.boxFullscreen.Location = New System.Drawing.Point(10, 22)
         Me.boxFullscreen.Name = "boxFullscreen"
         Me.boxFullscreen.Size = New System.Drawing.Size(74, 17)
-        Me.boxFullscreen.TabIndex = 0
+        Me.boxFullscreen.TabIndex = 7
         Me.boxFullscreen.Text = "Fullscreen"
         Me.boxFullscreen.UseVisualStyleBackColor = True
+        '
+        'lblWindowSizePix
+        '
+        Me.lblWindowSizePix.AutoSize = True
+        Me.lblWindowSizePix.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.lblWindowSizePix.Location = New System.Drawing.Point(369, 23)
+        Me.lblWindowSizePix.Name = "lblWindowSizePix"
+        Me.lblWindowSizePix.Size = New System.Drawing.Size(33, 13)
+        Me.lblWindowSizePix.TabIndex = 5
+        Me.lblWindowSizePix.Text = "pixels"
+        '
+        'lblWindowSizeX
+        '
+        Me.lblWindowSizeX.AutoSize = True
+        Me.lblWindowSizeX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.lblWindowSizeX.Location = New System.Drawing.Point(302, 23)
+        Me.lblWindowSizeX.Name = "lblWindowSizeX"
+        Me.lblWindowSizeX.Size = New System.Drawing.Size(12, 13)
+        Me.lblWindowSizeX.TabIndex = 3
+        Me.lblWindowSizeX.Text = "x"
+        '
+        'boxHeight
+        '
+        Me.boxHeight.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.boxHeight.Location = New System.Drawing.Point(317, 20)
+        Me.boxHeight.Name = "boxHeight"
+        Me.boxHeight.ReadOnly = True
+        Me.boxHeight.Size = New System.Drawing.Size(48, 20)
+        Me.boxHeight.TabIndex = 4
+        '
+        'boxMultimon
+        '
+        Me.boxMultimon.AutoSize = True
+        Me.boxMultimon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.boxMultimon.Location = New System.Drawing.Point(47, 45)
+        Me.boxMultimon.Name = "boxMultimon"
+        Me.boxMultimon.Size = New System.Drawing.Size(127, 17)
+        Me.boxMultimon.TabIndex = 0
+        Me.boxMultimon.Text = "Span remote desktop"
+        Me.boxMultimon.UseVisualStyleBackColor = True
         '
         'boxWidth
         '
         Me.boxWidth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxWidth.Location = New System.Drawing.Point(180, 20)
+        Me.boxWidth.Location = New System.Drawing.Point(249, 20)
         Me.boxWidth.Name = "boxWidth"
         Me.boxWidth.ReadOnly = True
         Me.boxWidth.Size = New System.Drawing.Size(48, 20)
         Me.boxWidth.TabIndex = 2
-        '
-        'lblWindowSize
-        '
-        Me.lblWindowSize.AutoSize = True
-        Me.lblWindowSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.lblWindowSize.Location = New System.Drawing.Point(101, 23)
-        Me.lblWindowSize.Name = "lblWindowSize"
-        Me.lblWindowSize.Size = New System.Drawing.Size(70, 13)
-        Me.lblWindowSize.TabIndex = 1
-        Me.lblWindowSize.Text = "Window size:"
         '
         'groupAdditionalInformations
         '
@@ -261,7 +287,7 @@ Partial Class mainForm
         Me.groupAdditionalInformations.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupAdditionalInformations.Location = New System.Drawing.Point(0, 95)
         Me.groupAdditionalInformations.Name = "groupAdditionalInformations"
-        Me.groupAdditionalInformations.Size = New System.Drawing.Size(584, 180)
+        Me.groupAdditionalInformations.Size = New System.Drawing.Size(584, 147)
         Me.groupAdditionalInformations.TabIndex = 2
         Me.groupAdditionalInformations.TabStop = False
         Me.groupAdditionalInformations.Text = "Additional informations"
@@ -273,7 +299,7 @@ Partial Class mainForm
         Me.boxDescription.Location = New System.Drawing.Point(3, 92)
         Me.boxDescription.Multiline = True
         Me.boxDescription.Name = "boxDescription"
-        Me.boxDescription.Size = New System.Drawing.Size(578, 85)
+        Me.boxDescription.Size = New System.Drawing.Size(578, 52)
         Me.boxDescription.TabIndex = 5
         '
         'lblDescription
@@ -413,7 +439,7 @@ Partial Class mainForm
         'boxIP
         '
         Me.boxIP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxIP.Location = New System.Drawing.Point(103, 56)
+        Me.boxIP.Location = New System.Drawing.Point(104, 56)
         Me.boxIP.Name = "boxIP"
         Me.boxIP.Size = New System.Drawing.Size(193, 20)
         Me.boxIP.TabIndex = 3
@@ -470,7 +496,7 @@ Partial Class mainForm
         '
         'menuBar
         '
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem, Me.boxSourcesPath})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(792, 24)
@@ -595,19 +621,6 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
-        'boxSourcesPath
-        '
-        Me.boxSourcesPath.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.boxSourcesPath.BackColor = System.Drawing.SystemColors.Window
-        Me.boxSourcesPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.boxSourcesPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.boxSourcesPath.ForeColor = System.Drawing.Color.Gray
-        Me.boxSourcesPath.Name = "boxSourcesPath"
-        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
-        Me.boxSourcesPath.ReadOnly = True
-        Me.boxSourcesPath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.boxSourcesPath.Size = New System.Drawing.Size(495, 20)
-        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -627,6 +640,7 @@ Partial Class mainForm
         CType(Me.container, System.ComponentModel.ISupportInitialize).EndInit()
         Me.container.ResumeLayout(False)
         Me.groupStatistics.ResumeLayout(False)
+        Me.groupStatistics.PerformLayout()
         Me.groupResolutionSettings.ResumeLayout(False)
         Me.groupResolutionSettings.PerformLayout()
         Me.groupAdditionalInformations.ResumeLayout(False)
@@ -664,9 +678,8 @@ Partial Class mainForm
     Friend WithEvents lblWindowSizePix As System.Windows.Forms.Label
     Friend WithEvents lblWindowSizeX As System.Windows.Forms.Label
     Friend WithEvents boxHeight As System.Windows.Forms.TextBox
-    Friend WithEvents boxFullscreen As System.Windows.Forms.CheckBox
+    Friend WithEvents boxMultimon As System.Windows.Forms.CheckBox
     Friend WithEvents boxWidth As System.Windows.Forms.TextBox
-    Friend WithEvents lblWindowSize As System.Windows.Forms.Label
     Friend WithEvents menuBar As System.Windows.Forms.MenuStrip
     Friend WithEvents boxPicture As System.Windows.Forms.PictureBox
     Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -692,6 +705,8 @@ Partial Class mainForm
     Friend WithEvents sourcesList As System.Windows.Forms.ListView
     Friend WithEvents EditSourcesDatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents boxSourcesPath As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents statisticsCommandLine As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents boxFullscreen As System.Windows.Forms.CheckBox
 
 End Class

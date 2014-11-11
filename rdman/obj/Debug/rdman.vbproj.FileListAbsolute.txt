@@ -29,6 +29,7 @@ c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Deb
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\unknown.ico
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\icons\windows.ico
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\asciiGraphics\0.txt
+c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\LICENSE
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\sources.csv
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\rdman.exe
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Debug\rdman.pdb

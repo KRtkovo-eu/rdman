@@ -58,7 +58,7 @@ Module dataControl
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
         deleteSource(nodeName)
 
-        Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text}
+        Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxMultimon.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text}
 
         nodes.Add(sourceData)
 
@@ -74,7 +74,8 @@ Module dataControl
             line += element(5) + ";"
             line += element(6) + ";"
             line += element(7) + ";"
-            line += element(8)
+            line += element(8) + ";"
+            line += element(9)
 
             objWriter.WriteLine(line)
         Next
@@ -93,13 +94,13 @@ Module dataControl
             mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(6)))
         Next
 
-        mainForm.boxSourcesPath.Text = "CSV database: " + sources
+        'mainForm.boxSourcesPath.Text = "CSV database: " + sources
         statistics("Loaded Sources Database file from " + sources)
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String)
         Dim nodeIP, nodePort, nodeSystem, nodeVersion, nodeDescription, nodeWidth, nodeHeight As String
-        Dim nodeFullscreen As Boolean
+        Dim nodeFullscreen, nodeMultimon As Boolean
         Dim nodeSystemNum As Integer
 
         If nodeName = "EMPTY" Then
@@ -113,19 +114,21 @@ Module dataControl
             nodeWidth = "1024"
             nodeHeight = "768"
             nodeSystemNum = 4
+            nodeMultimon = False
         Else
             For Each element In nodes
                 If element(0) = nodeName Then
                     nodeName = element(0)
                     nodeIP = element(1)
                     nodePort = element(2)
-                    nodeSystem = element(6)
-                    nodeVersion = element(7)
-                    nodeDescription = element(8)
+                    nodeSystem = element(7)
+                    nodeVersion = element(8)
+                    nodeDescription = element(9)
                     nodeFullscreen = element(3)
-                    nodeWidth = element(4)
-                    nodeHeight = element(5)
-                    nodeSystemNum = systemToIndexNum(element(6))
+                    nodeWidth = element(5)
+                    nodeHeight = element(6)
+                    nodeSystemNum = systemToIndexNum(element(7))
+                    nodeMultimon = element(4)
                 End If
             Next
         End If
@@ -140,6 +143,7 @@ Module dataControl
         mainForm.boxWidth.Text = nodeWidth
         mainForm.boxHeight.Text = nodeHeight
         mainForm.boxPicture.Image = mainForm.operatingSystemsImages.Images.Item(nodeSystemNum)
+        mainForm.boxMultimon.Checked = nodeMultimon
         statistics("Loaded source ~" + nodeName + "~ (system: " + nodeSystem + "| IP or hostname: " + nodeIP + ":" + nodePort + ")")
     End Sub
 
@@ -159,7 +163,7 @@ Module dataControl
 
     End Sub
 
-    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String) As Integer
+    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean) As Integer
         If nodeIP <> "" And nodeIP <> "127.0.0.1" Then
             If nodePort = "" Then
                 nodePort = "3389"
@@ -168,7 +172,11 @@ Module dataControl
             ProcessProperties.FileName = mstscPath
 
             If nodeFullscreen = True Then
-                ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /f"
+                If nodeMultimon = True Then
+                    ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /multimon"
+                Else
+                    ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /f"
+                End If
             Else
                 If nodeWidth = "" Then
                     nodeWidth = "1024"
@@ -181,25 +189,29 @@ Module dataControl
                 ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /w:" + nodeWidth + " /h:" + nodeHeight
             End If
 
-            mstsc = Process.Start(ProcessProperties)
-            If mstsc.HasExited = False Then
-                statistics("Execution > " + mstscPath + " " + ProcessProperties.Arguments)
-                Return mstsc.Id
+                mstsc = Process.Start(ProcessProperties)
+                If mstsc.HasExited = False Then
+                    statistics("Execution > " + mstscPath + " " + ProcessProperties.Arguments)
+                    Return mstsc.Id
+                Else
+                    statistics("Execution ends with error.")
+                    Return 0
+                End If
+            ElseIf nodeIP = "127.0.0.1" Then
+                'MessageBox.Show("Connecting to localhost is not allowed.", "Cannot connect to localhost", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return 1
             Else
-                statistics("Execution ends with error.")
+                MessageBox.Show("IP Address cannot be empty.", "IP Address null", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return 0
             End If
-        ElseIf nodeIP = "127.0.0.1" Then
-            'MessageBox.Show("Connecting to localhost is not allowed.", "Cannot connect to localhost", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return 1
-        Else
-            MessageBox.Show("IP Address cannot be empty.", "IP Address null", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return 0
-        End If
+    End Function
+
+    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeMultimon As Boolean)
+        Return runRemote(nodeIP, nodePort, nodeFullscreen, "1024", "768", nodeMultimon)
     End Function
 
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean)
-        Return runRemote(nodeIP, nodePort, nodeFullscreen, "1024", "768")
+        Return runRemote(nodeIP, nodePort, nodeFullscreen, "1024", "768", False)
     End Function
 
 

@@ -5,6 +5,7 @@
 
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim username As String = My.User.Name
+
         username = username.ToUpper()
         username = username.Replace(My.Computer.Name.ToUpper + "\", "")
 
@@ -12,28 +13,23 @@
         statistics(statisticsEnvironment())
         'Me.Text = Me.Text + " v" + Me.ProductVersion
 
-        LoadSources(sourcesDb)
+        If My.Application.CommandLineArgs.Count > 0 Then
+            LoadSources(My.Application.CommandLineArgs.Item(0))
+        Else
+            LoadSources(sourcesDb)
+        End If
+
         loadSourceData("EMPTY")
     End Sub
 
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
-        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text)
+        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked)
         If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
         ElseIf processPid = 1 Then
             statistics("[ERROR] Unable to connect to localhost.")
         Else
             statistics("[ERROR] Unable to open remote session.")
-        End If
-    End Sub
-
-    Private Sub boxFullscreen_CheckedChanged(sender As Object, e As EventArgs) Handles boxFullscreen.CheckedChanged
-        If boxFullscreen.Checked = False Then
-            Me.boxHeight.ReadOnly = False
-            Me.boxWidth.ReadOnly = False
-        Else
-            Me.boxHeight.ReadOnly = True
-            Me.boxWidth.ReadOnly = True
         End If
     End Sub
 
@@ -128,4 +124,21 @@
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
         Process.Start(sourcesDb)
     End Sub
+
+    Private Sub boxFullscreen_CheckedChanged(sender As Object, e As EventArgs) Handles boxFullscreen.CheckedChanged
+        If boxFullscreen.Checked = False Then
+            Me.boxHeight.ReadOnly = False
+            Me.boxWidth.ReadOnly = False
+            Me.boxMultimon.Enabled = False
+        Else
+            Me.boxHeight.ReadOnly = True
+            Me.boxWidth.ReadOnly = True
+            Me.boxMultimon.Enabled = True
+        End If
+    End Sub
+
+    Private Sub commandFromLine()
+
+    End Sub
+
 End Class
