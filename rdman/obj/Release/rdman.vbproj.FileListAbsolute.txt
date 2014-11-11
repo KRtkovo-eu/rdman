@@ -4,7 +4,6 @@ C:\git\rdman\rdman\bin\Release\icons\linux.ico
 C:\git\rdman\rdman\bin\Release\icons\rdman.ico
 C:\git\rdman\rdman\bin\Release\icons\unknown.ico
 C:\git\rdman\rdman\bin\Release\icons\windows.ico
-C:\git\rdman\rdman\bin\Release\sources.xml
 C:\git\rdman\rdman\bin\Release\rdman.exe
 C:\git\rdman\rdman\obj\Release\rdman.mainForm.resources
 C:\git\rdman\rdman\obj\Release\rdman.Resources.resources
@@ -28,3 +27,10 @@ c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Rel
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.Resources.resources
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.vbproj.GenerateResource.Cache
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Release\rdman.exe
+C:\git\rdman\rdman\bin\Release\asciiGraphics\4.txt
+C:\git\rdman\rdman\bin\Release\asciiGraphics\2.txt
+C:\git\rdman\rdman\bin\Release\asciiGraphics\3.txt
+C:\git\rdman\rdman\bin\Release\asciiGraphics\1.txt
+C:\git\rdman\rdman\bin\Release\asciiGraphics\0.txt
+C:\git\rdman\rdman\bin\Release\sources.csv
+C:\git\rdman\rdman\obj\Release\rdman.aboutForm.resources
