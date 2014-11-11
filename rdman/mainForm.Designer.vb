@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.container = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
@@ -56,10 +56,14 @@ Partial Class mainForm
         Me.boxName = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
         Me.groupImage = New System.Windows.Forms.GroupBox()
+        Me.boxPicture = New System.Windows.Forms.PictureBox()
         Me.menuBar = New System.Windows.Forms.MenuStrip()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.AddNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveStatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -71,10 +75,7 @@ Partial Class mainForm
         Me.statisticTimer = New System.Windows.Forms.Timer(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
-        Me.boxPicture = New System.Windows.Forms.PictureBox()
-        Me.LoadSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditSourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.boxSourcesPath = New System.Windows.Forms.ToolStripTextBox()
         CType(Me.container, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.container.Panel1.SuspendLayout()
         Me.container.Panel2.SuspendLayout()
@@ -85,8 +86,8 @@ Partial Class mainForm
         Me.GroupBox1.SuspendLayout()
         Me.groupConnectionSettings.SuspendLayout()
         Me.groupImage.SuspendLayout()
-        Me.menuBar.SuspendLayout()
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.menuBar.SuspendLayout()
         Me.SuspendLayout()
         '
         'container
@@ -116,7 +117,7 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
@@ -457,9 +458,19 @@ Partial Class mainForm
         Me.groupImage.TabStop = False
         Me.groupImage.Text = "Image"
         '
+        'boxPicture
+        '
+        Me.boxPicture.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.boxPicture.Location = New System.Drawing.Point(3, 16)
+        Me.boxPicture.Name = "boxPicture"
+        Me.boxPicture.Size = New System.Drawing.Size(163, 166)
+        Me.boxPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.boxPicture.TabIndex = 0
+        Me.boxPicture.TabStop = False
+        '
         'menuBar
         '
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem, Me.boxSourcesPath})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(792, 24)
@@ -470,32 +481,55 @@ Partial Class mainForm
         '
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.EditSourcesDatabaseToolStripMenuItem, Me.ToolStripSeparator3, Me.AddNodeToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
+        '
+        'LoadSourcesDatabaseToolStripMenuItem
+        '
+        Me.LoadSourcesDatabaseToolStripMenuItem.Image = CType(resources.GetObject("LoadSourcesDatabaseToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.LoadSourcesDatabaseToolStripMenuItem.Name = "LoadSourcesDatabaseToolStripMenuItem"
+        Me.LoadSourcesDatabaseToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.LoadSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.LoadSourcesDatabaseToolStripMenuItem.Text = "&Load sources database"
+        '
+        'EditSourcesDatabaseToolStripMenuItem
+        '
+        Me.EditSourcesDatabaseToolStripMenuItem.Image = CType(resources.GetObject("EditSourcesDatabaseToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EditSourcesDatabaseToolStripMenuItem.Name = "EditSourcesDatabaseToolStripMenuItem"
+        Me.EditSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.EditSourcesDatabaseToolStripMenuItem.Text = "&Edit sources database"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(229, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(233, 6)
         '
         'AddNodeToolStripMenuItem
         '
         Me.AddNodeToolStripMenuItem.Image = CType(resources.GetObject("AddNodeToolStripMenuItem.Image"), System.Drawing.Image)
         Me.AddNodeToolStripMenuItem.Name = "AddNodeToolStripMenuItem"
         Me.AddNodeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.AddNodeToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.AddNodeToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.AddNodeToolStripMenuItem.Text = "&New Node"
+        '
+        'SaveNodeToolStripMenuItem
+        '
+        Me.SaveNodeToolStripMenuItem.Image = CType(resources.GetObject("SaveNodeToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.SaveNodeToolStripMenuItem.Name = "SaveNodeToolStripMenuItem"
+        Me.SaveNodeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.SaveNodeToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.SaveNodeToolStripMenuItem.Text = "&Save Node"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(229, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(233, 6)
         '
         'SaveStatisticsToolStripMenuItem
         '
         Me.SaveStatisticsToolStripMenuItem.Image = CType(resources.GetObject("SaveStatisticsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SaveStatisticsToolStripMenuItem.Name = "SaveStatisticsToolStripMenuItem"
-        Me.SaveStatisticsToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.SaveStatisticsToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.SaveStatisticsToolStripMenuItem.Text = "&Save statistics"
         '
         'ExitToolStripMenuItem
@@ -503,14 +537,14 @@ Partial Class mainForm
         Me.ExitToolStripMenuItem.Image = CType(resources.GetObject("ExitToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.ToolStripSeparator1, Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(43, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
         'ViewHelpToolStripMenuItem
@@ -518,19 +552,19 @@ Partial Class mainForm
         Me.ViewHelpToolStripMenuItem.Image = CType(resources.GetObject("ViewHelpToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ViewHelpToolStripMenuItem.Name = "ViewHelpToolStripMenuItem"
         Me.ViewHelpToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F1), System.Windows.Forms.Keys)
-        Me.ViewHelpToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
+        Me.ViewHelpToolStripMenuItem.Size = New System.Drawing.Size(247, 22)
         Me.ViewHelpToolStripMenuItem.Text = "View &Help"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(240, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(244, 6)
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Image = CType(resources.GetObject("AboutToolStripMenuItem.Image"), System.Drawing.Image)
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(247, 22)
         Me.AboutToolStripMenuItem.Text = "&About Remote Desktop Manager"
         '
         'operatingSystemsImages
@@ -561,38 +595,18 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
-        'boxPicture
+        'boxSourcesPath
         '
-        Me.boxPicture.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.boxPicture.Location = New System.Drawing.Point(3, 16)
-        Me.boxPicture.Name = "boxPicture"
-        Me.boxPicture.Size = New System.Drawing.Size(163, 166)
-        Me.boxPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.boxPicture.TabIndex = 0
-        Me.boxPicture.TabStop = False
-        '
-        'LoadSourcesDatabaseToolStripMenuItem
-        '
-        Me.LoadSourcesDatabaseToolStripMenuItem.Image = CType(resources.GetObject("LoadSourcesDatabaseToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.LoadSourcesDatabaseToolStripMenuItem.Name = "LoadSourcesDatabaseToolStripMenuItem"
-        Me.LoadSourcesDatabaseToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.LoadSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
-        Me.LoadSourcesDatabaseToolStripMenuItem.Text = "&Load sources database"
-        '
-        'EditSourcesDatabaseToolStripMenuItem
-        '
-        Me.EditSourcesDatabaseToolStripMenuItem.Image = CType(resources.GetObject("EditSourcesDatabaseToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.EditSourcesDatabaseToolStripMenuItem.Name = "EditSourcesDatabaseToolStripMenuItem"
-        Me.EditSourcesDatabaseToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
-        Me.EditSourcesDatabaseToolStripMenuItem.Text = "&Edit sources database"
-        '
-        'SaveNodeToolStripMenuItem
-        '
-        Me.SaveNodeToolStripMenuItem.Image = CType(resources.GetObject("SaveNodeToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.SaveNodeToolStripMenuItem.Name = "SaveNodeToolStripMenuItem"
-        Me.SaveNodeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveNodeToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
-        Me.SaveNodeToolStripMenuItem.Text = "&Save Node"
+        Me.boxSourcesPath.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.boxSourcesPath.BackColor = System.Drawing.SystemColors.Window
+        Me.boxSourcesPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.boxSourcesPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.boxSourcesPath.ForeColor = System.Drawing.Color.Gray
+        Me.boxSourcesPath.Name = "boxSourcesPath"
+        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
+        Me.boxSourcesPath.ReadOnly = True
+        Me.boxSourcesPath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.boxSourcesPath.Size = New System.Drawing.Size(495, 20)
         '
         'mainForm
         '
@@ -621,9 +635,9 @@ Partial Class mainForm
         Me.groupConnectionSettings.ResumeLayout(False)
         Me.groupConnectionSettings.PerformLayout()
         Me.groupImage.ResumeLayout(False)
+        CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuBar.ResumeLayout(False)
         Me.menuBar.PerformLayout()
-        CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -678,5 +692,6 @@ Partial Class mainForm
     Friend WithEvents sourcesList As System.Windows.Forms.ListView
     Friend WithEvents EditSourcesDatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents boxSourcesPath As System.Windows.Forms.ToolStripTextBox
 
 End Class

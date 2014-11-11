@@ -34,3 +34,4 @@ C:\git\rdman\rdman\bin\Release\asciiGraphics\1.txt
 C:\git\rdman\rdman\bin\Release\asciiGraphics\0.txt
 C:\git\rdman\rdman\bin\Release\sources.csv
 C:\git\rdman\rdman\obj\Release\rdman.aboutForm.resources
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\bin\Release\LICENSE

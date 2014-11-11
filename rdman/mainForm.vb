@@ -8,9 +8,9 @@
         username = username.ToUpper()
         username = username.Replace(My.Computer.Name.ToUpper + "\", "")
 
-        statistics("HELLO " + username + "! Have a nice day with " + Me.Text + " " + Me.ProductVersion + ". So let's play the Game! I hope, You will enjoy it ;-)")
+        statistics("HELLO " + username + "! Have a nice day with " + Me.Text + " (v" + Me.ProductVersion + "). So let's play the Game! I hope, You will enjoy it ;-)")
         statistics(statisticsEnvironment())
-        Me.Text = Me.Text + " v" + Me.ProductVersion
+        'Me.Text = Me.Text + " v" + Me.ProductVersion
 
         LoadSources(sourcesDb)
         loadSourceData("EMPTY")
@@ -21,7 +21,7 @@
         If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
         ElseIf processPid = 1 Then
-
+            statistics("[ERROR] Unable to connect to localhost.")
         Else
             statistics("[ERROR] Unable to open remote session.")
         End If

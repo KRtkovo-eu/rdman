@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub aboutForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Label1.Text = mainForm.Text
+        Me.Label1.Text = My.Application.Info.Title + " v" + Me.ProductVersion
         Me.LinkLabel1.Text = My.Application.Info.Copyright
         Me.LinkLabel2.Text = My.Application.Info.CompanyName
         Me.sourcesTextBox.Text = getSourcesString()
