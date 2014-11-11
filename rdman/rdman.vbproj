@@ -167,9 +167,11 @@
     <Content Include="icons\apple.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="icons\edit.png" />
     <Content Include="icons\linux.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="icons\load.png" />
     <Content Include="icons\rdman.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
