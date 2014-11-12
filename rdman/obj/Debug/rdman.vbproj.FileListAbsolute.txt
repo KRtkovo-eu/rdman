@@ -39,3 +39,6 @@ c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Deb
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.vbproj.GenerateResource.Cache
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.exe
 c:\Users\Administrator\Documents\Visual Studio 2013\Projects\rdman\rdman\obj\Debug\rdman.pdb
+C:\git\rdman\rdman\bin\Debug\LICENSE
+C:\git\rdman\rdman\bin\Debug\rdman.exe.config
+C:\git\rdman\rdman\obj\Debug\rdman.commandValueInput.resources

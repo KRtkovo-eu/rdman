@@ -26,8 +26,16 @@ Module dataControl
         Return nodes
     End Function
 
+    Public Sub statistics(ByVal newLine As String, ByVal command As Boolean)
+        If command = True Then
+            mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss>#:") + newLine + vbNewLine)
+        Else
+            mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss>$:") + newLine + vbNewLine)
+        End If
+    End Sub
+
     Public Sub statistics(ByVal newLine As String)
-        mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss> ") + newLine + vbNewLine)
+        statistics(newLine, False)
     End Sub
 
     Public Function statisticsEnvironment() As String
@@ -99,8 +107,15 @@ Module dataControl
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String)
-        Dim nodeIP, nodePort, nodeSystem, nodeVersion, nodeDescription, nodeWidth, nodeHeight As String
-        Dim nodeFullscreen, nodeMultimon As Boolean
+        Dim nodeIP As String = ""
+        Dim nodePort As String = ""
+        Dim nodeSystem As String = ""
+        Dim nodeVersion As String = ""
+        Dim nodeDescription As String = ""
+        Dim nodeWidth As String = ""
+        Dim nodeHeight As String = ""
+        Dim nodeFullscreen As Boolean = False
+        Dim nodeMultimon As Boolean = False
         Dim nodeSystemNum As Integer
 
         If nodeName = "EMPTY" Then

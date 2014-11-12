@@ -53,6 +53,66 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property positionTop() As String
+            Get
+                Return CType(Me("positionTop"),String)
+            End Get
+            Set
+                Me("positionTop") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property positionLeft() As String
+            Get
+                Return CType(Me("positionLeft"),String)
+            End Get
+            Set
+                Me("positionLeft") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property width() As String
+            Get
+                Return CType(Me("width"),String)
+            End Get
+            Set
+                Me("width") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property height() As String
+            Get
+                Return CType(Me("height"),String)
+            End Get
+            Set
+                Me("height") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property isMaximized() As String
+            Get
+                Return CType(Me("isMaximized"),String)
+            End Get
+            Set
+                Me("isMaximized") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
