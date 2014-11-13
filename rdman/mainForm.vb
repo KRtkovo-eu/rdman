@@ -21,6 +21,16 @@
             sourcesDb = My.Settings.lastDb
         End If
 
+        Dim classesRootRegistry As Object = My.Computer.Registry.ClassesRoot
+
+        classesRootRegistry.CreateSubKey(".rdman").SetValue("", "rdman_db_file")
+        classesRootRegistry.CreateSubKey("rdman_db_file").SetValue("", "Remote Desktop Manager Database file")
+        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("DefaultIcon").SetValue("", My.Application.Info.DirectoryPath + "\icons\code.ico")
+        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("shell").SetValue("", "open")
+        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("shell").CreateSubKey("open").SetValue("", "open")
+        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue("", Chr(34) + My.Application.Info.DirectoryPath + "\rdman.exe" + Chr(34) + " " + Chr(34) + "%1" + Chr(34))
+
+
         Me.statisticsCommandLine.Focus()
 
         Dim username As String = My.User.Name
