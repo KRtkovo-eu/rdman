@@ -93,7 +93,8 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>rdman_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -185,8 +186,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="rdman_1_TemporaryKey.pfx" />
-    <None Include="rdman_TemporaryKey.pfx" />
     <Content Include="sources.rdman">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -363,14 +362,7 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup>
-    <FileAssociation Include=".rdman">
-      <Visible>False</Visible>
-      <Description>Remote Desktop Manager Db file</Description>
-      <Progid>rdman</Progid>
-      <DefaultIcon>icons\code.ico</DefaultIcon>
-    </FileAssociation>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

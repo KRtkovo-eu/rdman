@@ -1,4 +1,6 @@
-﻿Public Class aboutForm
+﻿Imports System.Net
+
+Public Class aboutForm
     Private Function getSourcesString() As String
         Dim sources As String
 
@@ -12,7 +14,18 @@
 
     Private Sub checkUpdate()
         Dim latest As String = "https://github.com/KRtkovo-eu/rdman/releases/latest"
+        Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(latest), HttpWebRequest)
+        Dim response As HttpWebResponse
+        Dim resUri As String
 
+        response = req.GetResponse
+        resUri = response.ResponseUri.AbsoluteUri
+
+        latest = resUri.Substring(resUri.LastIndexOf("/") + 1)
+
+        If latest > ("v" + Me.ProductVersion) Then
+            Me.lblGitHub.Text = "Available new version (" + latest + ") on GitHub page"
+        End If
 
     End Sub
 
