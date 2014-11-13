@@ -21,7 +21,6 @@
             sourcesDb = My.Settings.lastDb
         End If
 
-
         Me.statisticsCommandLine.Focus()
 
         Dim username As String = My.User.Name
@@ -268,11 +267,11 @@
 
     Private Function commandGetValue(ByVal title As String, ByVal multiline As Boolean) As String
         If multiline = True Then
-            commandValueInput.Height = 130
+            commandValueInput.Height = 140
             commandValueInput.TextBox1.Multiline = multiline
             commandValueInput.TextBox1.Height = 50
         Else
-            commandValueInput.Height = 100
+            commandValueInput.Height = 110
             commandValueInput.TextBox1.Multiline = multiline
             commandValueInput.TextBox1.Height = 20
         End If
@@ -282,7 +281,10 @@
         commandValueInput.ShowDialog()
 
         If commandValueInput.DialogResult = Windows.Forms.DialogResult.OK Then
-            Return commandValueInput.TextBox1.Text
+            Dim value As String = commandValueInput.TextBox1.Text
+
+            commandValueInput.TextBox1.Text = ""
+            Return value
         Else
             Return ""
         End If
