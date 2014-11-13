@@ -1,10 +1,13 @@
-﻿Public Class mainForm
+﻿Imports System.Security.Permissions
+
+Public Class mainForm
     Dim consoleTicker As Integer
     Dim level As Integer = 0
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
     Dim command As String = ""
 
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Get settings of windows state and position
         If My.Settings.isMaximized <> "" Then
             If My.Settings.isMaximized = FormWindowState.Normal Then
                 Me.Width = My.Settings.width
@@ -17,37 +20,29 @@
             End If
         End If
 
+        'Get last opened db
         If My.Settings.lastDb <> "" And IO.File.Exists(My.Settings.lastDb) Then
             sourcesDb = My.Settings.lastDb
         End If
 
-        Dim classesRootRegistry As Object = My.Computer.Registry.ClassesRoot
-
-        classesRootRegistry.createsubkey(".rdman")
-        classesRootRegistry.CreateSubKey("rdman_db_file").SetValue("", "Remote Desktop Manager Database file")
-        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("DefaultIcon").SetValue("", My.Application.Info.DirectoryPath + "\icons\code.ico")
-        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("shell").SetValue("", "open")
-        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("shell").CreateSubKey("open").SetValue("", "open")
-        classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command").SetValue("", Chr(34) + My.Application.Info.DirectoryPath + "\rdman.exe" + Chr(34) + " " + Chr(34) + "%1" + Chr(34))
-
-
+        'Focus command line
         Me.statisticsCommandLine.Focus()
 
+        'Get user name
         Dim username As String = My.User.Name
+        username = username.Substring(username.LastIndexOf("\") + 1)
 
-        username = username.ToUpper()
-        username = username.Replace(My.Computer.Name.ToUpper + "\", "")
-
+        'Set statistics default file name
         Me.saveStatistics.FileName = Today.ToString("yyyyMMdd")
 
+        'Write to console
         statistics("HELLO " + username + "! Have a nice day with " + Me.Text + " (v" + Me.ProductVersion + "). So let's play the Game! I hope, You will enjoy it ;-)")
         statistics(statisticsEnvironment())
-        'Me.Text = Me.Text + " v" + Me.ProductVersion
 
+        'Check parameters for db path and load db
         If My.Application.CommandLineArgs.Count > 0 Then
             If IO.File.Exists(My.Application.CommandLineArgs.Item(0)) Then
                 LoadSources(My.Application.CommandLineArgs.Item(0))
-
             Else
                 LoadSources(sourcesDb)
             End If
@@ -55,6 +50,7 @@
             LoadSources(sourcesDb)
         End If
 
+        'load empty node template
         loadSourceData("EMPTY")
     End Sub
 
@@ -372,9 +368,30 @@
 
     Private Sub statisticsCommandLine_Leave(sender As Object, e As EventArgs) Handles statisticsCommandLine.Leave
         statisticsCommandLine_TextChanged(sender, New System.EventArgs())
+        Me.AcceptButton = buttonConnect
     End Sub
 
     Private Sub statisticsCommandLine_Enter(sender As Object, e As EventArgs) Handles statisticsCommandLine.Enter
         statisticsCommandLine_TextChanged(sender, New System.EventArgs())
+        Me.AcceptButton = Nothing
+    End Sub
+
+    Private Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
+        saveStatistics.Filter = "Sources database *.rdman|*.rdman"
+        saveStatistics.DefaultExt = "rdman"
+        saveStatistics.FileName = "sources.rdman"
+        saveStatistics.Title = "New sources database"
+
+        If saveStatistics.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Dim statisticsFile As String = saveStatistics.FileName
+            My.Computer.FileSystem.WriteAllText(statisticsFile, "", False)
+            sourcesDb = statisticsFile
+            LoadSources(statisticsFile)
+        End If
+
+        saveStatistics.Filter = "Text files *.txt|*.txt"
+        saveStatistics.DefaultExt = "txt"
+        saveStatistics.FileName = Today.ToString("yyyyMMdd")
+        saveStatistics.Title = "Save Statistics file"
     End Sub
 End Class

@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Remote Desktop Manager")> 
 <Assembly: AssemblyDescription("Remote Desktop Manager")> 
-<Assembly: AssemblyCompany("KRtkovo.eu")> 
+<Assembly: AssemblyCompany("KRtkovo.eu design studio")> 
 <Assembly: AssemblyProduct("rdman")> 
 <Assembly: AssemblyCopyright("GNU General Public License  v3.0")> 
 <Assembly: AssemblyTrademark("")> 

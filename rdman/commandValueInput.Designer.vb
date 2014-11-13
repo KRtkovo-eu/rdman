@@ -30,6 +30,7 @@ Partial Class commandValueInput
         '
         Me.OK_Button.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OK_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.OK_Button.Location = New System.Drawing.Point(115, 75)
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(70, 23)
@@ -38,9 +39,10 @@ Partial Class commandValueInput
         '
         'TextBox1
         '
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(12, 12)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(270, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(270, 22)
         Me.TextBox1.TabIndex = 0
         '
         'commandValueInput
