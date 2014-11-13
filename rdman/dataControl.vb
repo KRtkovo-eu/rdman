@@ -64,15 +64,17 @@ Module dataControl
     End Function
 
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
-        deleteSource(nodeName)
+        Dim db As List(Of String())
+
+        db = deleteSource(nodeName, sourcesDb)
 
         Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxMultimon.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text}
 
-        nodes.Add(sourceData)
+        db.Add(sourceData)
 
         Dim objWriter As New System.IO.StreamWriter(sourcesDb)
 
-        For Each element In nodes
+        For Each element In db
             Dim line As String
             line = element(0) + ";"
             line += element(1) + ";"
@@ -99,7 +101,7 @@ Module dataControl
         mainForm.sourcesList.Items.Add("Add New Node", 5)
 
         For Each element In csvArray(sources)
-            mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(6)))
+            mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(7)))
         Next
 
         'mainForm.boxSourcesPath.Text = "CSV database: " + sources
@@ -162,13 +164,18 @@ Module dataControl
         statistics("Loaded source ~" + nodeName + "~ (system: " + nodeSystem + "| IP or hostname: " + nodeIP + ":" + nodePort + ")")
     End Sub
 
-    Public Sub deleteSource(ByVal nodeName As String)
+    Public Function deleteSource(ByVal nodeName As String, ByVal sourcesDb As String) As List(Of String())
+        Dim db As List(Of String())
+
+        db = csvArray(sourcesDb)
+
         Try
-            Dim marker As Integer
+            Dim marker As Integer = 0
 
             For Each element In nodes
                 If element(0) = nodeName Then
-                    nodes.RemoveAt(marker)
+                    db.RemoveAt(db.IndexOf(element))
+                    Exit For
                 End If
                 marker = marker + 1
             Next
@@ -176,7 +183,8 @@ Module dataControl
             MessageBox.Show(ex.Message)
         End Try
 
-    End Sub
+        Return db
+    End Function
 
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean) As Integer
         If nodeIP <> "" And nodeIP <> "127.0.0.1" Then

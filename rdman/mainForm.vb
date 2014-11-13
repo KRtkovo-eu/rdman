@@ -1,19 +1,26 @@
 ﻿Public Class mainForm
     Dim consoleTicker As Integer
     Dim level As Integer = 0
-    Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.csv"
+    Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
     Dim command As String = ""
 
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If My.Settings.isMaximized = FormWindowState.Normal Then
-            Me.Width = My.Settings.width
-            Me.Height = My.Settings.height
-            Me.Top = My.Settings.positionTop
-            Me.Left = My.Settings.positionLeft
-            Me.WindowState = My.Settings.isMaximized
-        Else
-            Me.WindowState = My.Settings.isMaximized
+        If My.Settings.isMaximized <> "" Then
+            If My.Settings.isMaximized = FormWindowState.Normal Then
+                Me.Width = My.Settings.width
+                Me.Height = My.Settings.height
+                Me.Top = My.Settings.positionTop
+                Me.Left = My.Settings.positionLeft
+                Me.WindowState = My.Settings.isMaximized
+            Else
+                Me.WindowState = My.Settings.isMaximized
+            End If
         End If
+
+        If My.Settings.lastDb <> "" Then
+            sourcesDb = My.Settings.lastDb
+        End If
+
 
         Me.statisticsCommandLine.Focus()
 
@@ -313,6 +320,7 @@
         Else
             My.Settings.isMaximized = Me.WindowState
         End If
+        My.Settings.lastDb = sourcesDb
         My.Settings.Save()
     End Sub
 

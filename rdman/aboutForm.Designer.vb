@@ -26,9 +26,9 @@ Partial Class aboutForm
         Me.closeButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.lblLicense = New System.Windows.Forms.LinkLabel()
+        Me.lblProducer = New System.Windows.Forms.LinkLabel()
+        Me.lblGitHub = New System.Windows.Forms.LinkLabel()
         Me.sourcesTextBox = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
@@ -67,45 +67,45 @@ Partial Class aboutForm
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Published under"
         '
-        'LinkLabel1
+        'lblLicense
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.BackColor = System.Drawing.Color.White
-        Me.LinkLabel1.LinkColor = System.Drawing.Color.DeepSkyBlue
-        Me.LinkLabel1.Location = New System.Drawing.Point(229, 97)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(59, 13)
-        Me.LinkLabel1.TabIndex = 3
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "LinkLabel1"
-        Me.LinkLabel1.VisitedLinkColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblLicense.AutoSize = True
+        Me.lblLicense.BackColor = System.Drawing.Color.White
+        Me.lblLicense.LinkColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblLicense.Location = New System.Drawing.Point(229, 97)
+        Me.lblLicense.Name = "lblLicense"
+        Me.lblLicense.Size = New System.Drawing.Size(59, 13)
+        Me.lblLicense.TabIndex = 3
+        Me.lblLicense.TabStop = True
+        Me.lblLicense.Text = "LinkLabel1"
+        Me.lblLicense.VisitedLinkColor = System.Drawing.Color.DeepSkyBlue
         '
-        'LinkLabel2
+        'lblProducer
         '
-        Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.BackColor = System.Drawing.Color.White
-        Me.LinkLabel2.LinkColor = System.Drawing.Color.LimeGreen
-        Me.LinkLabel2.Location = New System.Drawing.Point(255, 120)
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.LinkLabel2.Size = New System.Drawing.Size(59, 13)
-        Me.LinkLabel2.TabIndex = 4
-        Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "LinkLabel2"
-        Me.LinkLabel2.VisitedLinkColor = System.Drawing.Color.LimeGreen
+        Me.lblProducer.AutoSize = True
+        Me.lblProducer.BackColor = System.Drawing.Color.White
+        Me.lblProducer.LinkColor = System.Drawing.Color.LimeGreen
+        Me.lblProducer.Location = New System.Drawing.Point(283, 120)
+        Me.lblProducer.Name = "lblProducer"
+        Me.lblProducer.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.lblProducer.Size = New System.Drawing.Size(59, 13)
+        Me.lblProducer.TabIndex = 4
+        Me.lblProducer.TabStop = True
+        Me.lblProducer.Text = "LinkLabel2"
+        Me.lblProducer.VisitedLinkColor = System.Drawing.Color.LimeGreen
         '
-        'LinkLabel3
+        'lblGitHub
         '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.BackColor = System.Drawing.Color.White
-        Me.LinkLabel3.LinkColor = System.Drawing.Color.DarkOrange
-        Me.LinkLabel3.Location = New System.Drawing.Point(147, 120)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(102, 13)
-        Me.LinkLabel3.TabIndex = 5
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "GitHub project page"
-        Me.LinkLabel3.VisitedLinkColor = System.Drawing.Color.DarkOrange
+        Me.lblGitHub.AutoSize = True
+        Me.lblGitHub.BackColor = System.Drawing.Color.White
+        Me.lblGitHub.LinkColor = System.Drawing.Color.DarkOrange
+        Me.lblGitHub.Location = New System.Drawing.Point(147, 120)
+        Me.lblGitHub.Name = "lblGitHub"
+        Me.lblGitHub.Size = New System.Drawing.Size(102, 13)
+        Me.lblGitHub.TabIndex = 5
+        Me.lblGitHub.TabStop = True
+        Me.lblGitHub.Text = "GitHub project page"
+        Me.lblGitHub.VisitedLinkColor = System.Drawing.Color.DarkOrange
         '
         'sourcesTextBox
         '
@@ -131,9 +131,9 @@ Partial Class aboutForm
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(428, 246)
         Me.Controls.Add(Me.sourcesTextBox)
-        Me.Controls.Add(Me.LinkLabel3)
-        Me.Controls.Add(Me.LinkLabel2)
-        Me.Controls.Add(Me.LinkLabel1)
+        Me.Controls.Add(Me.lblGitHub)
+        Me.Controls.Add(Me.lblProducer)
+        Me.Controls.Add(Me.lblLicense)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.closeButton)
@@ -153,8 +153,8 @@ Partial Class aboutForm
     Friend WithEvents closeButton As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
-    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
-    Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
+    Friend WithEvents lblLicense As System.Windows.Forms.LinkLabel
+    Friend WithEvents lblProducer As System.Windows.Forms.LinkLabel
+    Friend WithEvents lblGitHub As System.Windows.Forms.LinkLabel
     Friend WithEvents sourcesTextBox As System.Windows.Forms.RichTextBox
 End Class
