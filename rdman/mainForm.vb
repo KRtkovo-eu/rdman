@@ -23,6 +23,7 @@
 
         Dim classesRootRegistry As Object = My.Computer.Registry.ClassesRoot
 
+        classesRootRegistry.createsubkey(".rdman")
         classesRootRegistry.CreateSubKey(".rdman").SetValue("", "rdman_db_file")
         classesRootRegistry.CreateSubKey("rdman_db_file").SetValue("", "Remote Desktop Manager Database file")
         classesRootRegistry.CreateSubKey("rdman_db_file").CreateSubKey("DefaultIcon").SetValue("", My.Application.Info.DirectoryPath + "\icons\code.ico")
