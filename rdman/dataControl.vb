@@ -104,7 +104,7 @@ Module dataControl
             mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(7)))
         Next
 
-        'mainForm.boxSourcesPath.Text = "CSV database: " + sources
+        mainForm.boxSourcesPath.Text = "Loaded database file: " + sources.Substring(sources.LastIndexOf("\") + 1)
         statistics("Loaded Sources Database file from " + sources)
     End Sub
 

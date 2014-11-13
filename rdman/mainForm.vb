@@ -17,7 +17,7 @@
             End If
         End If
 
-        If My.Settings.lastDb <> "" Then
+        If My.Settings.lastDb <> "" And IO.File.Exists(My.Settings.lastDb) Then
             sourcesDb = My.Settings.lastDb
         End If
 
@@ -45,7 +45,12 @@
         'Me.Text = Me.Text + " v" + Me.ProductVersion
 
         If My.Application.CommandLineArgs.Count > 0 Then
-            LoadSources(My.Application.CommandLineArgs.Item(0))
+            If IO.File.Exists(My.Application.CommandLineArgs.Item(0)) Then
+                LoadSources(My.Application.CommandLineArgs.Item(0))
+
+            Else
+                LoadSources(sourcesDb)
+            End If
         Else
             LoadSources(sourcesDb)
         End If
@@ -76,16 +81,20 @@
     Private Sub boxPicture_DoubleClick(sender As Object, e As EventArgs) Handles boxPicture.DoubleClick
         Dim asciiFile As String = My.Application.Info.DirectoryPath + "\asciiGraphics\" + Me.boxSystem.SelectedIndex.ToString + ".txt"
         Dim reader As IO.StreamReader = New IO.StreamReader(asciiFile)
-        statistics("")
-        statistics("")
+        Dim image As String
+
         statistics("Output > " + asciiFile)
-        statistics("")
+        image = vbNewLine
+
         Do While reader.EndOfStream = False
-            statistics(reader.ReadLine)
+            image += reader.ReadLine
+            image += vbNewLine
         Loop
         reader.Close()
-        statistics("")
-        statistics("")
+
+        image += vbNewLine
+
+        statistics(image)
     End Sub
 
     Private Sub buttonSave_Click(sender As Object, e As EventArgs) Handles buttonSave.Click
@@ -102,8 +111,10 @@
 
     Private Sub LoadSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadSourcesDatabaseToolStripMenuItem.Click
         If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            sourcesDb = openSourceDb.FileName
-            LoadSources(sourcesDb)
+            If IO.File.Exists(openSourceDb.FileName) Then
+                sourcesDb = openSourceDb.FileName
+                LoadSources(sourcesDb)
+            End If
         End If
     End Sub
 
@@ -187,7 +198,8 @@
             Case "help"
                 Dim help As String
 
-                help = "HELP for Remote Desktop Manager"
+                help = vbNewLine
+                help += "HELP for Remote Desktop Manager"
                 help += vbNewLine
                 help += "-------------------------------"
                 help += vbNewLine

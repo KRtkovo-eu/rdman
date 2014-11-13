@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
@@ -76,6 +76,7 @@ Partial Class mainForm
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
+        Me.boxSourcesPath = New System.Windows.Forms.ToolStripTextBox()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -117,7 +118,7 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
@@ -174,6 +175,9 @@ Partial Class mainForm
         'statisticsCommandLine
         '
         Me.statisticsCommandLine.AcceptsReturn = True
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodewidth", "savenode", "savestats"})
+        Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
         Me.statisticsCommandLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.statisticsCommandLine.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -498,7 +502,7 @@ Partial Class mainForm
         '
         'menuBar
         '
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem, Me.boxSourcesPath})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(792, 24)
@@ -619,6 +623,17 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
+        'boxSourcesPath
+        '
+        Me.boxSourcesPath.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.boxSourcesPath.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.boxSourcesPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Italic)
+        Me.boxSourcesPath.ForeColor = System.Drawing.Color.Gray
+        Me.boxSourcesPath.Name = "boxSourcesPath"
+        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
+        Me.boxSourcesPath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.boxSourcesPath.Size = New System.Drawing.Size(300, 20)
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -705,5 +720,6 @@ Partial Class mainForm
     Friend WithEvents statisticsCommandLine As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents boxFullscreen As System.Windows.Forms.CheckBox
+    Friend WithEvents boxSourcesPath As System.Windows.Forms.ToolStripTextBox
 
 End Class
