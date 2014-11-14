@@ -242,7 +242,7 @@ Module dataControl
 
             mstsc = Process.Start(ProcessProperties)
             If mstsc.HasExited = False Then
-                statistics("Execution > " + mstscPath + " " + ProcessProperties.Arguments)
+                statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
                 Return mstsc.Id
             Else
                 statistics("Execution ends with error.")
