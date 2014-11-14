@@ -160,7 +160,7 @@ Public Class mainForm
     End Sub
 
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
-        Process.Start(sourcesDb)
+        Process.Start("notepad.exe", sourcesDb)
     End Sub
 
     Private Sub boxFullscreen_CheckedChanged(sender As Object, e As EventArgs) Handles boxFullscreen.CheckedChanged
