@@ -433,7 +433,6 @@ Partial Class mainForm
         '
         'buttonConnect
         '
-        Me.buttonConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.buttonConnect.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonConnect.ForeColor = System.Drawing.Color.Green
         Me.buttonConnect.Location = New System.Drawing.Point(16, 9)
