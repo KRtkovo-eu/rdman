@@ -31,6 +31,10 @@ Partial Class mainForm
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
         Me.statisticsCommandLine = New System.Windows.Forms.ComboBox()
+        Me.groupConnectOver = New System.Windows.Forms.GroupBox()
+        Me.buttonLocateViewer = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.boxViewerPath = New System.Windows.Forms.TextBox()
         Me.groupResolutionSettings = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.boxFullscreen = New System.Windows.Forms.CheckBox()
@@ -47,12 +51,13 @@ Partial Class mainForm
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.buttonNewNode = New System.Windows.Forms.Button()
         Me.buttonSave = New System.Windows.Forms.Button()
+        Me.buttonConnect = New System.Windows.Forms.Button()
         Me.boxSystem = New System.Windows.Forms.ComboBox()
         Me.lblSystem = New System.Windows.Forms.Label()
         Me.groupConnectionSettings = New System.Windows.Forms.GroupBox()
+        Me.boxConnectOver = New System.Windows.Forms.CheckBox()
         Me.boxPort = New System.Windows.Forms.TextBox()
         Me.lblPort = New System.Windows.Forms.Label()
-        Me.buttonConnect = New System.Windows.Forms.Button()
         Me.boxIP = New System.Windows.Forms.TextBox()
         Me.lblIP = New System.Windows.Forms.Label()
         Me.boxName = New System.Windows.Forms.TextBox()
@@ -78,18 +83,12 @@ Partial Class mainForm
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
-        Me.boxConnectOver = New System.Windows.Forms.CheckBox()
-        Me.groupConnectOver = New System.Windows.Forms.GroupBox()
-        Me.boxViewerPath = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.buttonLocateViewer = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.boxViewerArgs = New System.Windows.Forms.TextBox()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
         Me.mainContainer.SuspendLayout()
         Me.groupStatistics.SuspendLayout()
+        Me.groupConnectOver.SuspendLayout()
         Me.groupResolutionSettings.SuspendLayout()
         Me.groupAdditionalInformations.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -97,7 +96,6 @@ Partial Class mainForm
         Me.groupImage.SuspendLayout()
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuBar.SuspendLayout()
-        Me.groupConnectOver.SuspendLayout()
         Me.SuspendLayout()
         '
         'mainContainer
@@ -117,8 +115,8 @@ Partial Class mainForm
         Me.mainContainer.Panel2.Controls.Add(Me.groupResolutionSettings)
         Me.mainContainer.Panel2.Controls.Add(Me.groupAdditionalInformations)
         Me.mainContainer.Panel2.Controls.Add(Me.groupConnectionSettings)
-        Me.mainContainer.Size = New System.Drawing.Size(824, 487)
-        Me.mainContainer.SplitterDistance = 212
+        Me.mainContainer.Size = New System.Drawing.Size(892, 499)
+        Me.mainContainer.SplitterDistance = 229
         Me.mainContainer.TabIndex = 1
         '
         'sourcesList
@@ -134,7 +132,7 @@ Partial Class mainForm
         Me.sourcesList.MultiSelect = False
         Me.sourcesList.Name = "sourcesList"
         Me.sourcesList.ShowGroups = False
-        Me.sourcesList.Size = New System.Drawing.Size(212, 487)
+        Me.sourcesList.Size = New System.Drawing.Size(229, 499)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.sourcesList.TabIndex = 0
@@ -159,9 +157,9 @@ Partial Class mainForm
         Me.groupStatistics.Controls.Add(Me.statisticsCommandLine)
         Me.groupStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.groupStatistics.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupStatistics.Location = New System.Drawing.Point(0, 369)
+        Me.groupStatistics.Location = New System.Drawing.Point(0, 342)
         Me.groupStatistics.Name = "groupStatistics"
-        Me.groupStatistics.Size = New System.Drawing.Size(608, 118)
+        Me.groupStatistics.Size = New System.Drawing.Size(659, 157)
         Me.groupStatistics.TabIndex = 4
         Me.groupStatistics.TabStop = False
         Me.groupStatistics.Text = "Statistics"
@@ -178,27 +176,74 @@ Partial Class mainForm
         Me.boxStatistics.ReadOnly = True
         Me.boxStatistics.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.boxStatistics.ShowSelectionMargin = True
-        Me.boxStatistics.Size = New System.Drawing.Size(602, 78)
+        Me.boxStatistics.Size = New System.Drawing.Size(653, 117)
         Me.boxStatistics.TabIndex = 0
         Me.boxStatistics.Text = ""
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodewidth", "savenode", "savestats"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodeconnectover", "connectover", "nodedescription", "description", "nodefullscreen", "fullscreen", "nodeheight", "height", "nodeip", "ip", "nodemultimon", "multimon", "nodename", "name", "nodeport", "port", "nodesystem", "system", "nodesystemversion", "version", "nodeviewerpath", "viewer", "nodewidth", "width", "savenode", "savestats"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
         Me.statisticsCommandLine.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.statisticsCommandLine.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodewidth", "savenode", "savestats"})
-        Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 96)
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
-        Me.statisticsCommandLine.Size = New System.Drawing.Size(602, 19)
+        Me.statisticsCommandLine.Size = New System.Drawing.Size(653, 19)
+        Me.statisticsCommandLine.Sorted = True
         Me.statisticsCommandLine.TabIndex = 3
         Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter."
+        '
+        'groupConnectOver
+        '
+        Me.groupConnectOver.Controls.Add(Me.buttonLocateViewer)
+        Me.groupConnectOver.Controls.Add(Me.Label2)
+        Me.groupConnectOver.Controls.Add(Me.boxViewerPath)
+        Me.groupConnectOver.Dock = System.Windows.Forms.DockStyle.Top
+        Me.groupConnectOver.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.groupConnectOver.Location = New System.Drawing.Point(0, 292)
+        Me.groupConnectOver.Name = "groupConnectOver"
+        Me.groupConnectOver.Size = New System.Drawing.Size(659, 50)
+        Me.groupConnectOver.TabIndex = 3
+        Me.groupConnectOver.TabStop = False
+        Me.groupConnectOver.Text = "Connect over"
+        Me.groupConnectOver.Visible = False
+        '
+        'buttonLocateViewer
+        '
+        Me.buttonLocateViewer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.buttonLocateViewer.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonLocateViewer.Location = New System.Drawing.Point(622, 19)
+        Me.buttonLocateViewer.Name = "buttonLocateViewer"
+        Me.buttonLocateViewer.Size = New System.Drawing.Size(25, 23)
+        Me.buttonLocateViewer.TabIndex = 13
+        Me.buttonLocateViewer.Text = "..."
+        Me.buttonLocateViewer.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.Label2.Location = New System.Drawing.Point(7, 24)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(79, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Locate viewer:"
+        '
+        'boxViewerPath
+        '
+        Me.boxViewerPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.boxViewerPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.boxViewerPath.Location = New System.Drawing.Point(115, 20)
+        Me.boxViewerPath.Name = "boxViewerPath"
+        Me.boxViewerPath.Size = New System.Drawing.Size(501, 22)
+        Me.boxViewerPath.TabIndex = 12
         '
         'groupResolutionSettings
         '
@@ -213,7 +258,7 @@ Partial Class mainForm
         Me.groupResolutionSettings.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 242)
         Me.groupResolutionSettings.Name = "groupResolutionSettings"
-        Me.groupResolutionSettings.Size = New System.Drawing.Size(608, 50)
+        Me.groupResolutionSettings.Size = New System.Drawing.Size(659, 50)
         Me.groupResolutionSettings.TabIndex = 2
         Me.groupResolutionSettings.TabStop = False
         Me.groupResolutionSettings.Text = "Resolution settings"
@@ -222,7 +267,7 @@ Partial Class mainForm
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.Label1.Location = New System.Drawing.Point(255, 23)
+        Me.Label1.Location = New System.Drawing.Point(335, 24)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
         Me.Label1.TabIndex = 8
@@ -245,7 +290,7 @@ Partial Class mainForm
         '
         Me.lblWindowSizePix.AutoSize = True
         Me.lblWindowSizePix.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.lblWindowSizePix.Location = New System.Drawing.Point(451, 23)
+        Me.lblWindowSizePix.Location = New System.Drawing.Point(537, 24)
         Me.lblWindowSizePix.Name = "lblWindowSizePix"
         Me.lblWindowSizePix.Size = New System.Drawing.Size(36, 13)
         Me.lblWindowSizePix.TabIndex = 5
@@ -255,7 +300,7 @@ Partial Class mainForm
         '
         Me.lblWindowSizeX.AutoSize = True
         Me.lblWindowSizeX.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.lblWindowSizeX.Location = New System.Drawing.Point(384, 23)
+        Me.lblWindowSizeX.Location = New System.Drawing.Point(470, 24)
         Me.lblWindowSizeX.Name = "lblWindowSizeX"
         Me.lblWindowSizeX.Size = New System.Drawing.Size(12, 13)
         Me.lblWindowSizeX.TabIndex = 3
@@ -264,7 +309,7 @@ Partial Class mainForm
         'boxHeight
         '
         Me.boxHeight.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxHeight.Location = New System.Drawing.Point(399, 20)
+        Me.boxHeight.Location = New System.Drawing.Point(485, 20)
         Me.boxHeight.Name = "boxHeight"
         Me.boxHeight.ReadOnly = True
         Me.boxHeight.Size = New System.Drawing.Size(48, 22)
@@ -274,17 +319,17 @@ Partial Class mainForm
         '
         Me.boxMultimon.AutoSize = True
         Me.boxMultimon.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxMultimon.Location = New System.Drawing.Point(104, 22)
+        Me.boxMultimon.Location = New System.Drawing.Point(115, 22)
         Me.boxMultimon.Name = "boxMultimon"
-        Me.boxMultimon.Size = New System.Drawing.Size(136, 17)
+        Me.boxMultimon.Size = New System.Drawing.Size(194, 17)
         Me.boxMultimon.TabIndex = 9
-        Me.boxMultimon.Text = "Span remote desktop"
+        Me.boxMultimon.Text = "Span remote desktop (multimon)"
         Me.boxMultimon.UseVisualStyleBackColor = True
         '
         'boxWidth
         '
         Me.boxWidth.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxWidth.Location = New System.Drawing.Point(331, 20)
+        Me.boxWidth.Location = New System.Drawing.Point(417, 20)
         Me.boxWidth.Name = "boxWidth"
         Me.boxWidth.ReadOnly = True
         Me.boxWidth.Size = New System.Drawing.Size(48, 22)
@@ -303,7 +348,7 @@ Partial Class mainForm
         Me.groupAdditionalInformations.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupAdditionalInformations.Location = New System.Drawing.Point(0, 95)
         Me.groupAdditionalInformations.Name = "groupAdditionalInformations"
-        Me.groupAdditionalInformations.Size = New System.Drawing.Size(608, 147)
+        Me.groupAdditionalInformations.Size = New System.Drawing.Size(659, 147)
         Me.groupAdditionalInformations.TabIndex = 1
         Me.groupAdditionalInformations.TabStop = False
         Me.groupAdditionalInformations.Text = "Additional informations"
@@ -316,7 +361,7 @@ Partial Class mainForm
         Me.boxDescription.Location = New System.Drawing.Point(3, 92)
         Me.boxDescription.Multiline = True
         Me.boxDescription.Name = "boxDescription"
-        Me.boxDescription.Size = New System.Drawing.Size(602, 52)
+        Me.boxDescription.Size = New System.Drawing.Size(653, 52)
         Me.boxDescription.TabIndex = 7
         '
         'lblDescription
@@ -331,10 +376,12 @@ Partial Class mainForm
         '
         'boxSystemVersion
         '
+        Me.boxSystemVersion.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxSystemVersion.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxSystemVersion.Location = New System.Drawing.Point(115, 48)
         Me.boxSystemVersion.Name = "boxSystemVersion"
-        Me.boxSystemVersion.Size = New System.Drawing.Size(193, 22)
+        Me.boxSystemVersion.Size = New System.Drawing.Size(258, 22)
         Me.boxSystemVersion.TabIndex = 6
         '
         'lblVersion
@@ -353,9 +400,9 @@ Partial Class mainForm
         Me.GroupBox1.Controls.Add(Me.buttonNewNode)
         Me.GroupBox1.Controls.Add(Me.buttonSave)
         Me.GroupBox1.Controls.Add(Me.buttonConnect)
-        Me.GroupBox1.Location = New System.Drawing.Point(327, 0)
+        Me.GroupBox1.Location = New System.Drawing.Point(388, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(120, 90)
+        Me.GroupBox1.Size = New System.Drawing.Size(107, 90)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         '
@@ -365,7 +412,7 @@ Partial Class mainForm
         Me.buttonNewNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonNewNode.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonNewNode.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.buttonNewNode.Location = New System.Drawing.Point(19, 63)
+        Me.buttonNewNode.Location = New System.Drawing.Point(16, 63)
         Me.buttonNewNode.Name = "buttonNewNode"
         Me.buttonNewNode.Size = New System.Drawing.Size(75, 23)
         Me.buttonNewNode.TabIndex = 0
@@ -377,22 +424,36 @@ Partial Class mainForm
         Me.buttonSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonSave.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonSave.Location = New System.Drawing.Point(19, 36)
+        Me.buttonSave.Location = New System.Drawing.Point(16, 36)
         Me.buttonSave.Name = "buttonSave"
         Me.buttonSave.Size = New System.Drawing.Size(75, 23)
         Me.buttonSave.TabIndex = 0
         Me.buttonSave.Text = "Save Node"
         Me.buttonSave.UseVisualStyleBackColor = True
         '
+        'buttonConnect
+        '
+        Me.buttonConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.buttonConnect.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonConnect.ForeColor = System.Drawing.Color.Green
+        Me.buttonConnect.Location = New System.Drawing.Point(16, 9)
+        Me.buttonConnect.Name = "buttonConnect"
+        Me.buttonConnect.Size = New System.Drawing.Size(75, 23)
+        Me.buttonConnect.TabIndex = 0
+        Me.buttonConnect.Text = "Connect"
+        Me.buttonConnect.UseVisualStyleBackColor = True
+        '
         'boxSystem
         '
+        Me.boxSystem.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.boxSystem.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxSystem.FormattingEnabled = True
         Me.boxSystem.Items.AddRange(New Object() {"Windows", "Linux", "Android", "MacOS", "other"})
         Me.boxSystem.Location = New System.Drawing.Point(115, 21)
         Me.boxSystem.Name = "boxSystem"
-        Me.boxSystem.Size = New System.Drawing.Size(193, 21)
+        Me.boxSystem.Size = New System.Drawing.Size(258, 21)
         Me.boxSystem.TabIndex = 5
         '
         'lblSystem
@@ -418,48 +479,52 @@ Partial Class mainForm
         Me.groupConnectionSettings.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupConnectionSettings.Location = New System.Drawing.Point(0, 0)
         Me.groupConnectionSettings.Name = "groupConnectionSettings"
-        Me.groupConnectionSettings.Size = New System.Drawing.Size(608, 95)
+        Me.groupConnectionSettings.Size = New System.Drawing.Size(659, 95)
         Me.groupConnectionSettings.TabIndex = 0
         Me.groupConnectionSettings.TabStop = False
         Me.groupConnectionSettings.Text = "Connection settings"
         '
+        'boxConnectOver
+        '
+        Me.boxConnectOver.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.boxConnectOver.AutoSize = True
+        Me.boxConnectOver.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.boxConnectOver.Location = New System.Drawing.Point(393, 25)
+        Me.boxConnectOver.Name = "boxConnectOver"
+        Me.boxConnectOver.Size = New System.Drawing.Size(94, 17)
+        Me.boxConnectOver.TabIndex = 4
+        Me.boxConnectOver.Text = "Connect over"
+        Me.boxConnectOver.UseVisualStyleBackColor = True
+        '
         'boxPort
         '
+        Me.boxPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxPort.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxPort.Location = New System.Drawing.Point(362, 56)
+        Me.boxPort.Location = New System.Drawing.Point(425, 56)
         Me.boxPort.Name = "boxPort"
-        Me.boxPort.Size = New System.Drawing.Size(48, 22)
+        Me.boxPort.Size = New System.Drawing.Size(54, 22)
         Me.boxPort.TabIndex = 3
         Me.boxPort.Text = "3389"
         '
         'lblPort
         '
+        Me.lblPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPort.AutoSize = True
         Me.lblPort.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.lblPort.Location = New System.Drawing.Point(327, 59)
+        Me.lblPort.Location = New System.Drawing.Point(388, 59)
         Me.lblPort.Name = "lblPort"
         Me.lblPort.Size = New System.Drawing.Size(31, 13)
         Me.lblPort.TabIndex = 4
         Me.lblPort.Text = "Port:"
         '
-        'buttonConnect
-        '
-        Me.buttonConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.buttonConnect.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonConnect.ForeColor = System.Drawing.Color.Green
-        Me.buttonConnect.Location = New System.Drawing.Point(19, 10)
-        Me.buttonConnect.Name = "buttonConnect"
-        Me.buttonConnect.Size = New System.Drawing.Size(75, 23)
-        Me.buttonConnect.TabIndex = 0
-        Me.buttonConnect.Text = "Connect"
-        Me.buttonConnect.UseVisualStyleBackColor = True
-        '
         'boxIP
         '
+        Me.boxIP.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxIP.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxIP.Location = New System.Drawing.Point(115, 56)
         Me.boxIP.Name = "boxIP"
-        Me.boxIP.Size = New System.Drawing.Size(193, 22)
+        Me.boxIP.Size = New System.Drawing.Size(258, 22)
         Me.boxIP.TabIndex = 2
         '
         'lblIP
@@ -474,10 +539,12 @@ Partial Class mainForm
         '
         'boxName
         '
+        Me.boxName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxName.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxName.Location = New System.Drawing.Point(115, 23)
         Me.boxName.Name = "boxName"
-        Me.boxName.Size = New System.Drawing.Size(193, 22)
+        Me.boxName.Size = New System.Drawing.Size(258, 22)
         Me.boxName.TabIndex = 1
         '
         'lblName
@@ -495,7 +562,7 @@ Partial Class mainForm
         Me.groupImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.groupImage.Controls.Add(Me.boxPicture)
         Me.groupImage.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupImage.Location = New System.Drawing.Point(655, 24)
+        Me.groupImage.Location = New System.Drawing.Point(723, 24)
         Me.groupImage.Name = "groupImage"
         Me.groupImage.Size = New System.Drawing.Size(169, 185)
         Me.groupImage.TabIndex = 5
@@ -518,7 +585,7 @@ Partial Class mainForm
         Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem, Me.boxSourcesPath})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
-        Me.menuBar.Size = New System.Drawing.Size(824, 24)
+        Me.menuBar.Size = New System.Drawing.Size(892, 24)
         Me.menuBar.TabIndex = 0
         Me.menuBar.Text = "MenuStrip1"
         '
@@ -631,7 +698,7 @@ Partial Class mainForm
         Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
         Me.boxSourcesPath.ReadOnly = True
         Me.boxSourcesPath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.boxSourcesPath.Size = New System.Drawing.Size(230, 20)
+        Me.boxSourcesPath.Size = New System.Drawing.Size(590, 20)
         '
         'operatingSystemsImages
         '
@@ -657,86 +724,12 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
-        'boxConnectOver
-        '
-        Me.boxConnectOver.AutoSize = True
-        Me.boxConnectOver.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxConnectOver.Location = New System.Drawing.Point(327, 25)
-        Me.boxConnectOver.Name = "boxConnectOver"
-        Me.boxConnectOver.Size = New System.Drawing.Size(94, 17)
-        Me.boxConnectOver.TabIndex = 4
-        Me.boxConnectOver.Text = "Connect over"
-        Me.boxConnectOver.UseVisualStyleBackColor = True
-        '
-        'groupConnectOver
-        '
-        Me.groupConnectOver.Controls.Add(Me.boxViewerArgs)
-        Me.groupConnectOver.Controls.Add(Me.Label3)
-        Me.groupConnectOver.Controls.Add(Me.buttonLocateViewer)
-        Me.groupConnectOver.Controls.Add(Me.Label2)
-        Me.groupConnectOver.Controls.Add(Me.boxViewerPath)
-        Me.groupConnectOver.Dock = System.Windows.Forms.DockStyle.Top
-        Me.groupConnectOver.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupConnectOver.Location = New System.Drawing.Point(0, 292)
-        Me.groupConnectOver.Name = "groupConnectOver"
-        Me.groupConnectOver.Size = New System.Drawing.Size(608, 77)
-        Me.groupConnectOver.TabIndex = 3
-        Me.groupConnectOver.TabStop = False
-        Me.groupConnectOver.Text = "Connect over"
-        Me.groupConnectOver.Visible = False
-        '
-        'boxViewerPath
-        '
-        Me.boxViewerPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxViewerPath.Location = New System.Drawing.Point(115, 20)
-        Me.boxViewerPath.Name = "boxViewerPath"
-        Me.boxViewerPath.Size = New System.Drawing.Size(402, 22)
-        Me.boxViewerPath.TabIndex = 12
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.Label2.Location = New System.Drawing.Point(7, 24)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(79, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Locate viewer:"
-        '
-        'buttonLocateViewer
-        '
-        Me.buttonLocateViewer.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonLocateViewer.Location = New System.Drawing.Point(523, 20)
-        Me.buttonLocateViewer.Name = "buttonLocateViewer"
-        Me.buttonLocateViewer.Size = New System.Drawing.Size(25, 23)
-        Me.buttonLocateViewer.TabIndex = 13
-        Me.buttonLocateViewer.Text = "..."
-        Me.buttonLocateViewer.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.Label3.Location = New System.Drawing.Point(7, 50)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(82, 13)
-        Me.Label3.TabIndex = 15
-        Me.Label3.Text = "Run with args:"
-        '
-        'boxViewerArgs
-        '
-        Me.boxViewerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxViewerArgs.Location = New System.Drawing.Point(115, 47)
-        Me.boxViewerArgs.Name = "boxViewerArgs"
-        Me.boxViewerArgs.Size = New System.Drawing.Size(433, 22)
-        Me.boxViewerArgs.TabIndex = 16
-        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(824, 511)
+        Me.ClientSize = New System.Drawing.Size(892, 523)
         Me.Controls.Add(Me.groupImage)
         Me.Controls.Add(Me.mainContainer)
         Me.Controls.Add(Me.menuBar)
@@ -751,6 +744,8 @@ Partial Class mainForm
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mainContainer.ResumeLayout(False)
         Me.groupStatistics.ResumeLayout(False)
+        Me.groupConnectOver.ResumeLayout(False)
+        Me.groupConnectOver.PerformLayout()
         Me.groupResolutionSettings.ResumeLayout(False)
         Me.groupResolutionSettings.PerformLayout()
         Me.groupAdditionalInformations.ResumeLayout(False)
@@ -762,8 +757,6 @@ Partial Class mainForm
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuBar.ResumeLayout(False)
         Me.menuBar.PerformLayout()
-        Me.groupConnectOver.ResumeLayout(False)
-        Me.groupConnectOver.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -826,7 +819,5 @@ Partial Class mainForm
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents boxViewerPath As System.Windows.Forms.TextBox
     Friend WithEvents boxConnectOver As System.Windows.Forms.CheckBox
-    Friend WithEvents boxViewerArgs As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
 
 End Class

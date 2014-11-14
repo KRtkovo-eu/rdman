@@ -55,7 +55,7 @@ Public Class mainForm
     End Sub
 
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
-        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked)
+        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text)
         If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
         ElseIf processPid = 1 Then
@@ -215,25 +215,29 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "newnode | Loads template of new node."
                 help += vbNewLine
-                help += vbTab + "nodedescription | Set node description."
+                help += vbTab + "nodeconnectover, connectover | Set node connect over checkbox to opposite state."
                 help += vbNewLine
-                help += vbTab + "nodefullscreen | Set node fullscreen checkbox to opposite state."
+                help += vbTab + "nodedescription, description | Set node description."
                 help += vbNewLine
-                help += vbTab + "nodeheight | Set node height."
+                help += vbTab + "nodefullscreen, fullscreen | Set node fullscreen checkbox to opposite state."
                 help += vbNewLine
-                help += vbTab + "nodeip | Set node IP or hostname."
+                help += vbTab + "nodeheight, height | Set node height."
                 help += vbNewLine
-                help += vbTab + "nodemultimon | Set node multimone (span remote desktop) checkbox to opposite state."
+                help += vbTab + "nodeip, ip | Set node IP or hostname."
                 help += vbNewLine
-                help += vbTab + "nodename | Set node name."
+                help += vbTab + "nodemultimon, multimon | Set node multimone (span remote desktop) checkbox to opposite state."
                 help += vbNewLine
-                help += vbTab + "nodeport | Set node port."
+                help += vbTab + "nodename, name | Set node name."
                 help += vbNewLine
-                help += vbTab + "nodesystem | Set node system. Write value as 'Windows', 'Linux', 'Android', 'MacOS' or 'other'."
+                help += vbTab + "nodeport, port | Set node port."
                 help += vbNewLine
-                help += vbTab + "nodesystemversion | Set node system version."
+                help += vbTab + "nodesystem, system | Set node system. Write value as 'Windows', 'Linux', 'Android', 'MacOS' or 'other'."
                 help += vbNewLine
-                help += vbTab + "nodewidth | Set node width."
+                help += vbTab + "nodesystemversion, version | Set node system version."
+                help += vbNewLine
+                help += vbTab + "nodeviewerpath, viewer | Set node viewer path."
+                help += vbNewLine
+                help += vbTab + "nodewidth, width | Set node width."
                 help += vbNewLine
                 help += vbTab + "savenode | Saves node to csv database file."
                 help += vbNewLine
@@ -246,33 +250,41 @@ Public Class mainForm
                 LoadSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "newnode"
                 AddNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
-            Case "nodedescription"
+            Case "nodeconnectover", "connectover"
+                If Me.boxConnectOver.Checked = True Then
+                    Me.boxConnectOver.Checked = False
+                Else
+                    Me.boxConnectOver.Checked = True
+                End If
+            Case "nodedescription", "description"
                 commandSetValue(Me.boxDescription, command, True)
-            Case "nodefullscreen"
+            Case "nodefullscreen", "fullscreen"
                 If Me.boxFullscreen.Checked = True Then
                     Me.boxFullscreen.Checked = False
                 Else
                     Me.boxFullscreen.Checked = True
                 End If
-            Case "nodeheight"
+            Case "nodeheight", "height"
                 commandSetValue(Me.boxHeight, command)
-            Case "nodeip"
+            Case "nodeip", "ip"
                 commandSetValue(Me.boxIP, command)
-            Case "nodemultimon"
+            Case "nodemultimon", "multimon"
                 If Me.boxMultimon.Checked = True Then
                     Me.boxMultimon.Checked = False
                 Else
                     Me.boxMultimon.Checked = True
                 End If
-            Case "nodename"
+            Case "nodename", "name"
                 commandSetValue(Me.boxName, command)
-            Case "nodeport"
+            Case "nodeport", "port"
                 commandSetValue(Me.boxPort, command)
-            Case "nodesystem"
+            Case "nodesystem", "system"
                 commandSetValue(Me.boxSystem, command)
-            Case "nodesystemversion"
+            Case "nodesystemversion", "version"
                 commandSetValue(Me.boxSystemVersion, command)
-            Case "nodewidth"
+            Case "nodeviewerpath", "viewer"
+                commandSetValue(Me.boxViewerPath, command)
+            Case "nodewidth", "width"
                 commandSetValue(Me.boxWidth, command)
             Case "savenode"
                 SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
@@ -283,7 +295,7 @@ Public Class mainForm
         End Select
     End Sub
 
-    Private Function commandGetValue(ByVal title As String, ByVal multiline As Boolean) As String
+    Private Function commandGetValue(ByVal title As String, ByVal multiline As Boolean, ByVal value As String) As String
         If multiline = True Then
             commandValueInput.Height = 140
             commandValueInput.TextBox1.Multiline = multiline
@@ -295,23 +307,40 @@ Public Class mainForm
         End If
 
         commandValueInput.Text = title
+        commandValueInput.TextBox1.Text = value
+        commandValueInput.TextBox1.SelectAll()
 
         commandValueInput.ShowDialog()
 
         If commandValueInput.DialogResult = Windows.Forms.DialogResult.OK Then
-            Dim value As String = commandValueInput.TextBox1.Text
+            value = commandValueInput.TextBox1.Text
 
             commandValueInput.TextBox1.Text = ""
-            Return value
-        Else
-            Return ""
         End If
+
+        Return value
     End Function
 
     Private Sub commandSetValue(ByVal box As Object, ByVal command As String, ByVal multiline As Boolean)
-        Dim item As String = commandGetValue("Set " + command + " of node", multiline)
+        Dim item As String = commandGetValue("Set " + command + " of node", multiline, box.text)
         statistics(vbTab + "value {" + item + "}", True)
-        box.text = item
+
+        If box.name = "boxSystem" Then
+            Select Case item
+                Case "w"
+                    item = "windows"
+                Case "l"
+                    item = "linux"
+                Case "a"
+                    item = "android"
+                Case "m"
+                    item = "macos"
+                Case Else
+                    item = "other"
+            End Select
+        End If
+
+        box.Text = item
     End Sub
 
     Private Sub commandSetValue(ByVal box As Object, ByVal command As String)
@@ -357,13 +386,13 @@ Public Class mainForm
 
         If Me.statisticsCommandLine.Text = "" Or Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter." Then
             If Me.statisticsCommandLine.Focused = False Then
+                Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter."
                 font = New Font("Lucida Console", 8, FontStyle.Italic, GraphicsUnit.Point)
                 Me.statisticsCommandLine.Font = font
-                Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter."
             Else
+                Me.statisticsCommandLine.Text = ""
                 font = New Font("Lucida Console", 8, FontStyle.Bold, GraphicsUnit.Point)
                 Me.statisticsCommandLine.Font = font
-                Me.statisticsCommandLine.Text = ""
             End If
         End If
     End Sub
@@ -405,5 +434,21 @@ Public Class mainForm
             Me.groupResolutionSettings.Visible = True
             Me.groupConnectOver.Visible = False
         End If
+    End Sub
+
+    Private Sub buttonLocateViewer_Click(sender As Object, e As EventArgs) Handles buttonLocateViewer.Click
+        openSourceDb.Filter = "Executable file *.exe|*.exe"
+        openSourceDb.DefaultExt = "exe"
+        openSourceDb.FileName = ""
+        openSourceDb.Title = "Select viewer path"
+
+        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Me.boxViewerPath.Text = openSourceDb.FileName
+        End If
+
+        openSourceDb.Filter = "Sources database *.rdman|*.rdman|CSV file (sep. by semicolon) *.csv|*.csv"
+        openSourceDb.DefaultExt = "rdman"
+        openSourceDb.FileName = "sources.rdman"
+        openSourceDb.Title = "Open Sources Database file"
     End Sub
 End Class
