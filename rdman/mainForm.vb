@@ -160,7 +160,20 @@ Public Class mainForm
     End Sub
 
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
-        Process.Start("notepad.exe", sourcesDb)
+        Dim notepad As Process
+        Dim ProcessProperties As New ProcessStartInfo
+
+        ProcessProperties.FileName = "notepad.exe"
+        ProcessProperties.Arguments = sourcesDb
+
+        notepad = Process.Start(ProcessProperties)
+
+        notepad.WaitForExit()
+
+        If My.Computer.FileSystem.FileExists(sourcesDb) = True Then
+            LoadSources(sourcesDb)
+        End If
+
     End Sub
 
     Private Sub boxFullscreen_CheckedChanged(sender As Object, e As EventArgs) Handles boxFullscreen.CheckedChanged
