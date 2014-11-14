@@ -162,7 +162,6 @@ Partial Class aboutForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(460, 266)
         Me.Controls.Add(Me.clickEasterEgg)
         Me.Controls.Add(Me.clickRDMan)
