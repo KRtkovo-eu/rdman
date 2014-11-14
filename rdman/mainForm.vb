@@ -396,4 +396,14 @@ Public Class mainForm
         saveStatistics.FileName = Today.ToString("yyyyMMdd")
         saveStatistics.Title = "Save Statistics file"
     End Sub
+
+    Private Sub boxConnectOver_CheckedChanged(sender As Object, e As EventArgs) Handles boxConnectOver.CheckedChanged
+        If boxConnectOver.Checked = True Then
+            Me.groupResolutionSettings.Visible = False
+            Me.groupConnectOver.Visible = True
+        Else
+            Me.groupResolutionSettings.Visible = True
+            Me.groupConnectOver.Visible = False
+        End If
+    End Sub
 End Class
