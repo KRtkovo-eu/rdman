@@ -342,6 +342,8 @@ Public Class mainForm
         End If
         My.Settings.lastDb = sourcesDb
         My.Settings.Save()
+
+        SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
     End Sub
 
     Private Sub statisticsCommandLine_KeyUp(sender As Object, e As KeyEventArgs) Handles statisticsCommandLine.KeyUp
