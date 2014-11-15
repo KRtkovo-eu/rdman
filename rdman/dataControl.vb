@@ -111,8 +111,8 @@ Module dataControl
             mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(7)))
         Next
 
-        mainForm.boxSourcesPath.Text = "Loaded database file: " + sources.Substring(sources.LastIndexOf("\") + 1)
-        statistics("Loaded Sources Database file from " + sources)
+        mainForm.boxSourcesPath.Text = "Loaded: " + sources.Substring(sources.LastIndexOf("\") + 1)
+        statistics("Loaded sources database file from " + sources)
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String)

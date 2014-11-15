@@ -25,6 +25,10 @@ Public Class mainForm
             sourcesDb = My.Settings.lastDb
         End If
 
+        'Other settings
+        Me.AskBeforeCloseToolStripMenuItem.Checked = My.Settings.askOnClose
+        Me.CheckForupdateOnStartToolStripMenuItem.Checked = My.Settings.updateOnStart
+
         'Focus command line
         Me.statisticsCommandLine.Focus()
 
@@ -55,6 +59,8 @@ Public Class mainForm
     End Sub
 
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
+        SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
+
         Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text)
         If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
@@ -72,6 +78,11 @@ Public Class mainForm
     Private Sub boxStatistics_TextChanged(sender As Object, e As EventArgs) Handles boxStatistics.TextChanged
         boxStatistics.SelectionStart = boxStatistics.TextLength
         boxStatistics.ScrollToCaret()
+
+        If boxStatistics.TextLength = boxStatistics.MaxLength Then
+            SaveStatisticsToolStripMenuItem_Click(Nothing, New System.EventArgs())
+            boxStatistics.Text = ""
+        End If
     End Sub
 
     Private Sub boxPicture_DoubleClick(sender As Object, e As EventArgs) Handles boxPicture.DoubleClick
@@ -196,6 +207,8 @@ Public Class mainForm
                 statistics("", True)
             Case "about"
                 AboutToolStripMenuItem_Click(Nothing, New System.EventArgs())
+            Case "clear"
+                boxStatistics.Text = ""
             Case "connect"
                 buttonConnect_Click(Nothing, New System.EventArgs())
             Case "editsources"
@@ -213,6 +226,8 @@ Public Class mainForm
                 help += "-------------------------------"
                 help += vbNewLine
                 help += vbTab + "about | Show dialog with informations about this program."
+                help += vbNewLine
+                help += vbTab + "clear | Cleans the statistics box."
                 help += vbNewLine
                 help += vbTab + "connect | Connects to currently loaded node."
                 help += vbNewLine
@@ -258,7 +273,6 @@ Public Class mainForm
                 help += vbNewLine
 
                 statistics(help, True)
-                statistics("", True)
             Case "loadsources"
                 LoadSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "newnode"
@@ -373,6 +387,13 @@ Public Class mainForm
     End Sub
 
     Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If My.Settings.askOnClose = True Then
+            If MessageBox.Show("Do you really want to exit Remote Desktop Manager?", "Really exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+                Exit Sub
+            End If
+        End If
+
         If Me.WindowState = FormWindowState.Normal Then
             My.Settings.width = Me.Width
             My.Settings.height = Me.Height
@@ -383,6 +404,8 @@ Public Class mainForm
             My.Settings.isMaximized = Me.WindowState
         End If
         My.Settings.lastDb = sourcesDb
+        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked
+        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked
         My.Settings.Save()
 
         SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
@@ -463,5 +486,41 @@ Public Class mainForm
         openSourceDb.DefaultExt = "rdman"
         openSourceDb.FileName = "sources.rdman"
         openSourceDb.Title = "Open Sources Database file"
+    End Sub
+
+    Private Sub AskBeforeCloseToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        If AskBeforeCloseToolStripMenuItem.Checked = True Then
+            My.Settings.askOnClose = False
+            AskBeforeCloseToolStripMenuItem.Checked = False
+        Else
+            My.Settings.askOnClose = True
+            AskBeforeCloseToolStripMenuItem.Checked = True
+        End If
+    End Sub
+
+    Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If My.Settings.updateOnStart = True Then
+            Dim latest As String = aboutForm.checkUpdate()
+
+            If latest <> "latest" Then
+                If MessageBox.Show("Update to " + My.Application.Info.Title + " " + latest + " is available on GitHub!" + vbNewLine + "Do you want to download it now?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                    Process.Start("https://github.com/KRtkovo-eu/rdman/releases/latest")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CheckForupdateOnStartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForupdateOnStartToolStripMenuItem.Click
+        If CheckForupdateOnStartToolStripMenuItem.Checked = True Then
+            My.Settings.updateOnStart = False
+            CheckForupdateOnStartToolStripMenuItem.Checked = False
+        Else
+            My.Settings.updateOnStart = True
+            CheckForupdateOnStartToolStripMenuItem.Checked = True
+        End If
+    End Sub
+
+    Private Sub boxSourcesPath_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles boxSourcesPath.LinkClicked
+        EditSourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs())
     End Sub
 End Class

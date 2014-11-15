@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
@@ -79,10 +79,14 @@ Partial Class mainForm
         Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.boxSourcesPath = New System.Windows.Forms.ToolStripTextBox()
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckForupdateOnStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -107,6 +111,7 @@ Partial Class mainForm
         'mainContainer.Panel1
         '
         Me.mainContainer.Panel1.Controls.Add(Me.sourcesList)
+        Me.mainContainer.Panel1.Controls.Add(Me.boxSourcesPath)
         '
         'mainContainer.Panel2
         '
@@ -126,13 +131,13 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
         Me.sourcesList.Name = "sourcesList"
         Me.sourcesList.ShowGroups = False
-        Me.sourcesList.Size = New System.Drawing.Size(229, 499)
+        Me.sourcesList.Size = New System.Drawing.Size(229, 477)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.sourcesList.TabIndex = 0
@@ -182,7 +187,7 @@ Partial Class mainForm
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodeconnectover", "connectover", "nodedescription", "description", "nodefullscreen", "fullscreen", "nodeheight", "height", "nodeip", "ip", "nodemultimon", "multimon", "nodename", "name", "nodeport", "port", "nodesystem", "system", "nodesystemversion", "version", "nodeviewerpath", "viewer", "nodewidth", "width", "savenode", "savestats"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodeconnectover", "connectover", "nodedescription", "description", "nodefullscreen", "fullscreen", "nodeheight", "height", "nodeip", "ip", "nodemultimon", "multimon", "nodename", "name", "nodeport", "port", "nodesystem", "system", "nodesystemversion", "version", "nodeviewerpath", "viewer", "nodewidth", "width", "savenode", "savestats"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
@@ -191,7 +196,7 @@ Partial Class mainForm
         Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
         Me.statisticsCommandLine.Size = New System.Drawing.Size(653, 19)
@@ -581,7 +586,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem, Me.boxSourcesPath})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -685,20 +690,6 @@ Partial Class mainForm
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.AboutToolStripMenuItem.Text = "&About Remote Desktop Manager"
         '
-        'boxSourcesPath
-        '
-        Me.boxSourcesPath.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.boxSourcesPath.BackColor = System.Drawing.SystemColors.Window
-        Me.boxSourcesPath.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.boxSourcesPath.Enabled = False
-        Me.boxSourcesPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxSourcesPath.ForeColor = System.Drawing.Color.DarkRed
-        Me.boxSourcesPath.Name = "boxSourcesPath"
-        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
-        Me.boxSourcesPath.ReadOnly = True
-        Me.boxSourcesPath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.boxSourcesPath.Size = New System.Drawing.Size(590, 20)
-        '
         'operatingSystemsImages
         '
         Me.operatingSystemsImages.ImageStream = CType(resources.GetObject("operatingSystemsImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -722,6 +713,47 @@ Partial Class mainForm
         Me.saveStatistics.FileName = "statistics.txt"
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
+        '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AskBeforeCloseToolStripMenuItem, Me.CheckForupdateOnStartToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Text = "&Options"
+        '
+        'AskBeforeCloseToolStripMenuItem
+        '
+        Me.AskBeforeCloseToolStripMenuItem.Checked = True
+        Me.AskBeforeCloseToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.AskBeforeCloseToolStripMenuItem.Name = "AskBeforeCloseToolStripMenuItem"
+        Me.AskBeforeCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.AskBeforeCloseToolStripMenuItem.Text = "&Ask before close"
+        '
+        'CheckForupdateOnStartToolStripMenuItem
+        '
+        Me.CheckForupdateOnStartToolStripMenuItem.Checked = True
+        Me.CheckForupdateOnStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckForupdateOnStartToolStripMenuItem.Name = "CheckForupdateOnStartToolStripMenuItem"
+        Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.CheckForupdateOnStartToolStripMenuItem.Text = "Check for &update on start"
+        '
+        'boxSourcesPath
+        '
+        Me.boxSourcesPath.ActiveLinkColor = System.Drawing.Color.Red
+        Me.boxSourcesPath.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.boxSourcesPath.Font = New System.Drawing.Font("Lucida Console", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.boxSourcesPath.LinkArea = New System.Windows.Forms.LinkArea(8, 32000)
+        Me.boxSourcesPath.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.boxSourcesPath.Location = New System.Drawing.Point(0, 477)
+        Me.boxSourcesPath.Name = "boxSourcesPath"
+        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(2)
+        Me.boxSourcesPath.Size = New System.Drawing.Size(229, 22)
+        Me.boxSourcesPath.TabIndex = 1
+        Me.boxSourcesPath.Text = "Loaded: "
+        Me.boxSourcesPath.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.ToolTip1.SetToolTip(Me.boxSourcesPath, "Edit sources database")
+        Me.boxSourcesPath.UseCompatibleTextRendering = True
+        Me.boxSourcesPath.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'mainForm
         '
@@ -810,7 +842,6 @@ Partial Class mainForm
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents boxFullscreen As System.Windows.Forms.CheckBox
-    Friend WithEvents boxSourcesPath As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents NewEmptySourcesDatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents statisticsCommandLine As System.Windows.Forms.ComboBox
     Friend WithEvents groupConnectOver As System.Windows.Forms.GroupBox
@@ -818,5 +849,10 @@ Partial Class mainForm
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents boxViewerPath As System.Windows.Forms.TextBox
     Friend WithEvents boxConnectOver As System.Windows.Forms.CheckBox
+    Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AskBeforeCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CheckForupdateOnStartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents boxSourcesPath As System.Windows.Forms.LinkLabel
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 
 End Class

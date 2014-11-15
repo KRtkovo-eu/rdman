@@ -13,7 +13,7 @@ Public Class aboutForm
         Return sources
     End Function
 
-    Private Sub checkUpdate()
+    Public Function checkUpdate() As String
         If My.Computer.Network.IsAvailable Then
             Me.lblGitHub.Text = "Checking new version..."
             Me.Refresh()
@@ -28,14 +28,11 @@ Public Class aboutForm
 
             latest = resUri.Substring(resUri.LastIndexOf("/") + 1)
 
-            If latest > ("v" + Me.ProductVersion) Then
-                Me.lblGitHub.Text = "Available new version (" + latest + ") on GitHub ;-)"
-            Else
-                Me.lblGitHub.Text = "Your version is up to date. Visit us on GitHub ;-)"
-            End If
-            Me.Refresh()
+            Return latest
+        Else
+            Return "latest"
         End If
-    End Sub
+    End Function
 
     Private Sub aboutForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Label1.Text = My.Application.Info.Title + " v" + Me.ProductVersion
@@ -56,7 +53,14 @@ Public Class aboutForm
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblGitHub.LinkClicked
         Select Case Me.lblGitHub.Text
             Case "Check for update"
-                checkUpdate()
+                Dim latest = checkUpdate()
+
+                If latest > ("v" + Me.ProductVersion) Then
+                    Me.lblGitHub.Text = "Available new version (" + latest + ") on GitHub ;-)"
+                Else
+                    Me.lblGitHub.Text = "Your version is up to date. Visit us on GitHub ;-)"
+                End If
+                Me.Refresh()
             Case "Your version is up to date. Visit us on GitHub ;-)"
                 Process.Start("https://github.com/KRtkovo-eu/rdman/wiki/")
             Case Else
