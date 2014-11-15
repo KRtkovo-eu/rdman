@@ -10,10 +10,22 @@ Public Class mainForm
         'Get settings of windows state and position
         If My.Settings.isMaximized <> "" Then
             If My.Settings.isMaximized = FormWindowState.Normal Then
-                Me.Width = My.Settings.width
-                Me.Height = My.Settings.height
-                Me.Top = My.Settings.positionTop
-                Me.Left = My.Settings.positionLeft
+                If My.Settings.width <> "" Then
+                    Me.Width = My.Settings.width
+                End If
+
+                If My.Settings.height <> "" Then
+                    Me.Height = My.Settings.height
+                End If
+
+                If My.Settings.positionTop <> "" Then
+                    Me.Top = My.Settings.positionTop
+                End If
+
+                If My.Settings.positionLeft <> "" Then
+                    Me.Left = My.Settings.positionLeft
+                End If
+
                 Me.WindowState = My.Settings.isMaximized
             Else
                 Me.WindowState = My.Settings.isMaximized
@@ -26,8 +38,13 @@ Public Class mainForm
         End If
 
         'Other settings
-        Me.AskBeforeCloseToolStripMenuItem.Checked = My.Settings.askOnClose
-        Me.CheckForupdateOnStartToolStripMenuItem.Checked = My.Settings.updateOnStart
+        If My.Settings.askOnClose <> "" Then
+            Me.AskBeforeCloseToolStripMenuItem.Checked = My.Settings.askOnClose
+        End If
+
+        If My.Settings.updateOnStart <> "" Then
+            Me.CheckForupdateOnStartToolStripMenuItem.Checked = My.Settings.updateOnStart
+        End If
 
         'Focus command line
         Me.statisticsCommandLine.Focus()
