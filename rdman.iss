@@ -59,7 +59,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe"; DestDir: 
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.application"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\sources.rdman"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\sources.rdman"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\asciiGraphics\*"; DestDir: "{app}\asciiGraphics"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
