@@ -339,14 +339,14 @@ Public Class mainForm
         statistics(vbTab + "value {" + item + "}", True)
 
         If box.name = "boxSystem" Then
-            Select Case item
-                Case "w"
+            Select Case item.ToLower
+                Case "w", "windows", "microsoft"
                     item = "windows"
-                Case "l"
+                Case "l", "linux"
                     item = "linux"
-                Case "a"
+                Case "a", "android"
                     item = "android"
-                Case "m"
+                Case "m", "macos", "mac", "apple", "macintosh"
                     item = "macos"
                 Case Else
                     item = "other"
