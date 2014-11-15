@@ -519,7 +519,7 @@ Public Class mainForm
         If My.Settings.updateOnStart = "True" Then
             Dim latest As String = aboutForm.checkUpdate()
 
-            If latest <> "latest" Then
+            If latest <> "latest" And latest > "v" + Me.ProductVersion Then
                 If MessageBox.Show("Update to " + My.Application.Info.Title + " " + latest + " is available on GitHub!" + vbNewLine + "Do you want to download it now?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
                     Process.Start("https://github.com/KRtkovo-eu/rdman/releases/latest")
                 End If
