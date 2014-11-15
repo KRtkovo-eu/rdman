@@ -488,7 +488,7 @@ Public Class mainForm
         openSourceDb.Title = "Open Sources Database file"
     End Sub
 
-    Private Sub AskBeforeCloseToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    Private Sub AskBeforeCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AskBeforeCloseToolStripMenuItem.Click
         If AskBeforeCloseToolStripMenuItem.Checked = True Then
             My.Settings.askOnClose = False
             AskBeforeCloseToolStripMenuItem.Checked = False

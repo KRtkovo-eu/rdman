@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
@@ -131,7 +131,7 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
@@ -723,16 +723,12 @@ Partial Class mainForm
         '
         'AskBeforeCloseToolStripMenuItem
         '
-        Me.AskBeforeCloseToolStripMenuItem.Checked = True
-        Me.AskBeforeCloseToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AskBeforeCloseToolStripMenuItem.Name = "AskBeforeCloseToolStripMenuItem"
         Me.AskBeforeCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.AskBeforeCloseToolStripMenuItem.Text = "&Ask before close"
         '
         'CheckForupdateOnStartToolStripMenuItem
         '
-        Me.CheckForupdateOnStartToolStripMenuItem.Checked = True
-        Me.CheckForupdateOnStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckForupdateOnStartToolStripMenuItem.Name = "CheckForupdateOnStartToolStripMenuItem"
         Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.CheckForupdateOnStartToolStripMenuItem.Text = "Check for &update on start"
