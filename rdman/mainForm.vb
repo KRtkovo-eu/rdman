@@ -9,26 +9,26 @@ Public Class mainForm
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Get settings of windows state and position
         If My.Settings.isMaximized <> "" Then
-            If My.Settings.isMaximized = FormWindowState.Normal Then
+            If My.Settings.isMaximized = "False" Then
                 If My.Settings.width <> "" Then
-                    Me.Width = My.Settings.width
+                    Me.Width = Convert.ToInt32(My.Settings.width)
                 End If
 
                 If My.Settings.height <> "" Then
-                    Me.Height = My.Settings.height
+                    Me.Height = Convert.ToInt32(My.Settings.height)
                 End If
 
                 If My.Settings.positionTop <> "" Then
-                    Me.Top = My.Settings.positionTop
+                    Me.Top = Convert.ToInt32(My.Settings.positionTop)
                 End If
 
                 If My.Settings.positionLeft <> "" Then
-                    Me.Left = My.Settings.positionLeft
+                    Me.Left = Convert.ToInt32(My.Settings.positionLeft)
                 End If
 
-                Me.WindowState = My.Settings.isMaximized
+                Me.WindowState = FormWindowState.Normal
             Else
-                Me.WindowState = My.Settings.isMaximized
+                Me.WindowState = FormWindowState.Maximized
             End If
         End If
 
@@ -39,11 +39,11 @@ Public Class mainForm
 
         'Other settings
         If My.Settings.askOnClose <> "" Then
-            Me.AskBeforeCloseToolStripMenuItem.Checked = My.Settings.askOnClose
+            Me.AskBeforeCloseToolStripMenuItem.Checked = Convert.ToBoolean(My.Settings.askOnClose)
         End If
 
         If My.Settings.updateOnStart <> "" Then
-            Me.CheckForupdateOnStartToolStripMenuItem.Checked = My.Settings.updateOnStart
+            Me.CheckForupdateOnStartToolStripMenuItem.Checked = Convert.ToBoolean(My.Settings.updateOnStart)
         End If
 
         'Focus command line
@@ -404,7 +404,7 @@ Public Class mainForm
     End Sub
 
     Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If My.Settings.askOnClose = True Then
+        If My.Settings.askOnClose = "True" Then
             If MessageBox.Show("Do you really want to exit Remote Desktop Manager?", "Really exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
                 e.Cancel = True
                 Exit Sub
@@ -412,17 +412,17 @@ Public Class mainForm
         End If
 
         If Me.WindowState = FormWindowState.Normal Then
-            My.Settings.width = Me.Width
-            My.Settings.height = Me.Height
-            My.Settings.positionTop = Me.Top
-            My.Settings.positionLeft = Me.Left
-            My.Settings.isMaximized = Me.WindowState
+            My.Settings.width = Me.Width.ToString
+            My.Settings.height = Me.Height.ToString
+            My.Settings.positionTop = Me.Top.ToString
+            My.Settings.positionLeft = Me.Left.ToString
+            My.Settings.isMaximized = "False"
         Else
-            My.Settings.isMaximized = Me.WindowState
+            My.Settings.isMaximized = "True"
         End If
         My.Settings.lastDb = sourcesDb
-        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked
-        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked
+        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked.ToString
+        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked.ToString
         My.Settings.Save()
 
         SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
@@ -507,16 +507,16 @@ Public Class mainForm
 
     Private Sub AskBeforeCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AskBeforeCloseToolStripMenuItem.Click
         If AskBeforeCloseToolStripMenuItem.Checked = True Then
-            My.Settings.askOnClose = False
+            My.Settings.askOnClose = "False"
             AskBeforeCloseToolStripMenuItem.Checked = False
         Else
-            My.Settings.askOnClose = True
+            My.Settings.askOnClose = "True"
             AskBeforeCloseToolStripMenuItem.Checked = True
         End If
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If My.Settings.updateOnStart = True Then
+        If My.Settings.updateOnStart = "True" Then
             Dim latest As String = aboutForm.checkUpdate()
 
             If latest <> "latest" Then
@@ -529,10 +529,10 @@ Public Class mainForm
 
     Private Sub CheckForupdateOnStartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForupdateOnStartToolStripMenuItem.Click
         If CheckForupdateOnStartToolStripMenuItem.Checked = True Then
-            My.Settings.updateOnStart = False
+            My.Settings.updateOnStart = "False"
             CheckForupdateOnStartToolStripMenuItem.Checked = False
         Else
-            My.Settings.updateOnStart = True
+            My.Settings.updateOnStart = "True"
             CheckForupdateOnStartToolStripMenuItem.Checked = True
         End If
     End Sub
