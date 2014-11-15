@@ -45,6 +45,8 @@ VersionInfoProductVersion=0.4
 VersionInfoProductTextVersion=v0.4
 ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x86 x64
+WizardImageFile=C:\git\rdman\installerBig.bmp
+WizardSmallImageFile=C:\git\rdman\installerSmall.bmp
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
