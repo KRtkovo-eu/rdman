@@ -122,7 +122,7 @@ Partial Class colorStatistics
         Me.Name = "colorStatistics"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Set colors of statistics box"
+        Me.Text = "Statistics console style"
         CType(Me.fontSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

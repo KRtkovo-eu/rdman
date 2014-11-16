@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("550")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("600")>  _
         Public Property height() As Integer
             Get
                 Return CType(Me("height"),Integer)

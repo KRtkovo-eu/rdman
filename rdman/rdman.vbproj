@@ -30,7 +30,7 @@
     <SuiteName>rdman</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.4.5.0</ApplicationVersion>
+    <ApplicationVersion>0.4.6.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -184,9 +184,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="cert\RDMan.pfx" />
-    <None Include="LICENSE">
+    <Content Include="LICENSE">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

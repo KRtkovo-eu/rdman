@@ -12,7 +12,7 @@
       <Value Profile="(Default)">800</Value>
     </Setting>
     <Setting Name="height" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">550</Value>
+      <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="isMaximized" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>

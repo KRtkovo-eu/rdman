@@ -9,28 +9,26 @@ Public Class mainForm
 
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Get settings of windows state and position
-        If My.Settings.isMaximized <> Nothing Then
-            If My.Settings.isMaximized = FormWindowState.Normal Then
-                If My.Settings.width <> Nothing Then
-                    Me.Width = My.Settings.width
-                End If
-
-                If My.Settings.height <> Nothing Then
-                    Me.Height = My.Settings.height
-                End If
-
-                If My.Settings.positionTop <> Nothing Then
-                    Me.Top = My.Settings.positionTop
-                End If
-
-                If My.Settings.positionLeft <> Nothing Then
-                    Me.Left = My.Settings.positionLeft
-                End If
-
-                Me.WindowState = FormWindowState.Normal
-            Else
-                Me.WindowState = FormWindowState.Maximized
+        If My.Settings.isMaximized = FormWindowState.Normal Then
+            If My.Settings.width <> Nothing Then
+                Me.Width = My.Settings.width
             End If
+
+            If My.Settings.height <> Nothing Then
+                Me.Height = My.Settings.height
+            End If
+
+            If My.Settings.positionTop <> Nothing Then
+                Me.Top = My.Settings.positionTop
+            End If
+
+            If My.Settings.positionLeft <> Nothing Then
+                Me.Left = My.Settings.positionLeft
+            End If
+
+            Me.WindowState = My.Settings.isMaximized
+        Else
+            Me.WindowState = My.Settings.isMaximized
         End If
 
         'Get last opened db
