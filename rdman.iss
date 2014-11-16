@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "v0.4.4"
+#define MyAppVersion "v0.4.5"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -24,7 +24,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=C:\git\rdman\LICENSE
 OutputDir=C:\git\rdman\rdman\publish
-OutputBaseFilename=Remote Desktop Manager v0.4.4 setup
+OutputBaseFilename=Remote Desktop Manager v0.4.5 setup
 SetupIconFile=C:\git\rdman\rdman\icons\unknown.ico
 Compression=lzma
 SolidCompression=yes
@@ -36,13 +36,13 @@ CreateUninstallRegKey=yes
 UninstallDisplayName=Remote Desktop Manager
 AppModifyPath={app}
 UninstallDisplayIcon={app}\rdman.exe
-VersionInfoVersion=0.4.4
+VersionInfoVersion=0.4.5
 VersionInfoCompany=KRtkovo.eu design studio
-VersionInfoTextVersion=v0.4.4
+VersionInfoTextVersion=v0.4.5
 VersionInfoCopyright=GNU General Public License v3.0
 VersionInfoProductName=Remote Desktop Manager
-VersionInfoProductVersion=0.4.4
-VersionInfoProductTextVersion=v0.4.4
+VersionInfoProductVersion=0.4.5
+VersionInfoProductTextVersion=v0.4.5
 ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x86 x64
 WizardImageFile=C:\git\rdman\installerBig.bmp

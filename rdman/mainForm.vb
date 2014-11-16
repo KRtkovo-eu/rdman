@@ -5,25 +5,26 @@ Public Class mainForm
     Dim level As Integer = 0
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
     Dim command As String = ""
+    Dim consoleFont As Font = New Font("Lucida Console", 8, FontStyle.Regular, GraphicsUnit.Point)
 
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Get settings of windows state and position
-        If My.Settings.isMaximized <> "" Then
-            If My.Settings.isMaximized = "False" Then
-                If My.Settings.width <> "" Then
-                    Me.Width = Convert.ToInt32(My.Settings.width)
+        If My.Settings.isMaximized <> Nothing Then
+            If My.Settings.isMaximized = FormWindowState.Normal Then
+                If My.Settings.width <> Nothing Then
+                    Me.Width = My.Settings.width
                 End If
 
-                If My.Settings.height <> "" Then
-                    Me.Height = Convert.ToInt32(My.Settings.height)
+                If My.Settings.height <> Nothing Then
+                    Me.Height = My.Settings.height
                 End If
 
-                If My.Settings.positionTop <> "" Then
-                    Me.Top = Convert.ToInt32(My.Settings.positionTop)
+                If My.Settings.positionTop <> Nothing Then
+                    Me.Top = My.Settings.positionTop
                 End If
 
-                If My.Settings.positionLeft <> "" Then
-                    Me.Left = Convert.ToInt32(My.Settings.positionLeft)
+                If My.Settings.positionLeft <> Nothing Then
+                    Me.Left = My.Settings.positionLeft
                 End If
 
                 Me.WindowState = FormWindowState.Normal
@@ -33,32 +34,57 @@ Public Class mainForm
         End If
 
         'Get last opened db
-        If My.Settings.lastDb <> "" And IO.File.Exists(My.Settings.lastDb) Then
+        If My.Settings.lastDb <> Nothing And IO.File.Exists(My.Settings.lastDb) Then
             sourcesDb = My.Settings.lastDb
         End If
 
         'Other settings
-        If My.Settings.askOnClose <> "" Then
-            Me.AskBeforeCloseToolStripMenuItem.Checked = Convert.ToBoolean(My.Settings.askOnClose)
+        If My.Settings.askOnClose <> Nothing Then
+            Me.AskBeforeCloseToolStripMenuItem.Checked = My.Settings.askOnClose
         End If
 
-        If My.Settings.updateOnStart <> "" Then
-            Me.CheckForupdateOnStartToolStripMenuItem.Checked = Convert.ToBoolean(My.Settings.updateOnStart)
+        If My.Settings.updateOnStart <> Nothing Then
+            Me.CheckForupdateOnStartToolStripMenuItem.Checked = My.Settings.updateOnStart
         End If
+
+        If My.Settings.saveStats <> Nothing Then
+            Me.SaveStatisticsOnCloseToolStripMenuItem.Checked = My.Settings.saveStats
+        End If
+
+        If My.Settings.consoleBgColor <> Nothing Then
+            Me.boxStatistics.BackColor = My.Settings.consoleBgColor
+            Me.statisticsCommandLine.BackColor = My.Settings.consoleBgColor
+        End If
+
+        If My.Settings.consoleTextColor <> Nothing Then
+            Me.boxStatistics.ForeColor = My.Settings.consoleTextColor
+            Me.statisticsCommandLine.ForeColor = My.Settings.consoleTextColor
+        End If
+
+        If My.Settings.consoleFontSize <> Nothing Then
+            colorStatistics.fontSize.Value = My.Settings.consoleFontSize
+            consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
+        End If
+        Me.boxStatistics.Font = consoleFont
 
         'Focus command line
         Me.statisticsCommandLine.Focus()
-
-        'Get user name
-        Dim username As String = My.User.Name
-        username = username.Substring(username.LastIndexOf("\") + 1)
 
         'Set statistics default file name
         Me.saveStatistics.FileName = Today.ToString("yyyyMMdd")
 
         'Write to console
-        statistics("HELLO " + username + "! Have a nice day with " + Me.Text + " (v" + Me.ProductVersion + "). So let's play the Game! I hope, You will enjoy it ;-)")
-        statistics(statisticsEnvironment())
+        Dim allahToConsole As String = ""
+
+        allahToConsole += My.Application.Info.Title + " shell [Version " + Me.ProductVersion + "]"
+        allahToConsole += vbNewLine
+        allahToConsole += "Published under " + My.Application.Info.Copyright
+        allahToConsole += vbNewLine
+        allahToConsole += My.Application.Info.CompanyName + ", 2014 [http://krtkovo.eu/]"
+        allahToConsole += vbNewLine + vbNewLine
+
+        boxStatistics.Text = allahToConsole
+        statisticsEnvironment()
 
         'Check parameters for db path and load db
         If IO.File.Exists(sourcesDb) = False Then
@@ -235,7 +261,7 @@ Public Class mainForm
             Case "editsources"
                 EditSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "environment"
-                statistics(statisticsEnvironment, True)
+                statisticsEnvironment()
             Case "exit"
                 Me.Close()
             Case "help"
@@ -408,7 +434,7 @@ Public Class mainForm
     End Sub
 
     Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If My.Settings.askOnClose = "True" Then
+        If My.Settings.askOnClose = True Then
             If MessageBox.Show("Do you really want to exit Remote Desktop Manager?", "Really exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
                 e.Cancel = True
                 Exit Sub
@@ -416,20 +442,26 @@ Public Class mainForm
         End If
 
         If Me.WindowState = FormWindowState.Normal Then
-            My.Settings.width = Me.Width.ToString
-            My.Settings.height = Me.Height.ToString
-            My.Settings.positionTop = Me.Top.ToString
-            My.Settings.positionLeft = Me.Left.ToString
-            My.Settings.isMaximized = "False"
+            My.Settings.width = Me.Width
+            My.Settings.height = Me.Height
+            My.Settings.positionTop = Me.Top
+            My.Settings.positionLeft = Me.Left
+            My.Settings.isMaximized = Me.WindowState
         Else
-            My.Settings.isMaximized = "True"
+            My.Settings.isMaximized = Me.WindowState
         End If
         My.Settings.lastDb = sourcesDb
-        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked.ToString
-        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked.ToString
+        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked
+        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked
+        My.Settings.saveStats = Me.SaveStatisticsOnCloseToolStripMenuItem.Checked
+        My.Settings.consoleBgColor = Me.boxStatistics.BackColor
+        My.Settings.consoleTextColor = Me.boxStatistics.ForeColor
+        My.Settings.consoleFontSize = colorStatistics.fontSize.Value
         My.Settings.Save()
 
-        SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
+        If My.Settings.saveStats = True Then
+            SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
+        End If
     End Sub
 
     Private Sub statisticsCommandLine_KeyUp(sender As Object, e As KeyEventArgs) Handles statisticsCommandLine.KeyUp
@@ -451,6 +483,9 @@ Public Class mainForm
                 font = New Font("Lucida Console", 8, FontStyle.Bold, GraphicsUnit.Point)
                 Me.statisticsCommandLine.Font = font
             End If
+        Else
+            font = New Font("Lucida Console", 8, FontStyle.Bold, GraphicsUnit.Point)
+            Me.statisticsCommandLine.Font = font
         End If
     End Sub
 
@@ -511,16 +546,16 @@ Public Class mainForm
 
     Private Sub AskBeforeCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AskBeforeCloseToolStripMenuItem.Click
         If AskBeforeCloseToolStripMenuItem.Checked = True Then
-            My.Settings.askOnClose = "False"
+            My.Settings.askOnClose = False
             AskBeforeCloseToolStripMenuItem.Checked = False
         Else
-            My.Settings.askOnClose = "True"
+            My.Settings.askOnClose = True
             AskBeforeCloseToolStripMenuItem.Checked = True
         End If
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If My.Settings.updateOnStart = "True" Then
+        If My.Settings.updateOnStart = True Then
             Dim latest As String = aboutForm.checkUpdate()
 
             If latest <> "latest" And latest > "v" + Me.ProductVersion Then
@@ -533,15 +568,44 @@ Public Class mainForm
 
     Private Sub CheckForupdateOnStartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForupdateOnStartToolStripMenuItem.Click
         If CheckForupdateOnStartToolStripMenuItem.Checked = True Then
-            My.Settings.updateOnStart = "False"
+            My.Settings.updateOnStart = False
             CheckForupdateOnStartToolStripMenuItem.Checked = False
         Else
-            My.Settings.updateOnStart = "True"
+            My.Settings.updateOnStart = True
             CheckForupdateOnStartToolStripMenuItem.Checked = True
         End If
     End Sub
 
     Private Sub boxSourcesPath_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles boxSourcesPath.LinkClicked
         EditSourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs())
+    End Sub
+
+    Private Sub SaveStatisticsOnCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveStatisticsOnCloseToolStripMenuItem.Click
+        If SaveStatisticsOnCloseToolStripMenuItem.Checked = True Then
+            My.Settings.saveStats = False
+            SaveStatisticsOnCloseToolStripMenuItem.Checked = False
+        Else
+            My.Settings.saveStats = True
+            SaveStatisticsOnCloseToolStripMenuItem.Checked = True
+        End If
+    End Sub
+
+    Private Sub ColorOfStatisticsConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColorOfStatisticsConsoleToolStripMenuItem.Click
+        colorStatistics.btnBgColor.BackColor = My.Settings.consoleBgColor
+        colorStatistics.btnTextColor.BackColor = My.Settings.consoleTextColor
+        colorStatistics.fontSize.Value = My.Settings.consoleFontSize
+
+        If colorStatistics.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            My.Settings.consoleBgColor = colorStatistics.btnBgColor.BackColor
+            My.Settings.consoleTextColor = colorStatistics.btnTextColor.BackColor
+            My.Settings.consoleFontSize = colorStatistics.fontSize.Value
+            Me.boxStatistics.BackColor = My.Settings.consoleBgColor
+            Me.statisticsCommandLine.BackColor = My.Settings.consoleBgColor
+            Me.boxStatistics.ForeColor = My.Settings.consoleTextColor
+            Me.statisticsCommandLine.ForeColor = My.Settings.consoleTextColor
+
+            consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
+            Me.boxStatistics.Font = consoleFont
+        End If
     End Sub
 End Class

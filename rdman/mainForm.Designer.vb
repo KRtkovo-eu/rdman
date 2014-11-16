@@ -23,11 +23,12 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
         Me.statisticsCommandLine = New System.Windows.Forms.ComboBox()
@@ -75,6 +76,12 @@ Partial Class mainForm
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveStatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColorOfStatisticsConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckForupdateOnStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -82,10 +89,6 @@ Partial Class mainForm
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
-        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckForupdateOnStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
@@ -131,7 +134,7 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
@@ -155,6 +158,24 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
+        '
+        'boxSourcesPath
+        '
+        Me.boxSourcesPath.ActiveLinkColor = System.Drawing.Color.Red
+        Me.boxSourcesPath.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.boxSourcesPath.Font = New System.Drawing.Font("Lucida Console", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.boxSourcesPath.LinkArea = New System.Windows.Forms.LinkArea(8, 32000)
+        Me.boxSourcesPath.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.boxSourcesPath.Location = New System.Drawing.Point(0, 477)
+        Me.boxSourcesPath.Name = "boxSourcesPath"
+        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(2)
+        Me.boxSourcesPath.Size = New System.Drawing.Size(229, 22)
+        Me.boxSourcesPath.TabIndex = 1
+        Me.boxSourcesPath.Text = "Loaded: "
+        Me.boxSourcesPath.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.ToolTip1.SetToolTip(Me.boxSourcesPath, "Edit sources database")
+        Me.boxSourcesPath.UseCompatibleTextRendering = True
+        Me.boxSourcesPath.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'groupStatistics
         '
@@ -361,6 +382,7 @@ Partial Class mainForm
         'boxDescription
         '
         Me.boxDescription.AcceptsReturn = True
+        Me.boxDescription.AcceptsTab = True
         Me.boxDescription.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.boxDescription.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxDescription.Location = New System.Drawing.Point(3, 92)
@@ -663,6 +685,44 @@ Partial Class mainForm
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ToolStripSeparator4, Me.AskBeforeCloseToolStripMenuItem, Me.CheckForupdateOnStartToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Text = "&Options"
+        '
+        'ColorOfStatisticsConsoleToolStripMenuItem
+        '
+        Me.ColorOfStatisticsConsoleToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control
+        Me.ColorOfStatisticsConsoleToolStripMenuItem.Image = CType(resources.GetObject("ColorOfStatisticsConsoleToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ColorOfStatisticsConsoleToolStripMenuItem.Name = "ColorOfStatisticsConsoleToolStripMenuItem"
+        Me.ColorOfStatisticsConsoleToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ColorOfStatisticsConsoleToolStripMenuItem.Text = "&Statistics console style"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(203, 6)
+        '
+        'AskBeforeCloseToolStripMenuItem
+        '
+        Me.AskBeforeCloseToolStripMenuItem.Name = "AskBeforeCloseToolStripMenuItem"
+        Me.AskBeforeCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.AskBeforeCloseToolStripMenuItem.Text = "&Ask before close"
+        '
+        'CheckForupdateOnStartToolStripMenuItem
+        '
+        Me.CheckForupdateOnStartToolStripMenuItem.Name = "CheckForupdateOnStartToolStripMenuItem"
+        Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.CheckForupdateOnStartToolStripMenuItem.Text = "Check for &update on start"
+        '
+        'SaveStatisticsOnCloseToolStripMenuItem
+        '
+        Me.SaveStatisticsOnCloseToolStripMenuItem.Name = "SaveStatisticsOnCloseToolStripMenuItem"
+        Me.SaveStatisticsOnCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SaveStatisticsOnCloseToolStripMenuItem.Text = "&Save statistics on close"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.ToolStripSeparator1, Me.AboutToolStripMenuItem})
@@ -713,43 +773,6 @@ Partial Class mainForm
         Me.saveStatistics.FileName = "statistics.txt"
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
-        '
-        'OptionsToolStripMenuItem
-        '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AskBeforeCloseToolStripMenuItem, Me.CheckForupdateOnStartToolStripMenuItem})
-        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
-        Me.OptionsToolStripMenuItem.Text = "&Options"
-        '
-        'AskBeforeCloseToolStripMenuItem
-        '
-        Me.AskBeforeCloseToolStripMenuItem.Name = "AskBeforeCloseToolStripMenuItem"
-        Me.AskBeforeCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.AskBeforeCloseToolStripMenuItem.Text = "&Ask before close"
-        '
-        'CheckForupdateOnStartToolStripMenuItem
-        '
-        Me.CheckForupdateOnStartToolStripMenuItem.Name = "CheckForupdateOnStartToolStripMenuItem"
-        Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.CheckForupdateOnStartToolStripMenuItem.Text = "Check for &update on start"
-        '
-        'boxSourcesPath
-        '
-        Me.boxSourcesPath.ActiveLinkColor = System.Drawing.Color.Red
-        Me.boxSourcesPath.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.boxSourcesPath.Font = New System.Drawing.Font("Lucida Console", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxSourcesPath.LinkArea = New System.Windows.Forms.LinkArea(8, 32000)
-        Me.boxSourcesPath.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.boxSourcesPath.Location = New System.Drawing.Point(0, 477)
-        Me.boxSourcesPath.Name = "boxSourcesPath"
-        Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(2)
-        Me.boxSourcesPath.Size = New System.Drawing.Size(229, 22)
-        Me.boxSourcesPath.TabIndex = 1
-        Me.boxSourcesPath.Text = "Loaded: "
-        Me.boxSourcesPath.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.ToolTip1.SetToolTip(Me.boxSourcesPath, "Edit sources database")
-        Me.boxSourcesPath.UseCompatibleTextRendering = True
-        Me.boxSourcesPath.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'mainForm
         '
@@ -850,5 +873,8 @@ Partial Class mainForm
     Friend WithEvents CheckForupdateOnStartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents boxSourcesPath As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents SaveStatisticsOnCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ColorOfStatisticsConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
 
 End Class

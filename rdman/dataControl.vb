@@ -38,8 +38,19 @@ Module dataControl
         statistics(newLine, False)
     End Sub
 
-    Public Function statisticsEnvironment() As String
-        Dim compTitle As String
+    Public Sub statisticsEnvironment()
+        Dim compTitle As String = ""
+
+        'Line
+        Dim username As String = My.User.Name
+        username = username.Substring(username.LastIndexOf("\") + 1)
+
+        compTitle = "Hello " + username + "!"
+        compTitle += " Today is nice " + Today.ToString("dddd, yyyy/MM/dd.")
+
+        statistics(compTitle)
+
+        'Line
 
         compTitle = "Environment: "
         compTitle += My.Computer.Name
@@ -47,9 +58,9 @@ Module dataControl
         compTitle += My.Computer.Info.OSFullName
         compTitle += "| locale: "
         compTitle += My.Computer.Info.InstalledUICulture.EnglishName
-        compTitle += "| memory: "
+        compTitle += "| memory free: "
         compTitle += SetBytes(My.Computer.Info.AvailablePhysicalMemory)
-        compTitle += "/"
+        compTitle += "/total: "
         compTitle += SetBytes(My.Computer.Info.TotalPhysicalMemory)
         compTitle += ")"
 
@@ -60,8 +71,10 @@ Module dataControl
             compTitle += "is not connected to network."
         End If
 
-        Return compTitle
-    End Function
+        statistics(compTitle)
+
+        statistics("Check the news on our GitHub page! [http://github.com/KRtkovo-eu/rdman/]")
+    End Sub
 
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
         Dim db As List(Of String())

@@ -30,7 +30,7 @@
     <SuiteName>rdman</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.4.4.0</ApplicationVersion>
+    <ApplicationVersion>0.4.5.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -125,6 +125,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="colorStatistics.Designer.vb">
+      <DependentUpon>colorStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="colorStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="commandValueInput.Designer.vb">
       <DependentUpon>commandValueInput.vb</DependentUpon>
     </Compile>
@@ -158,6 +164,9 @@
   <ItemGroup>
     <EmbeddedResource Include="aboutForm.resx">
       <DependentUpon>aboutForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="colorStatistics.resx">
+      <DependentUpon>colorStatistics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="commandValueInput.resx">
       <DependentUpon>commandValueInput.vb</DependentUpon>

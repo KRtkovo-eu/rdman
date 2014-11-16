@@ -56,10 +56,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property positionTop() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property positionTop() As Integer
             Get
-                Return CType(Me("positionTop"),String)
+                Return CType(Me("positionTop"),Integer)
             End Get
             Set
                 Me("positionTop") = value
@@ -68,10 +68,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property positionLeft() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property positionLeft() As Integer
             Get
-                Return CType(Me("positionLeft"),String)
+                Return CType(Me("positionLeft"),Integer)
             End Get
             Set
                 Me("positionLeft") = value
@@ -80,10 +80,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property width() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("800")>  _
+        Public Property width() As Integer
             Get
-                Return CType(Me("width"),String)
+                Return CType(Me("width"),Integer)
             End Get
             Set
                 Me("width") = value
@@ -92,10 +92,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property height() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("550")>  _
+        Public Property height() As Integer
             Get
-                Return CType(Me("height"),String)
+                Return CType(Me("height"),Integer)
             End Get
             Set
                 Me("height") = value
@@ -104,10 +104,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property isMaximized() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Normal")>  _
+        Public Property isMaximized() As Global.System.Windows.Forms.FormWindowState
             Get
-                Return CType(Me("isMaximized"),String)
+                Return CType(Me("isMaximized"),Global.System.Windows.Forms.FormWindowState)
             End Get
             Set
                 Me("isMaximized") = value
@@ -116,7 +116,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("sources.rdman")>  _
         Public Property lastDb() As String
             Get
                 Return CType(Me("lastDb"),String)
@@ -128,10 +128,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property askOnClose() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property askOnClose() As Boolean
             Get
-                Return CType(Me("askOnClose"),String)
+                Return CType(Me("askOnClose"),Boolean)
             End Get
             Set
                 Me("askOnClose") = value
@@ -140,13 +140,61 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property updateOnStart() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property updateOnStart() As Boolean
             Get
-                Return CType(Me("updateOnStart"),String)
+                Return CType(Me("updateOnStart"),Boolean)
             End Get
             Set
                 Me("updateOnStart") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property saveStats() As Boolean
+            Get
+                Return CType(Me("saveStats"),Boolean)
+            End Get
+            Set
+                Me("saveStats") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Black")>  _
+        Public Property consoleBgColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("consoleBgColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("consoleBgColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("LawnGreen")>  _
+        Public Property consoleTextColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("consoleTextColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("consoleTextColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("8")>  _
+        Public Property consoleFontSize() As Decimal
+            Get
+                Return CType(Me("consoleFontSize"),Decimal)
+            End Get
+            Set
+                Me("consoleFontSize") = value
             End Set
         End Property
     End Class

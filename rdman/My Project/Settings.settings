@@ -2,29 +2,41 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="positionTop" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="positionTop" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="positionLeft" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="positionLeft" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="width" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">800</Value>
     </Setting>
-    <Setting Name="height" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">550</Value>
     </Setting>
-    <Setting Name="isMaximized" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="isMaximized" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="lastDb" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">sources.rdman</Value>
     </Setting>
-    <Setting Name="askOnClose" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="askOnClose" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="updateOnStart" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="updateOnStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="saveStats" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="consoleBgColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="consoleTextColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">LawnGreen</Value>
+    </Setting>
+    <Setting Name="consoleFontSize" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">8</Value>
     </Setting>
   </Settings>
 </SettingsFile>

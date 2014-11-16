@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Remote Desktop Manager")> 
 <Assembly: AssemblyCompany("KRtkovo.eu design studio")> 
 <Assembly: AssemblyProduct("rdman")> 
-<Assembly: AssemblyCopyright("GNU General Public License  v3.0")> 
+<Assembly: AssemblyCopyright("GNU General Public License v3.0")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.4.4")> 
-<Assembly: AssemblyFileVersion("0.4.4")> 
+<Assembly: AssemblyVersion("0.4.5")> 
+<Assembly: AssemblyFileVersion("0.4.5")> 

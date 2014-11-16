@@ -39,6 +39,8 @@ Partial Class commandValueInput
         '
         'TextBox1
         '
+        Me.TextBox1.AcceptsReturn = True
+        Me.TextBox1.AcceptsTab = True
         Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(12, 12)
         Me.TextBox1.Name = "TextBox1"
