@@ -61,6 +61,10 @@ Public Class mainForm
         statistics(statisticsEnvironment())
 
         'Check parameters for db path and load db
+        If IO.File.Exists(sourcesDb) = False Then
+            My.Computer.FileSystem.WriteAllText(sourcesDb, "", False)
+        End If
+
         If My.Application.CommandLineArgs.Count > 0 Then
             If IO.File.Exists(My.Application.CommandLineArgs.Item(0)) Then
                 LoadSources(My.Application.CommandLineArgs.Item(0))
