@@ -1,8 +1,6 @@
 ﻿Imports System.Security.Permissions
 
 Public Class mainForm
-    Dim consoleTicker As Integer
-    Dim level As Integer = 0
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
     Dim command As String = ""
     Dim consoleFont As Font = New Font("Lucida Console", 8, FontStyle.Regular, GraphicsUnit.Point)
@@ -106,7 +104,7 @@ Public Class mainForm
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
         SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
 
-        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text)
+        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text, boxName.Text)
         If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
         ElseIf processPid = 1 Then
@@ -605,5 +603,9 @@ Public Class mainForm
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
             Me.boxStatistics.Font = consoleFont
         End If
+    End Sub
+
+    Private Sub monitorTimer_Tick(sender As Object, e As EventArgs) Handles monitorTimer.Tick
+        monitorCheckStates()
     End Sub
 End Class

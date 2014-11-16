@@ -23,11 +23,17 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.sourcesList = New System.Windows.Forms.ListView()
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.monitor = New System.Windows.Forms.ListView()
+        Me.columnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnIP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnState = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnPID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
@@ -90,10 +96,16 @@ Partial Class mainForm
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
+        Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
         Me.mainContainer.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
         Me.groupStatistics.SuspendLayout()
         Me.groupConnectOver.SuspendLayout()
         Me.groupResolutionSettings.SuspendLayout()
@@ -113,7 +125,7 @@ Partial Class mainForm
         '
         'mainContainer.Panel1
         '
-        Me.mainContainer.Panel1.Controls.Add(Me.sourcesList)
+        Me.mainContainer.Panel1.Controls.Add(Me.SplitContainer1)
         Me.mainContainer.Panel1.Controls.Add(Me.boxSourcesPath)
         '
         'mainContainer.Panel2
@@ -127,6 +139,24 @@ Partial Class mainForm
         Me.mainContainer.SplitterDistance = 229
         Me.mainContainer.TabIndex = 1
         '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.sourcesList)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.monitor)
+        Me.SplitContainer1.Size = New System.Drawing.Size(229, 477)
+        Me.SplitContainer1.SplitterDistance = 370
+        Me.SplitContainer1.TabIndex = 3
+        '
         'sourcesList
         '
         Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.Left
@@ -134,13 +164,13 @@ Partial Class mainForm
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(0, 0)
         Me.sourcesList.MultiSelect = False
         Me.sourcesList.Name = "sourcesList"
         Me.sourcesList.ShowGroups = False
-        Me.sourcesList.Size = New System.Drawing.Size(229, 477)
+        Me.sourcesList.Size = New System.Drawing.Size(229, 370)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.sourcesList.TabIndex = 0
@@ -158,6 +188,39 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
+        '
+        'monitor
+        '
+        Me.monitor.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.columnName, Me.columnIP, Me.columnState, Me.columnPID})
+        Me.monitor.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.monitor.GridLines = True
+        Me.monitor.Location = New System.Drawing.Point(0, 0)
+        Me.monitor.MultiSelect = False
+        Me.monitor.Name = "monitor"
+        Me.monitor.ShowGroups = False
+        Me.monitor.Size = New System.Drawing.Size(229, 103)
+        Me.monitor.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.monitor.TabIndex = 2
+        Me.monitor.UseCompatibleStateImageBehavior = False
+        Me.monitor.View = System.Windows.Forms.View.Details
+        '
+        'columnName
+        '
+        Me.columnName.Text = "Node"
+        Me.columnName.Width = 110
+        '
+        'columnIP
+        '
+        Me.columnIP.Text = "Connection on"
+        Me.columnIP.Width = 90
+        '
+        'columnState
+        '
+        Me.columnState.Text = "Status"
+        '
+        'columnPID
+        '
+        Me.columnPID.Text = "PID"
         '
         'boxSourcesPath
         '
@@ -774,6 +837,16 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
+        'monitorStates
+        '
+        Me.monitorStates.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+        Me.monitorStates.ImageSize = New System.Drawing.Size(16, 16)
+        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
+        '
+        'monitorTimer
+        '
+        Me.monitorTimer.Interval = 250
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -793,6 +866,10 @@ Partial Class mainForm
         Me.mainContainer.Panel2.ResumeLayout(False)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mainContainer.ResumeLayout(False)
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
         Me.groupStatistics.ResumeLayout(False)
         Me.groupConnectOver.ResumeLayout(False)
         Me.groupConnectOver.PerformLayout()
@@ -876,5 +953,13 @@ Partial Class mainForm
     Friend WithEvents SaveStatisticsOnCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ColorOfStatisticsConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents monitor As System.Windows.Forms.ListView
+    Friend WithEvents columnName As System.Windows.Forms.ColumnHeader
+    Friend WithEvents columnIP As System.Windows.Forms.ColumnHeader
+    Friend WithEvents columnState As System.Windows.Forms.ColumnHeader
+    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+    Friend WithEvents columnPID As System.Windows.Forms.ColumnHeader
+    Friend WithEvents monitorStates As System.Windows.Forms.ImageList
+    Friend WithEvents monitorTimer As System.Windows.Forms.Timer
 
 End Class

@@ -6,6 +6,7 @@ Module dataControl
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
     Dim nodes As List(Of String())
+    Dim monitorNodes As List(Of String())
 
     Function csvArray(ByVal sources As String) As List(Of String())
         Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
@@ -215,7 +216,7 @@ Module dataControl
         Return db
     End Function
 
-    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String) As Integer
+    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String) As Integer
         If nodeIP <> "" And nodeIP <> "127.0.0.1" Then
             If nodePort = "" Then
                 nodePort = "3389"
@@ -254,10 +255,17 @@ Module dataControl
             End If
 
             mstsc = Process.Start(ProcessProperties)
+
+            Dim monitorNodeDetails As String()
+
             If mstsc.HasExited = False Then
+                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(connected)", mstsc.Id}
+                setMonitor(monitorNodeDetails)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
                 Return mstsc.Id
             Else
+                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(disconnected)", 0}
+                setMonitor(monitorNodeDetails)
                 statistics("Execution ends with error.")
                 Return 0
                 Exit Function
@@ -300,4 +308,33 @@ Module dataControl
                 Return 4
         End Select
     End Function
+
+    Private Sub setMonitor(ByVal node As String())
+        If node IsNot Nothing Then
+
+
+            'zjistit jestli už je v monitorNodes podle name, pokud ano, tak jen prohodit záznamy, jinak přidat
+            monitorNodes.Add(node)
+
+            Dim listViewItem = mainForm.monitor.Items.Add(node(0))
+
+            For x = 1 To node.Length
+                listViewItem.SubItems.Add(node(x))
+            Next
+        End If
+    End Sub
+
+    Public Sub monitorCheckStates()
+        Dim remoteSession As Process
+
+        For Each node In monitorNodes
+            If node(2) = "(connected)" Then
+                remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+
+                If remoteSession.HasExited = True Then
+
+                End If
+            End If
+        Next
+    End Sub
 End Module
