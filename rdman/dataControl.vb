@@ -1,4 +1,5 @@
 ﻿Imports System.Xml
+Imports System.IO
 
 Module dataControl
     Dim windir As String = System.Environment.ExpandEnvironmentVariables("%windir%")
@@ -25,6 +26,22 @@ Module dataControl
         Loop
 
         Return nodes
+    End Function
+
+    Public Function IsPathWritable(ByVal strPath As String) As Boolean
+        IsPathWritable = True
+        If Not Directory.Exists(strPath) Then
+            IsPathWritable = False
+        Else
+            Try
+                Dim fs As FileStream = File.Create(strPath & "\WriteTest.txt")
+                fs.Close()
+            Catch ex As IOException
+                IsPathWritable = False
+            Finally
+                If File.Exists(strPath & "\WriteTest.txt") And IsPathWritable Then File.Delete(strPath & "\WriteTest.txt")
+            End Try
+        End If
     End Function
 
     Public Sub statistics(ByVal newLine As String, ByVal command As Boolean)
@@ -85,6 +102,11 @@ Module dataControl
         Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxMultimon.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text, mainForm.boxConnectOver.Checked, mainForm.boxViewerPath.Text}
 
         db.Add(sourceData)
+
+        If IsPathWritable(sourcesDb.Replace(sourcesDb.Substring(sourcesDb.LastIndexOf("\") + 1), "")) = False Then
+            MessageBox.Show(sourcesDb + vbNewLine + "is not writable.", "Cannot write to database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            mainForm.NewEmptySourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs)
+        End If
 
         Dim objWriter As New System.IO.StreamWriter(sourcesDb)
 

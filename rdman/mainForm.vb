@@ -1,5 +1,6 @@
 ﻿Imports System.Security.Permissions
 Imports System.Windows.Forms.ListView
+Imports System.IO
 
 Public Class mainForm
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
@@ -85,7 +86,7 @@ Public Class mainForm
 
         'Check parameters for db path and load db
         If IO.File.Exists(sourcesDb) = False Then
-            My.Computer.FileSystem.WriteAllText(sourcesDb, "", False)
+            NewEmptySourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs)
         End If
 
         If My.Application.CommandLineArgs.Count > 0 Then
@@ -499,7 +500,7 @@ Public Class mainForm
         Me.AcceptButton = Nothing
     End Sub
 
-    Private Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
+    Public Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
         saveStatistics.Filter = "Sources database *.rdman|*.rdman"
         saveStatistics.DefaultExt = "rdman"
         saveStatistics.FileName = "sources.rdman"
