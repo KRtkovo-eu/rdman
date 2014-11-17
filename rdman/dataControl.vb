@@ -7,7 +7,7 @@ Module dataControl
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
     Dim nodes As List(Of String())
-    Dim monitorNodes As List(Of String()) = New List(Of String())
+    Public monitorNodes As List(Of String()) = New List(Of String())
 
     Function csvArray(ByVal sources As String) As List(Of String())
         Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
@@ -26,22 +26,6 @@ Module dataControl
         Loop
 
         Return nodes
-    End Function
-
-    Public Function IsPathWritable(ByVal strPath As String) As Boolean
-        IsPathWritable = True
-        If Not Directory.Exists(strPath) Then
-            IsPathWritable = False
-        Else
-            Try
-                Dim fs As FileStream = File.Create(strPath & "\WriteTest.txt")
-                fs.Close()
-            Catch ex As IOException
-                IsPathWritable = False
-            Finally
-                If File.Exists(strPath & "\WriteTest.txt") And IsPathWritable Then File.Delete(strPath & "\WriteTest.txt")
-            End Try
-        End If
     End Function
 
     Public Sub statistics(ByVal newLine As String, ByVal command As Boolean)
@@ -103,38 +87,37 @@ Module dataControl
 
         db.Add(sourceData)
 
-        If IsPathWritable(sourcesDb.Replace(sourcesDb.Substring(sourcesDb.LastIndexOf("\") + 1), "")) = False Then
-            MessageBox.Show(sourcesDb + vbNewLine + "is not writable.", "Cannot write to database", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            mainForm.NewEmptySourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs)
-        End If
+        Try
+            Dim objWriter As New System.IO.StreamWriter(sourcesDb)
 
-        Dim objWriter As New System.IO.StreamWriter(sourcesDb)
+            For Each element In db
+                Dim line As String = ""
+                For Each field In element
+                    line += field + ";"
+                Next
+                line = line.Substring(0, line.Length - 1)
 
-        For Each element In db
-            Dim line As String = ""
-            For Each field In element
-                line += field + ";"
+                'line = element(0) + ";"
+                'line += element(1) + ";"
+                'line += element(2) + ";"
+                'line += element(3) + ";"
+                'line += element(4) + ";"
+                'line += element(5) + ";"
+                'line += element(6) + ";"
+                'line += element(7) + ";"
+                'line += element(8) + ";"
+                'line += element(9) + ";"
+                'line += element(10) + ";"
+                'line += element(11)
+
+                objWriter.WriteLine(line)
             Next
-            line = line.Substring(0, line.Length - 1)
 
-            'line = element(0) + ";"
-            'line += element(1) + ";"
-            'line += element(2) + ";"
-            'line += element(3) + ";"
-            'line += element(4) + ";"
-            'line += element(5) + ";"
-            'line += element(6) + ";"
-            'line += element(7) + ";"
-            'line += element(8) + ";"
-            'line += element(9) + ";"
-            'line += element(10) + ";"
-            'line += element(11)
-
-            objWriter.WriteLine(line)
-        Next
-
-        objWriter.Close()
-        statistics("Node ~" + nodeName + "~ successfully saved.")
+            objWriter.Close()
+            statistics("Node ~" + nodeName + "~ successfully saved.")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
         LoadSources(sourcesDb)
     End Sub
@@ -358,30 +341,32 @@ Module dataControl
         Dim remoteSession As Process = New Process
         Dim nodeId As Integer = 0
 
-        For Each node In monitorNodes
-            If node(2) = "(connected)" Then
-                Try
-                    remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+        If monitorNodes IsNot Nothing Then
+            For Each node In monitorNodes
+                If node(2) = "(connected)" Then
+                    Try
+                        remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
 
-                    If remoteSession.HasExited = True Then
+                        If remoteSession.HasExited = True Then
+                            node(2) = "(disconnected)"
+                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
+                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                            statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
+                        End If
+                    Catch
                         node(2) = "(disconnected)"
                         mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
                         mainForm.monitor.Items(nodeId).StateImageIndex = 1
                         mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
                         mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
                         statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
-                    End If
-                Catch
-                    node(2) = "(disconnected)"
-                    mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
-                    mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                    mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                    mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
-                    statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
-                End Try
-            End If
-            nodeId = nodeId + 1
-        Next
+                    End Try
+                End If
+                nodeId = nodeId + 1
+            Next
+        End If
     End Sub
 
     Public Sub monitorDelNode(ByVal nodeName As String, ByVal PID As String)
@@ -396,4 +381,13 @@ Module dataControl
             nodeId = nodeId + 1
         Next
     End Sub
+
+    Public Sub monitorLoad(ByVal savedNodes As List(Of String()))
+        If savedNodes IsNot Nothing Then
+            For Each node In savedNodes
+                setMonitor(node, False)
+            Next
+        End If
+    End Sub
+
 End Module

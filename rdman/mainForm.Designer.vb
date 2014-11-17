@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -183,7 +183,7 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -240,7 +240,7 @@ Partial Class mainForm
         'columnName
         '
         Me.columnName.Text = "Remote session"
-        Me.columnName.Width = 110
+        Me.columnName.Width = 150
         '
         'columnIP
         '
@@ -328,11 +328,14 @@ Partial Class mainForm
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
         Me.statisticsCommandLine.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.statisticsCommandLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
+        Me.statisticsCommandLine.ItemHeight = 11
         Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
+        Me.statisticsCommandLine.MaxDropDownItems = 5
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
         Me.statisticsCommandLine.Size = New System.Drawing.Size(653, 19)
         Me.statisticsCommandLine.Sorted = True
