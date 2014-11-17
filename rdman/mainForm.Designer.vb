@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -183,7 +183,7 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -239,7 +239,7 @@ Partial Class mainForm
         '
         'columnName
         '
-        Me.columnName.Text = "Remote relation"
+        Me.columnName.Text = "Remote session"
         Me.columnName.Width = 110
         '
         'columnIP

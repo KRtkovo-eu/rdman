@@ -369,6 +369,7 @@ Module dataControl
                         mainForm.monitor.Items(nodeId).StateImageIndex = 1
                         mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
                         mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                        statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
                     End If
                 Catch
                     node(2) = "(disconnected)"
@@ -376,6 +377,7 @@ Module dataControl
                     mainForm.monitor.Items(nodeId).StateImageIndex = 1
                     mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
                     mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                    statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
                 End Try
             End If
             nodeId = nodeId + 1
