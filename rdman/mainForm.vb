@@ -1,4 +1,5 @@
 ﻿Imports System.Security.Permissions
+Imports System.Windows.Forms.ListView
 
 Public Class mainForm
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
@@ -99,6 +100,9 @@ Public Class mainForm
 
         'load empty node template
         loadSourceData("EMPTY")
+
+        'monitor timer
+        monitorTimer.Start()
     End Sub
 
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
@@ -607,5 +611,21 @@ Public Class mainForm
 
     Private Sub monitorTimer_Tick(sender As Object, e As EventArgs) Handles monitorTimer.Tick
         monitorCheckStates()
+    End Sub
+
+    Private Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
+        For Each node As ListViewItem In monitor.SelectedItems()
+
+            Select Case node.SubItems(2).Text
+                Case "(connected)"
+                    If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                        Process.GetProcessById(node.SubItems(3).Text).Kill()
+                    End If
+                Case "(disconnected)"
+                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                Case "(failed)"
+                    monitorDelNode(node.SubItems(0).Text, "0")
+            End Select
+        Next
     End Sub
 End Class

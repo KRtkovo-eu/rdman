@@ -3,12 +3,19 @@ Imports System.Threading
 
 Public Class aboutForm
     Private Function getSourcesString() As String
-        Dim sources As String
+        Dim sources As String = ""
 
-        sources = "Double-J Design - Super Mono 3D Icons (CC Attribution 4.0) [http://doublejdesign.co.uk/]"
+        sources += "Used sources of third parts:"
         sources += vbNewLine
         sources += vbNewLine
-        sources += "dAKirby309 - Windows 8 Metro Icons (CC Attribution-Noncommercial 4.0) [http://dakirby309.deviantart.com/]"
+        sources += "Double-J Design - Super Mono 3D Icons (CC Attribution 4.0)" + vbNewLine + "[http://doublejdesign.co.uk/]"
+        sources += vbNewLine
+        sources += vbNewLine
+        sources += "dAKirby309 - Windows 8 Metro Icons (CC Attribution-Noncommercial 4.0)" + vbNewLine + "[http://dakirby309.deviantart.com/]"
+        sources += vbNewLine
+        sources += vbNewLine
+        sources += "Frank Souza - FS Ubuntu Icons (GNU General Public License)" + vbNewLine + "[http://franksouza183.deviantart.com]"
+        sources += vbNewLine
 
         Return sources
     End Function

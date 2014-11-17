@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -34,6 +34,9 @@ Partial Class mainForm
         Me.columnIP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnState = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnPID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnArgs = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
@@ -96,8 +99,9 @@ Partial Class mainForm
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -115,6 +119,8 @@ Partial Class mainForm
         Me.groupImage.SuspendLayout()
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuBar.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'mainContainer
@@ -148,13 +154,13 @@ Partial Class mainForm
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.sourcesList)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox3)
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.monitor)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox2)
         Me.SplitContainer1.Size = New System.Drawing.Size(229, 477)
-        Me.SplitContainer1.SplitterDistance = 370
+        Me.SplitContainer1.SplitterDistance = 350
         Me.SplitContainer1.TabIndex = 3
         '
         'sourcesList
@@ -162,15 +168,16 @@ Partial Class mainForm
         Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.Left
         Me.sourcesList.AutoArrange = False
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
-        Me.sourcesList.Location = New System.Drawing.Point(0, 0)
+        Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
         Me.sourcesList.Name = "sourcesList"
         Me.sourcesList.ShowGroups = False
-        Me.sourcesList.Size = New System.Drawing.Size(229, 370)
+        Me.sourcesList.Size = New System.Drawing.Size(223, 329)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.sourcesList.TabIndex = 0
@@ -191,22 +198,25 @@ Partial Class mainForm
         '
         'monitor
         '
-        Me.monitor.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.columnName, Me.columnIP, Me.columnState, Me.columnPID})
+        Me.monitor.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.columnName, Me.columnIP, Me.columnState, Me.columnPID, Me.columnArgs, Me.columnTime})
         Me.monitor.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.monitor.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.monitor.FullRowSelect = True
         Me.monitor.GridLines = True
-        Me.monitor.Location = New System.Drawing.Point(0, 0)
+        Me.monitor.Location = New System.Drawing.Point(3, 18)
         Me.monitor.MultiSelect = False
         Me.monitor.Name = "monitor"
         Me.monitor.ShowGroups = False
-        Me.monitor.Size = New System.Drawing.Size(229, 103)
+        Me.monitor.Size = New System.Drawing.Size(223, 102)
         Me.monitor.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.monitor.StateImageList = Me.monitorStates
         Me.monitor.TabIndex = 2
         Me.monitor.UseCompatibleStateImageBehavior = False
         Me.monitor.View = System.Windows.Forms.View.Details
         '
         'columnName
         '
-        Me.columnName.Text = "Node"
+        Me.columnName.Text = "Remote relation"
         Me.columnName.Width = 110
         '
         'columnIP
@@ -217,10 +227,29 @@ Partial Class mainForm
         'columnState
         '
         Me.columnState.Text = "Status"
+        Me.columnState.Width = 90
         '
         'columnPID
         '
         Me.columnPID.Text = "PID"
+        '
+        'columnArgs
+        '
+        Me.columnArgs.Text = "Runs"
+        Me.columnArgs.Width = 150
+        '
+        'columnTime
+        '
+        Me.columnTime.Text = "Started on"
+        Me.columnTime.Width = 150
+        '
+        'monitorStates
+        '
+        Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
+        Me.monitorStates.Images.SetKeyName(0, "online.ico")
+        Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
+        Me.monitorStates.Images.SetKeyName(2, "failed.ico")
         '
         'boxSourcesPath
         '
@@ -276,7 +305,6 @@ Partial Class mainForm
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
         Me.statisticsCommandLine.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.statisticsCommandLine.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
@@ -837,15 +865,33 @@ Partial Class mainForm
         Me.saveStatistics.Filter = "Text files *.txt|*.txt"
         Me.saveStatistics.Title = "Save Statistics file"
         '
-        'monitorStates
-        '
-        Me.monitorStates.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
-        Me.monitorStates.ImageSize = New System.Drawing.Size(16, 16)
-        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
-        '
         'monitorTimer
         '
-        Me.monitorTimer.Interval = 250
+        Me.monitorTimer.Interval = 750
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.monitor)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(229, 123)
+        Me.GroupBox2.TabIndex = 3
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Remote connections monitor"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.sourcesList)
+        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(229, 350)
+        Me.GroupBox3.TabIndex = 1
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Remote nodes"
         '
         'mainForm
         '
@@ -884,6 +930,8 @@ Partial Class mainForm
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuBar.ResumeLayout(False)
         Me.menuBar.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -961,5 +1009,9 @@ Partial Class mainForm
     Friend WithEvents columnPID As System.Windows.Forms.ColumnHeader
     Friend WithEvents monitorStates As System.Windows.Forms.ImageList
     Friend WithEvents monitorTimer As System.Windows.Forms.Timer
+    Friend WithEvents columnArgs As System.Windows.Forms.ColumnHeader
+    Friend WithEvents columnTime As System.Windows.Forms.ColumnHeader
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
 
 End Class

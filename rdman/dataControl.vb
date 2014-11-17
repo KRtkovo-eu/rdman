@@ -6,7 +6,7 @@ Module dataControl
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
     Dim nodes As List(Of String())
-    Dim monitorNodes As List(Of String())
+    Dim monitorNodes As List(Of String()) = New List(Of String())
 
     Function csvArray(ByVal sources As String) As List(Of String())
         Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
@@ -217,7 +217,15 @@ Module dataControl
     End Function
 
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String) As Integer
-        If nodeIP <> "" And nodeIP <> "127.0.0.1" Then
+        If nodeIP <> "" Then
+            statistics("Connecting to " + nodeName)
+
+            If My.Computer.Network.Ping(nodeIP) = False Then
+                statistics("Ping on " + nodeIP + " > Connection timed out or host is unavailable.")
+            Else
+                statistics("Ping on " + nodeIP + " > Host is available.")
+            End If
+
             If nodePort = "" Then
                 nodePort = "3389"
             End If
@@ -244,7 +252,7 @@ Module dataControl
                 End If
 
             Else
-                If nodeViewer <> "" Or My.Computer.FileSystem.FileExists(nodeViewer) = True Then
+                If nodeViewer <> "" And My.Computer.FileSystem.FileExists(nodeViewer) = True Then
                     ProcessProperties.FileName = nodeViewer
                     ProcessProperties.Arguments = nodeIP + ":" + nodePort
                 Else
@@ -259,25 +267,20 @@ Module dataControl
             Dim monitorNodeDetails As String()
 
             If mstsc.HasExited = False Then
-                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(connected)", mstsc.Id}
-                setMonitor(monitorNodeDetails)
+                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(connected)", mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
+                setMonitor(monitorNodeDetails, True)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
                 Return mstsc.Id
             Else
-                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(disconnected)", 0}
-                setMonitor(monitorNodeDetails)
-                statistics("Execution ends with error.")
+                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(failed)", "0", ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
+                setMonitor(monitorNodeDetails, False)
+                statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+                statistics("Unexpectedly ended...")
                 Return 0
-                Exit Function
             End If
-        ElseIf nodeIP = "127.0.0.1" Then
-            'MessageBox.Show("Connecting to localhost is not allowed.", "Cannot connect to localhost", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return 1
-            Exit Function
         Else
             MessageBox.Show("IP Address cannot be empty!", "IP Address null", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return 0
-            Exit Function
         End If
     End Function
 
@@ -309,32 +312,65 @@ Module dataControl
         End Select
     End Function
 
-    Private Sub setMonitor(ByVal node As String())
+    Private Sub setMonitor(ByVal node As String(), ByVal success As Boolean)
         If node IsNot Nothing Then
-
-
-            'zjistit jestli už je v monitorNodes podle name, pokud ano, tak jen prohodit záznamy, jinak přidat
             monitorNodes.Add(node)
 
-            Dim listViewItem = mainForm.monitor.Items.Add(node(0))
+            Dim listViewItem As ListViewItem = mainForm.monitor.Items.Add(node(0))
 
-            For x = 1 To node.Length
+            If success = True Then
+                listViewItem.StateImageIndex = 0
+            Else
+                listViewItem.StateImageIndex = 2
+            End If
+
+            For x = 1 To node.Length - 1
                 listViewItem.SubItems.Add(node(x))
             Next
+
+            mainForm.monitorTimer.Start()
         End If
     End Sub
 
     Public Sub monitorCheckStates()
-        Dim remoteSession As Process
+        Dim remoteSession As Process = New Process
+        Dim nodeId As Integer = 0
 
         For Each node In monitorNodes
             If node(2) = "(connected)" Then
-                remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                Try
+                    remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
 
-                If remoteSession.HasExited = True Then
-
-                End If
+                    If remoteSession.HasExited = True Then
+                        node(2) = "(disconnected)"
+                        mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
+                        mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                    End If
+                Catch
+                    node(2) = "(disconnected)"
+                    mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
+                    mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                End Try
+                mainForm.monitorTimer.Start()
+            Else
+                mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                mainForm.monitorTimer.Stop()
             End If
+            nodeId = nodeId + 1
+        Next
+    End Sub
+
+    Public Sub monitorDelNode(ByVal nodeName As String, ByVal PID As String)
+        Dim nodeId As Integer = 0
+
+        For Each node In monitorNodes
+            If node(0) = nodeName And node(3) = PID Then
+                monitorNodes.RemoveAt(nodeId)
+                mainForm.monitor.Items(nodeId).Remove()
+                Exit Sub
+            End If
+            nodeId = nodeId + 1
         Next
     End Sub
 End Module

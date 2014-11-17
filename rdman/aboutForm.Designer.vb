@@ -108,7 +108,7 @@ Partial Class aboutForm
         Me.sourcesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.sourcesTextBox.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesTextBox.ForeColor = System.Drawing.Color.Gray
-        Me.sourcesTextBox.Location = New System.Drawing.Point(135, 151)
+        Me.sourcesTextBox.Location = New System.Drawing.Point(133, 151)
         Me.sourcesTextBox.Name = "sourcesTextBox"
         Me.sourcesTextBox.ReadOnly = True
         Me.sourcesTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
@@ -160,7 +160,7 @@ Partial Class aboutForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(460, 266)
         Me.Controls.Add(Me.clickEasterEgg)
@@ -181,7 +181,7 @@ Partial Class aboutForm
         Me.Name = "aboutForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "About Remote Desktop Manager"
-        Me.TransparencyKey = System.Drawing.SystemColors.Control
+        Me.TransparencyKey = System.Drawing.Color.WhiteSmoke
         Me.ResumeLayout(False)
         Me.PerformLayout
 
