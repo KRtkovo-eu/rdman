@@ -30,7 +30,7 @@
     <SuiteName>rdman</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.5.1.0</ApplicationVersion>
+    <ApplicationVersion>0.5.2.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -184,7 +184,22 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="cert\RDMan.pfx" />
+    <Content Include="csved\uniCSVed.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csved\backup.uniCSVed.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csved\uniCSVed.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csved\uniCSVed.exe.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csved\uniCSVed.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="My Project\app.manifest" />

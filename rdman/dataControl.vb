@@ -79,52 +79,64 @@ Module dataControl
     End Sub
 
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
-        Dim db As List(Of String())
+        saveSource(nodeName, sourcesDb, False)
+    End Sub
 
-        db = deleteSource(nodeName, sourcesDb)
+    Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String, ByVal onlyDelete As Boolean)
+        If nodeName IsNot Nothing Then
+            Dim db As List(Of String())
 
-        Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxMultimon.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text, mainForm.boxConnectOver.Checked, mainForm.boxViewerPath.Text}
+            db = deleteSource(nodeName, sourcesDb)
 
-        db.Add(sourceData)
+            If onlyDelete = False Then
+                Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxMultimon.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text, mainForm.boxConnectOver.Checked, mainForm.boxViewerPath.Text}
 
-        Try
-            Dim objWriter As New System.IO.StreamWriter(sourcesDb)
+                db.Add(sourceData)
+            End If
 
-            For Each element In db
-                Dim line As String = ""
-                For Each field In element
-                    line += field + ";"
+            Try
+                Dim objWriter As New System.IO.StreamWriter(sourcesDb)
+
+                For Each element In db
+                    Dim line As String = ""
+                    For Each field In element
+                        line += field + ";"
+                    Next
+                    line = line.Substring(0, line.Length - 1)
+
+                    'line = element(0) + ";"
+                    'line += element(1) + ";"
+                    'line += element(2) + ";"
+                    'line += element(3) + ";"
+                    'line += element(4) + ";"
+                    'line += element(5) + ";"
+                    'line += element(6) + ";"
+                    'line += element(7) + ";"
+                    'line += element(8) + ";"
+                    'line += element(9) + ";"
+                    'line += element(10) + ";"
+                    'line += element(11)
+
+                    objWriter.WriteLine(line)
                 Next
-                line = line.Substring(0, line.Length - 1)
 
-                'line = element(0) + ";"
-                'line += element(1) + ";"
-                'line += element(2) + ";"
-                'line += element(3) + ";"
-                'line += element(4) + ";"
-                'line += element(5) + ";"
-                'line += element(6) + ";"
-                'line += element(7) + ";"
-                'line += element(8) + ";"
-                'line += element(9) + ";"
-                'line += element(10) + ";"
-                'line += element(11)
+                objWriter.Close()
+                If onlyDelete = False Then
+                    statistics("Node ~" + nodeName + "~ successfully saved.")
+                Else
+                    statistics("Node ~" + nodeName + "~ successfully deleted.")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-                objWriter.WriteLine(line)
-            Next
-
-            objWriter.Close()
-            statistics("Node ~" + nodeName + "~ successfully saved.")
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
-        LoadSources(sourcesDb)
+            LoadSources(sourcesDb)
+        End If
     End Sub
 
     Public Sub LoadSources(ByVal sources As String)
         mainForm.sourcesList.Clear()
-        mainForm.sourcesList.Items.Add("Add New Node", 5)
+        mainForm.sourcesList.Items.Add("(Add New Node)", 5)
 
         For Each element In csvArray(sources)
             mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(7)))

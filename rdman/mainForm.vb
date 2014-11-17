@@ -201,13 +201,13 @@ Public Class mainForm
     End Sub
 
     Private Sub sourcesList_Click(sender As Object, e As EventArgs) Handles sourcesList.Click
-        Dim nodeName As String = "Add New Node"
+        Dim nodeName As String = "(Add New Node)"
 
         For Each item As ListViewItem In sourcesList.SelectedItems()
             nodeName = item.Text
         Next
 
-        If nodeName = "Add New Node" Then
+        If nodeName = "(Add New Node)" Then
             AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
         Else
             loadSourceData(nodeName)
@@ -221,11 +221,19 @@ Public Class mainForm
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
         Dim notepad As Process
         Dim ProcessProperties As New ProcessStartInfo
+        Dim csved As String = My.Application.Info.DirectoryPath + "\csved\uniCSVed.exe"
 
-        ProcessProperties.FileName = "notepad.exe"
-        ProcessProperties.Arguments = sourcesDb
+        If IO.File.Exists(csved) = False Then
+            ProcessProperties.FileName = "notepad.exe"
+        Else
+            ProcessProperties.FileName = csved
+        End If
+
+        ProcessProperties.Arguments = Chr(34) + sourcesDb + Chr(34)
+
 
         notepad = Process.Start(ProcessProperties)
+        statistics("Database editing started with " + ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1))
 
         notepad.WaitForExit()
 
@@ -642,5 +650,18 @@ Public Class mainForm
                     monitorDelNode(node.SubItems(0).Text, "0")
             End Select
         Next
+    End Sub
+
+    Private Sub sourcesList_KeyDown(sender As Object, e As KeyEventArgs) Handles sourcesList.KeyDown
+        Select e.KeyCode
+            Case Keys.Delete
+                For Each node As ListViewItem In sourcesList.SelectedItems()
+                    If node.SubItems(0).Text IsNot "(Add New Node)" Then
+                        If MessageBox.Show("Do you really want to delete " + node.SubItems(0).Text + "?", "Delete " + node.SubItems(0).Text + "?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                            saveSource(node.SubItems(0).Text, sourcesDb, True)
+                        End If
+                    End If
+                Next
+        End Select
     End Sub
 End Class

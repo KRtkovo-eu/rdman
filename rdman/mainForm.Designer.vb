@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add New Node", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -307,7 +307,6 @@ Partial Class mainForm
         '
         'boxStatistics
         '
-        Me.boxStatistics.AutoWordSelection = True
         Me.boxStatistics.BackColor = System.Drawing.Color.Black
         Me.boxStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.boxStatistics.Font = New System.Drawing.Font("Lucida Console", 8.0!)
