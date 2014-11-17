@@ -618,6 +618,20 @@ Public Class mainForm
 
             Select Case node.SubItems(2).Text
                 Case "(connected)"
+                    AppActivate(Convert.ToInt32(node.SubItems(3).Text))
+                Case "(disconnected)"
+                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                Case "(failed)"
+                    monitorDelNode(node.SubItems(0).Text, "0")
+            End Select
+        Next
+    End Sub
+
+    Private Sub monitor_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles monitor.ItemDrag
+        For Each node As ListViewItem In monitor.SelectedItems()
+
+            Select Case node.SubItems(2).Text
+                Case "(connected)"
                     If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                         Process.GetProcessById(node.SubItems(3).Text).Kill()
                     End If

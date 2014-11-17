@@ -322,13 +322,13 @@ Module dataControl
                 listViewItem.StateImageIndex = 0
             Else
                 listViewItem.StateImageIndex = 2
+                listViewItem.Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                listViewItem.ForeColor = Color.Red
             End If
 
             For x = 1 To node.Length - 1
                 listViewItem.SubItems.Add(node(x))
             Next
-
-            mainForm.monitorTimer.Start()
         End If
     End Sub
 
@@ -345,19 +345,17 @@ Module dataControl
                         node(2) = "(disconnected)"
                         mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
                         mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                        mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                        mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
                     End If
                 Catch
                     node(2) = "(disconnected)"
                     mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
                     mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                    mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                    mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
                 End Try
-                mainForm.monitorTimer.Start()
-            Else
-                mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
-                mainForm.monitorTimer.Stop()
             End If
-            nodeId = nodeId + 1
         Next
     End Sub
 
