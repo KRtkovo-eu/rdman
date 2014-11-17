@@ -378,6 +378,7 @@ Module dataControl
                     mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
                 End Try
             End If
+            nodeId = nodeId + 1
         Next
     End Sub
 
