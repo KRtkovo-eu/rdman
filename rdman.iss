@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "v0.5.2"
+#define MyAppVersion "v0.5.3"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -24,7 +24,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=C:\git\rdman\LICENSE
 OutputDir=C:\git\rdman\rdman\publish
-OutputBaseFilename=Remote Desktop Manager v0.5.2 setup
+OutputBaseFilename=Remote Desktop Manager v0.5.3 setup
 SetupIconFile=C:\git\rdman\rdman\icons\unknown.ico
 Compression=lzma
 SolidCompression=yes
@@ -36,13 +36,13 @@ CreateUninstallRegKey=yes
 UninstallDisplayName=Remote Desktop Manager
 AppModifyPath={app}
 UninstallDisplayIcon={app}\rdman.exe
-VersionInfoVersion=0.5.2
+VersionInfoVersion=0.5.3
 VersionInfoCompany=KRtkovo.eu design studio
-VersionInfoTextVersion=v0.5.2
+VersionInfoTextVersion=v0.5.3
 VersionInfoCopyright=GNU General Public License v3.0
 VersionInfoProductName=Remote Desktop Manager
-VersionInfoProductVersion=0.5.2
-VersionInfoProductTextVersion=v0.5.2
+VersionInfoProductVersion=0.5.3
+VersionInfoProductTextVersion=v0.5.3
 ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x86 x64
 WizardImageFile=C:\git\rdman\installerBig.bmp
@@ -63,13 +63,14 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\sources.rdman"; DestD
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\asciiGraphics\*"; DestDir: "{app}\asciiGraphics"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\csved\*"; DestDir: "{app}\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\csved\*"; DestDir: "{app}\modules\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{group}\modules\uniCSVed"; Filename: "{app}\modules\csved\uniCSVed.exe"; Components: CSVed
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Registry]
@@ -86,6 +87,6 @@ Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom f
 Name: "RDMan"; Description: "Remote Desktop Manager"; Types: full custom compact; Flags: checkablealone fixed
 
 [Types]
-Name: "full"; Description: "Install Remote Desktop Manager with CSVed for editing database file."
-Name: "custom"; Description: "Install Remote Desktop Manager and optionally CSVed."; Flags: iscustom
-Name: "compact"; Description: "Install only Remote Desktop Manager."
+Name: "full"; Description: "Remote Desktop Manager with all modules"
+Name: "custom"; Description: "Remote Desktop Manager with selected modules"; Flags: iscustom
+Name: "compact"; Description: "Remote Desktop Manager standalone"

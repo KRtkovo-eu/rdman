@@ -75,7 +75,27 @@ Module dataControl
 
         statistics(compTitle)
 
+        statisticsModules()
+
         statistics("Check the news on our GitHub page! [http://github.com/KRtkovo-eu/rdman/]")
+    End Sub
+
+    Public Sub statisticsModules()
+        Dim modulesPath As String = My.Application.Info.DirectoryPath + "\modules"
+        Dim line As String = ""
+
+        If IO.Directory.Exists(modulesPath) = True Then
+            Dim modulesCount As Integer = 0
+            line += vbNewLine + "Found these modules:" + vbNewLine
+
+            For Each rdmanModule In IO.Directory.GetDirectories(modulesPath)
+                line += vbTab + rdmanModule.Substring(rdmanModule.LastIndexOf("\") + 1) + vbNewLine
+                modulesCount = modulesCount + 1
+            Next
+            line += vbTab + "--- Total count: " + modulesCount.ToString
+
+            statistics(line)
+        End If
     End Sub
 
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
@@ -328,8 +348,11 @@ Module dataControl
                 Return 4
         End Select
     End Function
+    Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean)
+        setMonitor(node, success, False)
+    End Sub
 
-    Private Sub setMonitor(ByVal node As String(), ByVal success As Boolean)
+    Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean, ByVal moduleRun As Boolean)
         If node IsNot Nothing Then
             monitorNodes.Add(node)
 
@@ -337,16 +360,20 @@ Module dataControl
 
             If success = True Then
                 listViewItem.StateImageIndex = 0
+
+                If moduleRun = True Then
+                    listViewItem.ForeColor = Color.SteelBlue
+                End If
             Else
                 listViewItem.StateImageIndex = 2
                 listViewItem.Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
                 listViewItem.ForeColor = Color.Red
             End If
 
-            For x = 1 To node.Length - 1
-                listViewItem.SubItems.Add(node(x))
-            Next
-        End If
+                For x = 1 To node.Length - 1
+                    listViewItem.SubItems.Add(node(x))
+                Next
+            End If
     End Sub
 
     Public Sub monitorCheckStates()
@@ -355,27 +382,30 @@ Module dataControl
 
         If monitorNodes IsNot Nothing Then
             For Each node In monitorNodes
-                If node(2) = "(connected)" Then
-                    Try
-                        remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-
-                        If remoteSession.HasExited = True Then
+                Select Case node(2)
+                    Case "(connected)"
+                        Try
+                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                        Catch
                             node(2) = "(disconnected)"
                             mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
                             mainForm.monitor.Items(nodeId).StateImageIndex = 1
                             mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
                             mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
                             statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
-                        End If
-                    Catch
-                        node(2) = "(disconnected)"
-                        mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
-                        mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                        mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                        mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
-                        statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
-                    End Try
-                End If
+                        End Try
+                    Case "(module)"
+                        Try
+                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                        Catch
+                            node(2) = "(closed)"
+                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
+                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                            statistics("Module " + node(0) + " (pid: " + node(3) + ") has terminated.")
+                        End Try
+                End Select
                 nodeId = nodeId + 1
             Next
         End If
@@ -401,5 +431,4 @@ Module dataControl
             Next
         End If
     End Sub
-
 End Module
