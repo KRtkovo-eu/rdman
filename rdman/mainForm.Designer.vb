@@ -245,7 +245,7 @@ Partial Class mainForm
         'columnIP
         '
         Me.columnIP.Text = "Connection on"
-        Me.columnIP.Width = 90
+        Me.columnIP.Width = 110
         '
         'columnState
         '

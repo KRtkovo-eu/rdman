@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.5.3.1"
-#define MyAppVersionText "v0.5.3.1"
+#define MyAppVersion "0.5.3.2"
+#define MyAppVersionText "v0.5.3.2"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
