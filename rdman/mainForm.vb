@@ -241,17 +241,11 @@ Public Class mainForm
         If notepad.HasExited = False Then
             setMonitor({"<mod> " + editorName, "localhost", "(module)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
             statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-            statistics("Unexpectedly ended...")
         Else
             setMonitor({"<mod> " + editorName, "localhost", "(closed)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False)
             statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
             statistics("Unexpectedly ended...")
         End If
-
-        If My.Computer.FileSystem.FileExists(sourcesDb) = True Then
-            LoadSources(sourcesDb)
-        End If
-
     End Sub
 
     Private Sub boxFullscreen_CheckedChanged(sender As Object, e As EventArgs) Handles boxFullscreen.CheckedChanged
