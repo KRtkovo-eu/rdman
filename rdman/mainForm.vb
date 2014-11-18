@@ -221,7 +221,7 @@ Public Class mainForm
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
         Dim notepad As Process
         Dim ProcessProperties As New ProcessStartInfo
-        Dim csved As String = My.Application.Info.DirectoryPath + "\csved\uniCSVed.exe"
+        Dim csved As String = My.Application.Info.DirectoryPath + "\modules\csved\uniCSVed.exe"
 
         If IO.File.Exists(csved) = False Then
             ProcessProperties.FileName = "notepad.exe"
@@ -631,9 +631,9 @@ Public Class mainForm
         For Each node As ListViewItem In monitor.SelectedItems()
 
             Select Case node.SubItems(2).Text
-                Case "(connected)"
+                Case "(connected)","(module)"
                     AppActivate(Convert.ToInt32(node.SubItems(3).Text))
-                Case "(disconnected)"
+                Case "(disconnected)","(closed)"
                     monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 Case "(failed)"
                     monitorDelNode(node.SubItems(0).Text, "0")
@@ -645,11 +645,11 @@ Public Class mainForm
         For Each node As ListViewItem In monitor.SelectedItems()
 
             Select Case node.SubItems(2).Text
-                Case "(connected)"
+                Case "(connected)","(module)"
                     If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                         Process.GetProcessById(node.SubItems(3).Text).Kill()
                     End If
-                Case "(disconnected)"
+                Case "(disconnected)","(closed)"
                     monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 Case "(failed)"
                     monitorDelNode(node.SubItems(0).Text, "0")
