@@ -61,7 +61,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe"; DestDir: 
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.application"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\sources.rdman"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Components: RDMan
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\sources.rdman"; DestDir: "{app}"; Flags: onlyifdoesntexist confirmoverwrite; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\asciiGraphics\*"; DestDir: "{app}\asciiGraphics"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
