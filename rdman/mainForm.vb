@@ -1,12 +1,17 @@
 ﻿Imports System.Security.Permissions
 Imports System.Windows.Forms.ListView
 Imports System.IO
+Imports rdman.processWindowState
 
 Public Class mainForm
+#Region "Global variables"
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
     Dim command As String = ""
     Dim consoleFont As Font = New Font("Lucida Console", 8, FontStyle.Regular, GraphicsUnit.Point)
+    Dim allahToConsole As String = ""
+#End Region
 
+#Region "Form handle"
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Get settings of windows state and position
         If My.Settings.isMaximized = FormWindowState.Normal Then
@@ -49,6 +54,10 @@ Public Class mainForm
             Me.SaveStatisticsOnCloseToolStripMenuItem.Checked = My.Settings.saveStats
         End If
 
+        If My.Settings.showPreview <> Nothing Then
+            Me.ShowpreviewToolStripMenuItem.Checked = My.Settings.showPreview
+        End If
+
         If My.Settings.consoleBgColor <> Nothing Then
             Me.boxStatistics.BackColor = My.Settings.consoleBgColor
             Me.statisticsCommandLine.BackColor = My.Settings.consoleBgColor
@@ -72,8 +81,6 @@ Public Class mainForm
         Me.saveStatistics.FileName = Today.ToString("yyyyMMdd")
 
         'Write to console
-        Dim allahToConsole As String = ""
-
         allahToConsole += My.Application.Info.Title + " shell [Version " + Me.ProductVersion + "]"
         allahToConsole += vbNewLine
         allahToConsole += "Published under " + My.Application.Info.Copyright
@@ -106,6 +113,52 @@ Public Class mainForm
         monitorTimer.Start()
     End Sub
 
+    Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If My.Settings.updateOnStart = True Then
+            Dim latest As String = aboutForm.checkUpdate()
+
+            If latest <> "latest" And latest > "v" + Me.ProductVersion Then
+                If MessageBox.Show("Update to " + My.Application.Info.Title + " " + latest + " is available on GitHub!" + vbNewLine + "Do you want to download it now?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                    Process.Start("https://github.com/KRtkovo-eu/rdman/releases/latest")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If My.Settings.askOnClose = True Then
+            If MessageBox.Show("Do you really want to exit Remote Desktop Manager?", "Really exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+                Exit Sub
+            End If
+        End If
+
+        If Me.WindowState = FormWindowState.Normal Then
+            My.Settings.width = Me.Width
+            My.Settings.height = Me.Height
+            My.Settings.positionTop = Me.Top
+            My.Settings.positionLeft = Me.Left
+            My.Settings.isMaximized = Me.WindowState
+        Else
+            My.Settings.isMaximized = Me.WindowState
+        End If
+        My.Settings.lastDb = sourcesDb
+        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked
+        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked
+        My.Settings.saveStats = Me.SaveStatisticsOnCloseToolStripMenuItem.Checked
+        My.Settings.consoleBgColor = Me.boxStatistics.BackColor
+        My.Settings.consoleTextColor = Me.boxStatistics.ForeColor
+        My.Settings.consoleFontSize = colorStatistics.fontSize.Value
+        My.Settings.showPreview = Me.ShowpreviewToolStripMenuItem.Checked
+        My.Settings.Save()
+
+        If My.Settings.saveStats = True Then
+            SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
+        End If
+    End Sub
+#End Region
+
+#Region "UI Buttons handle"
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
         SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
 
@@ -119,18 +172,38 @@ Public Class mainForm
         End If
     End Sub
 
-    Private Sub boxSystem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles boxSystem.SelectedIndexChanged
-        boxPicture.Image = operatingSystemsImages.Images.Item(boxSystem.SelectedIndex)
+    Private Sub buttonSave_Click(sender As Object, e As EventArgs) Handles buttonSave.Click
+        SaveNodeToolStripMenuItem_Click(sender, New System.EventArgs)
     End Sub
 
-    Private Sub boxStatistics_TextChanged(sender As Object, e As EventArgs) Handles boxStatistics.TextChanged
-        boxStatistics.SelectionStart = boxStatistics.TextLength
-        boxStatistics.ScrollToCaret()
+    Private Sub buttonNewNode_Click(sender As Object, e As EventArgs) Handles buttonNewNode.Click
+        AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
+    End Sub
 
-        If boxStatistics.TextLength = boxStatistics.MaxLength Then
-            SaveStatisticsToolStripMenuItem_Click(Nothing, New System.EventArgs())
-            boxStatistics.Text = ""
+    Private Sub buttonLocateViewer_Click(sender As Object, e As EventArgs) Handles buttonLocateViewer.Click
+        openSourceDb.Filter = "Executable file *.exe|*.exe"
+        openSourceDb.DefaultExt = "exe"
+        openSourceDb.FileName = ""
+        openSourceDb.Title = "Select viewer path"
+
+        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Me.boxViewerPath.Text = openSourceDb.FileName
         End If
+
+        openSourceDb.Filter = "Sources database *.rdman|*.rdman|CSV file (sep. by semicolon) *.csv|*.csv"
+        openSourceDb.DefaultExt = "rdman"
+        openSourceDb.FileName = "sources.rdman"
+        openSourceDb.Title = "Open Sources Database file"
+    End Sub
+
+    Private Sub boxSourcesPath_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles boxSourcesPath.LinkClicked
+        EditSourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs())
+    End Sub
+#End Region
+
+#Region "System picture box handle"
+    Private Sub boxSystem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles boxSystem.SelectedIndexChanged
+        boxPicture.Image = operatingSystemsImages.Images.Item(boxSystem.SelectedIndex)
     End Sub
 
     Private Sub boxPicture_DoubleClick(sender As Object, e As EventArgs) Handles boxPicture.DoubleClick
@@ -151,53 +224,11 @@ Public Class mainForm
 
         statistics(image)
     End Sub
+#End Region
 
-    Private Sub buttonSave_Click(sender As Object, e As EventArgs) Handles buttonSave.Click
-        saveSource(boxName.Text, sourcesDb)
-    End Sub
-
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-        Me.Close()
-    End Sub
-
-    Private Sub AddNodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddNodeToolStripMenuItem.Click
-        loadSourceData("EMPTY")
-    End Sub
-
-    Private Sub LoadSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadSourcesDatabaseToolStripMenuItem.Click
-        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            If IO.File.Exists(openSourceDb.FileName) Then
-                sourcesDb = openSourceDb.FileName
-                LoadSources(sourcesDb)
-            End If
-        End If
-    End Sub
-
-    Private Sub SaveStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveStatisticsToolStripMenuItem.Click
-        If saveStatistics.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            Dim statisticsFile As String = saveStatistics.FileName
-            Dim objWriter As New System.IO.StreamWriter(statisticsFile)
-
-            objWriter.Write(boxStatistics.Text)
-            objWriter.Close()
-            MessageBox.Show("Statistics was successfully saved.", "Statistics saved", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
-    End Sub
-
-    Private Sub SaveNodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveNodeToolStripMenuItem.Click
-        buttonSave_Click(sender, New System.EventArgs())
-    End Sub
-
-    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-        aboutForm.ShowDialog()
-    End Sub
-
+#Region "Sources list handle"
     Private Sub sourcesList_DoubleClick(sender As Object, e As EventArgs) Handles sourcesList.DoubleClick
         buttonConnect_Click(sender, New System.EventArgs())
-    End Sub
-
-    Private Sub buttonDelNode_Click(sender As Object, e As EventArgs) Handles buttonNewNode.Click
-        AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
     End Sub
 
     Private Sub sourcesList_Click(sender As Object, e As EventArgs) Handles sourcesList.Click
@@ -214,40 +245,18 @@ Public Class mainForm
         End If
     End Sub
 
-    Private Sub ViewHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHelpToolStripMenuItem.Click
-        Process.Start("https://github.com/KRtkovo-eu/rdman/wiki")
+    Private Sub sourcesList_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles sourcesList.ItemDrag
+        For Each node As ListViewItem In sourcesList.SelectedItems()
+            If node.SubItems(0).Text IsNot "(Add New Node)" Then
+                If MessageBox.Show("Do you really want to delete " + node.SubItems(0).Text + "?", "Delete " + node.SubItems(0).Text + "?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                    saveSource(node.SubItems(0).Text, sourcesDb, True)
+                End If
+            End If
+        Next
     End Sub
+#End Region
 
-    Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
-        Dim notepad As Process
-        Dim ProcessProperties As New ProcessStartInfo
-        Dim csved As String = My.Application.Info.DirectoryPath + "\modules\csved\uniCSVed.exe"
-
-        If IO.File.Exists(csved) = False Then
-            ProcessProperties.FileName = "notepad.exe"
-        Else
-            ProcessProperties.FileName = csved
-        End If
-
-        ProcessProperties.Arguments = Chr(34) + sourcesDb + Chr(34)
-
-
-        notepad = Process.Start(ProcessProperties)
-
-        Dim editorName As String = ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1)
-
-        statistics("Database editing started with " + editorName)
-
-        If notepad.HasExited = False Then
-            setMonitor({"<mod> " + editorName, "localhost", "(module)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
-            statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-        Else
-            setMonitor({"<mod> " + editorName, "localhost", "(closed)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False)
-            statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-            statistics("Unexpectedly ended...")
-        End If
-    End Sub
-
+#Region "Node details checkboxes handle"
     Private Sub boxFullscreen_CheckedChanged(sender As Object, e As EventArgs) Handles boxFullscreen.CheckedChanged
         If boxFullscreen.Checked = False Then
             Me.boxHeight.ReadOnly = False
@@ -260,16 +269,29 @@ Public Class mainForm
         End If
     End Sub
 
+    Private Sub boxConnectOver_CheckedChanged(sender As Object, e As EventArgs) Handles boxConnectOver.CheckedChanged
+        If boxConnectOver.Checked = True Then
+            Me.groupResolutionSettings.Visible = False
+            Me.groupConnectOver.Visible = True
+        Else
+            Me.groupResolutionSettings.Visible = True
+            Me.groupConnectOver.Visible = False
+        End If
+    End Sub
+#End Region
+
+#Region "RDMan Shell"
+
     Private Sub commandFromLine(ByVal command As String)
         statistics(command, True)
 
         Select Case command.ToLower
             Case ""
-                statistics("", True)
             Case "about"
                 AboutToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "clear"
-                boxStatistics.Text = ""
+                boxStatistics.Text = allahToConsole
+                statistics("", True) 'True because statistics was cleared by user.
             Case "connect"
                 buttonConnect_Click(Nothing, New System.EventArgs())
             Case "editsources"
@@ -289,6 +311,8 @@ Public Class mainForm
                 help += vbTab + "about | Show dialog with informations about this program."
                 help += vbNewLine
                 help += vbTab + "clear | Cleans the statistics box."
+                help += vbNewLine
+                help += vbTab + "cmd | Opens Windows shell."
                 help += vbNewLine
                 help += vbTab + "connect | Connects to currently loaded node."
                 help += vbNewLine
@@ -328,12 +352,14 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "nodewidth, width | Set node width."
                 help += vbNewLine
+                help += vbTab + "run | Runs chosen external process."
+                help += vbNewLine
                 help += vbTab + "savenode | Saves node to csv database file."
                 help += vbNewLine
                 help += vbTab + "savestats | Saves statistics log file."
                 help += vbNewLine
 
-                statistics(help, True)
+                statistics(help)
             Case "loadsources"
                 LoadSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "newnode"
@@ -374,12 +400,29 @@ Public Class mainForm
                 commandSetValue(Me.boxViewerPath, command)
             Case "nodewidth", "width"
                 commandSetValue(Me.boxWidth, command)
+            Case "run", "cmd"
+                Try
+                    Dim run As String
+                    If command <> "cmd" Then
+                        run = commandGetValue("Enter path", False, "")
+                    Else
+                        run = "cmd"
+                    End If
+                    Dim runProcess As Process = Process.GetProcessById(Process.Start(run).Id)
+                    Dim processToMonitor As String() = {run.Substring(run.LastIndexOf("\") + 1), "localhost", "(running)", runProcess.Id.ToString, run, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
+
+                    setMonitor(processToMonitor, True, True)
+                    statistics("Execution > " + run, True)
+                    Me.statisticsCommandLine.Text = ""
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
             Case "savenode"
                 SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "savestats"
                 SaveStatisticsToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case Else
-                statistics("Command not found", True)
+                statistics("Command not found")
         End Select
     End Sub
 
@@ -447,37 +490,6 @@ Public Class mainForm
         End Select
     End Sub
 
-    Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If My.Settings.askOnClose = True Then
-            If MessageBox.Show("Do you really want to exit Remote Desktop Manager?", "Really exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
-                e.Cancel = True
-                Exit Sub
-            End If
-        End If
-
-        If Me.WindowState = FormWindowState.Normal Then
-            My.Settings.width = Me.Width
-            My.Settings.height = Me.Height
-            My.Settings.positionTop = Me.Top
-            My.Settings.positionLeft = Me.Left
-            My.Settings.isMaximized = Me.WindowState
-        Else
-            My.Settings.isMaximized = Me.WindowState
-        End If
-        My.Settings.lastDb = sourcesDb
-        My.Settings.askOnClose = Me.AskBeforeCloseToolStripMenuItem.Checked
-        My.Settings.updateOnStart = Me.CheckForupdateOnStartToolStripMenuItem.Checked
-        My.Settings.saveStats = Me.SaveStatisticsOnCloseToolStripMenuItem.Checked
-        My.Settings.consoleBgColor = Me.boxStatistics.BackColor
-        My.Settings.consoleTextColor = Me.boxStatistics.ForeColor
-        My.Settings.consoleFontSize = colorStatistics.fontSize.Value
-        My.Settings.Save()
-
-        If My.Settings.saveStats = True Then
-            SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
-        End If
-    End Sub
-
     Private Sub statisticsCommandLine_KeyUp(sender As Object, e As KeyEventArgs) Handles statisticsCommandLine.KeyUp
         If e.KeyCode = Keys.Enter Then
             Me.statisticsCommandLine.Text = ""
@@ -503,6 +515,16 @@ Public Class mainForm
         End If
     End Sub
 
+    Private Sub boxStatistics_TextChanged(sender As Object, e As EventArgs) Handles boxStatistics.TextChanged
+        boxStatistics.SelectionStart = boxStatistics.TextLength
+        boxStatistics.ScrollToCaret()
+
+        If boxStatistics.TextLength = boxStatistics.MaxLength Then
+            SaveStatisticsToolStripMenuItem_Click(Nothing, New System.EventArgs())
+            boxStatistics.Text = ""
+        End If
+    End Sub
+
     Private Sub statisticsCommandLine_Leave(sender As Object, e As EventArgs) Handles statisticsCommandLine.Leave
         statisticsCommandLine_TextChanged(sender, New System.EventArgs())
         Me.AcceptButton = buttonConnect
@@ -511,6 +533,79 @@ Public Class mainForm
     Private Sub statisticsCommandLine_Enter(sender As Object, e As EventArgs) Handles statisticsCommandLine.Enter
         statisticsCommandLine_TextChanged(sender, New System.EventArgs())
         Me.AcceptButton = Nothing
+    End Sub
+#End Region
+
+#Region "Tools and Help menu toolbars"
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
+    End Sub
+
+    Private Sub AddNodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddNodeToolStripMenuItem.Click
+        loadSourceData("EMPTY")
+    End Sub
+
+    Private Sub LoadSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadSourcesDatabaseToolStripMenuItem.Click
+        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            If IO.File.Exists(openSourceDb.FileName) Then
+                sourcesDb = openSourceDb.FileName
+                LoadSources(sourcesDb)
+            End If
+        End If
+    End Sub
+
+    Private Sub SaveStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveStatisticsToolStripMenuItem.Click
+        If saveStatistics.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Dim statisticsFile As String = saveStatistics.FileName
+            Dim objWriter As New System.IO.StreamWriter(statisticsFile)
+
+            objWriter.Write(boxStatistics.Text)
+            objWriter.Close()
+            MessageBox.Show("Statistics was successfully saved.", "Statistics saved", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub SaveNodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveNodeToolStripMenuItem.Click
+        saveSource(boxName.Text, sourcesDb)
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        aboutForm.ShowDialog()
+    End Sub
+
+    Private Sub ViewHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHelpToolStripMenuItem.Click
+        Process.Start("https://github.com/KRtkovo-eu/rdman/wiki")
+    End Sub
+
+    Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
+        Dim notepad As Process
+        Dim ProcessProperties As New ProcessStartInfo
+        Dim csved As String = My.Application.Info.DirectoryPath + "\modules\csved\uniCSVed.exe"
+
+        If IO.File.Exists(csved) = False Then
+            ProcessProperties.FileName = "notepad.exe"
+        Else
+            ProcessProperties.FileName = csved
+        End If
+
+        ProcessProperties.Arguments = Chr(34) + sourcesDb + Chr(34)
+
+
+        notepad = Process.Start(ProcessProperties)
+
+        Dim editorName As String = ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1)
+
+        statistics("Database editing started with " + editorName)
+
+        If notepad.HasExited = False Then
+            setMonitor({"<mod> " + editorName, "localhost", "(module)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+            statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+        Else
+            setMonitor({"<mod> " + editorName, "localhost", "(closed)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False)
+            statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+            statistics("Unexpectedly ended...")
+        End If
     End Sub
 
     Public Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
@@ -531,32 +626,9 @@ Public Class mainForm
         saveStatistics.FileName = Today.ToString("yyyyMMdd")
         saveStatistics.Title = "Save Statistics file"
     End Sub
+#End Region
 
-    Private Sub boxConnectOver_CheckedChanged(sender As Object, e As EventArgs) Handles boxConnectOver.CheckedChanged
-        If boxConnectOver.Checked = True Then
-            Me.groupResolutionSettings.Visible = False
-            Me.groupConnectOver.Visible = True
-        Else
-            Me.groupResolutionSettings.Visible = True
-            Me.groupConnectOver.Visible = False
-        End If
-    End Sub
-
-    Private Sub buttonLocateViewer_Click(sender As Object, e As EventArgs) Handles buttonLocateViewer.Click
-        openSourceDb.Filter = "Executable file *.exe|*.exe"
-        openSourceDb.DefaultExt = "exe"
-        openSourceDb.FileName = ""
-        openSourceDb.Title = "Select viewer path"
-
-        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            Me.boxViewerPath.Text = openSourceDb.FileName
-        End If
-
-        openSourceDb.Filter = "Sources database *.rdman|*.rdman|CSV file (sep. by semicolon) *.csv|*.csv"
-        openSourceDb.DefaultExt = "rdman"
-        openSourceDb.FileName = "sources.rdman"
-        openSourceDb.Title = "Open Sources Database file"
-    End Sub
+#Region "Setting menu toolbar"
 
     Private Sub AskBeforeCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AskBeforeCloseToolStripMenuItem.Click
         If AskBeforeCloseToolStripMenuItem.Checked = True Then
@@ -565,18 +637,6 @@ Public Class mainForm
         Else
             My.Settings.askOnClose = True
             AskBeforeCloseToolStripMenuItem.Checked = True
-        End If
-    End Sub
-
-    Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If My.Settings.updateOnStart = True Then
-            Dim latest As String = aboutForm.checkUpdate()
-
-            If latest <> "latest" And latest > "v" + Me.ProductVersion Then
-                If MessageBox.Show("Update to " + My.Application.Info.Title + " " + latest + " is available on GitHub!" + vbNewLine + "Do you want to download it now?", "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
-                    Process.Start("https://github.com/KRtkovo-eu/rdman/releases/latest")
-                End If
-            End If
         End If
     End Sub
 
@@ -590,10 +650,6 @@ Public Class mainForm
         End If
     End Sub
 
-    Private Sub boxSourcesPath_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles boxSourcesPath.LinkClicked
-        EditSourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs())
-    End Sub
-
     Private Sub SaveStatisticsOnCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveStatisticsOnCloseToolStripMenuItem.Click
         If SaveStatisticsOnCloseToolStripMenuItem.Checked = True Then
             My.Settings.saveStats = False
@@ -601,6 +657,16 @@ Public Class mainForm
         Else
             My.Settings.saveStats = True
             SaveStatisticsOnCloseToolStripMenuItem.Checked = True
+        End If
+    End Sub
+
+    Private Sub ShowpreviewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowpreviewToolStripMenuItem.Click
+        If ShowpreviewToolStripMenuItem.Checked = True Then
+            My.Settings.showPreview = False
+            ShowpreviewToolStripMenuItem.Checked = False
+        Else
+            My.Settings.showPreview = True
+            ShowpreviewToolStripMenuItem.Checked = True
         End If
     End Sub
 
@@ -622,17 +688,35 @@ Public Class mainForm
             Me.boxStatistics.Font = consoleFont
         End If
     End Sub
+#End Region
+
+#Region "monitorHandle"
 
     Private Sub monitorTimer_Tick(sender As Object, e As EventArgs) Handles monitorTimer.Tick
         monitorCheckStates()
     End Sub
 
     Private Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
+        Dim haveFirst As Boolean = False
+
         For Each node As ListViewItem In monitor.SelectedItems()
 
             Select Case node.SubItems(2).Text
-                Case "(connected)", "(module)"
-                    AppActivate(Convert.ToInt32(node.SubItems(3).Text))
+                Case "(connected)", "(module)", "(running)"
+                    If haveFirst = False Then
+                        Dim extProcess As Process
+                        Dim PID As Integer
+
+                        PID = Convert.ToInt32(node.SubItems(3).Text)
+                        extProcess = Process.GetProcessById(PID)
+
+                        If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
+                            processAPI.ShowWindow(extProcess.MainWindowHandle)
+                        End If
+
+                        AppActivate(Convert.ToInt32(node.SubItems(3).Text))
+                        haveFirst = True
+                    End If
                 Case "(disconnected)", "(closed)"
                     monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 Case "(failed)"
@@ -645,7 +729,7 @@ Public Class mainForm
         For Each node As ListViewItem In monitor.SelectedItems()
 
             Select Case node.SubItems(2).Text
-                Case "(connected)", "(module)"
+                Case "(connected)", "(module)", "(running)"
                     If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                         Process.GetProcessById(node.SubItems(3).Text).Kill()
                     End If
@@ -657,16 +741,50 @@ Public Class mainForm
         Next
     End Sub
 
-    Private Sub sourcesList_KeyDown(sender As Object, e As KeyEventArgs) Handles sourcesList.KeyDown
-        Select e.KeyCode
-            Case Keys.Delete
-                For Each node As ListViewItem In sourcesList.SelectedItems()
-                    If node.SubItems(0).Text IsNot "(Add New Node)" Then
-                        If MessageBox.Show("Do you really want to delete " + node.SubItems(0).Text + "?", "Delete " + node.SubItems(0).Text + "?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                            saveSource(node.SubItems(0).Text, sourcesDb, True)
+    Private Sub monitor_MouseMove(sender As Object, e As MouseEventArgs) Handles monitor.MouseMove
+        If My.Settings.showPreview = True Then
+            Dim p As Point = Me.PointToClient(MousePosition)
+            Dim monitorElement As ListViewItem = monitor.GetItemAt(e.X, e.Y)
+
+            If monitorElement IsNot Nothing Then
+                Select Case monitorElement.SubItems(2).Text
+                    Case "(connected)", "(module)", "(running)"
+                        Dim PID As String = monitorElement.SubItems(3).Text
+                        Dim processImage As Image = getWindowScreenshot(PID)
+                        Dim xPos, yPos As Integer
+                        Dim screenArea As Rectangle = My.Computer.Screen.WorkingArea
+
+                        If p.Y + processImage.Height > screenArea.Height Or p.Y + 23 > screenArea.Height Then
+                            yPos = screenArea.Height - processImage.Height
+                        Else
+                            yPos = p.Y + 23
                         End If
-                    End If
-                Next
-        End Select
+
+                        If p.X + processImage.Width > screenArea.Width Or p.X + 23 > screenArea.Width Then
+                            xPos = screenArea.Width - processImage.Width
+                        Else
+                            xPos = p.X + 23
+                        End If
+
+                        processPreview.Location = New Point(xPos, yPos)
+                        processPreview.SizeMode = PictureBoxSizeMode.AutoSize
+                        processPreview.Image = processImage
+                        processPreview.Visible = True
+                    Case Else
+                        processPreview.Image = Nothing
+                        processPreview.Visible = False
+                End Select
+            Else
+                processPreview.Image = Nothing
+                processPreview.Visible = False
+            End If
+        End If
     End Sub
+
+    Private Sub monitor_MouseLeave(sender As Object, e As EventArgs) Handles monitor.MouseLeave
+        processPreview.Image = Nothing
+        processPreview.Visible = False
+    End Sub
+#End Region
+
 End Class

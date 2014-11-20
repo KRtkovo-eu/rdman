@@ -24,7 +24,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="updateOnStart" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="saveStats" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -37,6 +37,9 @@
     </Setting>
     <Setting Name="consoleFontSize" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="showPreview" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

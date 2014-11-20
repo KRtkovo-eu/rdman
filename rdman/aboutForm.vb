@@ -19,6 +19,15 @@ Public Class aboutForm
         sources += vbNewLine
         sources += "Sam Francke - uniCSVed 1.1 (Cardware)" + vbNewLine + "[http://csved.sjfrancke.nl/]"
         sources += vbNewLine
+        sources += vbNewLine
+        sources += "The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:" + vbNewLine
+        sources += "gigemboy - Easy Screen Capture Class [http://www.vbforums.com/showthread.php?385497-Easy-Screen-Capture-Class-Capture-Screen-Desktop-Region-Form-or-Controls]"
+        sources += vbNewLine + "Updated with GetWindow function from HeWhoWas [http://www.vbforums.com/showthread.php?581842-VB-NET-Get-image-of-inactive-3rd-party-windows-controls]"
+        sources += vbNewLine
+        sources += "Bill - processAPI class [http://stackoverflow.com/a/2171744]"
+        sources += vbNewLine
+        sources += "Jose M. - processWindowState class [http://stackoverflow.com/a/2171744]"
+        sources += vbNewLine
 
         Return sources
     End Function

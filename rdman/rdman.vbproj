@@ -29,8 +29,8 @@
     <PublisherName>KRtkovo.eu</PublisherName>
     <SuiteName>rdman</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>0.5.3.2</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.5.4.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -137,6 +137,9 @@
     <Compile Include="commandValueInput.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="monitorFunctions.vb" />
+    <Compile Include="processAPI.vb" />
+    <Compile Include="processWindowState.vb" />
     <Compile Include="mainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +163,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="dataControl.vb" />
+    <Compile Include="ScreenCapture.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="aboutForm.resx">
@@ -194,9 +198,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\csved\uniCSVed.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\csved\uniCSVed.exe.manifest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\csved\uniCSVed.ini">

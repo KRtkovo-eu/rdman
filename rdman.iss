@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.5.3.2"
-#define MyAppVersionText "v0.5.3.2"
+#define MyAppVersion "0.5.4"
+#define MyAppVersionText "v0.5.4"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -48,6 +48,7 @@ ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x86 x64
 WizardImageFile=C:\git\rdman\installerBig.bmp
 WizardSmallImageFile=C:\git\rdman\installerSmall.bmp
+
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

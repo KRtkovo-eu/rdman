@@ -102,6 +102,8 @@ Partial Class mainForm
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.processPreview = New System.Windows.Forms.PictureBox()
+        Me.ShowpreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -121,6 +123,7 @@ Partial Class mainForm
         Me.groupImage.SuspendLayout()
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuBar.SuspendLayout()
+        CType(Me.processPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mainContainer
@@ -160,7 +163,7 @@ Partial Class mainForm
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox2)
         Me.SplitContainer1.Size = New System.Drawing.Size(229, 477)
-        Me.SplitContainer1.SplitterDistance = 350
+        Me.SplitContainer1.SplitterDistance = 318
         Me.SplitContainer1.TabIndex = 3
         '
         'GroupBox3
@@ -170,7 +173,7 @@ Partial Class mainForm
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(229, 350)
+        Me.GroupBox3.Size = New System.Drawing.Size(229, 318)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Remote nodes"
@@ -189,7 +192,7 @@ Partial Class mainForm
         Me.sourcesList.MultiSelect = False
         Me.sourcesList.Name = "sourcesList"
         Me.sourcesList.ShowGroups = False
-        Me.sourcesList.Size = New System.Drawing.Size(223, 329)
+        Me.sourcesList.Size = New System.Drawing.Size(223, 297)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.sourcesList.TabIndex = 0
@@ -210,12 +213,14 @@ Partial Class mainForm
         '
         'GroupBox2
         '
+        Me.GroupBox2.AutoSize = True
+        Me.GroupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox2.Controls.Add(Me.monitor)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(229, 123)
+        Me.GroupBox2.Size = New System.Drawing.Size(229, 155)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Processes monitor"
@@ -228,10 +233,9 @@ Partial Class mainForm
         Me.monitor.FullRowSelect = True
         Me.monitor.GridLines = True
         Me.monitor.Location = New System.Drawing.Point(3, 18)
-        Me.monitor.MultiSelect = False
         Me.monitor.Name = "monitor"
         Me.monitor.ShowGroups = False
-        Me.monitor.Size = New System.Drawing.Size(223, 102)
+        Me.monitor.Size = New System.Drawing.Size(223, 134)
         Me.monitor.StateImageList = Me.monitorStates
         Me.monitor.TabIndex = 2
         Me.monitor.UseCompatibleStateImageBehavior = False
@@ -322,7 +326,7 @@ Partial Class mainForm
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "connect", "editsources", "environment", "exit", "help", "loadsources", "newnode", "nodeconnectover", "connectover", "nodedescription", "description", "nodefullscreen", "fullscreen", "nodeheight", "height", "nodeip", "ip", "nodemultimon", "multimon", "nodename", "name", "nodeport", "port", "nodesystem", "system", "nodesystemversion", "version", "nodeviewerpath", "viewer", "nodewidth", "width", "savenode", "savestats"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
@@ -332,7 +336,7 @@ Partial Class mainForm
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
         Me.statisticsCommandLine.ItemHeight = 11
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.MaxDropDownItems = 5
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
@@ -803,7 +807,7 @@ Partial Class mainForm
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ToolStripSeparator4, Me.AskBeforeCloseToolStripMenuItem, Me.CheckForupdateOnStartToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ToolStripSeparator4, Me.AskBeforeCloseToolStripMenuItem, Me.CheckForupdateOnStartToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.ShowpreviewToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "&Options"
@@ -894,12 +898,29 @@ Partial Class mainForm
         '
         Me.monitorTimer.Interval = 1
         '
+        'processPreview
+        '
+        Me.processPreview.BackColor = System.Drawing.Color.Transparent
+        Me.processPreview.Location = New System.Drawing.Point(162, 0)
+        Me.processPreview.Name = "processPreview"
+        Me.processPreview.Size = New System.Drawing.Size(61, 24)
+        Me.processPreview.TabIndex = 6
+        Me.processPreview.TabStop = False
+        Me.processPreview.Visible = False
+        '
+        'ShowpreviewToolStripMenuItem
+        '
+        Me.ShowpreviewToolStripMenuItem.Name = "ShowpreviewToolStripMenuItem"
+        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ShowpreviewToolStripMenuItem.Text = "Show &preview"
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(892, 523)
+        Me.Controls.Add(Me.processPreview)
         Me.Controls.Add(Me.groupImage)
         Me.Controls.Add(Me.mainContainer)
         Me.Controls.Add(Me.menuBar)
@@ -915,6 +936,7 @@ Partial Class mainForm
         Me.mainContainer.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
@@ -933,6 +955,7 @@ Partial Class mainForm
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuBar.ResumeLayout(False)
         Me.menuBar.PerformLayout()
+        CType(Me.processPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1014,5 +1037,7 @@ Partial Class mainForm
     Friend WithEvents columnTime As System.Windows.Forms.ColumnHeader
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents processPreview As System.Windows.Forms.PictureBox
+    Friend WithEvents ShowpreviewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

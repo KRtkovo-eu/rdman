@@ -140,7 +140,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property updateOnStart() As Boolean
             Get
                 Return CType(Me("updateOnStart"),Boolean)
@@ -195,6 +195,18 @@ Namespace My
             End Get
             Set
                 Me("consoleFontSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property showPreview() As Boolean
+            Get
+                Return CType(Me("showPreview"),Boolean)
+            End Get
+            Set
+                Me("showPreview") = value
             End Set
         End Property
     End Class

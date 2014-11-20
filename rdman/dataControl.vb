@@ -1,14 +1,21 @@
-﻿Imports System.Xml
+﻿Imports System
+Imports System.Runtime.InteropServices
+Imports System.Drawing
+Imports System.Drawing.Imaging
+Imports System.Xml
 Imports System.IO
 
 Module dataControl
+#Region "Global variables"
     Dim windir As String = System.Environment.ExpandEnvironmentVariables("%windir%")
     Dim mstscPath As String = windir + "\system32\mstsc.exe"
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
     Dim nodes As List(Of String())
     Public monitorNodes As List(Of String()) = New List(Of String())
+#End Region
 
+#Region "Function for fillig nodes array"
     Function csvArray(ByVal sources As String) As List(Of String())
         Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
         Dim csvLine As String()
@@ -27,13 +34,49 @@ Module dataControl
 
         Return nodes
     End Function
+#End Region
 
-    Public Sub statistics(ByVal newLine As String, ByVal command As Boolean)
+#Region "Misc"
+    Public Function SetBytes(ByVal number As ULong) As String
+        Select Case number
+            Case Is >= 1073741824
+                Return (number / 1024 / 1024 / 1024).ToString("F2") + " GB"
+            Case Is >= 1048576
+                Return (number / 1024 / 1024).ToString("F2") + " MB"
+            Case Is >= 1024
+                Return (number / 1024).ToString("F2") + " KB"
+            Case Else
+                Return number.ToString + " Bytes"
+        End Select
+    End Function
+
+    Public Function systemToIndexNum(ByVal system As String) As Integer
+        Select Case system
+            Case "Windows"
+                Return 0
+            Case "Linux"
+                Return 1
+            Case "Android"
+                Return 2
+            Case "MacOS"
+                Return 3
+            Case Else
+                Return 4
+        End Select
+    End Function
+#End Region
+
+#Region "Statistics functions"
+    Public Sub statistics(ByVal lineStatistics As String, ByVal command As Boolean)
+        Dim nowInFormat As String = DateTime.Now.ToString("<HH:mm:ss>")
+
+        mainForm.boxStatistics.AppendText(nowInFormat)
         If command = True Then
-            mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss>#:") + newLine + vbNewLine)
+            mainForm.boxStatistics.AppendText("#:")
         Else
-            mainForm.boxStatistics.AppendText(DateTime.Now.ToString("<HH:mm:ss>$:") + newLine + vbNewLine)
+            mainForm.boxStatistics.AppendText("$:")
         End If
+        mainForm.boxStatistics.AppendText(" " + lineStatistics + vbNewLine)
     End Sub
 
     Public Sub statistics(ByVal newLine As String)
@@ -58,9 +101,9 @@ Module dataControl
         compTitle += My.Computer.Name
         compTitle += " (system: "
         compTitle += My.Computer.Info.OSFullName
-        compTitle += "| locale: "
+        compTitle += " | locale: "
         compTitle += My.Computer.Info.InstalledUICulture.EnglishName
-        compTitle += "| memory free: "
+        compTitle += " | memory free: "
         compTitle += SetBytes(My.Computer.Info.AvailablePhysicalMemory)
         compTitle += "/total: "
         compTitle += SetBytes(My.Computer.Info.TotalPhysicalMemory)
@@ -92,12 +135,15 @@ Module dataControl
                 line += vbTab + rdmanModule.Substring(rdmanModule.LastIndexOf("\") + 1) + vbNewLine
                 modulesCount = modulesCount + 1
             Next
-            line += vbTab + "--- Total count: " + modulesCount.ToString
+            line += "--- Total count: " + modulesCount.ToString
+            line += vbNewLine
 
             statistics(line)
         End If
     End Sub
+#End Region
 
+#Region "Node details functions"
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String)
         saveSource(nodeName, sourcesDb, False)
     End Sub
@@ -142,9 +188,9 @@ Module dataControl
 
                 objWriter.Close()
                 If onlyDelete = False Then
-                    statistics("Node ~" + nodeName + "~ successfully saved.")
+                    statistics("Node [" + nodeName + "] successfully saved.")
                 Else
-                    statistics("Node ~" + nodeName + "~ successfully deleted.")
+                    statistics("Node [" + nodeName + "] successfully deleted.")
                 End If
             Catch ex As Exception
                 MsgBox(ex.Message)
@@ -228,7 +274,7 @@ Module dataControl
         mainForm.boxConnectOver.Checked = nodeConnectOver
         mainForm.boxViewerPath.Text = nodeViewerPath
 
-        statistics("Loaded source ~" + nodeName + "~ (system: " + nodeSystem + "| IP or hostname: " + nodeIP + ":" + nodePort + ")")
+        statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ":" + nodePort + ")")
     End Sub
 
     Public Function deleteSource(ByVal nodeName As String, ByVal sourcesDb As String) As List(Of String())
@@ -252,7 +298,9 @@ Module dataControl
 
         Return db
     End Function
+#End Region
 
+#Region "Run remote function"
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String) As Integer
         If nodeIP <> "" Then
             statistics("Connecting to " + nodeName)
@@ -320,115 +368,6 @@ Module dataControl
             Return 0
         End If
     End Function
+#End Region
 
-    Public Function SetBytes(ByVal number As ULong) As String
-        Select Case number
-            Case Is >= 1073741824
-                Return (number / 1024 / 1024 / 1024).ToString("F2") + " GB"
-            Case Is >= 1048576
-                Return (number / 1024 / 1024).ToString("F2") + " MB"
-            Case Is >= 1024
-                Return (number / 1024).ToString("F2") + " KB"
-            Case Else
-                Return number.ToString + " Bytes"
-        End Select
-    End Function
-
-    Public Function systemToIndexNum(ByVal system As String) As Integer
-        Select Case system
-            Case "Windows"
-                Return 0
-            Case "Linux"
-                Return 1
-            Case "Android"
-                Return 2
-            Case "MacOS"
-                Return 3
-            Case Else
-                Return 4
-        End Select
-    End Function
-    Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean)
-        setMonitor(node, success, False)
-    End Sub
-
-    Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean, ByVal moduleRun As Boolean)
-        If node IsNot Nothing Then
-            monitorNodes.Add(node)
-
-            Dim listViewItem As ListViewItem = mainForm.monitor.Items.Add(node(0))
-
-            If success = True Then
-                listViewItem.StateImageIndex = 0
-
-                If moduleRun = True Then
-                    listViewItem.ForeColor = Color.SteelBlue
-                End If
-            Else
-                listViewItem.StateImageIndex = 2
-                listViewItem.Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                listViewItem.ForeColor = Color.Red
-            End If
-
-                For x = 1 To node.Length - 1
-                    listViewItem.SubItems.Add(node(x))
-                Next
-            End If
-    End Sub
-
-    Public Sub monitorCheckStates()
-        Dim remoteSession As Process = New Process
-        Dim nodeId As Integer = 0
-
-        If monitorNodes IsNot Nothing Then
-            For Each node In monitorNodes
-                Select Case node(2)
-                    Case "(connected)"
-                        Try
-                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                        Catch
-                            node(2) = "(disconnected)"
-                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
-                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
-                            statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated.")
-                        End Try
-                    Case "(module)"
-                        Try
-                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                        Catch
-                            node(2) = "(closed)"
-                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
-                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
-                            statistics("Module " + node(0) + " (pid: " + node(3) + ") has terminated.")
-                        End Try
-                End Select
-                nodeId = nodeId + 1
-            Next
-        End If
-    End Sub
-
-    Public Sub monitorDelNode(ByVal nodeName As String, ByVal PID As String)
-        Dim nodeId As Integer = 0
-
-        For Each node In monitorNodes
-            If node(0) = nodeName And node(3) = PID Then
-                monitorNodes.RemoveAt(nodeId)
-                mainForm.monitor.Items(nodeId).Remove()
-                Exit Sub
-            End If
-            nodeId = nodeId + 1
-        Next
-    End Sub
-
-    Public Sub monitorLoad(ByVal savedNodes As List(Of String()))
-        If savedNodes IsNot Nothing Then
-            For Each node In savedNodes
-                setMonitor(node, False)
-            Next
-        End If
-    End Sub
 End Module
