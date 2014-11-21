@@ -742,49 +742,57 @@ Public Class mainForm
     End Sub
 
     Private Sub monitor_MouseMove(sender As Object, e As MouseEventArgs) Handles monitor.MouseMove
+        monitor_ProcessPreview(monitor.GetItemAt(e.X, e.Y), 2)
+    End Sub
+
+    Private Sub monitor_ProcessPreview(ByVal monitorElement As ListViewItem, ByVal delay As Integer)
+        Dim p As Point = Me.PointToClient(MousePosition)
+
         If My.Settings.showPreview = True Then
-            Dim p As Point = Me.PointToClient(MousePosition)
-            Dim monitorElement As ListViewItem = monitor.GetItemAt(e.X, e.Y)
-
             If monitorElement IsNot Nothing Then
-                Select Case monitorElement.SubItems(2).Text
-                    Case "(connected)", "(module)", "(running)"
-                        Dim PID As String = monitorElement.SubItems(3).Text
-                        Dim processImage As Image = getWindowScreenshot(PID)
-                        Dim xPos, yPos As Integer
-                        Dim screenArea As Rectangle = My.Computer.Screen.WorkingArea
+                If DateDiff(DateInterval.Second, Convert.ToDateTime(monitorElement.SubItems(5).Text), Now) > 15 Then
+                    Select Case monitorElement.SubItems(2).Text
+                        Case "(connected)", "(module)", "(running)"
+                            Dim PID As String = monitorElement.SubItems(3).Text
+                            Dim processImage As Image = getWindowScreenshot(PID, delay)
+                            Dim xPos, yPos As Integer
+                            Dim screenArea As Rectangle = Screen.GetWorkingArea(MousePosition)
 
-                        If p.Y + processImage.Height > screenArea.Height Or p.Y + 23 > screenArea.Height Then
-                            yPos = screenArea.Height - processImage.Height
-                        Else
-                            yPos = p.Y + 23
-                        End If
+                            If processImage IsNot Nothing Then
+                                If (p.Y + processImage.Height + 23) > screenArea.Height Or (p.Y + 23) > screenArea.Height Then
+                                    yPos = p.Y - processImage.Height
+                                Else
+                                    yPos = p.Y + 23
+                                End If
 
-                        If p.X + processImage.Width > screenArea.Width Or p.X + 23 > screenArea.Width Then
-                            xPos = screenArea.Width - processImage.Width
-                        Else
-                            xPos = p.X + 23
-                        End If
+                                If (p.X + processImage.Width + 23) > screenArea.Width Or p.X + 23 > screenArea.Width Then
+                                    xPos = p.X - processImage.Width
+                                Else
+                                    xPos = p.X + 23
+                                End If
 
-                        processPreview.Location = New Point(xPos, yPos)
-                        processPreview.SizeMode = PictureBoxSizeMode.AutoSize
-                        processPreview.Image = processImage
-                        processPreview.Visible = True
-                    Case Else
-                        processPreview.Image = Nothing
-                        processPreview.Visible = False
-                End Select
+                                processPreview.Location = Me.PointToScreen(New Point(xPos, yPos))
+                                processPreview.Height = processImage.Height
+                                processPreview.Width = processImage.Width
+                                processPreview.BackgroundImage = processImage
+                                processPreview.Show()
+                                'processPreview.Refresh()
+                            End If
+                        Case Else
+                            processPreview.Hide()
+                            lastPid = 0
+                    End Select
+                End If
             Else
-                processPreview.Image = Nothing
-                processPreview.Visible = False
+                processPreview.Hide()
+                lastPid = 0
             End If
         End If
     End Sub
 
     Private Sub monitor_MouseLeave(sender As Object, e As EventArgs) Handles monitor.MouseLeave
-        processPreview.Image = Nothing
-        processPreview.Visible = False
+        processPreview.Hide()
+        lastPid = 0
     End Sub
 #End Region
-
 End Class

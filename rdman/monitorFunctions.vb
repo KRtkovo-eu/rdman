@@ -12,7 +12,7 @@ Module monitorFunctions
             Dim listViewItem As ListViewItem = mainForm.monitor.Items.Add(node(0))
 
             If success = True Then
-                listViewItem.StateImageIndex = 0
+                listViewItem.StateImageIndex = 3
 
                 If moduleRun = True Then
                     listViewItem.ForeColor = Color.SteelBlue
@@ -37,35 +37,41 @@ Module monitorFunctions
             For Each node In monitorNodes
                 Select Case node(2)
                     Case "(connected)"
-                        Try
-                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                        Catch
-                            node(2) = "(disconnected)"
-                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
-                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                        If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
+                            mainForm.monitor.Items(nodeId).StateImageIndex = 0
+                            Try
+                                remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                            Catch
+                                node(2) = "(disconnected)"
+                                mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
+                                mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                                mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                                mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
 
-                            Dim started As Date = Convert.ToDateTime(node(5))
-                            Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
+                                Dim started As Date = Convert.ToDateTime(node(5))
+                                Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
 
-                            statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
-                        End Try
+                                statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
+                            End Try
+                        End If
                     Case "(module)", "(running)"
-                        Try
-                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                        Catch
-                            node(2) = "(closed)"
-                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
-                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                        If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
+                            mainForm.monitor.Items(nodeId).StateImageIndex = 0
+                            Try
+                                remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                            Catch
+                                node(2) = "(closed)"
+                                mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
+                                mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                                mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                                mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
 
-                            Dim started As Date = Convert.ToDateTime(node(5))
-                            Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
+                                Dim started As Date = Convert.ToDateTime(node(5))
+                                Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
 
-                            statistics("Process " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
-                        End Try
+                                statistics("Process " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
+                            End Try
+                        End If
                 End Select
                 nodeId = nodeId + 1
             Next
@@ -85,31 +91,41 @@ Module monitorFunctions
         Next
     End Sub
 
-    Dim lastPid As Integer
+    Public lastPid As Integer
     Dim MyWindow As Image
+    Dim lastLoad As Date = Now
 
-    Public Function getWindowScreenshot(ByVal PID As Integer) As Image
-        If PID <> lastPid Then
-            lastPid = PID
+    Public Function getWindowScreenshot(ByVal PID As Integer, ByVal delay As Integer) As Image
+        lastPid = 0
+        Try
+            If (PID <> lastPid Or DateDiff(DateInterval.Second, lastLoad, Now) >= delay) And Process.GetProcessById(PID).HasExited = False Then
+                lastPid = PID
 
-            Dim window As IntPtr = Process.GetProcessById(PID).MainWindowHandle
-            Dim SC As New ScreenShot.ScreenCapture
+                Dim window As IntPtr = Process.GetProcessById(PID).MainWindowHandle
+                Dim SC As New ScreenShot.ScreenCapture
 
-            MyWindow = SC.CaptureWindow(window)
+                MyWindow = SC.CaptureWindow(window)
 
-            If GetProcessWindowState(window) <> FormWindowState.Minimized Then
-                MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 4, MyWindow.Height / 4, Nothing, System.IntPtr.Zero)
+                If MyWindow IsNot Nothing Then
+                    If MyWindow.Width > 1280 Then
+                        MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 7, MyWindow.Height / 7, Nothing, System.IntPtr.Zero)
+                    ElseIf GetProcessWindowState(window) <> FormWindowState.Minimized Then
+                        MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 5, MyWindow.Height / 5, Nothing, System.IntPtr.Zero)
+                    End If
+                End If
+
+                Return MyWindow
+            ElseIf PID = lastPid Then
+                Return MyWindow
+            Else
+                Return Nothing
             End If
-
-            Return MyWindow
-        ElseIf PID = lastPid Then
-            Return MyWindow
-        Else
+        Catch
             Return Nothing
-        End If
+        End Try
     End Function
 
-    Public Function getWindowScreenshot(ByVal PID As String) As Image
-        Return getWindowScreenshot(Convert.ToInt32(PID))
+    Public Function getWindowScreenshot(ByVal PID As String, ByVal delay As Integer) As Image
+        Return getWindowScreenshot(Convert.ToInt32(PID), delay)
     End Function
 End Module

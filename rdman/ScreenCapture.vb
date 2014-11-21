@@ -20,16 +20,21 @@ Namespace ScreenShot
             User32.GetWindowRect(hwnd, rc)
             Dim width As Integer = rc.right - rc.left
             Dim height As Integer = rc.bottom - rc.top
-            Dim bmp As New Bitmap(width, height, PixelFormat.Format32bppArgb)
+            Dim bmp As Bitmap
 
-            Dim gfxBmp As Graphics = Graphics.FromImage(bmp)
-            Dim hdcBitmap As IntPtr = gfxBmp.GetHdc()
+            Try
+                bmp = New Bitmap(width, height, PixelFormat.Format32bppArgb)
 
-            PrintWindow(hwnd, hdcBitmap, 0)
+                Dim gfxBmp As Graphics = Graphics.FromImage(bmp)
+                Dim hdcBitmap As IntPtr = gfxBmp.GetHdc()
 
-            gfxBmp.ReleaseHdc(hdcBitmap)
-            gfxBmp.Dispose()
+                PrintWindow(hwnd, hdcBitmap, 0)
 
+                gfxBmp.ReleaseHdc(hdcBitmap)
+                gfxBmp.Dispose()
+            Catch
+                bmp = Nothing
+            End Try
             Return bmp
         End Function 'CaptureWindow
 

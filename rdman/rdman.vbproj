@@ -139,6 +139,12 @@
     </Compile>
     <Compile Include="monitorFunctions.vb" />
     <Compile Include="processAPI.vb" />
+    <Compile Include="processPreview.Designer.vb">
+      <DependentUpon>processPreview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="processPreview.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="processWindowState.vb" />
     <Compile Include="mainForm.vb">
       <SubType>Form</SubType>
@@ -183,6 +189,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="processPreview.resx">
+      <DependentUpon>processPreview.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

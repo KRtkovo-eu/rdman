@@ -93,6 +93,7 @@ Partial Class mainForm
         Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckForupdateOnStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowpreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -102,8 +103,6 @@ Partial Class mainForm
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.processPreview = New System.Windows.Forms.PictureBox()
-        Me.ShowpreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -123,7 +122,6 @@ Partial Class mainForm
         Me.groupImage.SuspendLayout()
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuBar.SuspendLayout()
-        CType(Me.processPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mainContainer
@@ -277,6 +275,7 @@ Partial Class mainForm
         Me.monitorStates.Images.SetKeyName(0, "online.ico")
         Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
         Me.monitorStates.Images.SetKeyName(2, "failed.ico")
+        Me.monitorStates.Images.SetKeyName(3, "idle.ico")
         '
         'boxSourcesPath
         '
@@ -843,6 +842,12 @@ Partial Class mainForm
         Me.SaveStatisticsOnCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.SaveStatisticsOnCloseToolStripMenuItem.Text = "&Save statistics on close"
         '
+        'ShowpreviewToolStripMenuItem
+        '
+        Me.ShowpreviewToolStripMenuItem.Name = "ShowpreviewToolStripMenuItem"
+        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ShowpreviewToolStripMenuItem.Text = "Show &preview"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.ToolStripSeparator1, Me.AboutToolStripMenuItem})
@@ -898,29 +903,12 @@ Partial Class mainForm
         '
         Me.monitorTimer.Interval = 1
         '
-        'processPreview
-        '
-        Me.processPreview.BackColor = System.Drawing.Color.Transparent
-        Me.processPreview.Location = New System.Drawing.Point(162, 0)
-        Me.processPreview.Name = "processPreview"
-        Me.processPreview.Size = New System.Drawing.Size(61, 24)
-        Me.processPreview.TabIndex = 6
-        Me.processPreview.TabStop = False
-        Me.processPreview.Visible = False
-        '
-        'ShowpreviewToolStripMenuItem
-        '
-        Me.ShowpreviewToolStripMenuItem.Name = "ShowpreviewToolStripMenuItem"
-        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ShowpreviewToolStripMenuItem.Text = "Show &preview"
-        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(892, 523)
-        Me.Controls.Add(Me.processPreview)
         Me.Controls.Add(Me.groupImage)
         Me.Controls.Add(Me.mainContainer)
         Me.Controls.Add(Me.menuBar)
@@ -955,7 +943,6 @@ Partial Class mainForm
         CType(Me.boxPicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuBar.ResumeLayout(False)
         Me.menuBar.PerformLayout()
-        CType(Me.processPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1037,7 +1024,6 @@ Partial Class mainForm
     Friend WithEvents columnTime As System.Windows.Forms.ColumnHeader
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents processPreview As System.Windows.Forms.PictureBox
     Friend WithEvents ShowpreviewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
