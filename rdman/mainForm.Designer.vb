@@ -103,6 +103,9 @@ Partial Class mainForm
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
+        Me.KillChildProcessesOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -806,7 +809,7 @@ Partial Class mainForm
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ToolStripSeparator4, Me.AskBeforeCloseToolStripMenuItem, Me.CheckForupdateOnStartToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.ShowpreviewToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ToolStripSeparator4, Me.CheckForupdateOnStartToolStripMenuItem, Me.ShowpreviewToolStripMenuItem, Me.ToolStripSeparator5, Me.AskBeforeCloseToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.KillChildProcessesOnCloseToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "&Options"
@@ -902,6 +905,21 @@ Partial Class mainForm
         'monitorTimer
         '
         Me.monitorTimer.Interval = 1
+        '
+        'processPreviewHover
+        '
+        Me.processPreviewHover.Interval = 500
+        '
+        'KillChildProcessesOnCloseToolStripMenuItem
+        '
+        Me.KillChildProcessesOnCloseToolStripMenuItem.Name = "KillChildProcessesOnCloseToolStripMenuItem"
+        Me.KillChildProcessesOnCloseToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.KillChildProcessesOnCloseToolStripMenuItem.Text = "&Kill child processes on close"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(213, 6)
         '
         'mainForm
         '
@@ -1025,5 +1043,8 @@ Partial Class mainForm
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents ShowpreviewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents processPreviewHover As System.Windows.Forms.Timer
+    Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents KillChildProcessesOnCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

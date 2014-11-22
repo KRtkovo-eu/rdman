@@ -58,6 +58,10 @@ Public Class mainForm
             Me.ShowpreviewToolStripMenuItem.Checked = My.Settings.showPreview
         End If
 
+        If My.Settings.closeChilds <> Nothing Then
+            Me.KillChildProcessesOnCloseToolStripMenuItem.Checked = My.Settings.closeChilds
+        End If
+
         If My.Settings.consoleBgColor <> Nothing Then
             Me.boxStatistics.BackColor = My.Settings.consoleBgColor
             Me.statisticsCommandLine.BackColor = My.Settings.consoleBgColor
@@ -72,6 +76,7 @@ Public Class mainForm
             colorStatistics.fontSize.Value = My.Settings.consoleFontSize
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
         End If
+
         Me.boxStatistics.Font = consoleFont
 
         'Focus command line
@@ -150,10 +155,21 @@ Public Class mainForm
         My.Settings.consoleTextColor = Me.boxStatistics.ForeColor
         My.Settings.consoleFontSize = colorStatistics.fontSize.Value
         My.Settings.showPreview = Me.ShowpreviewToolStripMenuItem.Checked
+        My.Settings.closeChilds = Me.KillChildProcessesOnCloseToolStripMenuItem.Checked
         My.Settings.Save()
 
         If My.Settings.saveStats = True Then
             SaveStatisticsToolStripMenuItem_Click(sender, New System.EventArgs())
+        End If
+
+        If My.Settings.closeChilds = True Then
+            For Each element In monitorNodes
+                Select element(2)
+                    Case "(connected)", "(module)", "(running)"
+                        Process.GetProcessById(Convert.ToInt32(element(3))).Kill()
+                    Case Else
+                End Select
+            Next
         End If
     End Sub
 #End Region
@@ -407,17 +423,25 @@ Public Class mainForm
             Case "run", "cmd"
                 Try
                     Dim run As String
+                    Dim processProperties As ProcessStartInfo = New ProcessStartInfo
+
                     If command <> "cmd" Then
                         run = commandGetValue("Enter path", False, "")
                     Else
                         run = "cmd"
                     End If
-                    Dim runProcess As Process = Process.GetProcessById(Process.Start(run).Id)
+
+                    If run(0) = "&" Then
+                        run = run.Remove(0, 1)
+                        processProperties.WindowStyle = ProcessWindowStyle.Hidden
+                    End If
+                    processProperties.FileName = run
+
+                    Dim runProcess As Process = Process.Start(processProperties)
                     Dim processToMonitor As String() = {run.Substring(run.LastIndexOf("\") + 1), "localhost", "(running)", runProcess.Id.ToString, run, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
 
                     setMonitor(processToMonitor, True, True)
                     statistics("Execution > " + run, True)
-                    Me.statisticsCommandLine.Text = ""
                 Catch ex As Exception
                     MsgBox(ex.Message)
                 End Try
@@ -674,6 +698,16 @@ Public Class mainForm
         End If
     End Sub
 
+    Private Sub KillChildProcessesOnCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KillChildProcessesOnCloseToolStripMenuItem.Click
+        If KillChildProcessesOnCloseToolStripMenuItem.Checked = True Then
+            My.Settings.closeChilds = False
+            KillChildProcessesOnCloseToolStripMenuItem.Checked = False
+        Else
+            My.Settings.closeChilds = True
+            KillChildProcessesOnCloseToolStripMenuItem.Checked = True
+        End If
+    End Sub
+
     Private Sub ColorOfStatisticsConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColorOfStatisticsConsoleToolStripMenuItem.Click
         colorStatistics.btnBgColor.BackColor = My.Settings.consoleBgColor
         colorStatistics.btnTextColor.BackColor = My.Settings.consoleTextColor
@@ -745,11 +779,11 @@ Public Class mainForm
         Next
     End Sub
 
-    Private Sub monitor_MouseMove(sender As Object, e As MouseEventArgs) Handles monitor.MouseMove
-        monitor_ProcessPreview(monitor.GetItemAt(e.X, e.Y), 2)
-    End Sub
+    'Private Sub monitor_MouseMove(sender As Object, e As MouseEventArgs) Handles monitor.MouseMove
+    '    monitor_ProcessPreview(monitor.GetItemAt(e.X, e.Y))
+    'End Sub
 
-    Private Sub monitor_ProcessPreview(ByVal monitorElement As ListViewItem, ByVal delay As Integer)
+    Private Sub monitor_ProcessPreview(ByVal monitorElement As ListViewItem)
         Dim p As Point = Me.PointToClient(MousePosition)
 
         If My.Settings.showPreview = True Then
@@ -758,7 +792,7 @@ Public Class mainForm
                     Select Case monitorElement.SubItems(2).Text
                         Case "(connected)", "(module)", "(running)"
                             Dim PID As String = monitorElement.SubItems(3).Text
-                            Dim processImage As Image = getWindowScreenshot(PID, delay)
+                            Dim processImage As Image = getWindowScreenshot(PID)
                             Dim xPos, yPos As Integer
                             Dim screenArea As Rectangle = Screen.GetWorkingArea(MousePosition)
 
@@ -779,12 +813,16 @@ Public Class mainForm
                                 processPreview.Height = processImage.Height
                                 processPreview.Width = processImage.Width
                                 processPreview.BackgroundImage = processImage
-                                processPreview.Show()
-                                'processPreview.Refresh()
+
+                                If processPreview.Visible = True Then
+                                    processPreview.Invalidate()
+                                Else
+                                    processPreview.Show()
+                                End If
                             End If
                         Case Else
-                            processPreview.Hide()
-                            lastPid = 0
+                                processPreview.Hide()
+                                lastPid = 0
                     End Select
                 End If
             Else
@@ -796,13 +834,26 @@ Public Class mainForm
 
     Private Sub monitor_MouseLeave(sender As Object, e As EventArgs) Handles monitor.MouseLeave
         processPreview.Hide()
+        processPreviewHover.Stop()
         lastPid = 0
+    End Sub
+
+    'Private Sub monitor_MouseHover(sender As Object, e As EventArgs) Handles monitor.MouseHover
+    '    processPreviewHover.Start()
+    'End Sub
+
+    Dim tickerItem As ListViewItem
+    Private Sub processPreviewHover_Tick(sender As Object, e As EventArgs) Handles processPreviewHover.Tick
+        'Dim p As Point = Me.PointToClient(MousePosition)
+        'Dim item As ListViewItem = monitor.GetItemAt(p.X, p.Y)
+
+        monitor_ProcessPreview(tickerItem)
+    End Sub
+
+    Private Sub monitor_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles monitor.ItemMouseHover
+        tickerItem = e.Item
+        processPreviewHover.Start()
     End Sub
 #End Region
 
-    Private Sub monitor_MouseHover(sender As Object, e As EventArgs) Handles monitor.MouseHover
-        Dim p As Point = Me.PointToClient(MousePosition)
-
-        monitor_ProcessPreview(monitor.GetItemAt(p.X, p.Y), 1)
-    End Sub
 End Class

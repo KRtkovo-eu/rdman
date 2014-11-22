@@ -1,6 +1,8 @@
 ﻿Imports rdman.processWindowState
 
 Module monitorFunctions
+    Public monitorNodes As List(Of String()) = New List(Of String())
+
     Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean)
         setMonitor(node, success, False)
     End Sub
@@ -93,12 +95,14 @@ Module monitorFunctions
 
     Public lastPid As Integer
     Dim MyWindow As Image
-    Dim lastLoad As Date = Now
+    'Dim lastLoad As Date = Now
 
-    Public Function getWindowScreenshot(ByVal PID As Integer, ByVal delay As Integer) As Image
+    'Public Function getWindowScreenshot(ByVal PID As Integer, ByVal delay As Integer) As Image
+    Public Function getWindowScreenshot(ByVal PID As Integer) As Image
         lastPid = 0
         Try
-            If (PID <> lastPid Or DateDiff(DateInterval.Second, lastLoad, Now) >= delay) And Process.GetProcessById(PID).HasExited = False Then
+            'If (PID <> lastPid Or DateDiff(DateInterval.Second, lastLoad, Now) >= delay) And Process.GetProcessById(PID).HasExited = False Then
+            If Process.GetProcessById(PID).HasExited = False Then
                 lastPid = PID
 
                 Dim window As IntPtr = Process.GetProcessById(PID).MainWindowHandle
@@ -115,8 +119,8 @@ Module monitorFunctions
                 End If
 
                 Return MyWindow
-            ElseIf PID = lastPid Then
-                Return MyWindow
+                'ElseIf PID = lastPid Then
+                '    Return MyWindow
             Else
                 Return Nothing
             End If
@@ -125,7 +129,7 @@ Module monitorFunctions
         End Try
     End Function
 
-    Public Function getWindowScreenshot(ByVal PID As String, ByVal delay As Integer) As Image
-        Return getWindowScreenshot(Convert.ToInt32(PID), delay)
+    Public Function getWindowScreenshot(ByVal PID As String) As Image
+        Return getWindowScreenshot(Convert.ToInt32(PID))
     End Function
 End Module

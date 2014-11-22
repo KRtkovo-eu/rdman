@@ -2,7 +2,6 @@
 Imports System.Runtime.InteropServices
 Imports System.Drawing
 Imports System.Drawing.Imaging
-Imports System.Xml
 Imports System.IO
 
 Module dataControl
@@ -12,7 +11,6 @@ Module dataControl
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
     Dim nodes As List(Of String())
-    Public monitorNodes As List(Of String()) = New List(Of String())
 #End Region
 
 #Region "Function for fillig nodes array"
@@ -305,11 +303,15 @@ Module dataControl
         If nodeIP <> "" Then
             statistics("Connecting to " + nodeName)
 
-            If My.Computer.Network.Ping(nodeIP) = False Then
-                statistics("Ping on " + nodeIP + " > Connection timed out or host is unavailable.")
-            Else
-                statistics("Ping on " + nodeIP + " > Host is available.")
-            End If
+            Try
+                If My.Computer.Network.Ping(nodeIP) = False Then
+                    statistics("Ping on " + nodeIP + " > Connection timed out or host is unavailable.")
+                Else
+                    statistics("Ping on " + nodeIP + " > Host is available.")
+                End If
+            Catch
+                statistics("Ping on " + nodeIP + " failed.")
+            End Try
 
             If nodePort = "" Then
                 nodePort = "3389"
@@ -347,22 +349,22 @@ Module dataControl
                 End If
             End If
 
-            mstsc = Process.Start(ProcessProperties)
-
             Dim monitorNodeDetails As String()
+            Try
+                mstsc = Process.Start(ProcessProperties)
 
-            If mstsc.HasExited = False Then
                 monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(connected)", mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
                 setMonitor(monitorNodeDetails, True)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+
                 Return mstsc.Id
-            Else
+            Catch
                 monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(failed)", "0", ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
                 setMonitor(monitorNodeDetails, False)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
                 statistics("Unexpectedly ended...")
                 Return 0
-            End If
+            End Try
         Else
             MessageBox.Show("IP Address cannot be empty!", "IP Address null", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return 0
