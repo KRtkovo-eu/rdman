@@ -197,7 +197,7 @@ Public Class mainForm
     End Sub
 
     Private Sub boxSourcesPath_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles boxSourcesPath.LinkClicked
-        EditSourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs())
+        LoadSources(sourcesDb)
     End Sub
 #End Region
 
@@ -352,6 +352,8 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "nodewidth, width | Set node width."
                 help += vbNewLine
+                help += vbTab + "reloadsources | Reloads nodes database."
+                help += vbNewLine
                 help += vbTab + "run | Runs chosen external process."
                 help += vbNewLine
                 help += vbTab + "savenode | Saves node to csv database file."
@@ -400,6 +402,8 @@ Public Class mainForm
                 commandSetValue(Me.boxViewerPath, command)
             Case "nodewidth", "width"
                 commandSetValue(Me.boxWidth, command)
+            Case "reloadsources"
+                LoadSources(sourcesDb)
             Case "run", "cmd"
                 Try
                     Dim run As String
@@ -795,4 +799,10 @@ Public Class mainForm
         lastPid = 0
     End Sub
 #End Region
+
+    Private Sub monitor_MouseHover(sender As Object, e As EventArgs) Handles monitor.MouseHover
+        Dim p As Point = Me.PointToClient(MousePosition)
+
+        monitor_ProcessPreview(monitor.GetItemAt(p.X, p.Y), 1)
+    End Sub
 End Class

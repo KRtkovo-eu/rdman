@@ -37,41 +37,41 @@ Module monitorFunctions
             For Each node In monitorNodes
                 Select Case node(2)
                     Case "(connected)"
-                        If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
-                            mainForm.monitor.Items(nodeId).StateImageIndex = 0
-                            Try
-                                remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                            Catch
-                                node(2) = "(disconnected)"
-                                mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
-                                mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                                mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                                mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                        Try
+                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                            If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
+                                mainForm.monitor.Items(nodeId).StateImageIndex = 0
+                            End If
+                        Catch
+                            node(2) = "(disconnected)"
+                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
+                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
 
-                                Dim started As Date = Convert.ToDateTime(node(5))
-                                Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
+                            Dim started As Date = Convert.ToDateTime(node(5))
+                            Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
 
-                                statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
-                            End Try
-                        End If
+                            statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
+                        End Try
                     Case "(module)", "(running)"
-                        If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
-                            mainForm.monitor.Items(nodeId).StateImageIndex = 0
-                            Try
-                                remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                            Catch
-                                node(2) = "(closed)"
-                                mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
-                                mainForm.monitor.Items(nodeId).StateImageIndex = 1
-                                mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
-                                mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
+                        Try
+                            remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
+                            If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
+                                mainForm.monitor.Items(nodeId).StateImageIndex = 0
+                            End If
+                        Catch
+                            node(2) = "(closed)"
+                            mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
+                            mainForm.monitor.Items(nodeId).StateImageIndex = 1
+                            mainForm.monitor.Items(nodeId).Font = New Font("Segoe UI", 8, FontStyle.Italic, GraphicsUnit.Point)
+                            mainForm.monitor.Items(nodeId).ForeColor = Color.Gray
 
-                                Dim started As Date = Convert.ToDateTime(node(5))
-                                Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
+                            Dim started As Date = Convert.ToDateTime(node(5))
+                            Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
 
-                                statistics("Process " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
-                            End Try
-                        End If
+                            statistics("Process " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
+                        End Try
                 End Select
                 nodeId = nodeId + 1
             Next
