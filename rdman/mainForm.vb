@@ -779,15 +779,11 @@ Public Class mainForm
         Next
     End Sub
 
-    'Private Sub monitor_MouseMove(sender As Object, e As MouseEventArgs) Handles monitor.MouseMove
-    '    monitor_ProcessPreview(monitor.GetItemAt(e.X, e.Y))
-    'End Sub
-
     Private Sub monitor_ProcessPreview(ByVal monitorElement As ListViewItem)
         Dim p As Point = Me.PointToClient(MousePosition)
 
         If My.Settings.showPreview = True Then
-            If monitorElement IsNot Nothing Then
+            If monitorElement IsNot Nothing Or monitorElement.Text <> "" Then
                 If DateDiff(DateInterval.Second, Convert.ToDateTime(monitorElement.SubItems(5).Text), Now) > 15 Then
                     Select Case monitorElement.SubItems(2).Text
                         Case "(connected)", "(module)", "(running)"
@@ -821,8 +817,8 @@ Public Class mainForm
                                 End If
                             End If
                         Case Else
-                                processPreview.Hide()
-                                lastPid = 0
+                            processPreview.Hide()
+                            lastPid = 0
                     End Select
                 End If
             Else
@@ -838,15 +834,8 @@ Public Class mainForm
         lastPid = 0
     End Sub
 
-    'Private Sub monitor_MouseHover(sender As Object, e As EventArgs) Handles monitor.MouseHover
-    '    processPreviewHover.Start()
-    'End Sub
-
     Dim tickerItem As ListViewItem
     Private Sub processPreviewHover_Tick(sender As Object, e As EventArgs) Handles processPreviewHover.Tick
-        'Dim p As Point = Me.PointToClient(MousePosition)
-        'Dim item As ListViewItem = monitor.GetItemAt(p.X, p.Y)
-
         monitor_ProcessPreview(tickerItem)
     End Sub
 
