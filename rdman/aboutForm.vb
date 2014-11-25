@@ -20,7 +20,7 @@ Public Class aboutForm
         sources += "Sam Francke - uniCSVed 1.1 (Cardware)" + vbNewLine + "[http://csved.sjfrancke.nl/]"
         sources += vbNewLine
         sources += vbNewLine
-        sources += "mitka development - MikroFTP 1.4.2013 (Freeware)" + vbNewLine + "[http://smitka.org/pc-elektro/mikroftp/]"
+        sources += "Smitka development - MikroFTP 1.4.2013 (Freeware)" + vbNewLine + "[http://smitka.org/pc-elektro/mikroftp/]"
         sources += vbNewLine
         sources += vbNewLine
         sources += "The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:" + vbNewLine
