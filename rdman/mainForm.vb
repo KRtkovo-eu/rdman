@@ -96,6 +96,11 @@ Public Class mainForm
         boxStatistics.Text = allahToConsole
         statisticsEnvironment()
 
+        'If MikroFTP is included, enable menu item
+        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe") = True Then
+            FTPServerToolStripMenuItem.Visible = True
+        End If
+
         'Check parameters for db path and load db
         If IO.File.Exists(sourcesDb) = False Then
             NewEmptySourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs)
@@ -164,11 +169,9 @@ Public Class mainForm
 
         If My.Settings.closeChilds = True Then
             For Each element In monitorNodes
-                Select element(2)
-                    Case "(connected)", "(module)", "(running)"
-                        Process.GetProcessById(Convert.ToInt32(element(3))).Kill()
-                    Case Else
-                End Select
+                If element(2) = "(connected)" Or element(2) = "(module)" Or element(2) = "(running)" Then
+                    Process.GetProcessById(Convert.ToInt32(element(3))).Kill()
+                End If
             Next
         End If
     End Sub
@@ -606,6 +609,10 @@ Public Class mainForm
         Process.Start("https://github.com/KRtkovo-eu/rdman/wiki")
     End Sub
 
+    Private Sub ReportAnIssueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportAnIssueToolStripMenuItem.Click
+        Process.Start("https://github.com/KRtkovo-eu/rdman/issues/new")
+    End Sub
+
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
         Dim notepad As Process
         Dim ProcessProperties As New ProcessStartInfo
@@ -617,24 +624,48 @@ Public Class mainForm
             ProcessProperties.FileName = csved
         End If
 
-        ProcessProperties.Arguments = Chr(34) + sourcesDb + Chr(34)
-
-
-        notepad = Process.Start(ProcessProperties)
-
         Dim editorName As String = ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1)
 
-        statistics("Database editing started with " + editorName)
+        ProcessProperties.Arguments = Chr(34) + sourcesDb + Chr(34)
 
-        If notepad.HasExited = False Then
+        Try
+            notepad = Process.Start(ProcessProperties)
+
+            statistics("Database editing started with " + editorName)
+
             setMonitor({"<mod> " + editorName, "localhost", "(module)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
             statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-        Else
-            setMonitor({"<mod> " + editorName, "localhost", "(closed)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False)
+        Catch ex As Exception
+            setMonitor({"<mod> " + editorName, "localhost", "(closed)", "0", ProcessProperties.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
             statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-            statistics("Unexpectedly ended...")
+            statistics("Unexpectedly ended... with error: " + ex.Message)
+        End Try
+    End Sub
+
+    Private Sub FTPServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FTPServerToolStripMenuItem.Click
+        ftpPath.SelectedPath = My.Application.Info.DirectoryPath + "\modules\mikroftp\share"
+        If (ftpPath.ShowDialog = Windows.Forms.DialogResult.OK) Then
+            Dim mikroftp As Process
+            Dim ProcessProperties As New ProcessStartInfo
+
+            ProcessProperties.FileName = My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe"
+            ProcessProperties.Arguments = Chr(34) + ftpPath.SelectedPath + Chr(34)
+
+            Try
+                mikroftp = Process.Start(ProcessProperties)
+
+                statistics("Starting FTP Server module.")
+
+                setMonitor({"<mod> MikroFTP", "localhost", "(module)", mikroftp.Id.ToString, mikroftp.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+                statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+            Catch ex As Exception
+                setMonitor({"<mod> MikroFTP", "localhost", "(closed)", "0", ProcessProperties.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
+                statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+                statistics("Unexpectedly ended... with error: " + ex.Message)
+            End Try
         End If
     End Sub
+
 
     Public Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
         saveStatistics.Filter = "Sources database *.rdman|*.rdman"
@@ -844,5 +875,4 @@ Public Class mainForm
         processPreviewHover.Start()
     End Sub
 #End Region
-
 End Class

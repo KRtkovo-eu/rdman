@@ -66,6 +66,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\LICENSE"; DestDir: "{
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\asciiGraphics\*"; DestDir: "{app}\asciiGraphics"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\csved\*"; DestDir: "{app}\modules\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\mikroftp\*"; DestDir: "{app}\modules\mikroftp"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: MikroFTP
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -87,6 +88,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 [Components]
 Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom full
 Name: "RDMan"; Description: "Remote Desktop Manager"; Types: full custom compact; Flags: checkablealone fixed
+Name: "MikroFTP"; Description: "MikroFTP server"; Types: custom full
 
 [Types]
 Name: "full"; Description: "Remote Desktop Manager with all modules"

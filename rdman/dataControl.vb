@@ -358,11 +358,11 @@ Module dataControl
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
 
                 Return mstsc.Id
-            Catch
+            Catch ex As Exception
                 monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(failed)", "0", ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
                 setMonitor(monitorNodeDetails, False)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-                statistics("Unexpectedly ended...")
+                statistics("Unexpectedly ended with error: " + ex.Message)
                 Return 0
             End Try
         Else

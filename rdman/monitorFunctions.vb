@@ -60,7 +60,7 @@ Module monitorFunctions
                         Try
                             remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
                             If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
-                                mainForm.monitor.Items(nodeId).StateImageIndex = 0
+                                mainForm.monitor.Items(nodeId).StateImageIndex = 4
                             End If
                         Catch
                             node(2) = "(closed)"
@@ -95,13 +95,10 @@ Module monitorFunctions
 
     Public lastPid As Integer
     Dim MyWindow As Image
-    'Dim lastLoad As Date = Now
 
-    'Public Function getWindowScreenshot(ByVal PID As Integer, ByVal delay As Integer) As Image
     Public Function getWindowScreenshot(ByVal PID As Integer) As Image
         lastPid = 0
         Try
-            'If (PID <> lastPid Or DateDiff(DateInterval.Second, lastLoad, Now) >= delay) And Process.GetProcessById(PID).HasExited = False Then
             If Process.GetProcessById(PID).HasExited = False Then
                 lastPid = PID
 
@@ -119,8 +116,6 @@ Module monitorFunctions
                 End If
 
                 Return MyWindow
-                'ElseIf PID = lastPid Then
-                '    Return MyWindow
             Else
                 Return Nothing
             End If

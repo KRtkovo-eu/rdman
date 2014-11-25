@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -90,10 +90,12 @@ Partial Class mainForm
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColorOfStatisticsConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckForupdateOnStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowpreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KillChildProcessesOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -104,8 +106,9 @@ Partial Class mainForm
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
-        Me.KillChildProcessesOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ReportAnIssueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FTPServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -187,7 +190,7 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -279,6 +282,7 @@ Partial Class mainForm
         Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
         Me.monitorStates.Images.SetKeyName(2, "failed.ico")
         Me.monitorStates.Images.SetKeyName(3, "idle.ico")
+        Me.monitorStates.Images.SetKeyName(4, "module.ico")
         '
         'boxSourcesPath
         '
@@ -730,7 +734,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -819,41 +823,52 @@ Partial Class mainForm
         Me.ColorOfStatisticsConsoleToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control
         Me.ColorOfStatisticsConsoleToolStripMenuItem.Image = CType(resources.GetObject("ColorOfStatisticsConsoleToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ColorOfStatisticsConsoleToolStripMenuItem.Name = "ColorOfStatisticsConsoleToolStripMenuItem"
-        Me.ColorOfStatisticsConsoleToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ColorOfStatisticsConsoleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.ColorOfStatisticsConsoleToolStripMenuItem.Text = "&Statistics console style"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(203, 6)
-        '
-        'AskBeforeCloseToolStripMenuItem
-        '
-        Me.AskBeforeCloseToolStripMenuItem.Name = "AskBeforeCloseToolStripMenuItem"
-        Me.AskBeforeCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.AskBeforeCloseToolStripMenuItem.Text = "&Ask before close"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(213, 6)
         '
         'CheckForupdateOnStartToolStripMenuItem
         '
         Me.CheckForupdateOnStartToolStripMenuItem.Name = "CheckForupdateOnStartToolStripMenuItem"
-        Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.CheckForupdateOnStartToolStripMenuItem.Text = "Check for &update on start"
-        '
-        'SaveStatisticsOnCloseToolStripMenuItem
-        '
-        Me.SaveStatisticsOnCloseToolStripMenuItem.Name = "SaveStatisticsOnCloseToolStripMenuItem"
-        Me.SaveStatisticsOnCloseToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SaveStatisticsOnCloseToolStripMenuItem.Text = "&Save statistics on close"
         '
         'ShowpreviewToolStripMenuItem
         '
         Me.ShowpreviewToolStripMenuItem.Name = "ShowpreviewToolStripMenuItem"
-        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.ShowpreviewToolStripMenuItem.Text = "Show &preview"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(213, 6)
+        '
+        'AskBeforeCloseToolStripMenuItem
+        '
+        Me.AskBeforeCloseToolStripMenuItem.Name = "AskBeforeCloseToolStripMenuItem"
+        Me.AskBeforeCloseToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.AskBeforeCloseToolStripMenuItem.Text = "&Ask before close"
+        '
+        'SaveStatisticsOnCloseToolStripMenuItem
+        '
+        Me.SaveStatisticsOnCloseToolStripMenuItem.Name = "SaveStatisticsOnCloseToolStripMenuItem"
+        Me.SaveStatisticsOnCloseToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.SaveStatisticsOnCloseToolStripMenuItem.Text = "&Save statistics on close"
+        '
+        'KillChildProcessesOnCloseToolStripMenuItem
+        '
+        Me.KillChildProcessesOnCloseToolStripMenuItem.Name = "KillChildProcessesOnCloseToolStripMenuItem"
+        Me.KillChildProcessesOnCloseToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.KillChildProcessesOnCloseToolStripMenuItem.Text = "&Kill child processes on close"
         '
         'HelpToolStripMenuItem
         '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.ToolStripSeparator1, Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.ReportAnIssueToolStripMenuItem, Me.ToolStripSeparator1, Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(43, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
@@ -910,16 +925,23 @@ Partial Class mainForm
         '
         Me.processPreviewHover.Interval = 500
         '
-        'KillChildProcessesOnCloseToolStripMenuItem
+        'ReportAnIssueToolStripMenuItem
         '
-        Me.KillChildProcessesOnCloseToolStripMenuItem.Name = "KillChildProcessesOnCloseToolStripMenuItem"
-        Me.KillChildProcessesOnCloseToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
-        Me.KillChildProcessesOnCloseToolStripMenuItem.Text = "&Kill child processes on close"
+        Me.ReportAnIssueToolStripMenuItem.Image = CType(resources.GetObject("ReportAnIssueToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ReportAnIssueToolStripMenuItem.Name = "ReportAnIssueToolStripMenuItem"
+        Me.ReportAnIssueToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
+        Me.ReportAnIssueToolStripMenuItem.Text = "&Report an issue"
         '
-        'ToolStripSeparator5
+        'FTPServerToolStripMenuItem
         '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(213, 6)
+        Me.FTPServerToolStripMenuItem.Name = "FTPServerToolStripMenuItem"
+        Me.FTPServerToolStripMenuItem.Size = New System.Drawing.Size(70, 20)
+        Me.FTPServerToolStripMenuItem.Text = "&FTP Server"
+        Me.FTPServerToolStripMenuItem.Visible = False
+        '
+        'ftpPath
+        '
+        Me.ftpPath.Description = "Choose the path to directory which you want to share."
         '
         'mainForm
         '
@@ -1046,5 +1068,8 @@ Partial Class mainForm
     Friend WithEvents processPreviewHover As System.Windows.Forms.Timer
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents KillChildProcessesOnCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ReportAnIssueToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FTPServerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ftpPath As System.Windows.Forms.FolderBrowserDialog
 
 End Class
