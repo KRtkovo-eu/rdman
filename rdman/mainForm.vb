@@ -757,6 +757,80 @@ Public Class mainForm
             Me.boxStatistics.Font = consoleFont
         End If
     End Sub
+
+    Dim lastWindowState As FormWindowState
+    Dim lastWidth, lastHeight As Integer
+
+    Private Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
+        If CompactModeToolStripMenuItem.Checked = True Then
+            CompactModeToolStripMenuItem.Checked = False
+
+            boxSourcesPath.Visible = True
+            groupAdditionalInformations.Visible = True
+            groupButtons.Visible = True
+            groupConnectionSettings.Visible = True
+            groupConnectOver.Visible = True
+            groupImage.Visible = True
+            groupResolutionSettings.Visible = True
+            groupSourcesList.Visible = True
+            groupStatistics.Visible = True
+            mainContainer.Panel2Collapsed = False
+            containerSourcesMonitor.Panel1Collapsed = False
+
+            If lastWindowState <> Nothing Then
+                Me.WindowState = lastWindowState
+            Else
+                Me.WindowState = FormWindowState.Normal
+            End If
+
+            Me.MinimumSize = New Size(800, 500)
+
+            If lastWidth > 0 Then
+                Me.Width = lastWidth
+            Else
+                Me.Width = 850
+            End If
+
+            If lastHeight > 0 Then
+                Me.Height = lastHeight
+            Else
+                Me.Height = 450
+            End If
+
+            Me.TopMost = False
+
+            Me.Text = Me.Text.Replace(" [compact mode]", "")
+        Else
+            CompactModeToolStripMenuItem.Checked = True
+
+            boxSourcesPath.Visible = False
+            groupAdditionalInformations.Visible = False
+            groupButtons.Visible = False
+            groupConnectionSettings.Visible = False
+            groupConnectOver.Visible = False
+            groupImage.Visible = False
+            groupResolutionSettings.Visible = False
+            groupSourcesList.Visible = False
+            groupStatistics.Visible = False
+            mainContainer.Panel2Collapsed = True
+            containerSourcesMonitor.Panel1Collapsed = True
+
+            lastWindowState = Me.WindowState
+            Me.WindowState = FormWindowState.Normal
+
+            Me.MinimumSize = New Size(100, 100)
+
+            lastWidth = Me.Width
+            Me.Width = 400
+
+            lastHeight = Me.Height
+            Me.Height = 300
+
+            Me.TopMost = True
+
+            Me.Text = Me.Text + " [compact mode]"
+        End If
+    End Sub
 #End Region
 
 #Region "monitorHandle"
