@@ -3,6 +3,7 @@ Imports System.Runtime.InteropServices
 Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.IO
+Imports System.Net
 
 Module dataControl
 #Region "Global variables"
@@ -108,7 +109,7 @@ Module dataControl
         compTitle += ")"
 
         If My.Computer.Network.IsAvailable = True Then
-            compTitle += " is connected to network. Ready to work!"
+            compTitle += " is connected to network with ip {" + IPAddress.Broadcast.ToString + "}. Ready to work!"
 
         Else
             compTitle += "is not connected to network."
@@ -203,7 +204,7 @@ Module dataControl
         mainForm.sourcesList.Items.Add("(Add New Node)", 5)
 
         For Each element In csvArray(sources)
-            mainForm.sourcesList.Items.Add(element(0), systemToIndexNum(element(7)))
+            mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
         Next
 
         mainForm.boxSourcesPath.Text = "Loaded: " + sources.Substring(sources.LastIndexOf("\") + 1)
