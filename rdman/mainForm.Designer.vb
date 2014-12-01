@@ -102,6 +102,7 @@ Partial Class mainForm
         Me.ReportAnIssueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompactModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
@@ -109,7 +110,6 @@ Partial Class mainForm
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
-        Me.CompactModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -908,6 +908,13 @@ Partial Class mainForm
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.AboutToolStripMenuItem.Text = "&About Remote Desktop Manager"
         '
+        'CompactModeToolStripMenuItem
+        '
+        Me.CompactModeToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.CompactModeToolStripMenuItem.Name = "CompactModeToolStripMenuItem"
+        Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(96, 20)
+        Me.CompactModeToolStripMenuItem.Text = "&Compact mode"
+        '
         'operatingSystemsImages
         '
         Me.operatingSystemsImages.ImageStream = CType(resources.GetObject("operatingSystemsImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -943,13 +950,6 @@ Partial Class mainForm
         'ftpPath
         '
         Me.ftpPath.Description = "Choose the path to directory which you want to share."
-        '
-        'CompactModeToolStripMenuItem
-        '
-        Me.CompactModeToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.CompactModeToolStripMenuItem.Name = "CompactModeToolStripMenuItem"
-        Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(96, 20)
-        Me.CompactModeToolStripMenuItem.Text = "&Compact mode"
         '
         'mainForm
         '
