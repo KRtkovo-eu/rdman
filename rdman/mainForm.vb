@@ -77,6 +77,10 @@ Public Class mainForm
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
         End If
 
+        If My.Settings.compactMode = True Then
+            CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
+        End If
+
         Me.boxStatistics.Font = consoleFont
 
         'Focus command line
@@ -161,6 +165,7 @@ Public Class mainForm
         My.Settings.consoleFontSize = colorStatistics.fontSize.Value
         My.Settings.showPreview = Me.ShowpreviewToolStripMenuItem.Checked
         My.Settings.closeChilds = Me.KillChildProcessesOnCloseToolStripMenuItem.Checked
+        My.Settings.compactMode = Me.CompactModeToolStripMenuItem.Checked
         My.Settings.Save()
 
         If My.Settings.saveStats = True Then
@@ -254,7 +259,11 @@ Public Class mainForm
         Dim nodeName As String = "(Add New Node)"
 
         For Each item As ListViewItem In sourcesList.SelectedItems()
-            nodeName = item.Text
+            If item.Text.Contains("[") And item.Text.Contains("]") Then
+                nodeName = item.Text.Remove(item.Text.LastIndexOf("[") - 1)
+            Else
+                nodeName = item.Text
+            End If
         Next
 
         If nodeName = "(Add New Node)" Then
