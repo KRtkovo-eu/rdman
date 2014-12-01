@@ -914,6 +914,7 @@ Public Class mainForm
                                 processPreview.Height = processImage.Height
                                 processPreview.Width = processImage.Width
                                 processPreview.BackgroundImage = processImage
+                                processPreview.TopMost = True
 
                                 If processPreview.Visible = True Then
                                     processPreview.Invalidate()
