@@ -277,7 +277,11 @@ Public Class mainForm
         For Each node As ListViewItem In sourcesList.SelectedItems()
             If node.SubItems(0).Text IsNot "(Add New Node)" Then
                 If MessageBox.Show("Do you really want to delete " + node.SubItems(0).Text + "?", "Delete " + node.SubItems(0).Text + "?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                    saveSource(node.SubItems(0).Text, sourcesDb, True)
+                    If node.SubItems(0).Text.Contains("[") And node.SubItems(0).Text.Contains("]") Then
+                        saveSource(node.SubItems(0).Text.Remove(node.SubItems(0).Text.LastIndexOf("[") - 1), sourcesDb, True)
+                    Else
+                        saveSource(node.SubItems(0).Text, sourcesDb, True)
+                    End If
                 End If
             End If
         Next
@@ -778,9 +782,14 @@ Public Class mainForm
             groupAdditionalInformations.Visible = True
             groupButtons.Visible = True
             groupConnectionSettings.Visible = True
-            groupConnectOver.Visible = True
+
+            If boxConnectOver.Checked = True Then
+                groupConnectOver.Visible = True
+            Else
+                groupResolutionSettings.Visible = True
+            End If
+
             groupImage.Visible = True
-            groupResolutionSettings.Visible = True
             groupSourcesList.Visible = True
             groupStatistics.Visible = True
             mainContainer.Panel2Collapsed = False

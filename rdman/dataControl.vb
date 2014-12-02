@@ -109,7 +109,7 @@ Module dataControl
         compTitle += ")"
 
         If My.Computer.Network.IsAvailable = True Then
-            compTitle += " is connected to network with ip {" + IPAddress.Broadcast.ToString + "}. Ready to work!"
+            compTitle += " is connected to network. Ready to work!"
 
         Else
             compTitle += "is not connected to network."
