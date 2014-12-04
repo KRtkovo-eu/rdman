@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.6.5"
-#define MyAppVersionText "v0.6.5"
+#define MyAppVersion "0.6.5.1"
+#define MyAppVersionText "v0.6.5.1"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -67,6 +67,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\asciiGraphics\*"; Des
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\csved\*"; DestDir: "{app}\modules\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\mikroftp\*"; DestDir: "{app}\modules\mikroftp"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: MikroFTP
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\putty\*"; DestDir: "{app}\modules\putty"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Putty
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -75,6 +76,7 @@ Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\modules\uniCSVed"; Filename: "{app}\modules\csved\uniCSVed.exe"; Components: CSVed
 Name: "{group}\modules\mikroFTP"; Filename: "{app}\modules\mikroftp\mikroftp.exe"; Components: MikroFTP
+Name: "{group}\modules\Putty"; Filename: "{app}\modules\putty\putty.exe"; Components: Putty
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Registry]
@@ -90,6 +92,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom full
 Name: "RDMan"; Description: "Remote Desktop Manager"; Types: full custom compact; Flags: checkablealone fixed
 Name: "MikroFTP"; Description: "MikroFTP server"; Types: custom full
+Name: "Putty"; Description: "Putty SSH and Telnet client"; Types: custom full
 
 [Types]
 Name: "full"; Description: "Remote Desktop Manager with all modules"
