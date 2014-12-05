@@ -9,6 +9,9 @@ Public Class mainForm
     Dim command As String = ""
     Dim consoleFont As Font = New Font("Lucida Console", 8, FontStyle.Regular, GraphicsUnit.Point)
     Dim allahToConsole As String = ""
+    Dim hasPutty As Boolean = False
+    Dim hasFTP As Boolean = False
+    Dim hasCsved As Boolean = False
 #End Region
 
 #Region "Form handle"
@@ -100,9 +103,21 @@ Public Class mainForm
         boxStatistics.Text = allahToConsole
         statisticsEnvironment()
 
+        'If csved is included, change control variable
+        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\csved\uniCSVed.exe") = True Then
+            hasCsved = True
+        End If
+
         'If MikroFTP is included, enable menu item
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe") = True Then
             FTPServerToolStripMenuItem.Visible = True
+            hasFTP = True
+        End If
+
+        'If PuTTY is included, enable "Use PuTTY" link
+        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\putty\putty.exe") = True Then
+            lblUsePutty.Visible = True
+            hasPutty = True
         End If
 
         'Check parameters for db path and load db
@@ -310,6 +325,14 @@ Public Class mainForm
             Me.groupConnectOver.Visible = False
         End If
     End Sub
+
+    Private Sub lblUsePutty_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblUsePutty.LinkClicked
+        If hasPutty = True Then
+            boxViewerPath.Text = My.Application.Info.DirectoryPath + "\modules\putty\putty.exe"
+            boxIP.Text = "-ssh " + boxIP.Text
+            statistics("!! NOTE !! - If you use PuTTY, you should specify which protocol you want to use. You can do this by writing IP address or hostname in this format:" + vbNewLine + "-ssh | -telnet | -rlogin | -raw 127.0.0.1")
+        End If
+    End Sub
 #End Region
 
 #Region "RDMan Shell"
@@ -332,6 +355,8 @@ Public Class mainForm
                 statisticsEnvironment()
             Case "exit"
                 Me.Close()
+            Case "ftpserver", "ftp"
+                FTPServerToolStripMenuItem_Click(Nothing, New System.EventArgs)
             Case "help"
                 Dim help As String
 
@@ -353,6 +378,8 @@ Public Class mainForm
                 help += vbTab + "environment | Writes information about your machine."
                 help += vbNewLine
                 help += vbTab + "exit | Closes this program."
+                help += vbNewLine
+                help += vbTab + "ftpserver, ftp | Run FTP server module."
                 help += vbNewLine
                 help += vbTab + "help | Shows this page."
                 help += vbNewLine
@@ -384,9 +411,11 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "nodewidth, width | Set node width."
                 help += vbNewLine
+                help += vbTab + "putty | Use PuTTY module as viewer."
+                help += vbNewLine
                 help += vbTab + "reloadsources | Reloads nodes database."
                 help += vbNewLine
-                help += vbTab + "run | Runs chosen external process."
+                help += vbTab + "run | Runs chosen external process. Add character & just before path to run process without window (ex. &cmd)."
                 help += vbNewLine
                 help += vbTab + "savenode | Saves node to csv database file."
                 help += vbNewLine
@@ -434,33 +463,27 @@ Public Class mainForm
                 commandSetValue(Me.boxViewerPath, command)
             Case "nodewidth", "width"
                 commandSetValue(Me.boxWidth, command)
+            Case "putty"
+                lblUsePutty_LinkClicked(Nothing, Nothing)
             Case "reloadsources"
                 LoadSources(sourcesDb)
             Case "run", "cmd"
-                Try
-                    Dim run As String
-                    Dim processProperties As ProcessStartInfo = New ProcessStartInfo
+                Dim run As String
+                Dim processProperties As ProcessStartInfo = New ProcessStartInfo
 
-                    If command <> "cmd" Then
-                        run = commandGetValue("Enter path", False, "")
-                    Else
-                        run = "cmd"
-                    End If
+                If command <> "cmd" Then
+                    run = commandGetValue("Enter path", False, "")
+                Else
+                    run = "cmd"
+                End If
 
-                    If run(0) = "&" Then
-                        run = run.Remove(0, 1)
-                        processProperties.WindowStyle = ProcessWindowStyle.Hidden
-                    End If
-                    processProperties.FileName = run
+                If run(0) = "&" Then
+                    run = run.Remove(0, 1)
+                    processProperties.WindowStyle = ProcessWindowStyle.Hidden
+                End If
+                processProperties.FileName = run
 
-                    Dim runProcess As Process = Process.Start(processProperties)
-                    Dim processToMonitor As String() = {run.Substring(run.LastIndexOf("\") + 1), "localhost", "(running)", runProcess.Id.ToString, run, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
-
-                    setMonitor(processToMonitor, True, True)
-                    statistics("Execution > " + run, True)
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
+                runModule(processProperties, False)
             Case "savenode"
                 SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "savestats"
@@ -627,58 +650,33 @@ Public Class mainForm
     End Sub
 
     Private Sub EditSourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditSourcesDatabaseToolStripMenuItem.Click
-        Dim notepad As Process
         Dim ProcessProperties As New ProcessStartInfo
-        Dim csved As String = My.Application.Info.DirectoryPath + "\modules\csved\uniCSVed.exe"
-
-        If IO.File.Exists(csved) = False Then
-            ProcessProperties.FileName = "notepad.exe"
+        If hasCsved = True Then
+            ProcessProperties.FileName = My.Application.Info.DirectoryPath + "\modules\csved\uniCSVed.exe"
         Else
-            ProcessProperties.FileName = csved
+            ProcessProperties.FileName = "notepad.exe"
         End If
-
-        Dim editorName As String = ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1)
 
         ProcessProperties.Arguments = Chr(34) + sourcesDb + Chr(34)
 
-        Try
-            notepad = Process.Start(ProcessProperties)
-
-            statistics("Database editing started with " + editorName)
-
-            setMonitor({"<mod> " + editorName, "localhost", "(module)", notepad.Id.ToString, notepad.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
-            statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-        Catch ex As Exception
-            setMonitor({"<mod> " + editorName, "localhost", "(closed)", "0", ProcessProperties.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
-            statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-            statistics("Unexpectedly ended... with error: " + ex.Message)
-        End Try
+        statistics("Database editing started.")
+        runModule(ProcessProperties, True)
     End Sub
 
     Private Sub FTPServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FTPServerToolStripMenuItem.Click
-        ftpPath.SelectedPath = My.Application.Info.DirectoryPath + "\modules\mikroftp\share"
-        If (ftpPath.ShowDialog = Windows.Forms.DialogResult.OK) Then
-            Dim mikroftp As Process
-            Dim ProcessProperties As New ProcessStartInfo
+        If hasFTP = True Then
+            ftpPath.SelectedPath = My.Application.Info.DirectoryPath + "\modules\mikroftp\share"
+            If (ftpPath.ShowDialog = Windows.Forms.DialogResult.OK) Then
+                Dim ProcessProperties As New ProcessStartInfo
 
-            ProcessProperties.FileName = My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe"
-            ProcessProperties.Arguments = Chr(34) + ftpPath.SelectedPath + Chr(34)
-
-            Try
-                mikroftp = Process.Start(ProcessProperties)
+                ProcessProperties.FileName = My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe"
+                ProcessProperties.Arguments = Chr(34) + ftpPath.SelectedPath + Chr(34)
 
                 statistics("Starting FTP Server module.")
-
-                setMonitor({"<mod> MikroFTP", "localhost", "(module)", mikroftp.Id.ToString, mikroftp.StartInfo.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
-                statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-            Catch ex As Exception
-                setMonitor({"<mod> MikroFTP", "localhost", "(closed)", "0", ProcessProperties.FileName + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
-                statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
-                statistics("Unexpectedly ended... with error: " + ex.Message)
-            End Try
+                runModule(ProcessProperties, True)
+            End If
         End If
     End Sub
-
 
     Public Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
         saveStatistics.Filter = "Sources database *.rdman|*.rdman"

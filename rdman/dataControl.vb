@@ -299,7 +299,7 @@ Module dataControl
     End Function
 #End Region
 
-#Region "Run remote function"
+#Region "Run functions"
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String) As Integer
         If nodeIP <> "" Then
             statistics("Connecting to " + nodeName)
@@ -371,6 +371,28 @@ Module dataControl
             Return 0
         End If
     End Function
+
+    Public Sub runModule(ByVal moduleProperties As ProcessStartInfo, ByVal isModule As Boolean)
+        Try
+            Dim moduleProcess As Process
+            moduleProcess = Process.Start(moduleProperties)
+
+            Dim status As String
+
+            If isModule = True Then
+                status = "(module)"
+            Else
+                status = "(running)"
+            End If
+
+            setMonitor({moduleProperties.FileName.Substring(moduleProperties.FileName.LastIndexOf("\") + 1), "localhost", status, moduleProcess.Id.ToString, moduleProperties.FileName + " " + moduleProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+            statistics("Execution > " + moduleProperties.FileName + " " + moduleProperties.Arguments)
+        Catch ex As Exception
+            setMonitor({moduleProperties.FileName.Substring(moduleProperties.FileName.LastIndexOf("\") + 1), "localhost", "(closed)", "0", moduleProperties.FileName + " " + moduleProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
+            statistics("Execution > " + moduleProperties.FileName + " " + moduleProperties.Arguments)
+            statistics("Unexpectedly ended... with error: " + ex.Message)
+        End Try
+    End Sub
 #End Region
 
 End Module

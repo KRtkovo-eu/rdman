@@ -44,6 +44,7 @@ Partial Class mainForm
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
         Me.statisticsCommandLine = New System.Windows.Forms.ComboBox()
         Me.groupConnectOver = New System.Windows.Forms.GroupBox()
+        Me.lblUsePutty = New System.Windows.Forms.LinkLabel()
         Me.buttonLocateViewer = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.boxViewerPath = New System.Windows.Forms.TextBox()
@@ -334,7 +335,7 @@ Partial Class mainForm
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
@@ -344,7 +345,7 @@ Partial Class mainForm
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
         Me.statisticsCommandLine.ItemHeight = 11
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.MaxDropDownItems = 5
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
@@ -355,6 +356,7 @@ Partial Class mainForm
         '
         'groupConnectOver
         '
+        Me.groupConnectOver.Controls.Add(Me.lblUsePutty)
         Me.groupConnectOver.Controls.Add(Me.buttonLocateViewer)
         Me.groupConnectOver.Controls.Add(Me.Label2)
         Me.groupConnectOver.Controls.Add(Me.boxViewerPath)
@@ -368,11 +370,26 @@ Partial Class mainForm
         Me.groupConnectOver.Text = "Connect over"
         Me.groupConnectOver.Visible = False
         '
+        'lblUsePutty
+        '
+        Me.lblUsePutty.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblUsePutty.AutoSize = True
+        Me.lblUsePutty.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.lblUsePutty.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.lblUsePutty.Location = New System.Drawing.Point(570, 24)
+        Me.lblUsePutty.Name = "lblUsePutty"
+        Me.lblUsePutty.Size = New System.Drawing.Size(57, 13)
+        Me.lblUsePutty.TabIndex = 14
+        Me.lblUsePutty.TabStop = True
+        Me.lblUsePutty.Text = "Use PuTTY"
+        Me.lblUsePutty.Visible = False
+        Me.lblUsePutty.VisitedLinkColor = System.Drawing.Color.DodgerBlue
+        '
         'buttonLocateViewer
         '
         Me.buttonLocateViewer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.buttonLocateViewer.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonLocateViewer.Location = New System.Drawing.Point(601, 19)
+        Me.buttonLocateViewer.Location = New System.Drawing.Point(539, 19)
         Me.buttonLocateViewer.Name = "buttonLocateViewer"
         Me.buttonLocateViewer.Size = New System.Drawing.Size(25, 23)
         Me.buttonLocateViewer.TabIndex = 13
@@ -396,7 +413,7 @@ Partial Class mainForm
         Me.boxViewerPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxViewerPath.Location = New System.Drawing.Point(115, 20)
         Me.boxViewerPath.Name = "boxViewerPath"
-        Me.boxViewerPath.Size = New System.Drawing.Size(480, 22)
+        Me.boxViewerPath.Size = New System.Drawing.Size(418, 22)
         Me.boxViewerPath.TabIndex = 12
         '
         'groupResolutionSettings
@@ -1081,5 +1098,6 @@ Partial Class mainForm
     Friend WithEvents FTPServerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ftpPath As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents CompactModeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents lblUsePutty As System.Windows.Forms.LinkLabel
 
 End Class
