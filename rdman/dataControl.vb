@@ -393,6 +393,19 @@ Module dataControl
             statistics("Unexpectedly ended... with error: " + ex.Message)
         End Try
     End Sub
+
+    Public Sub addProcessToMonitorByPid(ByVal PID As String)
+        Try
+            Dim moduleProcess As Process
+
+            moduleProcess = Process.GetProcessById(Convert.ToInt32(PID))
+
+            setMonitor({moduleProcess.MainWindowTitle, "localhost", "(running)", PID, moduleProcess.ProcessName, moduleProcess.StartTime.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+            statistics("Process " + PID + " [" + moduleProcess.ProcessName + "] added to monitor.")
+        Catch ex As Exception
+            statistics(ex.Message)
+        End Try
+    End Sub
 #End Region
 
 End Module

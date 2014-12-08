@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.6.6"
-#define MyAppVersionText "v0.6.6"
+#define MyAppVersion "0.7"
+#define MyAppVersionText "v0.7"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -68,6 +68,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\csved\*"; DestDir: "{app}\modules\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\mikroftp\*"; DestDir: "{app}\modules\mikroftp"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: MikroFTP
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\putty\*"; DestDir: "{app}\modules\putty"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Putty
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\fighter\*"; DestDir: "{app}\modules\fighter"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Fighter
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -76,7 +77,8 @@ Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\modules\uniCSVed"; Filename: "{app}\modules\csved\uniCSVed.exe"; Components: CSVed
 Name: "{group}\modules\mikroFTP"; Filename: "{app}\modules\mikroftp\mikroftp.exe"; Components: MikroFTP
-Name: "{group}\modules\Putty"; Filename: "{app}\modules\putty\putty.exe"; Components: Putty
+Name: "{group}\modules\PuTTY"; Filename: "{app}\modules\putty\putty.exe"; Components: Putty
+Name: "{group}\modules\Aviation Fight"; Filename: "{app}\modules\fighter\fighter.exe"; Components: Fighter
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Registry]
@@ -89,12 +91,13 @@ Root: HKCR; Subkey: "rdman_database_file\shell\open\command"; ValueType: string;
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [Components]
-Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom full
 Name: "RDMan"; Description: "Remote Desktop Manager"; Types: full custom compact; Flags: checkablealone fixed
+Name: "Fighter"; Description: "Celebration game bonus to one month since first release"; Types: full custom; Flags: fixed
+Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom full
 Name: "MikroFTP"; Description: "MikroFTP server"; Types: custom full
-Name: "Putty"; Description: "Putty SSH and Telnet client"; Types: custom full
+Name: "PuTTY"; Description: "PuTTY SSH and Telnet client"; Types: custom full
 
 [Types]
 Name: "full"; Description: "Remote Desktop Manager with all modules"
-Name: "custom"; Description: "Remote Desktop Manager with selected modules"; Flags: iscustom
 Name: "compact"; Description: "Remote Desktop Manager standalone"
+Name: "custom"; Description: "Remote Desktop Manager with selected modules"; Flags: iscustom

@@ -2,6 +2,7 @@
 Imports System.Windows.Forms.ListView
 Imports System.IO
 Imports rdman.processWindowState
+Imports System.Threading
 
 Public Class mainForm
 #Region "Global variables"
@@ -12,6 +13,7 @@ Public Class mainForm
     Dim hasPutty As Boolean = False
     Dim hasFTP As Boolean = False
     Dim hasCsved As Boolean = False
+    Dim hasFighter As Boolean = False
 #End Region
 
 #Region "Form handle"
@@ -118,6 +120,11 @@ Public Class mainForm
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\putty\putty.exe") = True Then
             lblUsePutty.Visible = True
             hasPutty = True
+        End If
+
+        'If Fighter is included, change control variable
+        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe") Then
+            hasFighter = True
         End If
 
         'Check parameters for db path and load db
@@ -355,6 +362,26 @@ Public Class mainForm
                 statisticsEnvironment()
             Case "exit"
                 Me.Close()
+            Case "fight"
+                If hasFighter = True Then
+                    Dim processProperties As ProcessStartInfo = New ProcessStartInfo
+                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!!")
+                    Thread.Sleep(1000)
+                    Me.Refresh()
+                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! .")
+                    Thread.Sleep(1000)
+                    Me.Refresh()
+                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! ..")
+                    Thread.Sleep(1000)
+                    Me.Refresh()
+                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! ...")
+
+                    processProperties.FileName = My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe"
+
+                    runModule(processProperties, True)
+                    Me.Text = Me.Text + " [fight mode]"
+                    statistics("Started !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!!")
+                End If
             Case "ftpserver", "ftp"
                 FTPServerToolStripMenuItem_Click(Nothing, New System.EventArgs)
             Case "help"
@@ -384,6 +411,8 @@ Public Class mainForm
                 help += vbTab + "help | Shows this page."
                 help += vbNewLine
                 help += vbTab + "loadsources | Opens dialog for selecting csv database file."
+                help += vbNewLine
+                help += vbTab + "monitorpid | Add running process to monitor by PID."
                 help += vbNewLine
                 help += vbTab + "newnode | Loads template of new node."
                 help += vbNewLine
@@ -425,6 +454,10 @@ Public Class mainForm
                 statistics(help)
             Case "loadsources"
                 LoadSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
+            Case "monitorpid"
+                Dim PID As String = commandGetValue("Select PID of process", False, "")
+
+                addProcessToMonitorByPid(PID)
             Case "newnode"
                 AddNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "nodeconnectover", "connectover"
@@ -847,6 +880,7 @@ Public Class mainForm
             Me.Text = Me.Text + " [compact mode]"
         End If
     End Sub
+
 #End Region
 
 #Region "monitorHandle"
