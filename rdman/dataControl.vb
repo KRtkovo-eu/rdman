@@ -400,7 +400,7 @@ Module dataControl
 
             moduleProcess = Process.GetProcessById(Convert.ToInt32(PID))
 
-            setMonitor({moduleProcess.MainWindowTitle, "localhost", "(running)", PID, moduleProcess.ProcessName, moduleProcess.StartTime.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+            setMonitor({moduleProcess.ProcessName, "localhost", "(running)", PID, moduleProcess.ProcessName, moduleProcess.StartTime.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
             statistics("Process " + PID + " [" + moduleProcess.ProcessName + "] added to monitor.")
         Catch ex As Exception
             statistics(ex.Message)
