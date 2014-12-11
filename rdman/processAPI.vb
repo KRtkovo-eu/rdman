@@ -46,7 +46,7 @@ Public Class processAPI
 
         Dim ip As New IntPtr(hwnd)
 
-        apiShowWindow(ip, SW_NORMAL)
+        apiShowWindow(ip, 0)
 
     End Sub
 

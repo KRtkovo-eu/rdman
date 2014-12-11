@@ -148,7 +148,7 @@ Module dataControl
     End Sub
 
     Public Sub saveSource(ByVal nodeName As String, ByVal sourcesDb As String, ByVal onlyDelete As Boolean)
-        If nodeName IsNot Nothing Then
+        If nodeName <> "" And mainForm.boxIP.Text <> "" Then
             Dim db As List(Of String())
 
             db = deleteSource(nodeName, sourcesDb)
@@ -164,23 +164,18 @@ Module dataControl
 
                 For Each element In db
                     Dim line As String = ""
+                    Dim lineNum As Integer = 0
+
                     For Each field In element
-                        line += field + ";"
+                        If lineNum = 9 Then
+                            line += field.Replace(Environment.NewLine, "\n") + ";"
+                        Else
+                            line += field + ";"
+                        End If
+
+                        lineNum = lineNum + 1
                     Next
                     line = line.Substring(0, line.Length - 1)
-
-                    'line = element(0) + ";"
-                    'line += element(1) + ";"
-                    'line += element(2) + ";"
-                    'line += element(3) + ";"
-                    'line += element(4) + ";"
-                    'line += element(5) + ";"
-                    'line += element(6) + ";"
-                    'line += element(7) + ";"
-                    'line += element(8) + ";"
-                    'line += element(9) + ";"
-                    'line += element(10) + ";"
-                    'line += element(11)
 
                     objWriter.WriteLine(line)
                 Next
@@ -247,7 +242,7 @@ Module dataControl
                     nodePort = element(2)
                     nodeSystem = element(7)
                     nodeVersion = element(8)
-                    nodeDescription = element(9)
+                    nodeDescription = element(9).Replace("\n", Environment.NewLine)
                     nodeFullscreen = element(3)
                     nodeWidth = element(5)
                     nodeHeight = element(6)

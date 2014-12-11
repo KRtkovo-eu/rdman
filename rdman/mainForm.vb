@@ -337,7 +337,15 @@ Public Class mainForm
         If hasPutty = True Then
             boxViewerPath.Text = My.Application.Info.DirectoryPath + "\modules\putty\putty.exe"
             boxIP.Text = "-ssh " + boxIP.Text
-            statistics("!! NOTE !! - If you use PuTTY, you should specify which protocol you want to use. You can do this by writing IP address or hostname in this format:" + vbNewLine + "-ssh | -telnet | -rlogin | -raw 127.0.0.1")
+            statistics("!! NOTE !! - If you use PuTTY, you should specify which protocol you want to use. You can do this by writing IP address or hostname in this format:" + vbNewLine + "-ssh | -telnet | -rlogin | -raw " + boxIP.Text)
+        End If
+    End Sub
+
+    Private Sub boxDescription_KeyDown(sender As Object, e As KeyEventArgs) Handles boxDescription.KeyDown
+        If e.Control = True Then
+            If e.KeyCode = Keys.A Then
+                boxDescription.SelectAll()
+            End If
         End If
     End Sub
 #End Region
@@ -890,13 +898,14 @@ Public Class mainForm
     End Sub
 
     Private Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
-        Dim haveFirst As Boolean = False
+        'Dim haveFirst As Boolean = False
 
         For Each node As ListViewItem In monitor.SelectedItems()
 
             Select Case node.SubItems(2).Text
                 Case "(connected)", "(module)", "(running)"
-                    If haveFirst = False Then
+                    Try
+                        'If haveFirst = False Then
                         Dim extProcess As Process
                         Dim PID As Integer
 
@@ -905,11 +914,15 @@ Public Class mainForm
 
                         If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
                             processAPI.ShowWindow(extProcess.MainWindowHandle)
+                        Else
+                            AppActivate(Convert.ToInt32(node.SubItems(3).Text))
                         End If
 
-                        AppActivate(Convert.ToInt32(node.SubItems(3).Text))
-                        haveFirst = True
-                    End If
+                        'haveFirst = True
+                        'End If
+                    Catch ex As Exception
+                        statistics(ex.Message)
+                    End Try
                 Case "(disconnected)", "(closed)"
                     monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 Case "(failed)"
