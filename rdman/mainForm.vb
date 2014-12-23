@@ -42,8 +42,10 @@ Public Class mainForm
         End If
 
         'Get last opened db
-        If My.Settings.lastDb <> Nothing And IO.File.Exists(My.Settings.lastDb) Then
+        If My.Settings.lastDb <> "" Then
             sourcesDb = My.Settings.lastDb
+        ElseIf My.Application.CommandLineArgs.Count > 0 Then
+            sourcesDb = My.Application.CommandLineArgs.Item(0)
         End If
 
         'Other settings
@@ -128,18 +130,13 @@ Public Class mainForm
         End If
 
         'Check parameters for db path and load db
-        If IO.File.Exists(sourcesDb) = False Then
+        If sourcesDb = "" Or IO.File.Exists(sourcesDb) = False Then
             NewEmptySourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs)
-        End If
-
-        If My.Application.CommandLineArgs.Count > 0 Then
-            If IO.File.Exists(My.Application.CommandLineArgs.Item(0)) Then
-                LoadSources(My.Application.CommandLineArgs.Item(0))
-            Else
-                LoadSources(sourcesDb)
-            End If
         Else
             LoadSources(sourcesDb)
+
+            'Make backup of actual db file, it overwrites file with same name.
+            IO.File.Copy(sourcesDb, sourcesDb + ".bak", True)
         End If
 
         'load empty node template
@@ -147,6 +144,11 @@ Public Class mainForm
 
         'monitor timer
         monitorTimer.Start()
+
+        'ping timer
+        If My.Computer.Network.IsAvailable = True Then
+            pingTimer.Start()
+        End If
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -659,6 +661,9 @@ Public Class mainForm
             If IO.File.Exists(openSourceDb.FileName) Then
                 sourcesDb = openSourceDb.FileName
                 LoadSources(sourcesDb)
+
+                'Make backup of actual db file, it overwrites file with same name.
+                IO.File.Copy(sourcesDb, sourcesDb + ".bak", True)
             End If
         End If
     End Sub
@@ -895,6 +900,7 @@ Public Class mainForm
 
     Private Sub monitorTimer_Tick(sender As Object, e As EventArgs) Handles monitorTimer.Tick
         monitorCheckStates()
+        globalHotkeySelect()
     End Sub
 
     Private Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
@@ -937,7 +943,11 @@ Public Class mainForm
             Select Case node.SubItems(2).Text
                 Case "(connected)", "(module)", "(running)"
                     If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                        Process.GetProcessById(node.SubItems(3).Text).Kill()
+                        Try
+                            Process.GetProcessById(node.SubItems(3).Text).Kill()
+                        Catch ex As Exception
+                            statistics(ex.Message)
+                        End Try
                     End If
                 Case "(disconnected)", "(closed)"
                     monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
@@ -1006,6 +1016,10 @@ Public Class mainForm
     Dim tickerItem As ListViewItem
     Private Sub processPreviewHover_Tick(sender As Object, e As EventArgs) Handles processPreviewHover.Tick
         monitor_ProcessPreview(tickerItem)
+    End Sub
+
+    Private Sub pingTimer_Tick(sender As Object, e As EventArgs) Handles pingTimer.Tick
+        pingNodes()
     End Sub
 
     Private Sub monitor_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles monitor.ItemMouseHover

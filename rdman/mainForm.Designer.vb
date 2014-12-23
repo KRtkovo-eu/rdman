@@ -30,6 +30,7 @@ Partial Class mainForm
         Me.groupSourcesList = New System.Windows.Forms.GroupBox()
         Me.sourcesList = New System.Windows.Forms.ListView()
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.groupMonitor = New System.Windows.Forms.GroupBox()
         Me.monitor = New System.Windows.Forms.ListView()
         Me.columnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -38,7 +39,6 @@ Partial Class mainForm
         Me.columnPID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnArgs = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
@@ -111,6 +111,7 @@ Partial Class mainForm
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
+        Me.pingTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -202,6 +203,7 @@ Partial Class mainForm
         Me.sourcesList.Size = New System.Drawing.Size(244, 297)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.sourcesList.StateImageList = Me.monitorStates
         Me.sourcesList.TabIndex = 0
         Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
         Me.sourcesList.UseCompatibleStateImageBehavior = False
@@ -217,6 +219,16 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
+        '
+        'monitorStates
+        '
+        Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
+        Me.monitorStates.Images.SetKeyName(0, "online.ico")
+        Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
+        Me.monitorStates.Images.SetKeyName(2, "failed.ico")
+        Me.monitorStates.Images.SetKeyName(3, "idle.ico")
+        Me.monitorStates.Images.SetKeyName(4, "module.ico")
         '
         'groupMonitor
         '
@@ -276,16 +288,6 @@ Partial Class mainForm
         '
         Me.columnTime.Text = "Started on"
         Me.columnTime.Width = 150
-        '
-        'monitorStates
-        '
-        Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
-        Me.monitorStates.Images.SetKeyName(0, "online.ico")
-        Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
-        Me.monitorStates.Images.SetKeyName(2, "failed.ico")
-        Me.monitorStates.Images.SetKeyName(3, "idle.ico")
-        Me.monitorStates.Images.SetKeyName(4, "module.ico")
         '
         'boxSourcesPath
         '
@@ -969,6 +971,10 @@ Partial Class mainForm
         '
         Me.processPreviewHover.Interval = 500
         '
+        'pingTimer
+        '
+        Me.pingTimer.Interval = 1
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1099,5 +1105,6 @@ Partial Class mainForm
     Friend WithEvents CompactModeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblUsePutty As System.Windows.Forms.LinkLabel
     Friend WithEvents processPreviewHover As System.Windows.Forms.Timer
+    Friend WithEvents pingTimer As System.Windows.Forms.Timer
 
 End Class

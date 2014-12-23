@@ -127,4 +127,27 @@ Module monitorFunctions
     Public Function getWindowScreenshot(ByVal PID As String) As Image
         Return getWindowScreenshot(Convert.ToInt32(PID))
     End Function
+
+    Public Sub pingNodes()
+        Dim nodeName As String = ""
+
+        For Each node As ListViewItem In mainForm.sourcesList.Items
+            If node.Text.Contains("[") And node.Text.Contains("]") Then
+                nodeName = node.Text.Remove(0, node.Text.LastIndexOf("["))
+                nodeName = nodeName.Replace("[", "")
+                nodeName = nodeName.Replace("]", "")
+                nodeName = nodeName.Substring(0, nodeName.LastIndexOf(":"))
+
+                If My.Computer.Network.Ping(nodeName) = True Then
+                    node.StateImageIndex = 0
+                Else
+                    node.StateImageIndex = 2
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub GlobalHotkeySelect()
+        'To be implemented
+    End Sub
 End Module
