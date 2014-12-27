@@ -131,23 +131,38 @@ Module monitorFunctions
     Public Sub pingNodes()
         Dim nodeName As String = ""
 
-        For Each node As ListViewItem In mainForm.sourcesList.Items
+        mainForm.pingProgressBar.Visible = True
+        mainForm.pingProgressBar.Maximum = mainForm.sourcesList.CheckedItems.Count
+        mainForm.pingProgressBar.Value = 0
+        mainForm.Cursor = Cursors.WaitCursor
+
+        For Each node As ListViewItem In mainForm.sourcesList.CheckedItems
             If node.Text.Contains("[") And node.Text.Contains("]") Then
                 nodeName = node.Text.Remove(0, node.Text.LastIndexOf("["))
                 nodeName = nodeName.Replace("[", "")
                 nodeName = nodeName.Replace("]", "")
                 nodeName = nodeName.Substring(0, nodeName.LastIndexOf(":"))
 
-                If My.Computer.Network.Ping(nodeName) = True Then
-                    node.StateImageIndex = 0
-                Else
-                    node.StateImageIndex = 2
-                End If
+                Try
+                    If My.Computer.Network.Ping(nodeName) = True Then
+                        'node.StateImageIndex = 0
+                        node.ForeColor = Color.Green
+                        statistics("Ping on " + nodeName + " > successful.")
+                    Else
+                        'node.StateImageIndex = 2
+                        node.ForeColor = Color.Red
+                        statistics("Ping on " + nodeName + " > host unreachable.")
+                    End If
+                Catch ex As Exception
+                    node.ForeColor = Color.Red
+                    statistics("Ping on " + nodeName + " > " + ex.Message)
+                End Try
             End If
-        Next
-    End Sub
 
-    Public Sub GlobalHotkeySelect()
-        'To be implemented
+            mainForm.pingProgressBar.Value = mainForm.pingProgressBar.Value + 1
+        Next
+
+        mainForm.pingProgressBar.Visible = False
+        mainForm.Cursor = Cursors.Default
     End Sub
 End Module

@@ -111,7 +111,9 @@ Partial Class mainForm
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
-        Me.pingTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.pingAll = New System.Windows.Forms.LinkLabel()
+        Me.pingProgressBar = New System.Windows.Forms.ProgressBar()
+        Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -175,6 +177,8 @@ Partial Class mainForm
         '
         'groupSourcesList
         '
+        Me.groupSourcesList.Controls.Add(Me.pingProgressBar)
+        Me.groupSourcesList.Controls.Add(Me.pingAll)
         Me.groupSourcesList.Controls.Add(Me.sourcesList)
         Me.groupSourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.groupSourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
@@ -189,10 +193,12 @@ Partial Class mainForm
         '
         Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.Left
         Me.sourcesList.AutoArrange = False
+        Me.sourcesList.CheckBoxes = True
         Me.sourcesList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
+        ListViewItem1.StateImageIndex = 0
         ListViewItem1.Tag = ""
         Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
@@ -203,7 +209,6 @@ Partial Class mainForm
         Me.sourcesList.Size = New System.Drawing.Size(244, 297)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.sourcesList.StateImageList = Me.monitorStates
         Me.sourcesList.TabIndex = 0
         Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
         Me.sourcesList.UseCompatibleStateImageBehavior = False
@@ -971,9 +976,37 @@ Partial Class mainForm
         '
         Me.processPreviewHover.Interval = 500
         '
-        'pingTimer
+        'pingAll
         '
-        Me.pingTimer.Interval = 1
+        Me.pingAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pingAll.AutoSize = True
+        Me.pingAll.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.pingAll.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.pingAll.Location = New System.Drawing.Point(148, 0)
+        Me.pingAll.Name = "pingAll"
+        Me.pingAll.Size = New System.Drawing.Size(96, 12)
+        Me.pingAll.TabIndex = 1
+        Me.pingAll.TabStop = True
+        Me.pingAll.Text = "PING selected nodes"
+        Me.pingAll.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.pingAll.VisitedLinkColor = System.Drawing.Color.DodgerBlue
+        '
+        'pingProgressBar
+        '
+        Me.pingProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pingProgressBar.Location = New System.Drawing.Point(3, 297)
+        Me.pingProgressBar.Name = "pingProgressBar"
+        Me.pingProgressBar.Size = New System.Drawing.Size(244, 18)
+        Me.pingProgressBar.TabIndex = 2
+        Me.pingProgressBar.Visible = False
+        '
+        'notifyIconCompactMode
+        '
+        Me.notifyIconCompactMode.BalloonTipText = "Open Remote Desktop Manager in compact mode by double click on this icon."
+        Me.notifyIconCompactMode.BalloonTipTitle = "Remote Desktop Manager"
+        Me.notifyIconCompactMode.Icon = CType(resources.GetObject("notifyIconCompactMode.Icon"), System.Drawing.Icon)
+        Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
+        Me.notifyIconCompactMode.Visible = True
         '
         'mainForm
         '
@@ -1000,6 +1033,7 @@ Partial Class mainForm
         CType(Me.containerSourcesMonitor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.containerSourcesMonitor.ResumeLayout(False)
         Me.groupSourcesList.ResumeLayout(False)
+        Me.groupSourcesList.PerformLayout()
         Me.groupMonitor.ResumeLayout(False)
         Me.groupStatistics.ResumeLayout(False)
         Me.groupConnectOver.ResumeLayout(False)
@@ -1105,6 +1139,8 @@ Partial Class mainForm
     Friend WithEvents CompactModeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblUsePutty As System.Windows.Forms.LinkLabel
     Friend WithEvents processPreviewHover As System.Windows.Forms.Timer
-    Friend WithEvents pingTimer As System.Windows.Forms.Timer
+    Friend WithEvents pingAll As System.Windows.Forms.LinkLabel
+    Friend WithEvents pingProgressBar As System.Windows.Forms.ProgressBar
+    Friend WithEvents notifyIconCompactMode As System.Windows.Forms.NotifyIcon
 
 End Class

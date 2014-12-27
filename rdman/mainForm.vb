@@ -84,9 +84,9 @@ Public Class mainForm
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
         End If
 
-        If My.Settings.compactMode = True Then
-            CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
-        End If
+        'If My.Settings.compactMode = True Then
+        '    CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
+        'End If
 
         Me.boxStatistics.Font = consoleFont
 
@@ -144,11 +144,6 @@ Public Class mainForm
 
         'monitor timer
         monitorTimer.Start()
-
-        'ping timer
-        If My.Computer.Network.IsAvailable = True Then
-            pingTimer.Start()
-        End If
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -310,6 +305,10 @@ Public Class mainForm
             End If
         Next
     End Sub
+
+    Private Sub pingAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles pingAll.LinkClicked
+        pingNodes()
+    End Sub
 #End Region
 
 #Region "Node details checkboxes handle"
@@ -389,7 +388,6 @@ Public Class mainForm
                     processProperties.FileName = My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe"
 
                     runModule(processProperties, True)
-                    Me.Text = Me.Text + " [fight mode]"
                     statistics("Started !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!!")
                 End If
             Case "ftpserver", "ftp"
@@ -742,6 +740,14 @@ Public Class mainForm
         saveStatistics.FileName = Today.ToString("yyyyMMdd")
         saveStatistics.Title = "Save Statistics file"
     End Sub
+
+    Private Sub notifyIconCompactMode_DoubleClick(sender As Object, e As EventArgs) Handles notifyIconCompactMode.DoubleClick
+        If Me.WindowState = FormWindowState.Minimized Then
+            Me.WindowState = FormWindowState.Maximized
+        End If
+
+        Me.Activate()
+    End Sub
 #End Region
 
 #Region "Setting menu toolbar"
@@ -818,7 +824,7 @@ Public Class mainForm
     Dim lastWindowState As FormWindowState
     Dim lastWidth, lastHeight As Integer
 
-    Private Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
+    Public Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
         If CompactModeToolStripMenuItem.Checked = True Then
             CompactModeToolStripMenuItem.Checked = False
 
@@ -860,8 +866,6 @@ Public Class mainForm
             End If
 
             Me.TopMost = False
-
-            Me.Text = Me.Text.Replace(" [compact mode]", "")
         Else
             CompactModeToolStripMenuItem.Checked = True
 
@@ -889,8 +893,6 @@ Public Class mainForm
             Me.Height = 300
 
             Me.TopMost = True
-
-            Me.Text = Me.Text + " [compact mode]"
         End If
     End Sub
 
@@ -900,10 +902,9 @@ Public Class mainForm
 
     Private Sub monitorTimer_Tick(sender As Object, e As EventArgs) Handles monitorTimer.Tick
         monitorCheckStates()
-        globalHotkeySelect()
     End Sub
 
-    Private Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
+    Public Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
         'Dim haveFirst As Boolean = False
 
         For Each node As ListViewItem In monitor.SelectedItems()
@@ -1018,7 +1019,7 @@ Public Class mainForm
         monitor_ProcessPreview(tickerItem)
     End Sub
 
-    Private Sub pingTimer_Tick(sender As Object, e As EventArgs) Handles pingTimer.Tick
+    Private Sub pingTimer_Tick(sender As Object, e As EventArgs)
         pingNodes()
     End Sub
 
