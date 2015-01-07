@@ -28,9 +28,10 @@ Partial Class mainForm
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
         Me.groupSourcesList = New System.Windows.Forms.GroupBox()
+        Me.pingProgressBar = New System.Windows.Forms.ProgressBar()
+        Me.pingAll = New System.Windows.Forms.LinkLabel()
         Me.sourcesList = New System.Windows.Forms.ListView()
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
-        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.groupMonitor = New System.Windows.Forms.GroupBox()
         Me.monitor = New System.Windows.Forms.ListView()
         Me.columnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -39,6 +40,7 @@ Partial Class mainForm
         Me.columnPID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnArgs = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
@@ -111,8 +113,6 @@ Partial Class mainForm
         Me.monitorTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
-        Me.pingAll = New System.Windows.Forms.LinkLabel()
-        Me.pingProgressBar = New System.Windows.Forms.ProgressBar()
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
@@ -189,6 +189,30 @@ Partial Class mainForm
         Me.groupSourcesList.TabStop = False
         Me.groupSourcesList.Text = "Remote nodes"
         '
+        'pingProgressBar
+        '
+        Me.pingProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pingProgressBar.Location = New System.Drawing.Point(3, 297)
+        Me.pingProgressBar.Name = "pingProgressBar"
+        Me.pingProgressBar.Size = New System.Drawing.Size(244, 18)
+        Me.pingProgressBar.TabIndex = 2
+        Me.pingProgressBar.Visible = False
+        '
+        'pingAll
+        '
+        Me.pingAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pingAll.AutoSize = True
+        Me.pingAll.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.pingAll.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.pingAll.Location = New System.Drawing.Point(148, 0)
+        Me.pingAll.Name = "pingAll"
+        Me.pingAll.Size = New System.Drawing.Size(96, 12)
+        Me.pingAll.TabIndex = 1
+        Me.pingAll.TabStop = True
+        Me.pingAll.Text = "PING selected nodes"
+        Me.pingAll.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.pingAll.VisitedLinkColor = System.Drawing.Color.DodgerBlue
+        '
         'sourcesList
         '
         Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.Left
@@ -224,16 +248,6 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
-        '
-        'monitorStates
-        '
-        Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
-        Me.monitorStates.Images.SetKeyName(0, "online.ico")
-        Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
-        Me.monitorStates.Images.SetKeyName(2, "failed.ico")
-        Me.monitorStates.Images.SetKeyName(3, "idle.ico")
-        Me.monitorStates.Images.SetKeyName(4, "module.ico")
         '
         'groupMonitor
         '
@@ -293,6 +307,16 @@ Partial Class mainForm
         '
         Me.columnTime.Text = "Started on"
         Me.columnTime.Width = 150
+        '
+        'monitorStates
+        '
+        Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
+        Me.monitorStates.Images.SetKeyName(0, "online.ico")
+        Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
+        Me.monitorStates.Images.SetKeyName(2, "failed.ico")
+        Me.monitorStates.Images.SetKeyName(3, "idle.ico")
+        Me.monitorStates.Images.SetKeyName(4, "module.ico")
         '
         'boxSourcesPath
         '
@@ -975,30 +999,6 @@ Partial Class mainForm
         'processPreviewHover
         '
         Me.processPreviewHover.Interval = 500
-        '
-        'pingAll
-        '
-        Me.pingAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pingAll.AutoSize = True
-        Me.pingAll.Font = New System.Drawing.Font("Segoe UI", 7.5!)
-        Me.pingAll.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.pingAll.Location = New System.Drawing.Point(148, 0)
-        Me.pingAll.Name = "pingAll"
-        Me.pingAll.Size = New System.Drawing.Size(96, 12)
-        Me.pingAll.TabIndex = 1
-        Me.pingAll.TabStop = True
-        Me.pingAll.Text = "PING selected nodes"
-        Me.pingAll.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.pingAll.VisitedLinkColor = System.Drawing.Color.DodgerBlue
-        '
-        'pingProgressBar
-        '
-        Me.pingProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pingProgressBar.Location = New System.Drawing.Point(3, 297)
-        Me.pingProgressBar.Name = "pingProgressBar"
-        Me.pingProgressBar.Size = New System.Drawing.Size(244, 18)
-        Me.pingProgressBar.TabIndex = 2
-        Me.pingProgressBar.Visible = False
         '
         'notifyIconCompactMode
         '

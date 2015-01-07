@@ -309,6 +309,20 @@ Public Class mainForm
     Private Sub pingAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles pingAll.LinkClicked
         pingNodes()
     End Sub
+
+    Private Sub sourcesList_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles sourcesList.ItemChecked
+        If e.Item.Text = "(Add New Node)" Then
+            If e.Item.Checked = True Then
+                For Each item As ListViewItem In sourcesList.Items
+                    item.Checked = True
+                Next
+            Else
+                For Each item As ListViewItem In sourcesList.Items
+                    item.Checked = False
+                Next
+            End If
+        End If
+    End Sub
 #End Region
 
 #Region "Node details checkboxes handle"
