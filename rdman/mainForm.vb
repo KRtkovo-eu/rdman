@@ -270,26 +270,32 @@ Public Class mainForm
 #End Region
 
 #Region "Sources list handle"
+    Dim checkedControl As Boolean = False
+
     Private Sub sourcesList_DoubleClick(sender As Object, e As EventArgs) Handles sourcesList.DoubleClick
         buttonConnect_Click(sender, New System.EventArgs())
     End Sub
 
     Private Sub sourcesList_Click(sender As Object, e As EventArgs) Handles sourcesList.Click
-        Dim nodeName As String = "(Add New Node)"
+        If checkedControl = False Then
+            Dim nodeName As String = "(Add New Node)"
 
-        For Each item As ListViewItem In sourcesList.SelectedItems()
-            If item.Text.Contains("[") And item.Text.Contains("]") Then
-                nodeName = item.Text.Remove(item.Text.LastIndexOf("[") - 1)
+            For Each item As ListViewItem In sourcesList.SelectedItems()
+                If item.Text.Contains("[") And item.Text.Contains("]") Then
+                    nodeName = item.Text.Remove(item.Text.LastIndexOf("[") - 1)
+                Else
+                    nodeName = item.Text
+                End If
+            Next
+
+            If nodeName = "(Add New Node)" Then
+                AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
             Else
-                nodeName = item.Text
+                loadSourceData(nodeName)
             End If
-        Next
-
-        If nodeName = "(Add New Node)" Then
-            AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
-        Else
-            loadSourceData(nodeName)
         End If
+
+        checkedControl = False
     End Sub
 
     Private Sub sourcesList_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles sourcesList.ItemDrag
@@ -311,6 +317,8 @@ Public Class mainForm
     End Sub
 
     Private Sub sourcesList_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles sourcesList.ItemChecked
+        checkedControl = True
+
         If e.Item.Text = "(Add New Node)" Then
             If e.Item.Checked = True Then
                 For Each item As ListViewItem In sourcesList.Items
