@@ -215,6 +215,7 @@ Partial Class mainForm
         '
         'sourcesList
         '
+        Me.sourcesList.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.sourcesList.Alignment = System.Windows.Forms.ListViewAlignment.Left
         Me.sourcesList.AutoArrange = False
         Me.sourcesList.CheckBoxes = True
