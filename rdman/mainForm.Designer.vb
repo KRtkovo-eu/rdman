@@ -114,6 +114,7 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.cleanTerminated = New System.Windows.Forms.LinkLabel()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -254,6 +255,7 @@ Partial Class mainForm
         '
         Me.groupMonitor.AutoSize = True
         Me.groupMonitor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.groupMonitor.Controls.Add(Me.cleanTerminated)
         Me.groupMonitor.Controls.Add(Me.monitor)
         Me.groupMonitor.Dock = System.Windows.Forms.DockStyle.Fill
         Me.groupMonitor.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
@@ -1009,6 +1011,21 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
         '
+        'cleanTerminated
+        '
+        Me.cleanTerminated.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cleanTerminated.AutoSize = True
+        Me.cleanTerminated.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.cleanTerminated.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.cleanTerminated.Location = New System.Drawing.Point(165, 0)
+        Me.cleanTerminated.Name = "cleanTerminated"
+        Me.cleanTerminated.Size = New System.Drawing.Size(79, 12)
+        Me.cleanTerminated.TabIndex = 3
+        Me.cleanTerminated.TabStop = True
+        Me.cleanTerminated.Text = "Clean terminated"
+        Me.cleanTerminated.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.cleanTerminated.VisitedLinkColor = System.Drawing.Color.DodgerBlue
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1036,6 +1053,7 @@ Partial Class mainForm
         Me.groupSourcesList.ResumeLayout(False)
         Me.groupSourcesList.PerformLayout()
         Me.groupMonitor.ResumeLayout(False)
+        Me.groupMonitor.PerformLayout()
         Me.groupStatistics.ResumeLayout(False)
         Me.groupConnectOver.ResumeLayout(False)
         Me.groupConnectOver.PerformLayout()
@@ -1143,5 +1161,6 @@ Partial Class mainForm
     Friend WithEvents pingAll As System.Windows.Forms.LinkLabel
     Friend WithEvents pingProgressBar As System.Windows.Forms.ProgressBar
     Friend WithEvents notifyIconCompactMode As System.Windows.Forms.NotifyIcon
+    Friend WithEvents cleanTerminated As System.Windows.Forms.LinkLabel
 
 End Class

@@ -9,10 +9,10 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="width" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">800</Value>
+      <Value Profile="(Default)">900</Value>
     </Setting>
     <Setting Name="height" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+      <Value Profile="(Default)">650</Value>
     </Setting>
     <Setting Name="isMaximized" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
@@ -21,7 +21,7 @@
       <Value Profile="(Default)">sources.rdman</Value>
     </Setting>
     <Setting Name="askOnClose" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="updateOnStart" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

@@ -972,6 +972,18 @@ Public Class mainForm
         Next
     End Sub
 
+    Private Sub cleanTerminated_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles cleanTerminated.LinkClicked
+        For Each node As ListViewItem In monitor.Items()
+
+            Select Case node.SubItems(2).Text
+                Case "(disconnected)", "(closed)"
+                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                Case "(failed)"
+                    monitorDelNode(node.SubItems(0).Text, "0")
+            End Select
+        Next
+    End Sub
+
     Private Sub monitor_ProcessPreview(ByVal monitorElement As ListViewItem)
         Dim p As Point = Me.PointToClient(MousePosition)
 
@@ -1042,4 +1054,5 @@ Public Class mainForm
         processPreviewHover.Start()
     End Sub
 #End Region
+
 End Class

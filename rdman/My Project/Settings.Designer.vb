@@ -80,7 +80,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("800")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("900")>  _
         Public Property width() As Integer
             Get
                 Return CType(Me("width"),Integer)
@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("600")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("650")>  _
         Public Property height() As Integer
             Get
                 Return CType(Me("height"),Integer)
@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property askOnClose() As Boolean
             Get
                 Return CType(Me("askOnClose"),Boolean)
