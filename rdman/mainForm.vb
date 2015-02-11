@@ -934,7 +934,8 @@ Public Class mainForm
                         extProcess = Process.GetProcessById(PID)
 
                         If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
-                            processAPI.ShowWindow(extProcess.MainWindowHandle)
+                            AppActivate(Convert.ToInt32(node.SubItems(3).Text))
+                            'processAPI.ShowWindow(extProcess.MainWindowHandle)
                         Else
                             AppActivate(Convert.ToInt32(node.SubItems(3).Text))
                         End If
