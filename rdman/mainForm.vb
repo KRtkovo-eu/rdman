@@ -246,6 +246,39 @@ Public Class mainForm
     Private Sub boxSourcesPath_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles boxSourcesPath.LinkClicked
         LoadSources(sourcesDb)
     End Sub
+
+    Private Sub lblQuickConnect_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblQuickConnect.LinkClicked
+        commandValueInput.Height = 110
+        commandValueInput.TextBox1.Multiline = False
+        commandValueInput.TextBox1.Height = 20
+
+        commandValueInput.Text = "IP Address or hostname"
+        commandValueInput.TextBox1.Text = ""
+
+        commandValueInput.ShowDialog()
+
+        If commandValueInput.DialogResult = Windows.Forms.DialogResult.OK Then
+            Dim quickIP As String = commandValueInput.TextBox1.Text
+            Dim quickPort As String = "3389"
+
+            If quickIP.Contains(":") Then
+                quickPort = quickIP.Split(":").GetValue(1)
+                quickIP = quickIP.Split(":").GetValue(0)
+            End If
+
+            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP)
+
+            If processPid > 1 Then
+                statistics("Remote session started on " + quickIP + ":3389 with PID=" + processPid.ToString)
+            ElseIf processPid = 1 Then
+                statistics("[ERROR] Unable to connect to localhost.")
+            Else
+                statistics("[ERROR] Unable to open remote session.")
+            End If
+        End If
+
+            commandValueInput.TextBox1.Text = ""
+    End Sub
 #End Region
 
 #Region "System picture box handle"
@@ -571,9 +604,9 @@ Public Class mainForm
 
         If commandValueInput.DialogResult = Windows.Forms.DialogResult.OK Then
             value = commandValueInput.TextBox1.Text
-
-            commandValueInput.TextBox1.Text = ""
         End If
+
+        commandValueInput.TextBox1.Text = ""
 
         Return value
     End Function

@@ -115,6 +115,7 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.lblQuickConnect = New System.Windows.Forms.LinkLabel()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -688,6 +689,7 @@ Partial Class mainForm
         '
         'groupConnectionSettings
         '
+        Me.groupConnectionSettings.Controls.Add(Me.lblQuickConnect)
         Me.groupConnectionSettings.Controls.Add(Me.boxConnectOver)
         Me.groupConnectionSettings.Controls.Add(Me.boxPort)
         Me.groupConnectionSettings.Controls.Add(Me.lblPort)
@@ -1026,6 +1028,21 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
         '
+        'lblQuickConnect
+        '
+        Me.lblQuickConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblQuickConnect.AutoSize = True
+        Me.lblQuickConnect.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.lblQuickConnect.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.lblQuickConnect.Location = New System.Drawing.Point(394, 0)
+        Me.lblQuickConnect.Name = "lblQuickConnect"
+        Me.lblQuickConnect.Size = New System.Drawing.Size(71, 12)
+        Me.lblQuickConnect.TabIndex = 3
+        Me.lblQuickConnect.TabStop = True
+        Me.lblQuickConnect.Text = "Quick Connect"
+        Me.lblQuickConnect.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblQuickConnect.VisitedLinkColor = System.Drawing.Color.DodgerBlue
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1162,5 +1179,6 @@ Partial Class mainForm
     Friend WithEvents pingProgressBar As System.Windows.Forms.ProgressBar
     Friend WithEvents notifyIconCompactMode As System.Windows.Forms.NotifyIcon
     Friend WithEvents cleanTerminated As System.Windows.Forms.LinkLabel
+    Friend WithEvents lblQuickConnect As System.Windows.Forms.LinkLabel
 
 End Class
