@@ -199,6 +199,10 @@ Public Class mainForm
             Next
         End If
     End Sub
+
+    Private Sub mainForm_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        sourcesList.Refresh()
+    End Sub
 #End Region
 
 #Region "UI Buttons handle"
@@ -1055,5 +1059,4 @@ Public Class mainForm
         processPreviewHover.Start()
     End Sub
 #End Region
-
 End Class

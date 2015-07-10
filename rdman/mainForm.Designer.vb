@@ -33,6 +33,7 @@ Partial Class mainForm
         Me.sourcesList = New System.Windows.Forms.ListView()
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.groupMonitor = New System.Windows.Forms.GroupBox()
+        Me.cleanTerminated = New System.Windows.Forms.LinkLabel()
         Me.monitor = New System.Windows.Forms.ListView()
         Me.columnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnIP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -114,7 +115,6 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.cleanTerminated = New System.Windows.Forms.LinkLabel()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -265,6 +265,21 @@ Partial Class mainForm
         Me.groupMonitor.TabIndex = 3
         Me.groupMonitor.TabStop = False
         Me.groupMonitor.Text = "Processes monitor"
+        '
+        'cleanTerminated
+        '
+        Me.cleanTerminated.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cleanTerminated.AutoSize = True
+        Me.cleanTerminated.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.cleanTerminated.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.cleanTerminated.Location = New System.Drawing.Point(165, 0)
+        Me.cleanTerminated.Name = "cleanTerminated"
+        Me.cleanTerminated.Size = New System.Drawing.Size(79, 12)
+        Me.cleanTerminated.TabIndex = 3
+        Me.cleanTerminated.TabStop = True
+        Me.cleanTerminated.Text = "Clean terminated"
+        Me.cleanTerminated.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.cleanTerminated.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'monitor
         '
@@ -1010,21 +1025,6 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Icon = CType(resources.GetObject("notifyIconCompactMode.Icon"), System.Drawing.Icon)
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
-        '
-        'cleanTerminated
-        '
-        Me.cleanTerminated.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cleanTerminated.AutoSize = True
-        Me.cleanTerminated.Font = New System.Drawing.Font("Segoe UI", 7.5!)
-        Me.cleanTerminated.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.cleanTerminated.Location = New System.Drawing.Point(165, 0)
-        Me.cleanTerminated.Name = "cleanTerminated"
-        Me.cleanTerminated.Size = New System.Drawing.Size(79, 12)
-        Me.cleanTerminated.TabIndex = 3
-        Me.cleanTerminated.TabStop = True
-        Me.cleanTerminated.Text = "Clean terminated"
-        Me.cleanTerminated.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.cleanTerminated.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'mainForm
         '
