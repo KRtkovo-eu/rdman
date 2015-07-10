@@ -71,6 +71,7 @@ Partial Class mainForm
         Me.boxSystem = New System.Windows.Forms.ComboBox()
         Me.lblSystem = New System.Windows.Forms.Label()
         Me.groupConnectionSettings = New System.Windows.Forms.GroupBox()
+        Me.lblQuickConnect = New System.Windows.Forms.LinkLabel()
         Me.boxConnectOver = New System.Windows.Forms.CheckBox()
         Me.boxPort = New System.Windows.Forms.TextBox()
         Me.lblPort = New System.Windows.Forms.Label()
@@ -115,7 +116,6 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.lblQuickConnect = New System.Windows.Forms.LinkLabel()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -385,7 +385,7 @@ Partial Class mainForm
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
@@ -395,7 +395,7 @@ Partial Class mainForm
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
         Me.statisticsCommandLine.ItemHeight = 11
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.MaxDropDownItems = 5
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
@@ -705,6 +705,21 @@ Partial Class mainForm
         Me.groupConnectionSettings.TabIndex = 0
         Me.groupConnectionSettings.TabStop = False
         Me.groupConnectionSettings.Text = "Connection settings"
+        '
+        'lblQuickConnect
+        '
+        Me.lblQuickConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblQuickConnect.AutoSize = True
+        Me.lblQuickConnect.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.lblQuickConnect.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.lblQuickConnect.Location = New System.Drawing.Point(394, 0)
+        Me.lblQuickConnect.Name = "lblQuickConnect"
+        Me.lblQuickConnect.Size = New System.Drawing.Size(71, 12)
+        Me.lblQuickConnect.TabIndex = 3
+        Me.lblQuickConnect.TabStop = True
+        Me.lblQuickConnect.Text = "Quick Connect"
+        Me.lblQuickConnect.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblQuickConnect.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'boxConnectOver
         '
@@ -1027,21 +1042,6 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Icon = CType(resources.GetObject("notifyIconCompactMode.Icon"), System.Drawing.Icon)
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
-        '
-        'lblQuickConnect
-        '
-        Me.lblQuickConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblQuickConnect.AutoSize = True
-        Me.lblQuickConnect.Font = New System.Drawing.Font("Segoe UI", 7.5!)
-        Me.lblQuickConnect.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.lblQuickConnect.Location = New System.Drawing.Point(394, 0)
-        Me.lblQuickConnect.Name = "lblQuickConnect"
-        Me.lblQuickConnect.Size = New System.Drawing.Size(71, 12)
-        Me.lblQuickConnect.TabIndex = 3
-        Me.lblQuickConnect.TabStop = True
-        Me.lblQuickConnect.Text = "Quick Connect"
-        Me.lblQuickConnect.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.lblQuickConnect.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'mainForm
         '

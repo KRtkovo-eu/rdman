@@ -501,6 +501,8 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "putty | Use PuTTY module as viewer."
                 help += vbNewLine
+                help += vbTab + "quickconnect | Quick Connect to IP address or hostname."
+                help += vbNewLine
                 help += vbTab + "reloadsources | Reloads nodes database."
                 help += vbNewLine
                 help += vbTab + "run | Runs chosen external process. Add character & just before path to run process without window (ex. &cmd)."
@@ -557,6 +559,8 @@ Public Class mainForm
                 commandSetValue(Me.boxWidth, command)
             Case "putty"
                 lblUsePutty_LinkClicked(Nothing, Nothing)
+            Case "quickconnect"
+                lblQuickConnect_LinkClicked(Nothing, Nothing)
             Case "reloadsources"
                 LoadSources(sourcesDb)
             Case "run", "cmd"
