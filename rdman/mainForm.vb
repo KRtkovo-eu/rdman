@@ -7,6 +7,7 @@ Imports System.Threading
 Public Class mainForm
 #Region "Global variables"
     Dim sourcesDb As String = My.Application.Info.DirectoryPath + "\sources.rdman"
+    Dim _loggerPath As String = My.Application.Info.DirectoryPath + "\rdman.log"
     Dim command As String = ""
     Dim consoleFont As Font = New Font("Lucida Console", 8, FontStyle.Regular, GraphicsUnit.Point)
     Dim allahToConsole As String = ""
@@ -227,6 +228,81 @@ Public Class mainForm
 
     Private Sub buttonNewNode_Click(sender As Object, e As EventArgs) Handles buttonNewNode.Click
         AddNodeToolStripMenuItem_Click(sender, New System.EventArgs())
+    End Sub
+
+    Private Sub buttonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
+        openSourceDb.Title = "Import source settings"
+
+        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            If IO.File.Exists(openSourceDb.FileName) Then
+                Try
+                    Dim importedNode As String() = csvArray(openSourceDb.FileName).Item(0)
+
+                    If importedNode(0) <> "" And importedNode(1) <> "" Then
+                        boxName.Text = importedNode(0)
+                        boxIP.Text = importedNode(1)
+                        boxPort.Text = importedNode(2)
+                        boxSystem.Text = importedNode(7)
+                        boxSystemVersion.Text = importedNode(8)
+                        boxDescription.Text = importedNode(9).Replace("\n", Environment.NewLine)
+                        boxFullscreen.Checked = Convert.ToBoolean(importedNode(3))
+                        boxWidth.Text = importedNode(5)
+                        boxHeight.Text = importedNode(6)
+
+                        Dim nodeSystemNum As Integer = systemToIndexNum(importedNode(7))
+
+                        If nodeSystemNum > 4 Then
+                            nodeSystemNum = 4
+                        End If
+
+                        boxPicture.Image = operatingSystemsImages.Images.Item(nodeSystemNum)
+                        boxMultimon.Checked = Convert.ToBoolean(importedNode(4))
+                        boxConnectOver.Checked = Convert.ToBoolean(importedNode(10))
+                        boxViewerPath.Text = importedNode(11)
+
+                        statistics("Imported source [" + boxName.Text + "]")
+                    End If
+                Catch ex As Exception
+                    statistics("Importing of source [" + boxName.Text + "] failed. Cause: " + ex.Message)
+                End Try
+            End If
+        End If
+
+        openSourceDb.Title = "Open Sources Database file"
+    End Sub
+
+    Private Sub buttonExport_Click(sender As Object, e As EventArgs) Handles buttonExport.Click
+        Try
+            Dim exportNode As String = ""
+            Dim exportedFolderPath As String = My.Application.Info.DirectoryPath + "\exported\"
+
+            If System.IO.Directory.Exists(exportedFolderPath) = False Then
+                System.IO.Directory.CreateDirectory(exportedFolderPath)
+            End If
+
+            Dim exportedNodeFilePath As String = exportedFolderPath + boxName.Text + "_" + boxIP.Text + ".rdman"
+            Dim objWriter As New System.IO.StreamWriter(exportedNodeFilePath, False)
+
+            exportNode += boxName.Text + ";"
+            exportNode += boxIP.Text + ";"
+            exportNode += boxPort.Text + ";"
+            exportNode += boxFullscreen.Checked.ToString + ";"
+            exportNode += boxMultimon.Checked.ToString + ";"
+            exportNode += boxWidth.Text + ";"
+            exportNode += boxHeight.Text + ";"
+            exportNode += boxSystem.Text + ";"
+            exportNode += boxSystemVersion.Text + ";"
+            exportNode += boxDescription.Text + ";"
+            exportNode += boxConnectOver.Checked.ToString + ";"
+            exportNode += boxViewerPath.Text
+
+            objWriter.Write(exportNode)
+            objWriter.Close()
+            statistics("Source [" + boxName.Text + "] successfully exported to file://" + exportedNodeFilePath)
+            statistics(vbNewLine + boxName.Text + ".rdman:" + vbNewLine + vbTab + exportNode)
+        Catch ex As Exception
+            statistics("Exporting of source [" + boxName.Text + "] failed. Cause: " + ex.Message)
+        End Try
     End Sub
 
     Private Sub buttonLocateViewer_Click(sender As Object, e As EventArgs) Handles buttonLocateViewer.Click
@@ -1099,47 +1175,4 @@ Public Class mainForm
         processPreviewHover.Start()
     End Sub
 #End Region
-
-    Private Sub buttonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
-        openSourceDb.Title = "Import node settings"
-
-        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            If IO.File.Exists(openSourceDb.FileName) Then
-                sourcesDb = openSourceDb.FileName
-
-                Try
-                    Dim importedNode As String() = csvArray(sourcesDb).Item(0)
-
-                    If importedNode(0) <> "" And importedNode(1) <> "" Then
-                        boxName.Text = importedNode(0)
-                        boxIP.Text = importedNode(1)
-                        boxPort.Text = importedNode(2)
-                        boxSystem.Text = importedNode(7)
-                        boxSystemVersion.Text = importedNode(8)
-                        boxDescription.Text = importedNode(9).Replace("\n", Environment.NewLine)
-                        boxFullscreen.Checked = Convert.ToBoolean(importedNode(3))
-                        boxWidth.Text = importedNode(5)
-                        boxHeight.Text = importedNode(6)
-
-                        Dim nodeSystemNum As Integer = systemToIndexNum(importedNode(7))
-
-                        If nodeSystemNum > 4 Then
-                            nodeSystemNum = 4
-                        End If
-
-                        boxPicture.Image = operatingSystemsImages.Images.Item(nodeSystemNum)
-                        boxMultimon.Checked = Convert.ToBoolean(importedNode(4))
-                        boxConnectOver.Checked = Convert.ToBoolean(importedNode(10))
-                        boxViewerPath.Text = importedNode(11)
-
-                        statistics("Imported source [" + boxName.Text + "]")
-                    End If
-                Catch ex As Exception
-                    statistics(ex.Message)
-                End Try
-            End If
-        End If
-
-        openSourceDb.Title = "Open Sources Database file"
-    End Sub
 End Class
