@@ -168,6 +168,8 @@ Public Class mainForm
             End If
         End If
 
+        statistics("Exiting...")
+
         If Me.WindowState = FormWindowState.Normal Then
             My.Settings.width = Me.Width
             My.Settings.height = Me.Height
@@ -200,6 +202,8 @@ Public Class mainForm
                 End If
             Next
         End If
+
+        statistics("Good Bye ;-)")
     End Sub
 #End Region
 
@@ -275,7 +279,7 @@ Public Class mainForm
             End If
         End If
 
-            commandValueInput.TextBox1.Text = ""
+        commandValueInput.TextBox1.Text = ""
     End Sub
 #End Region
 
@@ -1095,4 +1099,45 @@ Public Class mainForm
         processPreviewHover.Start()
     End Sub
 #End Region
+
+    Private Sub buttonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
+        openSourceDb.Title = "Import node settings"
+
+        If openSourceDb.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            If IO.File.Exists(openSourceDb.FileName) Then
+                sourcesDb = openSourceDb.FileName
+
+                Try
+                    Dim importedNode As String() = csvArray(sourcesDb).Item(0)
+
+                    If importedNode(0) <> "" And importedNode(1) <> "" Then
+                        boxName.Text = importedNode(0)
+                        boxIP.Text = importedNode(1)
+                        boxPort.Text = importedNode(2)
+                        boxSystem.Text = importedNode(7)
+                        boxSystemVersion.Text = importedNode(8)
+                        boxDescription.Text = importedNode(9).Replace("\n", Environment.NewLine)
+                        boxFullscreen.Checked = Convert.ToBoolean(importedNode(3))
+                        boxWidth.Text = importedNode(5)
+                        boxHeight.Text = importedNode(6)
+
+                        Dim nodeSystemNum As Integer = systemToIndexNum(importedNode(7))
+
+                        If nodeSystemNum > 4 Then
+                            nodeSystemNum = 4
+                        End If
+
+                        boxPicture.Image = operatingSystemsImages.Images.Item(nodeSystemNum)
+                        boxMultimon.Checked = Convert.ToBoolean(importedNode(4))
+                        boxConnectOver.Checked = Convert.ToBoolean(importedNode(10))
+                        boxViewerPath.Text = importedNode(11)
+                    End If
+                Catch ex As Exception
+                    statistics(ex.Message)
+                End Try
+            End If
+        End If
+
+        openSourceDb.Title = "Open Sources Database file"
+    End Sub
 End Class

@@ -217,19 +217,7 @@ Module dataControl
         statistics("Loaded sources database file from " + sources)
     End Sub
 
-    Public Sub loadSourceData(ByVal nodeName As String)
-        Dim nodeIP As String = ""
-        Dim nodePort As String = ""
-        Dim nodeSystem As String = ""
-        Dim nodeVersion As String = ""
-        Dim nodeDescription As String = ""
-        Dim nodeWidth As String = ""
-        Dim nodeHeight As String = ""
-        Dim nodeFullscreen As Boolean = False
-        Dim nodeMultimon As Boolean = False
-        Dim nodeSystemNum As Integer
-        Dim nodeConnectOver As Boolean = False
-        Dim nodeViewerPath As String = ""
+    Public Sub loadSourceData(ByVal nodeName As String, nodeIP As String, nodePort As String, nodeSystem As String, nodeVersion As String, nodeDescription As String, nodeWidth As String, nodeHeight As String, nodeFullscreen As Boolean, nodeMultimon As Boolean, nodeSystemNum As Integer, nodeConnectOver As Boolean, nodeViewerPath As String)
 
         If nodeName = "EMPTY" Then
             nodeName = "New node"
@@ -245,7 +233,7 @@ Module dataControl
             nodeMultimon = False
             nodeConnectOver = False
             nodeViewerPath = ""
-        Else
+        ElseIf nodeIP = "" And nodePort = "" And nodeSystem = "" And nodeVersion = "" And nodeDescription = "" And nodeWidth = "" And nodeHeight = "" Then
             For Each element In nodes
                 If element(0) = nodeName Then
                     nodeName = element(0)
@@ -254,15 +242,19 @@ Module dataControl
                     nodeSystem = element(7)
                     nodeVersion = element(8)
                     nodeDescription = element(9).Replace("\n", Environment.NewLine)
-                    nodeFullscreen = element(3)
+                    nodeFullscreen = Convert.ToBoolean(element(3))
                     nodeWidth = element(5)
                     nodeHeight = element(6)
                     nodeSystemNum = systemToIndexNum(element(7))
-                    nodeMultimon = element(4)
-                    nodeConnectOver = element(10)
+                    nodeMultimon = Convert.ToBoolean(element(4))
+                    nodeConnectOver = Convert.ToBoolean(element(10))
                     nodeViewerPath = element(11)
                 End If
             Next
+        End If
+
+        If nodeSystemNum > 4 Then
+            nodeSystemNum = 4
         End If
 
         mainForm.boxName.Text = nodeName
@@ -280,6 +272,10 @@ Module dataControl
         mainForm.boxViewerPath.Text = nodeViewerPath
 
         statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ":" + nodePort + ")")
+    End Sub
+
+    Public Sub loadSourceData(ByVal nodeName As String)
+        loadSourceData(nodeName, "", "", "", "", "", "", "", False, False, 0, False, "")
     End Sub
 
     Public Function deleteSource(ByVal nodeName As String, ByVal sourcesDb As String) As List(Of String())

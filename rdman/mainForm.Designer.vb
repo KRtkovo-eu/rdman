@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 5)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -116,6 +116,7 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.buttonImport = New System.Windows.Forms.Button()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -225,9 +226,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem1.StateImageIndex = 0
-        ListViewItem1.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        ListViewItem2.StateImageIndex = 0
+        ListViewItem2.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -620,6 +621,7 @@ Partial Class mainForm
         'groupButtons
         '
         Me.groupButtons.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.groupButtons.Controls.Add(Me.buttonImport)
         Me.groupButtons.Controls.Add(Me.buttonNewNode)
         Me.groupButtons.Controls.Add(Me.buttonSave)
         Me.groupButtons.Controls.Add(Me.buttonConnect)
@@ -633,13 +635,13 @@ Partial Class mainForm
         '
         Me.buttonNewNode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonNewNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.buttonNewNode.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonNewNode.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonNewNode.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.buttonNewNode.Location = New System.Drawing.Point(16, 63)
+        Me.buttonNewNode.Location = New System.Drawing.Point(6, 63)
         Me.buttonNewNode.Name = "buttonNewNode"
-        Me.buttonNewNode.Size = New System.Drawing.Size(75, 23)
+        Me.buttonNewNode.Size = New System.Drawing.Size(40, 23)
         Me.buttonNewNode.TabIndex = 0
-        Me.buttonNewNode.Text = "New Node"
+        Me.buttonNewNode.Text = "New"
         Me.buttonNewNode.UseVisualStyleBackColor = True
         '
         'buttonSave
@@ -647,9 +649,9 @@ Partial Class mainForm
         Me.buttonSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonSave.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonSave.Location = New System.Drawing.Point(16, 36)
+        Me.buttonSave.Location = New System.Drawing.Point(6, 36)
         Me.buttonSave.Name = "buttonSave"
-        Me.buttonSave.Size = New System.Drawing.Size(75, 23)
+        Me.buttonSave.Size = New System.Drawing.Size(90, 23)
         Me.buttonSave.TabIndex = 0
         Me.buttonSave.Text = "Save Node"
         Me.buttonSave.UseVisualStyleBackColor = True
@@ -658,9 +660,9 @@ Partial Class mainForm
         '
         Me.buttonConnect.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonConnect.ForeColor = System.Drawing.Color.Green
-        Me.buttonConnect.Location = New System.Drawing.Point(16, 9)
+        Me.buttonConnect.Location = New System.Drawing.Point(6, 9)
         Me.buttonConnect.Name = "buttonConnect"
-        Me.buttonConnect.Size = New System.Drawing.Size(75, 23)
+        Me.buttonConnect.Size = New System.Drawing.Size(90, 23)
         Me.buttonConnect.TabIndex = 0
         Me.buttonConnect.Text = "Connect"
         Me.buttonConnect.UseVisualStyleBackColor = True
@@ -1044,6 +1046,19 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
         '
+        'buttonImport
+        '
+        Me.buttonImport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.buttonImport.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonImport.ForeColor = System.Drawing.SystemColors.GrayText
+        Me.buttonImport.Location = New System.Drawing.Point(50, 63)
+        Me.buttonImport.Name = "buttonImport"
+        Me.buttonImport.Size = New System.Drawing.Size(46, 23)
+        Me.buttonImport.TabIndex = 1
+        Me.buttonImport.Text = "Import"
+        Me.buttonImport.UseVisualStyleBackColor = True
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1181,5 +1196,6 @@ Partial Class mainForm
     Friend WithEvents notifyIconCompactMode As System.Windows.Forms.NotifyIcon
     Friend WithEvents cleanTerminated As System.Windows.Forms.LinkLabel
     Friend WithEvents lblQuickConnect As System.Windows.Forms.LinkLabel
+    Friend WithEvents buttonImport As System.Windows.Forms.Button
 
 End Class
