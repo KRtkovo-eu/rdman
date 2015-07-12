@@ -211,8 +211,13 @@ Public Class mainForm
 #Region "UI Buttons handle"
     Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
         SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
+        Dim isApp As Boolean = False
 
-        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text, boxName.Text)
+        If boxSystem.Text = "Application" Then
+            isApp = True
+        End If
+
+        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text, boxName.Text, isApp)
         If processPid > 1 Then
             statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
         ElseIf processPid = 1 Then
@@ -344,7 +349,7 @@ Public Class mainForm
                 quickIP = quickIP.Split(":").GetValue(0)
             End If
 
-            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP)
+            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP, False)
 
             If processPid > 1 Then
                 statistics("Remote session started on " + quickIP + ":3389 with PID=" + processPid.ToString)
@@ -501,6 +506,8 @@ Public Class mainForm
                 statisticsEnvironment()
             Case "exit"
                 Me.Close()
+            Case "exportsource"
+                buttonExport_Click(Nothing, Nothing)
             Case "fight"
                 If hasFighter = True Then
                     Dim processProperties As ProcessStartInfo = New ProcessStartInfo
@@ -544,9 +551,13 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "exit | Closes this program."
                 help += vbNewLine
+                help += vbTab + "exportsource | Export source in separate file."
+                help += vbNewLine
                 help += vbTab + "ftpserver, ftp | Run FTP server module."
                 help += vbNewLine
                 help += vbTab + "help | Shows this page."
+                help += vbNewLine
+                help += vbTab + "importsource | Import source from separate file."
                 help += vbNewLine
                 help += vbTab + "loadsources | Opens dialog for selecting csv database file."
                 help += vbNewLine
@@ -592,6 +603,8 @@ Public Class mainForm
                 help += vbNewLine
 
                 statistics(help)
+            Case "importsource"
+                buttonImport_Click(Nothing, Nothing)
             Case "loadsources"
                 LoadSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "monitorpid"

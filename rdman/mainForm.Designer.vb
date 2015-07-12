@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -227,9 +227,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem2.StateImageIndex = 0
-        ListViewItem2.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        ListViewItem1.StateImageIndex = 0
+        ListViewItem1.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -252,8 +252,8 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(2, "android.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(6, "virtual.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(5, "virtual.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(6, "plus.ico")
         '
         'groupMonitor
         '
@@ -388,7 +388,7 @@ Partial Class mainForm
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
@@ -398,7 +398,7 @@ Partial Class mainForm
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
         Me.statisticsCommandLine.ItemHeight = 11
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "ftp", "ftpserver", "fullscreen", "height", "help", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.MaxDropDownItems = 5
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
@@ -689,7 +689,7 @@ Partial Class mainForm
         Me.boxSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.boxSystem.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxSystem.FormattingEnabled = True
-        Me.boxSystem.Items.AddRange(New Object() {"Windows", "Linux", "Android", "MacOS", "other"})
+        Me.boxSystem.Items.AddRange(New Object() {"Windows", "Linux", "Android", "MacOS", "other", "Application"})
         Me.boxSystem.Location = New System.Drawing.Point(115, 21)
         Me.boxSystem.Name = "boxSystem"
         Me.boxSystem.Size = New System.Drawing.Size(237, 21)
@@ -1026,6 +1026,7 @@ Partial Class mainForm
         Me.operatingSystemsImages.Images.SetKeyName(2, "android.png")
         Me.operatingSystemsImages.Images.SetKeyName(3, "apple.png")
         Me.operatingSystemsImages.Images.SetKeyName(4, "unknown.png")
+        Me.operatingSystemsImages.Images.SetKeyName(5, "virtual.ico")
         '
         'openSourceDb
         '

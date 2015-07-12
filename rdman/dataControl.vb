@@ -60,7 +60,7 @@ Module dataControl
             Case "MacOS"
                 Return 3
             Case "Application"
-                Return 6
+                Return 5
             Case Else
                 Return 4
         End Select
@@ -207,7 +207,7 @@ Module dataControl
     Public Sub LoadSources(ByVal sources As String)
         mainForm.sourcesList.Clear()
 
-        mainForm.sourcesList.Items.Add("(Add New Node)", 5)
+        mainForm.sourcesList.Items.Add("(Add New Node)", 6)
 
         For Each element In csvArray(sources)
             mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
@@ -251,10 +251,6 @@ Module dataControl
                     nodeViewerPath = element(11)
                 End If
             Next
-        End If
-
-        If nodeSystemNum > 4 Then
-            nodeSystemNum = 4
         End If
 
         mainForm.boxName.Text = nodeName
@@ -302,7 +298,7 @@ Module dataControl
 #End Region
 
 #Region "Run functions"
-    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String) As Integer
+    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String, ByVal application As Boolean) As Integer
         If nodeIP <> "" Then
             statistics("Connecting to " + nodeName)
 
@@ -356,8 +352,14 @@ Module dataControl
             Try
                 mstsc = Process.Start(ProcessProperties)
 
-                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(connected)", mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
-                setMonitor(monitorNodeDetails, True)
+                Dim state As String = "(connected)"
+
+                If application = True Then
+                    state = "(running)"
+                End If
+
+                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, state, mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
+                setMonitor(monitorNodeDetails, True, application)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
 
                 Return mstsc.Id
