@@ -1131,6 +1131,8 @@ Public Class mainForm
                         boxMultimon.Checked = Convert.ToBoolean(importedNode(4))
                         boxConnectOver.Checked = Convert.ToBoolean(importedNode(10))
                         boxViewerPath.Text = importedNode(11)
+
+                        statistics("Imported source [" + boxName.Text + "]")
                     End If
                 Catch ex As Exception
                     statistics(ex.Message)
