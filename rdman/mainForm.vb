@@ -18,6 +18,8 @@ Public Class mainForm
 
 #Region "Form handle"
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Console.ForegroundColor = ConsoleColor.Green
+
         'Get settings of windows state and position
         If My.Settings.isMaximized = FormWindowState.Normal Then
             If My.Settings.width <> Nothing Then
@@ -401,6 +403,7 @@ Public Class mainForm
 #Region "RDMan Shell"
 
     Private Sub commandFromLine(ByVal command As String)
+        Console.Beep()
         statistics(command, True)
 
         Select Case command.ToLower

@@ -70,14 +70,22 @@ Module dataControl
 #Region "Statistics functions"
     Public Sub statistics(ByVal lineStatistics As String, ByVal command As Boolean)
         Dim nowInFormat As String = DateTime.Now.ToString("<HH:mm:ss>")
+        Dim toConsole As String
 
         mainForm.boxStatistics.AppendText(nowInFormat)
+        toConsole = nowInFormat
+
         If command = True Then
             mainForm.boxStatistics.AppendText("#:")
+            toConsole += "#:"
         Else
             mainForm.boxStatistics.AppendText("$:")
+            toConsole += "$:"
         End If
         mainForm.boxStatistics.AppendText(" " + lineStatistics + vbNewLine)
+        toConsole += " " + lineStatistics
+
+        Console.WriteLine(toConsole)
     End Sub
 
     Public Sub statistics(ByVal newLine As String)
@@ -198,11 +206,11 @@ Module dataControl
 
     Public Sub LoadSources(ByVal sources As String)
         mainForm.sourcesList.Clear()
+
         mainForm.sourcesList.Items.Add("(Add New Node)", 5)
 
         For Each element In csvArray(sources)
             mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
-            mainForm.sourcesList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
         Next
 
         mainForm.boxSourcesPath.Text = "Loaded: " + sources.Substring(sources.LastIndexOf("\") + 1)
