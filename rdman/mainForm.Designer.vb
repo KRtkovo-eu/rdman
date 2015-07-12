@@ -251,6 +251,7 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "plus.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(6, "virtual.ico")
         '
         'groupMonitor
         '

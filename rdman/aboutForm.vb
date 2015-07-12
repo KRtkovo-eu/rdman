@@ -42,24 +42,28 @@ Public Class aboutForm
     End Function
 
     Public Function checkUpdate() As String
-        If My.Computer.Network.IsAvailable Then
-            Me.lblGitHub.Text = "Checking new version..."
-            Me.Refresh()
+        Try
+            If My.Computer.Network.IsAvailable Then
+                Me.lblGitHub.Text = "Checking new version..."
+                Me.Refresh()
 
-            Dim latest As String = "https://github.com/KRtkovo-eu/rdman/releases/latest"
-            Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(latest), HttpWebRequest)
-            Dim response As HttpWebResponse
-            Dim resUri As String
+                Dim latest As String = "https://github.com/KRtkovo-eu/rdman/releases/latest"
+                Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(latest), HttpWebRequest)
+                Dim response As HttpWebResponse
+                Dim resUri As String
 
-            response = req.GetResponse
-            resUri = response.ResponseUri.AbsoluteUri
+                response = req.GetResponse
+                resUri = response.ResponseUri.AbsoluteUri
 
-            latest = resUri.Substring(resUri.LastIndexOf("/") + 1)
+                latest = resUri.Substring(resUri.LastIndexOf("/") + 1)
 
-            Return latest
-        Else
+                Return latest
+            Else
+                Return "latest"
+            End If
+        Catch
             Return "latest"
-        End If
+        End Try
     End Function
 
     Private Sub aboutForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load

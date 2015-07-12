@@ -59,6 +59,8 @@ Module dataControl
                 Return 2
             Case "MacOS"
                 Return 3
+            Case "Application"
+                Return 6
             Case Else
                 Return 4
         End Select
@@ -200,6 +202,7 @@ Module dataControl
 
         For Each element In csvArray(sources)
             mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
+            mainForm.sourcesList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
         Next
 
         mainForm.boxSourcesPath.Text = "Loaded: " + sources.Substring(sources.LastIndexOf("\") + 1)
