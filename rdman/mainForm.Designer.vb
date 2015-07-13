@@ -65,6 +65,7 @@ Partial Class mainForm
         Me.boxSystemVersion = New System.Windows.Forms.TextBox()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.groupButtons = New System.Windows.Forms.GroupBox()
+        Me.buttonExport = New System.Windows.Forms.Button()
         Me.buttonImport = New System.Windows.Forms.Button()
         Me.buttonNewNode = New System.Windows.Forms.Button()
         Me.buttonSave = New System.Windows.Forms.Button()
@@ -117,7 +118,6 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.buttonExport = New System.Windows.Forms.Button()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -241,7 +241,7 @@ Partial Class mainForm
         Me.sourcesList.TabIndex = 0
         Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
         Me.sourcesList.UseCompatibleStateImageBehavior = False
-        Me.sourcesList.View = System.Windows.Forms.View.SmallIcon
+        Me.sourcesList.View = System.Windows.Forms.View.List
         '
         'operatingSystemsIcons
         '
@@ -252,8 +252,8 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(2, "android.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(5, "virtual.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(6, "plus.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(5, "terminal.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(6, "add.ico")
         '
         'groupMonitor
         '
@@ -633,15 +633,27 @@ Partial Class mainForm
         Me.groupButtons.TabIndex = 6
         Me.groupButtons.TabStop = False
         '
+        'buttonExport
+        '
+        Me.buttonExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.buttonExport.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.buttonExport.Location = New System.Drawing.Point(54, 36)
+        Me.buttonExport.Name = "buttonExport"
+        Me.buttonExport.Size = New System.Drawing.Size(44, 23)
+        Me.buttonExport.TabIndex = 2
+        Me.buttonExport.Text = "Export"
+        Me.buttonExport.UseVisualStyleBackColor = True
+        '
         'buttonImport
         '
         Me.buttonImport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonImport.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonImport.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.buttonImport.Location = New System.Drawing.Point(50, 63)
+        Me.buttonImport.Location = New System.Drawing.Point(54, 63)
         Me.buttonImport.Name = "buttonImport"
-        Me.buttonImport.Size = New System.Drawing.Size(46, 23)
+        Me.buttonImport.Size = New System.Drawing.Size(44, 23)
         Me.buttonImport.TabIndex = 1
         Me.buttonImport.Text = "Import"
         Me.buttonImport.UseVisualStyleBackColor = True
@@ -654,7 +666,7 @@ Partial Class mainForm
         Me.buttonNewNode.ForeColor = System.Drawing.SystemColors.GrayText
         Me.buttonNewNode.Location = New System.Drawing.Point(6, 63)
         Me.buttonNewNode.Name = "buttonNewNode"
-        Me.buttonNewNode.Size = New System.Drawing.Size(40, 23)
+        Me.buttonNewNode.Size = New System.Drawing.Size(44, 23)
         Me.buttonNewNode.TabIndex = 0
         Me.buttonNewNode.Text = "New"
         Me.buttonNewNode.UseVisualStyleBackColor = True
@@ -666,7 +678,7 @@ Partial Class mainForm
         Me.buttonSave.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonSave.Location = New System.Drawing.Point(6, 36)
         Me.buttonSave.Name = "buttonSave"
-        Me.buttonSave.Size = New System.Drawing.Size(40, 23)
+        Me.buttonSave.Size = New System.Drawing.Size(44, 23)
         Me.buttonSave.TabIndex = 0
         Me.buttonSave.Text = "Save"
         Me.buttonSave.UseVisualStyleBackColor = True
@@ -677,7 +689,7 @@ Partial Class mainForm
         Me.buttonConnect.ForeColor = System.Drawing.Color.Green
         Me.buttonConnect.Location = New System.Drawing.Point(6, 9)
         Me.buttonConnect.Name = "buttonConnect"
-        Me.buttonConnect.Size = New System.Drawing.Size(90, 23)
+        Me.buttonConnect.Size = New System.Drawing.Size(92, 23)
         Me.buttonConnect.TabIndex = 0
         Me.buttonConnect.Text = "Connect"
         Me.buttonConnect.UseVisualStyleBackColor = True
@@ -1026,7 +1038,7 @@ Partial Class mainForm
         Me.operatingSystemsImages.Images.SetKeyName(2, "android.png")
         Me.operatingSystemsImages.Images.SetKeyName(3, "apple.png")
         Me.operatingSystemsImages.Images.SetKeyName(4, "unknown.png")
-        Me.operatingSystemsImages.Images.SetKeyName(5, "virtual.ico")
+        Me.operatingSystemsImages.Images.SetKeyName(5, "terminal.png")
         '
         'openSourceDb
         '
@@ -1061,18 +1073,6 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Icon = CType(resources.GetObject("notifyIconCompactMode.Icon"), System.Drawing.Icon)
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
-        '
-        'buttonExport
-        '
-        Me.buttonExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.buttonExport.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonExport.Location = New System.Drawing.Point(50, 36)
-        Me.buttonExport.Name = "buttonExport"
-        Me.buttonExport.Size = New System.Drawing.Size(46, 23)
-        Me.buttonExport.TabIndex = 2
-        Me.buttonExport.Text = "Export"
-        Me.buttonExport.UseVisualStyleBackColor = True
         '
         'mainForm
         '

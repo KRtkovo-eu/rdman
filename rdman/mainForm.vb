@@ -218,13 +218,16 @@ Public Class mainForm
         End If
 
         Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text, boxName.Text, isApp)
-        If processPid > 1 Then
-            statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
-        ElseIf processPid = 1 Then
-            statistics("[ERROR] Unable to connect to localhost.")
-        Else
-            statistics("[ERROR] Unable to open remote session.")
-        End If
+
+        Select Case processPid
+            Case 0
+                statistics("[ERROR] Unable to open remote session.")
+            Case 1
+                statistics("[ERROR] Unable to connect to localhost.")
+            Case 2
+            Case Else
+                statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
+        End Select
     End Sub
 
     Private Sub buttonSave_Click(sender As Object, e As EventArgs) Handles buttonSave.Click
@@ -1052,14 +1055,11 @@ Public Class mainForm
     End Sub
 
     Public Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
-        'Dim haveFirst As Boolean = False
-
         For Each node As ListViewItem In monitor.SelectedItems()
 
             Select Case node.SubItems(2).Text
                 Case "(connected)", "(module)", "(running)"
                     Try
-                        'If haveFirst = False Then
                         Dim extProcess As Process
                         Dim PID As Integer
 
@@ -1068,13 +1068,11 @@ Public Class mainForm
 
                         If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
                             AppActivate(Convert.ToInt32(node.SubItems(3).Text))
-                            'processAPI.ShowWindow(extProcess.MainWindowHandle)
+                            'When application is activated and is minimized, send Enter hit to bring it to original state
+                            SendKeys.Send(Keys.Enter)
                         Else
                             AppActivate(Convert.ToInt32(node.SubItems(3).Text))
                         End If
-
-                        'haveFirst = True
-                        'End If
                     Catch ex As Exception
                         statistics(ex.Message)
                     End Try
@@ -1088,21 +1086,7 @@ Public Class mainForm
 
     Private Sub monitor_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles monitor.ItemDrag
         For Each node As ListViewItem In monitor.SelectedItems()
-
-            Select Case node.SubItems(2).Text
-                Case "(connected)", "(module)", "(running)"
-                    If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                        Try
-                            Process.GetProcessById(node.SubItems(3).Text).Kill()
-                        Catch ex As Exception
-                            statistics(ex.Message)
-                        End Try
-                    End If
-                Case "(disconnected)", "(closed)"
-                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
-                Case "(failed)"
-                    monitorDelNode(node.SubItems(0).Text, "0")
-            End Select
+            monitorFocusApplication(node)
         Next
     End Sub
 
@@ -1179,13 +1163,36 @@ Public Class mainForm
         monitor_ProcessPreview(tickerItem)
     End Sub
 
-    Private Sub pingTimer_Tick(sender As Object, e As EventArgs)
-        pingNodes()
-    End Sub
-
     Private Sub monitor_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles monitor.ItemMouseHover
         tickerItem = e.Item
         processPreviewHover.Start()
+    End Sub
+
+    Public Sub monitorFocusApplication(node As ListViewItem)
+        Select Case node.SubItems(2).Text
+            Case "(connected)", "(module)", "(running)"
+                Try
+                    Dim extProcess As Process
+                    Dim PID As Integer
+
+                    PID = Convert.ToInt32(node.SubItems(3).Text)
+                    extProcess = Process.GetProcessById(PID)
+
+                    If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
+                        AppActivate(Convert.ToInt32(node.SubItems(3).Text))
+                        'When application is activated and is minimized, send Enter hit to bring it to original state
+                        SendKeys.Send(Keys.Enter)
+                    Else
+                        AppActivate(Convert.ToInt32(node.SubItems(3).Text))
+                    End If
+                Catch ex As Exception
+                    statistics(ex.Message)
+                End Try
+            Case "(disconnected)", "(closed)"
+                monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+            Case "(failed)"
+                monitorDelNode(node.SubItems(0).Text, "0")
+        End Select
     End Sub
 #End Region
 End Class

@@ -55,6 +55,24 @@ Module monitorFunctions
                             Dim elapsed As String = DateDiff(DateInterval.Second, started, Now)
 
                             statistics("Remote session on " + node(0) + " (pid: " + node(3) + ") has terminated after " + elapsed + " seconds long run.")
+
+                            'Write statistics about how long you have opened session in CSV file.
+                            'Format is: Day of start; Time of start; Date of end; Time of end; Elapsed time; Process arguments
+                            Try
+                                Dim statsNode As String = ""
+                                Dim statsFolderPath As String = My.Application.Info.DirectoryPath + "\statistics\"
+
+                                If System.IO.Directory.Exists(statsFolderPath) = False Then
+                                    System.IO.Directory.CreateDirectory(statsFolderPath)
+                                End If
+
+                                Dim exportedNodeFilePath As String = statsFolderPath + node(0) + ".csv"
+                                Dim objWriter As New System.IO.StreamWriter(exportedNodeFilePath, True)
+
+                                objWriter.Write(DateTime.Parse(node(5)).ToString("yyyy-MM-dd;HH:mm:ss") + ";" + DateTime.Now.ToString("yyyy-MM-dd;HH:mm:ss") + ";" + elapsed + ";" + node(4) + vbNewLine)
+                                objWriter.Close()
+                            Catch
+                            End Try
                         End Try
                     Case "(module)", "(running)"
                         Try
@@ -152,6 +170,10 @@ Module monitorFunctions
                         'node.StateImageIndex = 2
                         node.ForeColor = Color.Red
                         statistics("Ping on " + nodeName + " > host unreachable.")
+                    End If
+
+                    If checkAddress("http://" + nodeName) = True Then
+                        statistics("Webserver is available on http://" + nodeName)
                     End If
                 Catch ex As Exception
                     node.ForeColor = Color.Red

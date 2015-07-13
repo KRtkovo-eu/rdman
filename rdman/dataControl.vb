@@ -18,20 +18,21 @@ Module dataControl
     Function csvArray(ByVal sources As String) As List(Of String())
         Dim afile As FileIO.TextFieldParser = New FileIO.TextFieldParser(sources)
         Dim csvLine As String()
+        Dim csvNodes As List(Of String())
 
         afile.TextFieldType = FileIO.FieldType.Delimited
         afile.Delimiters = New String() {";"}
         afile.HasFieldsEnclosedInQuotes = False
 
-        nodes = New List(Of String())
+        csvNodes = New List(Of String())
 
         ' parse the actual file
         Do While Not afile.EndOfData
             csvLine = afile.ReadFields
-            nodes.Add(csvLine)
+            csvNodes.Add(csvLine)
         Loop
 
-        Return nodes
+        Return csvNodes
     End Function
 #End Region
 
@@ -64,6 +65,16 @@ Module dataControl
             Case Else
                 Return 4
         End Select
+    End Function
+
+    Public Function checkAddress(ByVal URL As String) As Boolean
+        Try
+            Dim request As WebRequest = WebRequest.Create(URL)
+            Dim response As WebResponse = request.GetResponse()
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
     End Function
 #End Region
 
@@ -209,8 +220,14 @@ Module dataControl
 
         mainForm.sourcesList.Items.Add("(Add New Node)", 6)
 
-        For Each element In csvArray(sources)
-            mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
+        nodes = csvArray(sources)
+
+        For Each element In nodes
+            If element(2) <> "" Then
+                mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
+            Else
+                mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + "]", systemToIndexNum(element(7)))
+            End If
         Next
 
         mainForm.boxSourcesPath.Text = "Loaded: " + sources.Substring(sources.LastIndexOf("\") + 1)
@@ -267,7 +284,11 @@ Module dataControl
         mainForm.boxConnectOver.Checked = nodeConnectOver
         mainForm.boxViewerPath.Text = nodeViewerPath
 
-        statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ":" + nodePort + ")")
+        If nodePort <> "" Then
+            statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ":" + nodePort + ")")
+        Else
+            statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ")")
+        End If
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String)
@@ -282,7 +303,7 @@ Module dataControl
         Try
             Dim marker As Integer = 0
 
-            For Each element In nodes
+            For Each element In db
                 If element(0) = nodeName Then
                     db.RemoveAt(db.IndexOf(element))
                     Exit For
@@ -300,7 +321,33 @@ Module dataControl
 #Region "Run functions"
     Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String, ByVal application As Boolean) As Integer
         If nodeIP <> "" Then
+            For Each monitorItem As ListViewItem In mainForm.monitor.Items
+                If monitorItem.SubItems.Item(1).Text.Contains(nodeIP) And (monitorItem.SubItems.Item(2).Text = "(connected)" Or monitorItem.SubItems.Item(2).Text = "(running)") Then
+                    Dim startNewSessionDialog As DialogResult = MessageBox.Show("You are already connected to source [" + nodeName + "]. Do you want to open this session?", "Session on " + nodeIP + " already running", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+
+                    Select Case startNewSessionDialog
+                        Case DialogResult.Yes
+                            mainForm.monitorFocusApplication(monitorItem)
+                            Return 2
+                            Exit Function
+                        Case DialogResult.No
+                            Exit For
+                        Case DialogResult.Cancel
+                            Return 2
+                            Exit Function
+                    End Select
+                End If
+            Next
+
             statistics("Connecting to " + nodeName)
+
+            Dim nodeAddressToConnect As String
+
+            If nodePort <> "" Then
+                nodeAddressToConnect = nodeIP + ":" + nodePort
+            Else
+                nodeAddressToConnect = nodeIP
+            End If
 
             Try
                 If My.Computer.Network.Ping(nodeIP) = False Then
@@ -321,9 +368,9 @@ Module dataControl
 
                 If nodeFullscreen = True Then
                     If nodeMultimon = True Then
-                        ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /multimon"
+                        ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /multimon"
                     Else
-                        ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /f"
+                        ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /f"
                     End If
                 Else
                     If nodeWidth = "" Then
@@ -334,13 +381,13 @@ Module dataControl
                         nodeHeight = "768"
                     End If
 
-                    ProcessProperties.Arguments = "/v:" + nodeIP + ":" + nodePort + " /w:" + nodeWidth + " /h:" + nodeHeight
+                    ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /w:" + nodeWidth + " /h:" + nodeHeight
                 End If
 
             Else
                 If nodeViewer <> "" And My.Computer.FileSystem.FileExists(nodeViewer) = True Then
                     ProcessProperties.FileName = nodeViewer
-                    ProcessProperties.Arguments = nodeIP + ":" + nodePort
+                    ProcessProperties.Arguments = nodeAddressToConnect
                 Else
                     MessageBox.Show("Viewer is not found or path is empty!", "Viewer not found", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return 0
@@ -358,13 +405,13 @@ Module dataControl
                     state = "(running)"
                 End If
 
-                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, state, mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
+                monitorNodeDetails = {nodeName, nodeAddressToConnect, state, mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
                 setMonitor(monitorNodeDetails, True, application)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
 
                 Return mstsc.Id
             Catch ex As Exception
-                monitorNodeDetails = {nodeName, nodeIP + ":" + nodePort, "(failed)", "0", ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
+                monitorNodeDetails = {nodeName, nodeAddressToConnect, "(failed)", "0", ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
                 setMonitor(monitorNodeDetails, False)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
                 statistics("Unexpectedly ended with error: " + ex.Message)
@@ -410,6 +457,7 @@ Module dataControl
             statistics(ex.Message)
         End Try
     End Sub
-#End Region
 
+
+#End Region
 End Module

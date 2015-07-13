@@ -17,6 +17,9 @@ Public Class aboutForm
         sources += "Frank Souza - FS Ubuntu Icons (GNU General Public License)" + vbNewLine + "[http://franksouza183.deviantart.com]"
         sources += vbNewLine
         sources += vbNewLine
+        sources += "Paomedia - Sign add & Terminal icons (CC Attribution 3.0 unported)" + vbNewLine + "[https://www.iconfinder.com/paomedia]"
+        sources += vbNewLine
+        sources += vbNewLine
         sources += "Sam Francke - uniCSVed 1.1 (Cardware)" + vbNewLine + "[http://csved.sjfrancke.nl/]"
         sources += vbNewLine
         sources += vbNewLine
