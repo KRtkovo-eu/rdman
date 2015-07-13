@@ -15,6 +15,8 @@ Public Class mainForm
     Dim hasFTP As Boolean = False
     Dim hasCsved As Boolean = False
     Dim hasFighter As Boolean = False
+    Private Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
+    Private Const SW_RESTORE = 9
 #End Region
 
 #Region "Form handle"
@@ -1056,37 +1058,27 @@ Public Class mainForm
 
     Public Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
         For Each node As ListViewItem In monitor.SelectedItems()
-
-            Select Case node.SubItems(2).Text
-                Case "(connected)", "(module)", "(running)"
-                    Try
-                        Dim extProcess As Process
-                        Dim PID As Integer
-
-                        PID = Convert.ToInt32(node.SubItems(3).Text)
-                        extProcess = Process.GetProcessById(PID)
-
-                        If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
-                            AppActivate(Convert.ToInt32(node.SubItems(3).Text))
-                            'When application is activated and is minimized, send Enter hit to bring it to original state
-                            SendKeys.Send(Keys.Enter)
-                        Else
-                            AppActivate(Convert.ToInt32(node.SubItems(3).Text))
-                        End If
-                    Catch ex As Exception
-                        statistics(ex.Message)
-                    End Try
-                Case "(disconnected)", "(closed)"
-                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
-                Case "(failed)"
-                    monitorDelNode(node.SubItems(0).Text, "0")
-            End Select
+            monitorFocusApplication(node)
         Next
     End Sub
 
     Private Sub monitor_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles monitor.ItemDrag
         For Each node As ListViewItem In monitor.SelectedItems()
-            monitorFocusApplication(node)
+
+            Select Case node.SubItems(2).Text
+                Case "(connected)", "(module)", "(running)"
+                    If MessageBox.Show("Do you really want to kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", "Kill " + node.SubItems(0).Text + " (pid: " + node.SubItems(3).Text + ")?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                        Try
+                            Process.GetProcessById(node.SubItems(3).Text).Kill()
+                        Catch ex As Exception
+                            statistics(ex.Message)
+                        End Try
+                    End If
+                Case "(disconnected)", "(closed)"
+                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                Case "(failed)"
+                    monitorDelNode(node.SubItems(0).Text, "0")
+            End Select
         Next
     End Sub
 
@@ -1179,9 +1171,7 @@ Public Class mainForm
                     extProcess = Process.GetProcessById(PID)
 
                     If GetProcessWindowState(extProcess.MainWindowHandle) = FormWindowState.Minimized Then
-                        AppActivate(Convert.ToInt32(node.SubItems(3).Text))
-                        'When application is activated and is minimized, send Enter hit to bring it to original state
-                        SendKeys.Send(Keys.Enter)
+                        ShowWindow(extProcess.MainWindowHandle, SW_RESTORE)
                     Else
                         AppActivate(Convert.ToInt32(node.SubItems(3).Text))
                     End If
