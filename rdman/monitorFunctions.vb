@@ -172,9 +172,9 @@ Module monitorFunctions
                         statistics("Ping on " + nodeName + " > host unreachable.")
                     End If
 
-                    If checkAddress("http://" + nodeName) = True Then
-                        statistics("Webserver is available on http://" + nodeName)
-                    End If
+                    'If checkAddress("http://" + nodeName) = True Then
+                    '    statistics("Webserver is available on http://" + nodeName)
+                    'End If
                 Catch ex As Exception
                     node.ForeColor = Color.Red
                     statistics("Ping on " + nodeName + " > " + ex.Message)
