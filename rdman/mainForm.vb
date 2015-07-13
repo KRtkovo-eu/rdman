@@ -290,7 +290,7 @@ Public Class mainForm
                 System.IO.Directory.CreateDirectory(exportedFolderPath)
             End If
 
-            Dim exportedNodeFilePath As String = exportedFolderPath + boxName.Text + "_" + boxIP.Text + ".rdman"
+            Dim exportedNodeFilePath As String = exportedFolderPath + boxName.Text + ".rdman"
             Dim objWriter As New System.IO.StreamWriter(exportedNodeFilePath, False)
 
             exportNode += boxName.Text + ";"
@@ -900,6 +900,14 @@ Public Class mainForm
 
         Me.Activate()
     End Sub
+
+    Private Sub ImportSourceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportSourceToolStripMenuItem.Click
+        buttonImport_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub ExportSourceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportSourceToolStripMenuItem.Click
+        buttonExport_Click(Nothing, Nothing)
+    End Sub
 #End Region
 
 #Region "Setting menu toolbar"
@@ -979,6 +987,8 @@ Public Class mainForm
     Public Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
         If CompactModeToolStripMenuItem.Checked = True Then
             CompactModeToolStripMenuItem.Checked = False
+            CompactModeToolStripMenuItem.BackColor = SystemColors.Control
+            CompactModeToolStripMenuItem.ForeColor = SystemColors.ControlText
 
             boxSourcesPath.Visible = True
             groupAdditionalInformations.Visible = True
@@ -992,10 +1002,10 @@ Public Class mainForm
             End If
 
             groupImage.Visible = True
-            groupSourcesList.Visible = True
+            'groupSourcesList.Visible = True
             groupStatistics.Visible = True
             mainContainer.Panel2Collapsed = False
-            containerSourcesMonitor.Panel1Collapsed = False
+            'containerSourcesMonitor.Panel1Collapsed = False
 
             If lastWindowState <> Nothing Then
                 Me.WindowState = lastWindowState
@@ -1008,18 +1018,20 @@ Public Class mainForm
             If lastWidth > 0 Then
                 Me.Width = lastWidth
             Else
-                Me.Width = 850
+                Me.Width = 800
             End If
 
             If lastHeight > 0 Then
                 Me.Height = lastHeight
             Else
-                Me.Height = 450
+                Me.Height = 500
             End If
 
             Me.TopMost = False
         Else
             CompactModeToolStripMenuItem.Checked = True
+            CompactModeToolStripMenuItem.BackColor = Color.DarkBlue
+            CompactModeToolStripMenuItem.ForeColor = Color.White
 
             boxSourcesPath.Visible = False
             groupAdditionalInformations.Visible = False
@@ -1028,21 +1040,21 @@ Public Class mainForm
             groupConnectOver.Visible = False
             groupImage.Visible = False
             groupResolutionSettings.Visible = False
-            groupSourcesList.Visible = False
+            'groupSourcesList.Visible = False
             groupStatistics.Visible = False
             mainContainer.Panel2Collapsed = True
-            containerSourcesMonitor.Panel1Collapsed = True
+            'containerSourcesMonitor.Panel1Collapsed = True
 
             lastWindowState = Me.WindowState
             Me.WindowState = FormWindowState.Normal
 
-            Me.MinimumSize = New Size(100, 100)
+            Me.MinimumSize = New Size(350, 500)
 
             lastWidth = Me.Width
-            Me.Width = 400
+            Me.Width = 350
 
             lastHeight = Me.Height
-            Me.Height = 300
+            Me.Height = 500
 
             Me.TopMost = True
         End If

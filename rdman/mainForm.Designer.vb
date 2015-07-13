@@ -118,6 +118,8 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.ExportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -858,7 +860,7 @@ Partial Class mainForm
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.EditSourcesDatabaseToolStripMenuItem, Me.NewEmptySourcesDatabaseToolStripMenuItem, Me.ToolStripSeparator3, Me.AddNodeToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.EditSourcesDatabaseToolStripMenuItem, Me.NewEmptySourcesDatabaseToolStripMenuItem, Me.ToolStripSeparator3, Me.AddNodeToolStripMenuItem, Me.ImportSourceToolStripMenuItem, Me.ExportSourceToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -896,7 +898,7 @@ Partial Class mainForm
         Me.AddNodeToolStripMenuItem.Name = "AddNodeToolStripMenuItem"
         Me.AddNodeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.AddNodeToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
-        Me.AddNodeToolStripMenuItem.Text = "&New Node"
+        Me.AddNodeToolStripMenuItem.Text = "&New source"
         '
         'SaveNodeToolStripMenuItem
         '
@@ -904,7 +906,7 @@ Partial Class mainForm
         Me.SaveNodeToolStripMenuItem.Name = "SaveNodeToolStripMenuItem"
         Me.SaveNodeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.SaveNodeToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
-        Me.SaveNodeToolStripMenuItem.Text = "&Save Node"
+        Me.SaveNodeToolStripMenuItem.Text = "&Save source"
         '
         'ToolStripSeparator2
         '
@@ -1074,6 +1076,22 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
         '
+        'ExportSourceToolStripMenuItem
+        '
+        Me.ExportSourceToolStripMenuItem.Image = CType(resources.GetObject("ExportSourceToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ExportSourceToolStripMenuItem.Name = "ExportSourceToolStripMenuItem"
+        Me.ExportSourceToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+        Me.ExportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.ExportSourceToolStripMenuItem.Text = "E&xport source"
+        '
+        'ImportSourceToolStripMenuItem
+        '
+        Me.ImportSourceToolStripMenuItem.Image = CType(resources.GetObject("ImportSourceToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ImportSourceToolStripMenuItem.Name = "ImportSourceToolStripMenuItem"
+        Me.ImportSourceToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
+        Me.ImportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.ImportSourceToolStripMenuItem.Text = "&Import source"
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1213,5 +1231,7 @@ Partial Class mainForm
     Friend WithEvents lblQuickConnect As System.Windows.Forms.LinkLabel
     Friend WithEvents buttonImport As System.Windows.Forms.Button
     Friend WithEvents buttonExport As System.Windows.Forms.Button
+    Friend WithEvents ImportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
