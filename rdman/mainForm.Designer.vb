@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -120,6 +120,7 @@ Partial Class mainForm
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ExportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -229,9 +230,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem1.StateImageIndex = 0
-        ListViewItem1.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        ListViewItem2.StateImageIndex = 0
+        ListViewItem2.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -851,7 +852,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -1092,6 +1093,13 @@ Partial Class mainForm
         Me.ImportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.ImportSourceToolStripMenuItem.Text = "&Import source"
         '
+        'GreenshotToolStripMenuItem
+        '
+        Me.GreenshotToolStripMenuItem.Name = "GreenshotToolStripMenuItem"
+        Me.GreenshotToolStripMenuItem.Size = New System.Drawing.Size(73, 20)
+        Me.GreenshotToolStripMenuItem.Text = "&Greenshot"
+        Me.GreenshotToolStripMenuItem.Visible = False
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1233,5 +1241,6 @@ Partial Class mainForm
     Friend WithEvents buttonExport As System.Windows.Forms.Button
     Friend WithEvents ImportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GreenshotToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

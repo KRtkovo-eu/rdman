@@ -15,6 +15,7 @@ Public Class mainForm
     Dim hasFTP As Boolean = False
     Dim hasCsved As Boolean = False
     Dim hasFighter As Boolean = False
+    Dim hasGreenshot As Boolean = False
     Private Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
     Private Const SW_RESTORE = 9
 #End Region
@@ -132,6 +133,12 @@ Public Class mainForm
         'If Fighter is included, change control variable
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe") Then
             hasFighter = True
+        End If
+
+        'If Greenshot is included, enable menu item
+        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\greenshot\Greenshot.exe") Then
+            GreenshotToolStripMenuItem.Visible = True
+            hasGreenshot = True
         End If
 
         'Check parameters for db path and load db
@@ -874,6 +881,17 @@ Public Class mainForm
         End If
     End Sub
 
+    Private Sub GreenshotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenshotToolStripMenuItem.Click
+        If hasGreenshot = True Then
+            Dim ProcessProperties As New ProcessStartInfo
+
+            ProcessProperties.FileName = My.Application.Info.DirectoryPath + "\modules\greenshot\Greenshot.exe"
+
+            statistics("Starting Greenshot module.")
+            runModule(ProcessProperties, True)
+        End If
+    End Sub
+
     Public Sub NewEmptySourcesDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptySourcesDatabaseToolStripMenuItem.Click
         saveStatistics.Filter = "Sources database *.rdman|*.rdman"
         saveStatistics.DefaultExt = "rdman"
@@ -1048,10 +1066,10 @@ Public Class mainForm
             lastWindowState = Me.WindowState
             Me.WindowState = FormWindowState.Normal
 
-            Me.MinimumSize = New Size(350, 500)
+            Me.MinimumSize = New Size(300, 500)
 
             lastWidth = Me.Width
-            Me.Width = 350
+            Me.Width = 300
 
             lastHeight = Me.Height
             Me.Height = 500

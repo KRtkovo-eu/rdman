@@ -69,6 +69,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\csved\*"; Des
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\mikroftp\*"; DestDir: "{app}\modules\mikroftp"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: MikroFTP
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\putty\*"; DestDir: "{app}\modules\putty"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Putty
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\fighter\*"; DestDir: "{app}\modules\fighter"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Fighter
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\greenshot\*"; DestDir: "{app}\modules\greenshot"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Greenshot
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -79,6 +80,7 @@ Name: "{group}\modules\uniCSVed"; Filename: "{app}\modules\csved\uniCSVed.exe"; 
 Name: "{group}\modules\mikroFTP"; Filename: "{app}\modules\mikroftp\mikroftp.exe"; Components: MikroFTP
 Name: "{group}\modules\PuTTY"; Filename: "{app}\modules\putty\putty.exe"; Components: Putty
 Name: "{group}\modules\Aviation Fight"; Filename: "{app}\modules\fighter\fighter.exe"; Components: Fighter
+Name: "{group}\modules\Greenshot"; Filename: "{app}\modules\greenshot\Greenshot.exe"; Components: Greenshot
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Registry]
@@ -96,6 +98,7 @@ Name: "Fighter"; Description: "Celebration game bonus to one month since first r
 Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom full
 Name: "MikroFTP"; Description: "MikroFTP server"; Types: custom full
 Name: "PuTTY"; Description: "PuTTY SSH and Telnet client"; Types: custom full
+Name: "Greenshot"; Description: "Greenshot module for simple screenshooting"; Types: custom full
 
 [Types]
 Name: "full"; Description: "Remote Desktop Manager with all modules"

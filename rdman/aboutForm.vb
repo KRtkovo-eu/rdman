@@ -32,6 +32,9 @@ Public Class aboutForm
         sources += "Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)" + vbNewLine + "[http://www.codeproject.com/Articles/31026/Aviation-Fight]"
         sources += vbNewLine
         sources += vbNewLine
+        sources += "Greenshot team - Greenshot (GNU General Public License)" + vbNewLine + "[http://getgreenshot.org]"
+        sources += vbNewLine
+        sources += vbNewLine
         sources += "The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:" + vbNewLine
         sources += "gigemboy - Easy Screen Capture Class [http://www.vbforums.com/showthread.php?385497-Easy-Screen-Capture-Class-Capture-Screen-Desktop-Region-Form-or-Controls]"
         sources += vbNewLine + "Updated with GetWindow function from HeWhoWas [http://www.vbforums.com/showthread.php?581842-VB-NET-Get-image-of-inactive-3rd-party-windows-controls]"
