@@ -1025,6 +1025,14 @@ Public Class mainForm
             mainContainer.Panel2Collapsed = False
             'containerSourcesMonitor.Panel1Collapsed = False
 
+            If hasFTP = True Then
+                FTPServerToolStripMenuItem.Visible = True
+            End If
+
+            If hasGreenshot = True Then
+                GreenshotToolStripMenuItem.Visible = True
+            End If
+
             If lastWindowState <> Nothing Then
                 Me.WindowState = lastWindowState
             Else
@@ -1062,6 +1070,8 @@ Public Class mainForm
             groupStatistics.Visible = False
             mainContainer.Panel2Collapsed = True
             'containerSourcesMonitor.Panel1Collapsed = True
+            FTPServerToolStripMenuItem.Visible = False
+            GreenshotToolStripMenuItem.Visible = False
 
             lastWindowState = Me.WindowState
             Me.WindowState = FormWindowState.Normal

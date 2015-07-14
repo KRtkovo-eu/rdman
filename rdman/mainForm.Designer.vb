@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -90,6 +90,8 @@ Partial Class mainForm
         Me.NewEmptySourcesDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.AddNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveNodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveStatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -104,6 +106,7 @@ Partial Class mainForm
         Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KillChildProcessesOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FTPServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportAnIssueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -118,9 +121,6 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.ExportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportSourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -230,9 +230,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem2.StateImageIndex = 0
-        ListViewItem2.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        ListViewItem1.StateImageIndex = 0
+        ListViewItem1.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -295,6 +295,7 @@ Partial Class mainForm
         Me.monitor.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.monitor.FullRowSelect = True
         Me.monitor.GridLines = True
+        Me.monitor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.monitor.Location = New System.Drawing.Point(3, 18)
         Me.monitor.Name = "monitor"
         Me.monitor.ShowGroups = False
@@ -901,6 +902,22 @@ Partial Class mainForm
         Me.AddNodeToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.AddNodeToolStripMenuItem.Text = "&New source"
         '
+        'ImportSourceToolStripMenuItem
+        '
+        Me.ImportSourceToolStripMenuItem.Image = CType(resources.GetObject("ImportSourceToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ImportSourceToolStripMenuItem.Name = "ImportSourceToolStripMenuItem"
+        Me.ImportSourceToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
+        Me.ImportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.ImportSourceToolStripMenuItem.Text = "&Import source"
+        '
+        'ExportSourceToolStripMenuItem
+        '
+        Me.ExportSourceToolStripMenuItem.Image = CType(resources.GetObject("ExportSourceToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ExportSourceToolStripMenuItem.Name = "ExportSourceToolStripMenuItem"
+        Me.ExportSourceToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+        Me.ExportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.ExportSourceToolStripMenuItem.Text = "E&xport source"
+        '
         'SaveNodeToolStripMenuItem
         '
         Me.SaveNodeToolStripMenuItem.Image = CType(resources.GetObject("SaveNodeToolStripMenuItem.Image"), System.Drawing.Image)
@@ -991,6 +1008,13 @@ Partial Class mainForm
         Me.FTPServerToolStripMenuItem.Text = "&FTP Server"
         Me.FTPServerToolStripMenuItem.Visible = False
         '
+        'GreenshotToolStripMenuItem
+        '
+        Me.GreenshotToolStripMenuItem.Name = "GreenshotToolStripMenuItem"
+        Me.GreenshotToolStripMenuItem.Size = New System.Drawing.Size(73, 20)
+        Me.GreenshotToolStripMenuItem.Text = "&Greenshot"
+        Me.GreenshotToolStripMenuItem.Visible = False
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewHelpToolStripMenuItem, Me.ReportAnIssueToolStripMenuItem, Me.ToolStripSeparator1, Me.AboutToolStripMenuItem})
@@ -1076,29 +1100,6 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Icon = CType(resources.GetObject("notifyIconCompactMode.Icon"), System.Drawing.Icon)
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
-        '
-        'ExportSourceToolStripMenuItem
-        '
-        Me.ExportSourceToolStripMenuItem.Image = CType(resources.GetObject("ExportSourceToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.ExportSourceToolStripMenuItem.Name = "ExportSourceToolStripMenuItem"
-        Me.ExportSourceToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
-        Me.ExportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
-        Me.ExportSourceToolStripMenuItem.Text = "E&xport source"
-        '
-        'ImportSourceToolStripMenuItem
-        '
-        Me.ImportSourceToolStripMenuItem.Image = CType(resources.GetObject("ImportSourceToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.ImportSourceToolStripMenuItem.Name = "ImportSourceToolStripMenuItem"
-        Me.ImportSourceToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
-        Me.ImportSourceToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
-        Me.ImportSourceToolStripMenuItem.Text = "&Import source"
-        '
-        'GreenshotToolStripMenuItem
-        '
-        Me.GreenshotToolStripMenuItem.Name = "GreenshotToolStripMenuItem"
-        Me.GreenshotToolStripMenuItem.Size = New System.Drawing.Size(73, 20)
-        Me.GreenshotToolStripMenuItem.Text = "&Greenshot"
-        Me.GreenshotToolStripMenuItem.Visible = False
         '
         'mainForm
         '
