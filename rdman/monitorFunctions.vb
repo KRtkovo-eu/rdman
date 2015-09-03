@@ -41,7 +41,7 @@ Module monitorFunctions
                     Case "(connected)"
                         Try
                             remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                            If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
+                            If remoteSession.MainWindowHandle <> IntPtr.Zero Then
                                 mainForm.monitor.Items(nodeId).StateImageIndex = 0
                             End If
                         Catch
@@ -77,7 +77,7 @@ Module monitorFunctions
                     Case "(module)", "(running)"
                         Try
                             remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                            If DateDiff(DateInterval.Second, Convert.ToDateTime(node(5)), Now) > 15 Then
+                            If remoteSession.MainWindowHandle <> IntPtr.Zero Then
                                 mainForm.monitor.Items(nodeId).StateImageIndex = 4
                             End If
                         Catch

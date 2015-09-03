@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -194,7 +194,7 @@ Partial Class mainForm
         Me.groupSourcesList.Size = New System.Drawing.Size(250, 318)
         Me.groupSourcesList.TabIndex = 1
         Me.groupSourcesList.TabStop = False
-        Me.groupSourcesList.Text = "Remote nodes"
+        Me.groupSourcesList.Text = "Sources list"
         '
         'pingProgressBar
         '
@@ -211,12 +211,12 @@ Partial Class mainForm
         Me.pingAll.AutoSize = True
         Me.pingAll.Font = New System.Drawing.Font("Segoe UI", 7.5!)
         Me.pingAll.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.pingAll.Location = New System.Drawing.Point(148, 0)
+        Me.pingAll.Location = New System.Drawing.Point(142, 0)
         Me.pingAll.Name = "pingAll"
-        Me.pingAll.Size = New System.Drawing.Size(96, 12)
+        Me.pingAll.Size = New System.Drawing.Size(102, 12)
         Me.pingAll.TabIndex = 1
         Me.pingAll.TabStop = True
-        Me.pingAll.Text = "PING selected nodes"
+        Me.pingAll.Text = "PING selected sources"
         Me.pingAll.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.pingAll.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
@@ -230,9 +230,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem1.StateImageIndex = 0
-        ListViewItem1.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        ListViewItem2.StateImageIndex = 0
+        ListViewItem2.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -338,11 +338,11 @@ Partial Class mainForm
         '
         Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.monitorStates.TransparentColor = System.Drawing.Color.Transparent
-        Me.monitorStates.Images.SetKeyName(0, "online.ico")
-        Me.monitorStates.Images.SetKeyName(1, "disconnected.ico")
-        Me.monitorStates.Images.SetKeyName(2, "failed.ico")
-        Me.monitorStates.Images.SetKeyName(3, "idle.ico")
-        Me.monitorStates.Images.SetKeyName(4, "module.ico")
+        Me.monitorStates.Images.SetKeyName(0, "conn.png")
+        Me.monitorStates.Images.SetKeyName(1, "off.png")
+        Me.monitorStates.Images.SetKeyName(2, "err.png")
+        Me.monitorStates.Images.SetKeyName(3, "prep.png")
+        Me.monitorStates.Images.SetKeyName(4, "app.png")
         '
         'boxSourcesPath
         '
@@ -579,7 +579,7 @@ Partial Class mainForm
         Me.groupAdditionalInformations.Size = New System.Drawing.Size(638, 147)
         Me.groupAdditionalInformations.TabIndex = 1
         Me.groupAdditionalInformations.TabStop = False
-        Me.groupAdditionalInformations.Text = "Additional informations"
+        Me.groupAdditionalInformations.Text = "Additional settings"
         '
         'boxDescription
         '

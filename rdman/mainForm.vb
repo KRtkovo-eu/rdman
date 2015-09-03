@@ -90,9 +90,9 @@ Public Class mainForm
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
         End If
 
-        'If My.Settings.compactMode = True Then
-        '    CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
-        'End If
+        If My.Settings.compactMode = True Then
+            CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
+        End If
 
         Me.boxStatistics.Font = consoleFont
 
@@ -551,31 +551,31 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "about | Show dialog with informations about this program."
                 help += vbNewLine
-                help += vbTab + "clear | Cleans the statistics box."
+                help += vbTab + "clear | Clean the statistics box."
                 help += vbNewLine
-                help += vbTab + "cmd | Opens Windows shell."
+                help += vbTab + "cmd | Open Windows shell."
                 help += vbNewLine
-                help += vbTab + "connect | Connects to currently loaded node."
+                help += vbTab + "connect | Connect to currently loaded node."
                 help += vbNewLine
-                help += vbTab + "editsources | Opens loaded csv database with sources in default program."
+                help += vbTab + "editsources | Open loaded csv database with sources in default program."
                 help += vbNewLine
-                help += vbTab + "environment | Writes information about your machine."
+                help += vbTab + "environment | Write information about your machine."
                 help += vbNewLine
-                help += vbTab + "exit | Closes this program."
+                help += vbTab + "exit | Close this program."
                 help += vbNewLine
                 help += vbTab + "exportsource | Export source in separate file."
                 help += vbNewLine
                 help += vbTab + "ftpserver, ftp | Run FTP server module."
                 help += vbNewLine
-                help += vbTab + "help | Shows this page."
+                help += vbTab + "help | Show this page."
                 help += vbNewLine
                 help += vbTab + "importsource | Import source from separate file."
                 help += vbNewLine
-                help += vbTab + "loadsources | Opens dialog for selecting csv database file."
+                help += vbTab + "loadsources | Open dialog for selecting csv database file."
                 help += vbNewLine
                 help += vbTab + "monitorpid | Add running process to monitor by PID."
                 help += vbNewLine
-                help += vbTab + "newnode | Loads template of new node."
+                help += vbTab + "newnode | Load template of new node."
                 help += vbNewLine
                 help += vbTab + "nodeconnectover, connectover | Set node connect over checkbox to opposite state."
                 help += vbNewLine
@@ -605,13 +605,13 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "quickconnect | Quick Connect to IP address or hostname."
                 help += vbNewLine
-                help += vbTab + "reloadsources | Reloads nodes database."
+                help += vbTab + "reloadsources | Reload nodes database."
                 help += vbNewLine
-                help += vbTab + "run | Runs chosen external process. Add character & just before path to run process without window (ex. &cmd)."
+                help += vbTab + "run | Run chosen external process. Add character & just before path to run process without window (ex. &cmd)."
                 help += vbNewLine
-                help += vbTab + "savenode | Saves node to csv database file."
+                help += vbTab + "savenode | Save node to csv database file."
                 help += vbNewLine
-                help += vbTab + "savestats | Saves statistics log file."
+                help += vbTab + "savestats | Save statistics log file."
                 help += vbNewLine
 
                 statistics(help)
@@ -820,7 +820,11 @@ Public Class mainForm
                 LoadSources(sourcesDb)
 
                 'Make backup of actual db file, it overwrites file with same name.
-                IO.File.Copy(sourcesDb, sourcesDb + ".bak", True)
+                Try
+                    IO.File.Copy(sourcesDb, sourcesDb + ".bak", True)
+                Catch ex As Exception
+                    statistics(ex.Message)
+                End Try
             End If
         End If
     End Sub
@@ -1218,7 +1222,14 @@ Public Class mainForm
                 Catch ex As Exception
                     statistics(ex.Message)
                 End Try
-            Case "(disconnected)", "(closed)"
+            Case "(disconnected)"
+                If MessageBox.Show("Do you want to reconnect to this remote session?", "Reconnect?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                    loadSourceData(node.SubItems(0).Text)
+                    buttonConnect_Click(Nothing, Nothing)
+                Else
+                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                End If
+            Case "(closed)"
                 monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
             Case "(failed)"
                 monitorDelNode(node.SubItems(0).Text, "0")
