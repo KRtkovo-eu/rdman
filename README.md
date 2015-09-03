@@ -13,3 +13,39 @@ Remote Desktop Manager (RDMan) is simple controller for Windows Remote Desktop C
 * RDMan is open source, written in Visual Basic .NET and published under [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.txt)
 
 Author: [Ondřej Kotas](mailto:ok@krtkovo.eu), [KRtkovo.eu](http://krtkovo.eu/)
+
+---------------------------------------------------------------------------------------------
+Used sources of third parts:
+
+Double-J Design - Super Mono 3D Icons (CC Attribution 4.0)
+[http://doublejdesign.co.uk/]
+
+dAKirby309 - Windows 8 Metro Icons (CC Attribution-Noncommercial 4.0)
+[http://dakirby309.deviantart.com/]
+
+Frank Souza - FS Ubuntu Icons (GNU General Public License)
+[http://franksouza183.deviantart.com]
+
+Paomedia - Sign add & Terminal icons (CC Attribution 3.0 unported)
+[https://www.iconfinder.com/paomedia]
+
+Sam Francke - uniCSVed 1.1 (Cardware)
+[http://csved.sjfrancke.nl/]
+
+Smitka development - MikroFTP 1.4.2013 (Freeware)
+[http://smitka.org/pc-elektro/mikroftp/]
+
+Simon Tatham - PuTTY 0.63 (MIT License)
+[http://putty.org/]
+
+Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)
+[http://www.codeproject.com/Articles/31026/Aviation-Fight]
+
+Greenshot team - Greenshot (GNU General Public License)
+[http://getgreenshot.org]
+
+The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:
+gigemboy - Easy Screen Capture Class [http://www.vbforums.com/showthread.php?385497-Easy-Screen-Capture-Class-Capture-Screen-Desktop-Region-Form-or-Controls]
+Updated with GetWindow function from HeWhoWas [http://www.vbforums.com/showthread.php?581842-VB-NET-Get-image-of-inactive-3rd-party-windows-controls]
+Bill - processAPI class [http://stackoverflow.com/a/2171744]
+Jose M. - processWindowState class [http://stackoverflow.com/a/2171744]
