@@ -90,10 +90,6 @@ Public Class mainForm
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
         End If
 
-        If My.Settings.compactMode = True Then
-            CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
-        End If
-
         Me.boxStatistics.Font = consoleFont
 
         'Focus command line
@@ -139,6 +135,11 @@ Public Class mainForm
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\greenshot\Greenshot.exe") Then
             GreenshotToolStripMenuItem.Visible = True
             hasGreenshot = True
+        End If
+
+        'Compact mode
+        If My.Settings.compactMode = True Then
+            CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
         End If
 
         'Check parameters for db path and load db
@@ -1024,10 +1025,8 @@ Public Class mainForm
             End If
 
             groupImage.Visible = True
-            'groupSourcesList.Visible = True
             groupStatistics.Visible = True
             mainContainer.Panel2Collapsed = False
-            'containerSourcesMonitor.Panel1Collapsed = False
 
             If hasFTP = True Then
                 FTPServerToolStripMenuItem.Visible = True
@@ -1043,12 +1042,12 @@ Public Class mainForm
                 Me.WindowState = FormWindowState.Normal
             End If
 
-            Me.MinimumSize = New Size(800, 500)
+            Me.MinimumSize = New Size(900, 500)
 
             If lastWidth > 0 Then
                 Me.Width = lastWidth
             Else
-                Me.Width = 800
+                Me.Width = 900
             End If
 
             If lastHeight > 0 Then
@@ -1070,10 +1069,8 @@ Public Class mainForm
             groupConnectOver.Visible = False
             groupImage.Visible = False
             groupResolutionSettings.Visible = False
-            'groupSourcesList.Visible = False
             groupStatistics.Visible = False
             mainContainer.Panel2Collapsed = True
-            'containerSourcesMonitor.Panel1Collapsed = True
             FTPServerToolStripMenuItem.Visible = False
             GreenshotToolStripMenuItem.Visible = False
 

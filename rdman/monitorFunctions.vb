@@ -125,14 +125,18 @@ Module monitorFunctions
 
                 MyWindow = SC.CaptureWindow(window)
 
-                If MyWindow IsNot Nothing Then
-                    If MyWindow.Width > 1280 Then
-                        MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 7, MyWindow.Height / 7, Nothing, System.IntPtr.Zero)
-                    ElseIf GetProcessWindowState(window) <> FormWindowState.Minimized Then
-                        MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 5, MyWindow.Height / 5, Nothing, System.IntPtr.Zero)
-                    End If
+                If (MyWindow IsNot Nothing) And (GetProcessWindowState(window) <> FormWindowState.Minimized) Then
+                    Select Case MyWindow.Width
+                        Case Is >= 1280
+                            MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 7, MyWindow.Height / 7, Nothing, System.IntPtr.Zero)
+                        Case 800 To 1279
+                            MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 5, MyWindow.Height / 5, Nothing, System.IntPtr.Zero)
+                        Case 400 To 799
+                            MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 3, MyWindow.Height / 3, Nothing, System.IntPtr.Zero)
+                        Case Is < 400
+                            MyWindow = MyWindow.GetThumbnailImage(MyWindow.Width / 2, MyWindow.Height / 2, Nothing, System.IntPtr.Zero)
+                    End Select
                 End If
-
                 Return MyWindow
             Else
                 Return Nothing
@@ -159,7 +163,9 @@ Module monitorFunctions
                 nodeName = node.Text.Remove(0, node.Text.LastIndexOf("["))
                 nodeName = nodeName.Replace("[", "")
                 nodeName = nodeName.Replace("]", "")
-                nodeName = nodeName.Substring(0, nodeName.LastIndexOf(":"))
+                If nodeName.Contains(":") Then
+                    nodeName = nodeName.Substring(0, nodeName.LastIndexOf(":"))
+                End If
 
                 Try
                     If My.Computer.Network.Ping(nodeName) = True Then

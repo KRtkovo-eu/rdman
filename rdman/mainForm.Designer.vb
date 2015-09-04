@@ -371,7 +371,7 @@ Partial Class mainForm
         Me.groupStatistics.Location = New System.Drawing.Point(0, 342)
         Me.groupStatistics.Name = "groupStatistics"
         Me.groupStatistics.Size = New System.Drawing.Size(638, 157)
-        Me.groupStatistics.TabIndex = 4
+        Me.groupStatistics.TabIndex = 0
         Me.groupStatistics.TabStop = False
         Me.groupStatistics.Text = "Statistics"
         '
@@ -422,7 +422,7 @@ Partial Class mainForm
         Me.groupConnectOver.Location = New System.Drawing.Point(0, 292)
         Me.groupConnectOver.Name = "groupConnectOver"
         Me.groupConnectOver.Size = New System.Drawing.Size(638, 50)
-        Me.groupConnectOver.TabIndex = 3
+        Me.groupConnectOver.TabIndex = 0
         Me.groupConnectOver.TabStop = False
         Me.groupConnectOver.Text = "Connect over"
         Me.groupConnectOver.Visible = False
@@ -436,7 +436,7 @@ Partial Class mainForm
         Me.lblUsePutty.Location = New System.Drawing.Point(570, 24)
         Me.lblUsePutty.Name = "lblUsePutty"
         Me.lblUsePutty.Size = New System.Drawing.Size(57, 13)
-        Me.lblUsePutty.TabIndex = 14
+        Me.lblUsePutty.TabIndex = 13
         Me.lblUsePutty.TabStop = True
         Me.lblUsePutty.Text = "Use PuTTY"
         Me.lblUsePutty.Visible = False
@@ -449,7 +449,7 @@ Partial Class mainForm
         Me.buttonLocateViewer.Location = New System.Drawing.Point(539, 19)
         Me.buttonLocateViewer.Name = "buttonLocateViewer"
         Me.buttonLocateViewer.Size = New System.Drawing.Size(25, 23)
-        Me.buttonLocateViewer.TabIndex = 13
+        Me.buttonLocateViewer.TabIndex = 12
         Me.buttonLocateViewer.Text = "..."
         Me.buttonLocateViewer.UseVisualStyleBackColor = True
         '
@@ -471,7 +471,7 @@ Partial Class mainForm
         Me.boxViewerPath.Location = New System.Drawing.Point(115, 20)
         Me.boxViewerPath.Name = "boxViewerPath"
         Me.boxViewerPath.Size = New System.Drawing.Size(418, 22)
-        Me.boxViewerPath.TabIndex = 12
+        Me.boxViewerPath.TabIndex = 11
         '
         'groupResolutionSettings
         '
@@ -487,7 +487,7 @@ Partial Class mainForm
         Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 242)
         Me.groupResolutionSettings.Name = "groupResolutionSettings"
         Me.groupResolutionSettings.Size = New System.Drawing.Size(638, 50)
-        Me.groupResolutionSettings.TabIndex = 2
+        Me.groupResolutionSettings.TabIndex = 0
         Me.groupResolutionSettings.TabStop = False
         Me.groupResolutionSettings.Text = "Resolution settings"
         '
@@ -510,7 +510,7 @@ Partial Class mainForm
         Me.boxFullscreen.Location = New System.Drawing.Point(10, 22)
         Me.boxFullscreen.Name = "boxFullscreen"
         Me.boxFullscreen.Size = New System.Drawing.Size(78, 17)
-        Me.boxFullscreen.TabIndex = 8
+        Me.boxFullscreen.TabIndex = 7
         Me.boxFullscreen.Text = "Fullscreen"
         Me.boxFullscreen.UseVisualStyleBackColor = True
         '
@@ -541,7 +541,7 @@ Partial Class mainForm
         Me.boxHeight.Name = "boxHeight"
         Me.boxHeight.ReadOnly = True
         Me.boxHeight.Size = New System.Drawing.Size(48, 22)
-        Me.boxHeight.TabIndex = 11
+        Me.boxHeight.TabIndex = 10
         '
         'boxMultimon
         '
@@ -550,7 +550,7 @@ Partial Class mainForm
         Me.boxMultimon.Location = New System.Drawing.Point(115, 22)
         Me.boxMultimon.Name = "boxMultimon"
         Me.boxMultimon.Size = New System.Drawing.Size(194, 17)
-        Me.boxMultimon.TabIndex = 9
+        Me.boxMultimon.TabIndex = 8
         Me.boxMultimon.Text = "Span remote desktop (multimon)"
         Me.boxMultimon.UseVisualStyleBackColor = True
         '
@@ -561,7 +561,7 @@ Partial Class mainForm
         Me.boxWidth.Name = "boxWidth"
         Me.boxWidth.ReadOnly = True
         Me.boxWidth.Size = New System.Drawing.Size(48, 22)
-        Me.boxWidth.TabIndex = 10
+        Me.boxWidth.TabIndex = 9
         '
         'groupAdditionalInformations
         '
@@ -577,7 +577,7 @@ Partial Class mainForm
         Me.groupAdditionalInformations.Location = New System.Drawing.Point(0, 95)
         Me.groupAdditionalInformations.Name = "groupAdditionalInformations"
         Me.groupAdditionalInformations.Size = New System.Drawing.Size(638, 147)
-        Me.groupAdditionalInformations.TabIndex = 1
+        Me.groupAdditionalInformations.TabIndex = 0
         Me.groupAdditionalInformations.TabStop = False
         Me.groupAdditionalInformations.Text = "Additional settings"
         '
@@ -591,7 +591,7 @@ Partial Class mainForm
         Me.boxDescription.Multiline = True
         Me.boxDescription.Name = "boxDescription"
         Me.boxDescription.Size = New System.Drawing.Size(632, 52)
-        Me.boxDescription.TabIndex = 7
+        Me.boxDescription.TabIndex = 6
         '
         'lblDescription
         '
@@ -611,7 +611,7 @@ Partial Class mainForm
         Me.boxSystemVersion.Location = New System.Drawing.Point(115, 48)
         Me.boxSystemVersion.Name = "boxSystemVersion"
         Me.boxSystemVersion.Size = New System.Drawing.Size(237, 22)
-        Me.boxSystemVersion.TabIndex = 6
+        Me.boxSystemVersion.TabIndex = 5
         '
         'lblVersion
         '
@@ -645,7 +645,7 @@ Partial Class mainForm
         Me.buttonExport.Location = New System.Drawing.Point(54, 36)
         Me.buttonExport.Name = "buttonExport"
         Me.buttonExport.Size = New System.Drawing.Size(44, 23)
-        Me.buttonExport.TabIndex = 2
+        Me.buttonExport.TabIndex = 0
         Me.buttonExport.Text = "Export"
         Me.buttonExport.UseVisualStyleBackColor = True
         '
@@ -658,7 +658,7 @@ Partial Class mainForm
         Me.buttonImport.Location = New System.Drawing.Point(54, 63)
         Me.buttonImport.Name = "buttonImport"
         Me.buttonImport.Size = New System.Drawing.Size(44, 23)
-        Me.buttonImport.TabIndex = 1
+        Me.buttonImport.TabIndex = 0
         Me.buttonImport.Text = "Import"
         Me.buttonImport.UseVisualStyleBackColor = True
         '
@@ -709,7 +709,7 @@ Partial Class mainForm
         Me.boxSystem.Location = New System.Drawing.Point(115, 21)
         Me.boxSystem.Name = "boxSystem"
         Me.boxSystem.Size = New System.Drawing.Size(237, 21)
-        Me.boxSystem.TabIndex = 5
+        Me.boxSystem.TabIndex = 4
         '
         'lblSystem
         '
@@ -749,7 +749,7 @@ Partial Class mainForm
         Me.lblQuickConnect.Location = New System.Drawing.Point(394, 0)
         Me.lblQuickConnect.Name = "lblQuickConnect"
         Me.lblQuickConnect.Size = New System.Drawing.Size(71, 12)
-        Me.lblQuickConnect.TabIndex = 3
+        Me.lblQuickConnect.TabIndex = 14
         Me.lblQuickConnect.TabStop = True
         Me.lblQuickConnect.Text = "Quick Connect"
         Me.lblQuickConnect.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -763,7 +763,7 @@ Partial Class mainForm
         Me.boxConnectOver.Location = New System.Drawing.Point(372, 25)
         Me.boxConnectOver.Name = "boxConnectOver"
         Me.boxConnectOver.Size = New System.Drawing.Size(94, 17)
-        Me.boxConnectOver.TabIndex = 4
+        Me.boxConnectOver.TabIndex = 1
         Me.boxConnectOver.Text = "Connect over"
         Me.boxConnectOver.UseVisualStyleBackColor = True
         '
@@ -816,7 +816,7 @@ Partial Class mainForm
         Me.boxName.Location = New System.Drawing.Point(115, 23)
         Me.boxName.Name = "boxName"
         Me.boxName.Size = New System.Drawing.Size(237, 22)
-        Me.boxName.TabIndex = 1
+        Me.boxName.TabIndex = 0
         '
         'lblName
         '
@@ -1026,7 +1026,7 @@ Partial Class mainForm
         '
         Me.ViewHelpToolStripMenuItem.Image = CType(resources.GetObject("ViewHelpToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ViewHelpToolStripMenuItem.Name = "ViewHelpToolStripMenuItem"
-        Me.ViewHelpToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F1), System.Windows.Forms.Keys)
+        Me.ViewHelpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1
         Me.ViewHelpToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.ViewHelpToolStripMenuItem.Text = "View &Help"
         '
@@ -1091,7 +1091,7 @@ Partial Class mainForm
         '
         'processPreviewHover
         '
-        Me.processPreviewHover.Interval = 500
+        Me.processPreviewHover.Interval = 40
         '
         'notifyIconCompactMode
         '
