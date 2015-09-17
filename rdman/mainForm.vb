@@ -1222,6 +1222,7 @@ Public Class mainForm
             Case "(disconnected)"
                 If MessageBox.Show("Do you want to reconnect to this remote session?", "Reconnect?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                     loadSourceData(node.SubItems(0).Text)
+                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                     buttonConnect_Click(Nothing, Nothing)
                 Else
                     monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
