@@ -966,7 +966,8 @@ Public Class mainForm
                 sourcesDb = statisticsFile
                 LoadSources(statisticsFile)
             End If
-        Catch
+        Catch ex As Exception
+            statistics(ex.Message)
         End Try
 
         saveStatistics.Filter = "Text files *.txt|*.txt"

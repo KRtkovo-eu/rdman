@@ -34,10 +34,14 @@ Module dataControl
         Loop
 
         'Check if the database file contains all fields.
-        If csvNodes.Item(0).Length < csvLineNumOfFields Then
-            MessageBox.Show("Sources database file was created by previous version of Remote Desktop Manager.", "Database file cannot be used.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            statistics("Sources database file " + sources + " was created by previous version of Remote Desktop Manager and must be resolved manually before it can be loaded.")
-        End If
+        Try
+            If csvNodes.Item(0).Length < csvLineNumOfFields Then
+                MessageBox.Show("Sources database file was created by previous version of Remote Desktop Manager.", "Database file cannot be used.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                statistics("Sources database file " + sources + " was created by previous version of Remote Desktop Manager and must be resolved manually before it can be loaded.")
+            End If
+        Catch ex As Exception
+            statistics(ex.Message)
+        End Try
 
         Return csvNodes
     End Function
