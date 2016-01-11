@@ -959,12 +959,15 @@ Public Class mainForm
         saveStatistics.FileName = "sources.rdman"
         saveStatistics.Title = "New sources database"
 
-        If saveStatistics.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            Dim statisticsFile As String = saveStatistics.FileName
-            My.Computer.FileSystem.WriteAllText(statisticsFile, "", False)
-            sourcesDb = statisticsFile
-            LoadSources(statisticsFile)
-        End If
+        Try
+            If saveStatistics.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                Dim statisticsFile As String = saveStatistics.FileName
+                My.Computer.FileSystem.WriteAllText(statisticsFile, "", False)
+                sourcesDb = statisticsFile
+                LoadSources(statisticsFile)
+            End If
+        Catch
+        End Try
 
         saveStatistics.Filter = "Text files *.txt|*.txt"
         saveStatistics.DefaultExt = "txt"
