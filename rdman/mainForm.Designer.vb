@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class mainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,10 @@ Partial Class mainForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -41,6 +41,8 @@ Partial Class mainForm
         Me.columnPID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnArgs = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.contextMenuMonitor = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MoveToNextScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.monitorStates = New System.Windows.Forms.ImageList(Me.components)
         Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
@@ -60,11 +62,17 @@ Partial Class mainForm
         Me.boxMultimon = New System.Windows.Forms.CheckBox()
         Me.boxWidth = New System.Windows.Forms.TextBox()
         Me.groupAdditionalInformations = New System.Windows.Forms.GroupBox()
+        Me.boxCredentials = New System.Windows.Forms.GroupBox()
+        Me.lblPassword = New System.Windows.Forms.LinkLabel()
+        Me.textboxPassword = New System.Windows.Forms.TextBox()
+        Me.textboxUsername = New System.Windows.Forms.TextBox()
+        Me.lblCredentialsUser = New System.Windows.Forms.Label()
         Me.boxDescription = New System.Windows.Forms.TextBox()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.boxSystemVersion = New System.Windows.Forms.TextBox()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.groupButtons = New System.Windows.Forms.GroupBox()
+        Me.btnAutoconnect = New System.Windows.Forms.Button()
         Me.buttonExport = New System.Windows.Forms.Button()
         Me.buttonImport = New System.Windows.Forms.Button()
         Me.buttonNewNode = New System.Windows.Forms.Button()
@@ -98,9 +106,9 @@ Partial Class mainForm
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ColorOfStatisticsConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowpreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.CheckForupdateOnStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ShowpreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -113,6 +121,7 @@ Partial Class mainForm
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompactModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
@@ -121,6 +130,7 @@ Partial Class mainForm
         Me.ftpPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -131,10 +141,12 @@ Partial Class mainForm
         Me.containerSourcesMonitor.SuspendLayout()
         Me.groupSourcesList.SuspendLayout()
         Me.groupMonitor.SuspendLayout()
+        Me.contextMenuMonitor.SuspendLayout()
         Me.groupStatistics.SuspendLayout()
         Me.groupConnectOver.SuspendLayout()
         Me.groupResolutionSettings.SuspendLayout()
         Me.groupAdditionalInformations.SuspendLayout()
+        Me.boxCredentials.SuspendLayout()
         Me.groupButtons.SuspendLayout()
         Me.groupConnectionSettings.SuspendLayout()
         Me.groupImage.SuspendLayout()
@@ -192,7 +204,7 @@ Partial Class mainForm
         Me.groupSourcesList.Location = New System.Drawing.Point(0, 0)
         Me.groupSourcesList.Name = "groupSourcesList"
         Me.groupSourcesList.Size = New System.Drawing.Size(250, 318)
-        Me.groupSourcesList.TabIndex = 1
+        Me.groupSourcesList.TabIndex = 0
         Me.groupSourcesList.TabStop = False
         Me.groupSourcesList.Text = "Sources list"
         '
@@ -214,7 +226,7 @@ Partial Class mainForm
         Me.pingAll.Location = New System.Drawing.Point(142, 0)
         Me.pingAll.Name = "pingAll"
         Me.pingAll.Size = New System.Drawing.Size(102, 12)
-        Me.pingAll.TabIndex = 1
+        Me.pingAll.TabIndex = 0
         Me.pingAll.TabStop = True
         Me.pingAll.Text = "PING selected sources"
         Me.pingAll.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -230,9 +242,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem2.StateImageIndex = 0
-        ListViewItem2.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        ListViewItem1.StateImageIndex = 0
+        ListViewItem1.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -241,7 +253,7 @@ Partial Class mainForm
         Me.sourcesList.Size = New System.Drawing.Size(244, 297)
         Me.sourcesList.SmallImageList = Me.operatingSystemsIcons
         Me.sourcesList.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.sourcesList.TabIndex = 0
+        Me.sourcesList.TabIndex = 1
         Me.sourcesList.TileSize = New System.Drawing.Size(150, 24)
         Me.sourcesList.UseCompatibleStateImageBehavior = False
         Me.sourcesList.View = System.Windows.Forms.View.List
@@ -269,7 +281,7 @@ Partial Class mainForm
         Me.groupMonitor.Location = New System.Drawing.Point(0, 0)
         Me.groupMonitor.Name = "groupMonitor"
         Me.groupMonitor.Size = New System.Drawing.Size(250, 155)
-        Me.groupMonitor.TabIndex = 3
+        Me.groupMonitor.TabIndex = 0
         Me.groupMonitor.TabStop = False
         Me.groupMonitor.Text = "Processes monitor"
         '
@@ -282,7 +294,7 @@ Partial Class mainForm
         Me.cleanTerminated.Location = New System.Drawing.Point(165, 0)
         Me.cleanTerminated.Name = "cleanTerminated"
         Me.cleanTerminated.Size = New System.Drawing.Size(79, 12)
-        Me.cleanTerminated.TabIndex = 3
+        Me.cleanTerminated.TabIndex = 0
         Me.cleanTerminated.TabStop = True
         Me.cleanTerminated.Text = "Clean terminated"
         Me.cleanTerminated.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -291,6 +303,7 @@ Partial Class mainForm
         'monitor
         '
         Me.monitor.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.columnName, Me.columnIP, Me.columnState, Me.columnPID, Me.columnArgs, Me.columnTime})
+        Me.monitor.ContextMenuStrip = Me.contextMenuMonitor
         Me.monitor.Dock = System.Windows.Forms.DockStyle.Fill
         Me.monitor.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.monitor.FullRowSelect = True
@@ -301,7 +314,7 @@ Partial Class mainForm
         Me.monitor.ShowGroups = False
         Me.monitor.Size = New System.Drawing.Size(244, 134)
         Me.monitor.StateImageList = Me.monitorStates
-        Me.monitor.TabIndex = 2
+        Me.monitor.TabIndex = 1
         Me.monitor.UseCompatibleStateImageBehavior = False
         Me.monitor.View = System.Windows.Forms.View.Details
         '
@@ -334,6 +347,18 @@ Partial Class mainForm
         Me.columnTime.Text = "Started on"
         Me.columnTime.Width = 150
         '
+        'contextMenuMonitor
+        '
+        Me.contextMenuMonitor.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoveToNextScreenToolStripMenuItem})
+        Me.contextMenuMonitor.Name = "contextMenuMonitor"
+        Me.contextMenuMonitor.Size = New System.Drawing.Size(181, 26)
+        '
+        'MoveToNextScreenToolStripMenuItem
+        '
+        Me.MoveToNextScreenToolStripMenuItem.Name = "MoveToNextScreenToolStripMenuItem"
+        Me.MoveToNextScreenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MoveToNextScreenToolStripMenuItem.Text = "Move to next screen"
+        '
         'monitorStates
         '
         Me.monitorStates.ImageStream = CType(resources.GetObject("monitorStates.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -355,7 +380,7 @@ Partial Class mainForm
         Me.boxSourcesPath.Name = "boxSourcesPath"
         Me.boxSourcesPath.Padding = New System.Windows.Forms.Padding(2)
         Me.boxSourcesPath.Size = New System.Drawing.Size(250, 22)
-        Me.boxSourcesPath.TabIndex = 1
+        Me.boxSourcesPath.TabIndex = 0
         Me.boxSourcesPath.Text = "Loaded: "
         Me.boxSourcesPath.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.ToolTip1.SetToolTip(Me.boxSourcesPath, "Reload sources database")
@@ -392,7 +417,7 @@ Partial Class mainForm
         '
         'statisticsCommandLine
         '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "autoconnect", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "password", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "username", "version", "viewer", "width"})
         Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
@@ -402,13 +427,13 @@ Partial Class mainForm
         Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
         Me.statisticsCommandLine.FormattingEnabled = True
         Me.statisticsCommandLine.ItemHeight = 11
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "version", "viewer", "width"})
+        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "autoconnect", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "password", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "username", "version", "viewer", "width"})
         Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 135)
         Me.statisticsCommandLine.MaxDropDownItems = 5
         Me.statisticsCommandLine.Name = "statisticsCommandLine"
         Me.statisticsCommandLine.Size = New System.Drawing.Size(632, 19)
         Me.statisticsCommandLine.Sorted = True
-        Me.statisticsCommandLine.TabIndex = 3
+        Me.statisticsCommandLine.TabIndex = 1
         Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter."
         '
         'groupConnectOver
@@ -422,7 +447,7 @@ Partial Class mainForm
         Me.groupConnectOver.Location = New System.Drawing.Point(0, 292)
         Me.groupConnectOver.Name = "groupConnectOver"
         Me.groupConnectOver.Size = New System.Drawing.Size(638, 50)
-        Me.groupConnectOver.TabIndex = 0
+        Me.groupConnectOver.TabIndex = 4
         Me.groupConnectOver.TabStop = False
         Me.groupConnectOver.Text = "Connect over"
         Me.groupConnectOver.Visible = False
@@ -436,7 +461,7 @@ Partial Class mainForm
         Me.lblUsePutty.Location = New System.Drawing.Point(570, 24)
         Me.lblUsePutty.Name = "lblUsePutty"
         Me.lblUsePutty.Size = New System.Drawing.Size(57, 13)
-        Me.lblUsePutty.TabIndex = 13
+        Me.lblUsePutty.TabIndex = 3
         Me.lblUsePutty.TabStop = True
         Me.lblUsePutty.Text = "Use PuTTY"
         Me.lblUsePutty.Visible = False
@@ -449,7 +474,7 @@ Partial Class mainForm
         Me.buttonLocateViewer.Location = New System.Drawing.Point(539, 19)
         Me.buttonLocateViewer.Name = "buttonLocateViewer"
         Me.buttonLocateViewer.Size = New System.Drawing.Size(25, 23)
-        Me.buttonLocateViewer.TabIndex = 12
+        Me.buttonLocateViewer.TabIndex = 2
         Me.buttonLocateViewer.Text = "..."
         Me.buttonLocateViewer.UseVisualStyleBackColor = True
         '
@@ -460,7 +485,7 @@ Partial Class mainForm
         Me.Label2.Location = New System.Drawing.Point(7, 24)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(79, 13)
-        Me.Label2.TabIndex = 1
+        Me.Label2.TabIndex = 0
         Me.Label2.Text = "Locate viewer:"
         '
         'boxViewerPath
@@ -471,7 +496,7 @@ Partial Class mainForm
         Me.boxViewerPath.Location = New System.Drawing.Point(115, 20)
         Me.boxViewerPath.Name = "boxViewerPath"
         Me.boxViewerPath.Size = New System.Drawing.Size(418, 22)
-        Me.boxViewerPath.TabIndex = 11
+        Me.boxViewerPath.TabIndex = 1
         '
         'groupResolutionSettings
         '
@@ -487,7 +512,7 @@ Partial Class mainForm
         Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 242)
         Me.groupResolutionSettings.Name = "groupResolutionSettings"
         Me.groupResolutionSettings.Size = New System.Drawing.Size(638, 50)
-        Me.groupResolutionSettings.TabIndex = 0
+        Me.groupResolutionSettings.TabIndex = 2
         Me.groupResolutionSettings.TabStop = False
         Me.groupResolutionSettings.Text = "Resolution settings"
         '
@@ -498,7 +523,7 @@ Partial Class mainForm
         Me.Label1.Location = New System.Drawing.Point(335, 24)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
-        Me.Label1.TabIndex = 8
+        Me.Label1.TabIndex = 2
         Me.Label1.Text = "Window size:"
         '
         'boxFullscreen
@@ -510,7 +535,7 @@ Partial Class mainForm
         Me.boxFullscreen.Location = New System.Drawing.Point(10, 22)
         Me.boxFullscreen.Name = "boxFullscreen"
         Me.boxFullscreen.Size = New System.Drawing.Size(78, 17)
-        Me.boxFullscreen.TabIndex = 7
+        Me.boxFullscreen.TabIndex = 0
         Me.boxFullscreen.Text = "Fullscreen"
         Me.boxFullscreen.UseVisualStyleBackColor = True
         '
@@ -521,7 +546,7 @@ Partial Class mainForm
         Me.lblWindowSizePix.Location = New System.Drawing.Point(537, 24)
         Me.lblWindowSizePix.Name = "lblWindowSizePix"
         Me.lblWindowSizePix.Size = New System.Drawing.Size(36, 13)
-        Me.lblWindowSizePix.TabIndex = 5
+        Me.lblWindowSizePix.TabIndex = 6
         Me.lblWindowSizePix.Text = "pixels"
         '
         'lblWindowSizeX
@@ -531,7 +556,7 @@ Partial Class mainForm
         Me.lblWindowSizeX.Location = New System.Drawing.Point(470, 24)
         Me.lblWindowSizeX.Name = "lblWindowSizeX"
         Me.lblWindowSizeX.Size = New System.Drawing.Size(12, 13)
-        Me.lblWindowSizeX.TabIndex = 3
+        Me.lblWindowSizeX.TabIndex = 4
         Me.lblWindowSizeX.Text = "x"
         '
         'boxHeight
@@ -541,7 +566,7 @@ Partial Class mainForm
         Me.boxHeight.Name = "boxHeight"
         Me.boxHeight.ReadOnly = True
         Me.boxHeight.Size = New System.Drawing.Size(48, 22)
-        Me.boxHeight.TabIndex = 10
+        Me.boxHeight.TabIndex = 5
         '
         'boxMultimon
         '
@@ -550,7 +575,7 @@ Partial Class mainForm
         Me.boxMultimon.Location = New System.Drawing.Point(115, 22)
         Me.boxMultimon.Name = "boxMultimon"
         Me.boxMultimon.Size = New System.Drawing.Size(194, 17)
-        Me.boxMultimon.TabIndex = 8
+        Me.boxMultimon.TabIndex = 1
         Me.boxMultimon.Text = "Span remote desktop (multimon)"
         Me.boxMultimon.UseVisualStyleBackColor = True
         '
@@ -561,10 +586,11 @@ Partial Class mainForm
         Me.boxWidth.Name = "boxWidth"
         Me.boxWidth.ReadOnly = True
         Me.boxWidth.Size = New System.Drawing.Size(48, 22)
-        Me.boxWidth.TabIndex = 9
+        Me.boxWidth.TabIndex = 3
         '
         'groupAdditionalInformations
         '
+        Me.groupAdditionalInformations.Controls.Add(Me.boxCredentials)
         Me.groupAdditionalInformations.Controls.Add(Me.boxDescription)
         Me.groupAdditionalInformations.Controls.Add(Me.lblDescription)
         Me.groupAdditionalInformations.Controls.Add(Me.boxSystemVersion)
@@ -577,21 +603,78 @@ Partial Class mainForm
         Me.groupAdditionalInformations.Location = New System.Drawing.Point(0, 95)
         Me.groupAdditionalInformations.Name = "groupAdditionalInformations"
         Me.groupAdditionalInformations.Size = New System.Drawing.Size(638, 147)
-        Me.groupAdditionalInformations.TabIndex = 0
+        Me.groupAdditionalInformations.TabIndex = 1
         Me.groupAdditionalInformations.TabStop = False
         Me.groupAdditionalInformations.Text = "Additional settings"
+        '
+        'boxCredentials
+        '
+        Me.boxCredentials.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.boxCredentials.Controls.Add(Me.lblPassword)
+        Me.boxCredentials.Controls.Add(Me.textboxPassword)
+        Me.boxCredentials.Controls.Add(Me.textboxUsername)
+        Me.boxCredentials.Controls.Add(Me.lblCredentialsUser)
+        Me.boxCredentials.Location = New System.Drawing.Point(367, 91)
+        Me.boxCredentials.Name = "boxCredentials"
+        Me.boxCredentials.Size = New System.Drawing.Size(268, 56)
+        Me.boxCredentials.TabIndex = 7
+        Me.boxCredentials.TabStop = False
+        Me.boxCredentials.Text = "Credentials"
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = True
+        Me.lblPassword.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.lblPassword.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.lblPassword.Location = New System.Drawing.Point(143, 15)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(59, 13)
+        Me.lblPassword.TabIndex = 2
+        Me.lblPassword.TabStop = True
+        Me.lblPassword.Text = "Password:"
+        Me.ToolTip1.SetToolTip(Me.lblPassword, "Show password for 5 sec.")
+        '
+        'textboxPassword
+        '
+        Me.textboxPassword.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.textboxPassword.Location = New System.Drawing.Point(141, 31)
+        Me.textboxPassword.Name = "textboxPassword"
+        Me.textboxPassword.Size = New System.Drawing.Size(124, 22)
+        Me.textboxPassword.TabIndex = 3
+        Me.textboxPassword.UseSystemPasswordChar = True
+        '
+        'textboxUsername
+        '
+        Me.textboxUsername.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.textboxUsername.Location = New System.Drawing.Point(6, 31)
+        Me.textboxUsername.Name = "textboxUsername"
+        Me.textboxUsername.Size = New System.Drawing.Size(129, 22)
+        Me.textboxUsername.TabIndex = 1
+        '
+        'lblCredentialsUser
+        '
+        Me.lblCredentialsUser.AutoSize = True
+        Me.lblCredentialsUser.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.lblCredentialsUser.Location = New System.Drawing.Point(6, 15)
+        Me.lblCredentialsUser.Name = "lblCredentialsUser"
+        Me.lblCredentialsUser.Size = New System.Drawing.Size(61, 13)
+        Me.lblCredentialsUser.TabIndex = 0
+        Me.lblCredentialsUser.Text = "Username:"
         '
         'boxDescription
         '
         Me.boxDescription.AcceptsReturn = True
         Me.boxDescription.AcceptsTab = True
-        Me.boxDescription.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.boxDescription.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxDescription.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxDescription.Location = New System.Drawing.Point(3, 92)
+        Me.boxDescription.Location = New System.Drawing.Point(10, 92)
         Me.boxDescription.Multiline = True
         Me.boxDescription.Name = "boxDescription"
-        Me.boxDescription.Size = New System.Drawing.Size(632, 52)
-        Me.boxDescription.TabIndex = 6
+        Me.boxDescription.Size = New System.Drawing.Size(342, 52)
+        Me.boxDescription.TabIndex = 5
         '
         'lblDescription
         '
@@ -611,7 +694,7 @@ Partial Class mainForm
         Me.boxSystemVersion.Location = New System.Drawing.Point(115, 48)
         Me.boxSystemVersion.Name = "boxSystemVersion"
         Me.boxSystemVersion.Size = New System.Drawing.Size(237, 22)
-        Me.boxSystemVersion.TabIndex = 5
+        Me.boxSystemVersion.TabIndex = 3
         '
         'lblVersion
         '
@@ -626,6 +709,7 @@ Partial Class mainForm
         'groupButtons
         '
         Me.groupButtons.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.groupButtons.Controls.Add(Me.btnAutoconnect)
         Me.groupButtons.Controls.Add(Me.buttonExport)
         Me.groupButtons.Controls.Add(Me.buttonImport)
         Me.groupButtons.Controls.Add(Me.buttonNewNode)
@@ -633,57 +717,65 @@ Partial Class mainForm
         Me.groupButtons.Controls.Add(Me.buttonConnect)
         Me.groupButtons.Location = New System.Drawing.Point(367, 0)
         Me.groupButtons.Name = "groupButtons"
-        Me.groupButtons.Size = New System.Drawing.Size(107, 90)
+        Me.groupButtons.Size = New System.Drawing.Size(115, 89)
         Me.groupButtons.TabIndex = 6
         Me.groupButtons.TabStop = False
         '
+        'btnAutoconnect
+        '
+        Me.btnAutoconnect.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAutoconnect.Location = New System.Drawing.Point(89, 10)
+        Me.btnAutoconnect.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnAutoconnect.Name = "btnAutoconnect"
+        Me.btnAutoconnect.Size = New System.Drawing.Size(9, 21)
+        Me.btnAutoconnect.TabIndex = 1
+        Me.btnAutoconnect.Text = "▼"
+        Me.ToolTip1.SetToolTip(Me.btnAutoconnect, "Autoconnect")
+        Me.btnAutoconnect.UseVisualStyleBackColor = True
+        '
         'buttonExport
         '
-        Me.buttonExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonExport.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonExport.Location = New System.Drawing.Point(54, 36)
+        Me.buttonExport.Location = New System.Drawing.Point(54, 35)
         Me.buttonExport.Name = "buttonExport"
         Me.buttonExport.Size = New System.Drawing.Size(44, 23)
-        Me.buttonExport.TabIndex = 0
+        Me.buttonExport.TabIndex = 3
         Me.buttonExport.Text = "Export"
         Me.buttonExport.UseVisualStyleBackColor = True
         '
         'buttonImport
         '
-        Me.buttonImport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonImport.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonImport.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.buttonImport.Location = New System.Drawing.Point(54, 63)
+        Me.buttonImport.Location = New System.Drawing.Point(54, 62)
         Me.buttonImport.Name = "buttonImport"
         Me.buttonImport.Size = New System.Drawing.Size(44, 23)
-        Me.buttonImport.TabIndex = 0
+        Me.buttonImport.TabIndex = 5
         Me.buttonImport.Text = "Import"
         Me.buttonImport.UseVisualStyleBackColor = True
         '
         'buttonNewNode
         '
-        Me.buttonNewNode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonNewNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonNewNode.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonNewNode.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.buttonNewNode.Location = New System.Drawing.Point(6, 63)
+        Me.buttonNewNode.Location = New System.Drawing.Point(6, 62)
         Me.buttonNewNode.Name = "buttonNewNode"
         Me.buttonNewNode.Size = New System.Drawing.Size(44, 23)
-        Me.buttonNewNode.TabIndex = 0
+        Me.buttonNewNode.TabIndex = 4
         Me.buttonNewNode.Text = "New"
         Me.buttonNewNode.UseVisualStyleBackColor = True
         '
         'buttonSave
         '
-        Me.buttonSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonSave.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.buttonSave.Location = New System.Drawing.Point(6, 36)
+        Me.buttonSave.Location = New System.Drawing.Point(6, 35)
         Me.buttonSave.Name = "buttonSave"
         Me.buttonSave.Size = New System.Drawing.Size(44, 23)
-        Me.buttonSave.TabIndex = 0
+        Me.buttonSave.TabIndex = 2
         Me.buttonSave.Text = "Save"
         Me.buttonSave.UseVisualStyleBackColor = True
         '
@@ -692,8 +784,9 @@ Partial Class mainForm
         Me.buttonConnect.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.buttonConnect.ForeColor = System.Drawing.Color.Green
         Me.buttonConnect.Location = New System.Drawing.Point(6, 9)
+        Me.buttonConnect.Margin = New System.Windows.Forms.Padding(0)
         Me.buttonConnect.Name = "buttonConnect"
-        Me.buttonConnect.Size = New System.Drawing.Size(92, 23)
+        Me.buttonConnect.Size = New System.Drawing.Size(84, 23)
         Me.buttonConnect.TabIndex = 0
         Me.buttonConnect.Text = "Connect"
         Me.buttonConnect.UseVisualStyleBackColor = True
@@ -709,7 +802,7 @@ Partial Class mainForm
         Me.boxSystem.Location = New System.Drawing.Point(115, 21)
         Me.boxSystem.Name = "boxSystem"
         Me.boxSystem.Size = New System.Drawing.Size(237, 21)
-        Me.boxSystem.TabIndex = 4
+        Me.boxSystem.TabIndex = 1
         '
         'lblSystem
         '
@@ -749,7 +842,7 @@ Partial Class mainForm
         Me.lblQuickConnect.Location = New System.Drawing.Point(394, 0)
         Me.lblQuickConnect.Name = "lblQuickConnect"
         Me.lblQuickConnect.Size = New System.Drawing.Size(71, 12)
-        Me.lblQuickConnect.TabIndex = 14
+        Me.lblQuickConnect.TabIndex = 7
         Me.lblQuickConnect.TabStop = True
         Me.lblQuickConnect.Text = "Quick Connect"
         Me.lblQuickConnect.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -763,7 +856,7 @@ Partial Class mainForm
         Me.boxConnectOver.Location = New System.Drawing.Point(372, 25)
         Me.boxConnectOver.Name = "boxConnectOver"
         Me.boxConnectOver.Size = New System.Drawing.Size(94, 17)
-        Me.boxConnectOver.TabIndex = 1
+        Me.boxConnectOver.TabIndex = 6
         Me.boxConnectOver.Text = "Connect over"
         Me.boxConnectOver.UseVisualStyleBackColor = True
         '
@@ -774,7 +867,7 @@ Partial Class mainForm
         Me.boxPort.Location = New System.Drawing.Point(404, 56)
         Me.boxPort.Name = "boxPort"
         Me.boxPort.Size = New System.Drawing.Size(54, 22)
-        Me.boxPort.TabIndex = 3
+        Me.boxPort.TabIndex = 5
         Me.boxPort.Text = "3389"
         '
         'lblPort
@@ -796,7 +889,7 @@ Partial Class mainForm
         Me.boxIP.Location = New System.Drawing.Point(115, 56)
         Me.boxIP.Name = "boxIP"
         Me.boxIP.Size = New System.Drawing.Size(237, 22)
-        Me.boxIP.TabIndex = 2
+        Me.boxIP.TabIndex = 3
         '
         'lblIP
         '
@@ -816,7 +909,7 @@ Partial Class mainForm
         Me.boxName.Location = New System.Drawing.Point(115, 23)
         Me.boxName.Name = "boxName"
         Me.boxName.Size = New System.Drawing.Size(237, 22)
-        Me.boxName.TabIndex = 0
+        Me.boxName.TabIndex = 1
         '
         'lblName
         '
@@ -835,8 +928,8 @@ Partial Class mainForm
         Me.groupImage.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupImage.Location = New System.Drawing.Point(723, 24)
         Me.groupImage.Name = "groupImage"
-        Me.groupImage.Size = New System.Drawing.Size(169, 185)
-        Me.groupImage.TabIndex = 5
+        Me.groupImage.Size = New System.Drawing.Size(169, 184)
+        Me.groupImage.TabIndex = 1
         Me.groupImage.TabStop = False
         Me.groupImage.Text = "Image"
         '
@@ -845,7 +938,7 @@ Partial Class mainForm
         Me.boxPicture.Dock = System.Windows.Forms.DockStyle.Fill
         Me.boxPicture.Location = New System.Drawing.Point(3, 18)
         Me.boxPicture.Name = "boxPicture"
-        Me.boxPicture.Size = New System.Drawing.Size(163, 164)
+        Me.boxPicture.Size = New System.Drawing.Size(163, 163)
         Me.boxPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.boxPicture.TabIndex = 0
         Me.boxPicture.TabStop = False
@@ -853,7 +946,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem, Me.AutoconnectToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -948,7 +1041,7 @@ Partial Class mainForm
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ToolStripSeparator4, Me.CheckForupdateOnStartToolStripMenuItem, Me.ShowpreviewToolStripMenuItem, Me.ToolStripSeparator5, Me.AskBeforeCloseToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.KillChildProcessesOnCloseToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ShowpreviewToolStripMenuItem, Me.ToolStripSeparator4, Me.CheckForupdateOnStartToolStripMenuItem, Me.ToolStripSeparator5, Me.AskBeforeCloseToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.KillChildProcessesOnCloseToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "&Options"
@@ -961,6 +1054,12 @@ Partial Class mainForm
         Me.ColorOfStatisticsConsoleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.ColorOfStatisticsConsoleToolStripMenuItem.Text = "&Statistics console style"
         '
+        'ShowpreviewToolStripMenuItem
+        '
+        Me.ShowpreviewToolStripMenuItem.Name = "ShowpreviewToolStripMenuItem"
+        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.ShowpreviewToolStripMenuItem.Text = "Show &preview"
+        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
@@ -971,12 +1070,6 @@ Partial Class mainForm
         Me.CheckForupdateOnStartToolStripMenuItem.Name = "CheckForupdateOnStartToolStripMenuItem"
         Me.CheckForupdateOnStartToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.CheckForupdateOnStartToolStripMenuItem.Text = "Check for &update on start"
-        '
-        'ShowpreviewToolStripMenuItem
-        '
-        Me.ShowpreviewToolStripMenuItem.Name = "ShowpreviewToolStripMenuItem"
-        Me.ShowpreviewToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
-        Me.ShowpreviewToolStripMenuItem.Text = "Show &preview"
         '
         'ToolStripSeparator5
         '
@@ -1056,6 +1149,13 @@ Partial Class mainForm
         Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(96, 20)
         Me.CompactModeToolStripMenuItem.Text = "&Compact mode"
         '
+        'AutoconnectToolStripMenuItem
+        '
+        Me.AutoconnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.AutoconnectToolStripMenuItem.Name = "AutoconnectToolStripMenuItem"
+        Me.AutoconnectToolStripMenuItem.Size = New System.Drawing.Size(119, 20)
+        Me.AutoconnectToolStripMenuItem.Text = "Do &autoconnection"
+        '
         'operatingSystemsImages
         '
         Me.operatingSystemsImages.ImageStream = CType(resources.GetObject("operatingSystemsImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -1101,6 +1201,10 @@ Partial Class mainForm
         Me.notifyIconCompactMode.Text = "Remote Desktop Manager"
         Me.notifyIconCompactMode.Visible = True
         '
+        'showPasswordTimer
+        '
+        Me.showPasswordTimer.Interval = 5000
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1129,6 +1233,7 @@ Partial Class mainForm
         Me.groupSourcesList.PerformLayout()
         Me.groupMonitor.ResumeLayout(False)
         Me.groupMonitor.PerformLayout()
+        Me.contextMenuMonitor.ResumeLayout(False)
         Me.groupStatistics.ResumeLayout(False)
         Me.groupConnectOver.ResumeLayout(False)
         Me.groupConnectOver.PerformLayout()
@@ -1136,6 +1241,8 @@ Partial Class mainForm
         Me.groupResolutionSettings.PerformLayout()
         Me.groupAdditionalInformations.ResumeLayout(False)
         Me.groupAdditionalInformations.PerformLayout()
+        Me.boxCredentials.ResumeLayout(False)
+        Me.boxCredentials.PerformLayout()
         Me.groupButtons.ResumeLayout(False)
         Me.groupConnectionSettings.ResumeLayout(False)
         Me.groupConnectionSettings.PerformLayout()
@@ -1243,5 +1350,14 @@ Partial Class mainForm
     Friend WithEvents ImportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GreenshotToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
+    Friend WithEvents contextMenuMonitor As ContextMenuStrip
+    Friend WithEvents MoveToNextScreenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents boxCredentials As GroupBox
+    Friend WithEvents textboxPassword As TextBox
+    Friend WithEvents textboxUsername As TextBox
+    Friend WithEvents lblCredentialsUser As Label
+    Friend WithEvents btnAutoconnect As Button
+    Friend WithEvents lblPassword As LinkLabel
+    Friend WithEvents showPasswordTimer As Timer
+    Friend WithEvents AutoconnectToolStripMenuItem As ToolStripMenuItem
 End Class

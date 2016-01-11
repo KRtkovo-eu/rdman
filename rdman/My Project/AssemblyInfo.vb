@@ -11,14 +11,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Remote Desktop Manager")> 
 <Assembly: AssemblyDescription("Remote Desktop Manager")> 
 <Assembly: AssemblyCompany("KRtkovo.eu design studio")> 
-<Assembly: AssemblyProduct("rdman")> 
-<Assembly: AssemblyCopyright("GNU General Public License v3.0")> 
+<Assembly: AssemblyProduct("rdman")>
+<Assembly: AssemblyCopyright("GNU General Public License v3.0")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("c6fcfb94-8495-4f59-8f98-59759b4966c5")> 
+<Assembly: Guid("c6fcfb94-8495-4f59-8f98-59759b4966c5")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.8.9")> 
-<Assembly: AssemblyFileVersion("0.8.9")> 
+<Assembly: AssemblyVersion("0.9")>
+<Assembly: AssemblyFileVersion("0.9")>

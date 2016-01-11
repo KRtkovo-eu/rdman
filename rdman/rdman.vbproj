@@ -31,7 +31,7 @@
     <SuiteName>rdman</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.8.9.0</ApplicationVersion>
+    <ApplicationVersion>0.9.0.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -87,10 +87,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>6368EA3115DA3C60B9391FF8592E00FB6F23F4DF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>02B7E8D34C4549A4DA842416D8B5855E86421DDD</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>cert\RDMan.pfx</ManifestKeyFile>
+    <ManifestKeyFile>rdman_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -248,6 +248,9 @@
     <Content Include="modules\greenshot\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="modules\launchrdp\LaunchRDP.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\putty\putty.chm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -309,6 +312,7 @@
     <Content Include="sources.rdman">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="rdman_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="asciiGraphics\4.txt">
@@ -490,6 +494,7 @@
       <DefaultIcon>icons\code.ico</DefaultIcon>
     </FileAssociation>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

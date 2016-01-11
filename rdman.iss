@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.8.9"
-#define MyAppVersionText "v0.8.9"
+#define MyAppVersion "0.9"
+#define MyAppVersionText "v0.9"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -70,6 +70,7 @@ Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\mikroftp\*"; 
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\putty\*"; DestDir: "{app}\modules\putty"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Putty
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\fighter\*"; DestDir: "{app}\modules\fighter"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Fighter
 Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\greenshot\*"; DestDir: "{app}\modules\greenshot"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Greenshot
+Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\launchrdp\*"; DestDir: "{app}\modules\launchrdp"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: LaunchRDP
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -81,6 +82,7 @@ Name: "{group}\modules\mikroFTP"; Filename: "{app}\modules\mikroftp\mikroftp.exe
 Name: "{group}\modules\PuTTY"; Filename: "{app}\modules\putty\putty.exe"; Components: Putty
 Name: "{group}\modules\Aviation Fight"; Filename: "{app}\modules\fighter\fighter.exe"; Components: Fighter
 Name: "{group}\modules\Greenshot"; Filename: "{app}\modules\greenshot\Greenshot.exe"; Components: Greenshot
+Name: "{group}\modules\LaunchRDP"; Filename: "{app}\modules\greenshot\launchrdp.exe"; Components: LaunchRDP
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Registry]
@@ -99,6 +101,7 @@ Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom f
 Name: "MikroFTP"; Description: "MikroFTP server"; Types: custom full
 Name: "PuTTY"; Description: "PuTTY SSH and Telnet client"; Types: custom full
 Name: "Greenshot"; Description: "Greenshot module for simple screenshooting"; Types: custom full
+Name: "LaunchRDP"; Description: "LaunchRDP script for automatic login with stored credentials"; Types: custom full
 
 [Types]
 Name: "full"; Description: "Remote Desktop Manager with all modules"

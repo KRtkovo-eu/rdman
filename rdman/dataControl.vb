@@ -12,6 +12,7 @@ Module dataControl
     Public mstsc As Process
     Dim ProcessProperties As New ProcessStartInfo
     Dim nodes As List(Of String())
+    Const csvLineNumOfFields As Integer = 14
 #End Region
 
 #Region "Function for fillig nodes array"
@@ -31,6 +32,12 @@ Module dataControl
             csvLine = afile.ReadFields
             csvNodes.Add(csvLine)
         Loop
+
+        'Check if the database file contains all fields.
+        If csvNodes.Item(0).Length < csvLineNumOfFields Then
+            MessageBox.Show("Sources database file was created by previous version of Remote Desktop Manager.", "Database file cannot be used.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            statistics("Sources database file " + sources + " was created by previous version of Remote Desktop Manager and must be resolved manually before it can be loaded.")
+        End If
 
         Return csvNodes
     End Function
@@ -175,7 +182,27 @@ Module dataControl
             db = deleteSource(nodeName, sourcesDb)
 
             If onlyDelete = False Then
-                Dim sourceData As String() = {nodeName, mainForm.boxIP.Text, mainForm.boxPort.Text, mainForm.boxFullscreen.Checked.ToString, mainForm.boxMultimon.Checked.ToString, mainForm.boxWidth.Text, mainForm.boxHeight.Text, mainForm.boxSystem.Text, mainForm.boxSystemVersion.Text, mainForm.boxDescription.Text, mainForm.boxConnectOver.Checked, mainForm.boxViewerPath.Text}
+                Dim autoconnect As Boolean = False
+                If mainForm.btnAutoconnect.BackColor = Color.GreenYellow Then
+                    autoconnect = True
+                End If
+
+                Dim sourceData As String() = {
+                    nodeName,
+                    mainForm.boxIP.Text,
+                    mainForm.boxPort.Text,
+                    mainForm.boxFullscreen.Checked.ToString,
+                    mainForm.boxMultimon.Checked.ToString,
+                    mainForm.boxWidth.Text,
+                    mainForm.boxHeight.Text,
+                    mainForm.boxSystem.Text,
+                    mainForm.boxSystemVersion.Text,
+                    mainForm.boxDescription.Text,
+                    mainForm.boxConnectOver.Checked,
+                    mainForm.boxViewerPath.Text,
+                    autoconnect.ToString,
+                    mainForm.textboxUsername.Text,
+                    mainForm.textboxPassword.Text}
 
                 db.Add(sourceData)
             End If
@@ -185,16 +212,16 @@ Module dataControl
 
                 For Each element In db
                     Dim line As String = ""
-                    Dim lineNum As Integer = 0
+                    Dim fieldNum As Integer = 0
 
                     For Each field In element
-                        If lineNum = 9 Then
+                        If fieldNum = 14 Then
                             line += field.Replace(Environment.NewLine, "\n") + ";"
                         Else
                             line += field + ";"
                         End If
 
-                        lineNum = lineNum + 1
+                        fieldNum = fieldNum + 1
                     Next
                     line = line.Substring(0, line.Length - 1)
 
@@ -203,9 +230,9 @@ Module dataControl
 
                 objWriter.Close()
                 If onlyDelete = False Then
-                    statistics("Node [" + nodeName + "] successfully saved.")
+                    statistics("Source [" + nodeName + "] successfully saved.")
                 Else
-                    statistics("Node [" + nodeName + "] successfully deleted.")
+                    statistics("Source [" + nodeName + "] successfully deleted.")
                 End If
             Catch ex As Exception
                 MsgBox(ex.Message)
@@ -235,6 +262,8 @@ Module dataControl
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String, nodeIP As String, nodePort As String, nodeSystem As String, nodeVersion As String, nodeDescription As String, nodeWidth As String, nodeHeight As String, nodeFullscreen As Boolean, nodeMultimon As Boolean, nodeSystemNum As Integer, nodeConnectOver As Boolean, nodeViewerPath As String)
+        Dim nodeAutoconnect As Boolean
+        Dim username, password As String
 
         If nodeName = "EMPTY" Then
             nodeName = "New node"
@@ -250,6 +279,9 @@ Module dataControl
             nodeMultimon = False
             nodeConnectOver = False
             nodeViewerPath = ""
+            nodeAutoconnect = False
+            username = ""
+            password = ""
         ElseIf nodeIP = "" And nodePort = "" And nodeSystem = "" And nodeVersion = "" And nodeDescription = "" And nodeWidth = "" And nodeHeight = "" Then
             For Each element In nodes
                 If element(0) = nodeName Then
@@ -266,6 +298,9 @@ Module dataControl
                     nodeMultimon = Convert.ToBoolean(element(4))
                     nodeConnectOver = Convert.ToBoolean(element(10))
                     nodeViewerPath = element(11)
+                    nodeAutoconnect = Convert.ToBoolean(element(12))
+                    username = element(13)
+                    password = element(14)
                 End If
             Next
         End If
@@ -283,6 +318,14 @@ Module dataControl
         mainForm.boxMultimon.Checked = nodeMultimon
         mainForm.boxConnectOver.Checked = nodeConnectOver
         mainForm.boxViewerPath.Text = nodeViewerPath
+        mainForm.textboxUsername.Text = username
+        mainForm.textboxPassword.Text = password
+
+        If nodeAutoconnect Then
+            mainForm.btnAutoconnect.BackColor = Color.GreenYellow
+        Else
+            mainForm.btnAutoconnect.BackColor = SystemColors.Control
+        End If
 
         If nodePort <> "" Then
             statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ":" + nodePort + ")")
@@ -319,7 +362,7 @@ Module dataControl
 #End Region
 
 #Region "Run functions"
-    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String, ByVal application As Boolean) As Integer
+    Public Function runRemote(ByVal nodeIP As String, ByVal nodePort As String, ByVal nodeFullscreen As Boolean, ByVal nodeWidth As String, ByVal nodeHeight As String, ByVal nodeMultimon As Boolean, ByVal nodeConnectOver As Boolean, ByVal nodeViewer As String, ByVal nodeName As String, ByVal application As Boolean, ByVal username As String, ByVal password As String) As Integer
         If nodeIP <> "" Then
             For Each monitorItem As ListViewItem In mainForm.monitor.Items
                 If monitorItem.SubItems.Item(1).Text.Contains(nodeIP) And (monitorItem.SubItems.Item(2).Text = "(connected)" Or monitorItem.SubItems.Item(2).Text = "(running)") Then
@@ -383,7 +426,6 @@ Module dataControl
 
                     ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /w:" + nodeWidth + " /h:" + nodeHeight
                 End If
-
             Else
                 If nodeViewer <> "" And My.Computer.FileSystem.FileExists(nodeViewer) = True Then
                     ProcessProperties.FileName = nodeViewer
@@ -397,7 +439,43 @@ Module dataControl
 
             Dim monitorNodeDetails As String()
             Try
-                mstsc = Process.Start(ProcessProperties)
+                'If MSTSC is used and username is filled, try to use stored credentials.
+                Dim launchRdp As String = My.Application.Info.DirectoryPath + "\modules\launchrdp\launchrdp.exe"
+
+                If username <> "" And nodeConnectOver = False And My.Computer.FileSystem.FileExists(launchRdp) Then
+                    Dim usernameDomain As String = ""
+
+                    'Parse username (get domain)
+                    If username.Contains("\") Then
+                        usernameDomain = username.Substring(0, username.LastIndexOf("\"))
+                        username = username.Substring(username.LastIndexOf("\") + 1)
+                    End If
+                    If username.Contains(" ") Then
+                        username = ControlChars.Quote + username + ControlChars.Quote
+                    End If
+
+                    'Set LaunchRdp path and args
+
+                    Dim launchRdpArgs As String = nodeIP + " " + nodePort + " " + username + " " + usernameDomain + " " + password + " 0 1 0"
+
+                    Try
+                        Process.Start(launchRdp, launchRdpArgs).WaitForExit()
+                        Threading.Thread.Sleep(2000)
+
+                        Dim listOfProcesses As Process() = Process.GetProcesses()
+
+                        For Each runningProcess As Process In listOfProcesses
+                            If runningProcess.MainWindowTitle = "LaunchRDP - " + nodeIP + " - Remote Desktop Connection" Then
+                                mstsc = runningProcess
+                            End If
+                        Next
+                    Catch ex As Exception
+                        statistics("Applying saved credentials failed. > " + ex.Message)
+                    End Try
+                Else
+                    mstsc = Process.Start(ProcessProperties)
+                End If
+
 
                 Dim state As String = "(connected)"
 
@@ -458,6 +536,22 @@ Module dataControl
         End Try
     End Sub
 
+    Public Sub autoconnect()
+        Try
+            For Each node In nodes
+                If Convert.ToBoolean(node(12)) Then
+                    loadSourceData(node(0))
+                    mainForm.buttonConnect_Click(Nothing, Nothing)
+                End If
+            Next
+        Catch
+        End Try
+    End Sub
 
+    Public Sub SendString(ByVal text As String, ByVal process As Process)
+        AppActivate(process.Id)
+        SendKeys.SendWait(text)
+        Threading.Thread.Sleep(250)
+    End Sub
 #End Region
 End Module

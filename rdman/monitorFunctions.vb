@@ -158,7 +158,8 @@ Module monitorFunctions
         mainForm.pingProgressBar.Value = 0
         mainForm.Cursor = Cursors.WaitCursor
 
-        For Each node As ListViewItem In mainForm.sourcesList.CheckedItems
+        For Each node In mainForm.sourcesList.CheckedItems
+
             If node.Text.Contains("[") And node.Text.Contains("]") Then
                 nodeName = node.Text.Remove(0, node.Text.LastIndexOf("["))
                 nodeName = nodeName.Replace("[", "")
@@ -193,4 +194,62 @@ Module monitorFunctions
         mainForm.pingProgressBar.Visible = False
         mainForm.Cursor = Cursors.Default
     End Sub
+
+#Region "ProcessFunctions"
+    Public Function ReturnSelectedProcess() As ListViewItem
+        If mainForm.monitor.SelectedItems.Count > 0 Then
+            Return mainForm.monitor.SelectedItems.Item(0)
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Public Function ReturnProcessPID(ByVal processItem As ListViewItem) As Integer
+        If processItem IsNot Nothing Then
+            Return Convert.ToInt32(processItem.SubItems(3).Text)
+        Else
+            Return 0
+        End If
+    End Function
+
+    Public Function ReturnProcessState(ByVal processItem As ListViewItem) As String
+        If processItem IsNot Nothing Then
+            Dim processStateString As String = processItem.SubItems(2).Text
+
+            Select Case processStateString
+                Case "(connected)"
+                    Return ProcessState.connected
+                Case "(disconnected)"
+                    Return ProcessState.disconnected
+                Case "(running)", "(module)"
+                    Return ProcessState.running
+                Case "(failed)"
+                    Return ProcessState.failed
+                Case "(closed)"
+                    Return ProcessState.closed
+            End Select
+        End If
+        Return Nothing
+    End Function
+
+    Public Function IsSelectedProcessDead(ByVal processItem As ListViewItem) As Boolean
+        If processItem IsNot Nothing Then
+            Select Case ReturnProcessState(processItem)
+                Case ProcessState.closed, ProcessState.disconnected, ProcessState.failed
+                    Return True
+                Case ProcessState.connected, ProcessState.running
+                    Return False
+            End Select
+        End If
+        Return True
+    End Function
+
+    Public Enum ProcessState
+        connected
+        disconnected
+        running
+        closed
+        failed
+    End Enum
+#End Region
 End Module

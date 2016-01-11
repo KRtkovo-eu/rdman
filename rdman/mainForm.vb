@@ -94,6 +94,7 @@ Public Class mainForm
 
         'Focus command line
         Me.statisticsCommandLine.Focus()
+        Me.statisticsCommandLine.Text = ""
 
         'Set statistics default file name
         Me.saveStatistics.FileName = Today.ToString("yyyyMMdd")
@@ -103,7 +104,9 @@ Public Class mainForm
         allahToConsole += vbNewLine
         allahToConsole += "Published under " + My.Application.Info.Copyright
         allahToConsole += vbNewLine
-        allahToConsole += My.Application.Info.CompanyName + ", 2014 [http://krtkovo.eu/]"
+        allahToConsole += My.Application.Info.CompanyName + ", 2014-2016 [http://krtkovo.eu/]"
+        allahToConsole += vbNewLine + vbNewLine
+        allahToConsole += "Ich bin ein roboter!"
         allahToConsole += vbNewLine + vbNewLine
 
         boxStatistics.Text = allahToConsole
@@ -157,6 +160,9 @@ Public Class mainForm
 
         'monitor timer
         monitorTimer.Start()
+
+        'Autoconnect
+        dataControl.autoconnect()
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -219,7 +225,7 @@ Public Class mainForm
 #End Region
 
 #Region "UI Buttons handle"
-    Private Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
+    Public Sub buttonConnect_Click(sender As Object, e As EventArgs) Handles buttonConnect.Click
         SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
         Dim isApp As Boolean = False
 
@@ -227,7 +233,7 @@ Public Class mainForm
             isApp = True
         End If
 
-        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text, boxName.Text, isApp)
+        Dim processPid As Integer = runRemote(boxIP.Text, boxPort.Text, boxFullscreen.Checked, boxWidth.Text, boxHeight.Text, boxMultimon.Checked, boxConnectOver.Checked, boxViewerPath.Text, boxName.Text, isApp, textboxUsername.Text, textboxPassword.Text)
 
         Select Case processPid
             Case 0
@@ -238,6 +244,14 @@ Public Class mainForm
             Case Else
                 statistics("Remote session started on " + Me.boxIP.Text + ":" + Me.boxPort.Text + " with PID=" + processPid.ToString)
         End Select
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAutoconnect.Click
+        If btnAutoconnect.BackColor = Color.GreenYellow Then
+            btnAutoconnect.BackColor = SystemColors.Control
+        Else
+            btnAutoconnect.BackColor = Color.GreenYellow
+        End If
     End Sub
 
     Private Sub buttonSave_Click(sender As Object, e As EventArgs) Handles buttonSave.Click
@@ -278,6 +292,15 @@ Public Class mainForm
                         boxConnectOver.Checked = Convert.ToBoolean(importedNode(10))
                         boxViewerPath.Text = importedNode(11)
 
+                        If Convert.ToBoolean(importedNode(12)) Then
+                            btnAutoconnect.BackColor = Color.GreenYellow
+                        Else
+                            btnAutoconnect.BackColor = SystemColors.Control
+                        End If
+
+                        textboxUsername.Text = importedNode(13)
+                        textboxPassword.Text = importedNode(14)
+
                         statistics("Imported source [" + boxName.Text + "]")
                     End If
                 Catch ex As Exception
@@ -312,7 +335,16 @@ Public Class mainForm
             exportNode += boxSystemVersion.Text + ";"
             exportNode += boxDescription.Text + ";"
             exportNode += boxConnectOver.Checked.ToString + ";"
-            exportNode += boxViewerPath.Text
+            exportNode += boxViewerPath.Text + ";"
+
+            If btnAutoconnect.BackColor = Color.GreenYellow Then
+                exportNode += "True;"
+            Else
+                exportNode += "False;"
+            End If
+
+            exportNode += textboxUsername.Text + ";"
+            exportNode += textboxPassword.Text
 
             objWriter.Write(exportNode)
             objWriter.Close()
@@ -362,7 +394,7 @@ Public Class mainForm
                 quickIP = quickIP.Split(":").GetValue(0)
             End If
 
-            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP, False)
+            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP, False, "", "")
 
             If processPid > 1 Then
                 statistics("Remote session started on " + quickIP + ":3389 with PID=" + processPid.ToString)
@@ -374,6 +406,11 @@ Public Class mainForm
         End If
 
         commandValueInput.TextBox1.Text = ""
+    End Sub
+
+    Private Sub lblPassword_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblPassword.LinkClicked
+        textboxPassword.UseSystemPasswordChar = False
+        showPasswordTimer.Start()
     End Sub
 #End Region
 
@@ -475,9 +512,11 @@ Public Class mainForm
         If boxConnectOver.Checked = True Then
             Me.groupResolutionSettings.Visible = False
             Me.groupConnectOver.Visible = True
+            Me.boxCredentials.Visible = False
         Else
             Me.groupResolutionSettings.Visible = True
             Me.groupConnectOver.Visible = False
+            Me.boxCredentials.Visible = True
         End If
     End Sub
 
@@ -496,6 +535,11 @@ Public Class mainForm
             End If
         End If
     End Sub
+
+    Private Sub showPasswordTimer_Tick(sender As Object, e As EventArgs) Handles showPasswordTimer.Tick
+        textboxPassword.UseSystemPasswordChar = True
+        showPasswordTimer.Stop()
+    End Sub
 #End Region
 
 #Region "RDMan Shell"
@@ -508,6 +552,8 @@ Public Class mainForm
             Case ""
             Case "about"
                 AboutToolStripMenuItem_Click(Nothing, New System.EventArgs())
+            Case "autoconnect"
+                dataControl.autoconnect()
             Case "clear"
                 boxStatistics.Text = allahToConsole
                 statistics("", True) 'True because statistics was cleared by user.
@@ -551,6 +597,8 @@ Public Class mainForm
                 help += "-------------------------------"
                 help += vbNewLine
                 help += vbTab + "about | Show dialog with informations about this program."
+                help += vbNewLine
+                help += vbTab + "autoconnect | Autoconnect"
                 help += vbNewLine
                 help += vbTab + "clear | Clean the statistics box."
                 help += vbNewLine
@@ -602,17 +650,21 @@ Public Class mainForm
                 help += vbNewLine
                 help += vbTab + "nodewidth, width | Set node width."
                 help += vbNewLine
-                help += vbTab + "putty | Use PuTTY module as viewer."
+                help += vbTab + "password | Set password in credentials."
                 help += vbNewLine
-                help += vbTab + "quickconnect | Quick Connect to IP address or hostname."
+                help += vbTab + "putty | Use PuTTY Module As viewer."
+                help += vbNewLine
+                help += vbTab + "quickconnect | Quick Connect To IP address Or hostname."
                 help += vbNewLine
                 help += vbTab + "reloadsources | Reload nodes database."
                 help += vbNewLine
-                help += vbTab + "run | Run chosen external process. Add character & just before path to run process without window (ex. &cmd)."
+                help += vbTab + "run | Run chosen external process. Add character & just before path To run process without window (ex. &cmd)."
                 help += vbNewLine
-                help += vbTab + "savenode | Save node to csv database file."
+                help += vbTab + "savenode | Save node To csv database file."
                 help += vbNewLine
                 help += vbTab + "savestats | Save statistics log file."
+                help += vbNewLine
+                help += vbTab + "username | Set username in credentials."
                 help += vbNewLine
 
                 statistics(help)
@@ -621,7 +673,7 @@ Public Class mainForm
             Case "loadsources"
                 LoadSourcesDatabaseToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "monitorpid"
-                Dim PID As String = commandGetValue("Select PID of process", False, "")
+                Dim PID As String = commandGetValue("Select PID Of process", False, "")
 
                 addProcessToMonitorByPid(PID)
             Case "newnode"
@@ -662,6 +714,8 @@ Public Class mainForm
                 commandSetValue(Me.boxViewerPath, command)
             Case "nodewidth", "width"
                 commandSetValue(Me.boxWidth, command)
+            Case "password"
+                commandSetValue(Me.textboxPassword, command)
             Case "putty"
                 lblUsePutty_LinkClicked(Nothing, Nothing)
             Case "quickconnect"
@@ -689,8 +743,10 @@ Public Class mainForm
                 SaveNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "savestats"
                 SaveStatisticsToolStripMenuItem_Click(Nothing, New System.EventArgs())
+            Case "username"
+                commandSetValue(Me.textboxUsername, command)
             Case Else
-                statistics("Command not found")
+                statistics("Command Not found")
         End Select
     End Sub
 
@@ -721,7 +777,7 @@ Public Class mainForm
     End Function
 
     Private Sub commandSetValue(ByVal box As Object, ByVal command As String, ByVal multiline As Boolean)
-        Dim item As String = commandGetValue("Set " + command + " of node", multiline, box.text)
+        Dim item As String = commandGetValue("Set " + command + " Of node", multiline, box.text)
         statistics(vbTab + "value {" + item + "}", True)
 
         If box.name = "boxSystem" Then
@@ -767,9 +823,9 @@ Public Class mainForm
     Private Sub statisticsCommandLine_TextChanged(sender As Object, e As EventArgs) Handles statisticsCommandLine.TextChanged
         Dim font As Font
 
-        If Me.statisticsCommandLine.Text = "" Or Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter." Then
+        If Me.statisticsCommandLine.Text = "" Or Me.statisticsCommandLine.Text = "Write command And launch it by pressing enter." Then
             If Me.statisticsCommandLine.Focused = False Then
-                Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter."
+                Me.statisticsCommandLine.Text = "Write command And launch it by pressing enter."
                 font = New Font("Lucida Console", 8, FontStyle.Italic, GraphicsUnit.Point)
                 Me.statisticsCommandLine.Font = font
             Else
@@ -804,7 +860,7 @@ Public Class mainForm
     End Sub
 #End Region
 
-#Region "Tools and Help menu toolbars"
+#Region "Tools And Help menu toolbars"
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
@@ -931,6 +987,10 @@ Public Class mainForm
     Private Sub ExportSourceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportSourceToolStripMenuItem.Click
         buttonExport_Click(Nothing, Nothing)
     End Sub
+
+    Private Sub AutoconnectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoconnectToolStripMenuItem.Click
+        dataControl.autoconnect()
+    End Sub
 #End Region
 
 #Region "Setting menu toolbar"
@@ -1005,7 +1065,7 @@ Public Class mainForm
     End Sub
 
     Dim lastWindowState As FormWindowState
-    Dim lastWidth, lastHeight As Integer
+    Dim lastNormalSize, lastCompactSize As Size
 
     Public Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
         If CompactModeToolStripMenuItem.Checked = True Then
@@ -1017,6 +1077,7 @@ Public Class mainForm
             groupAdditionalInformations.Visible = True
             groupButtons.Visible = True
             groupConnectionSettings.Visible = True
+            AutoconnectToolStripMenuItem.Visible = True
 
             If boxConnectOver.Checked = True Then
                 groupConnectOver.Visible = True
@@ -1036,6 +1097,8 @@ Public Class mainForm
                 GreenshotToolStripMenuItem.Visible = True
             End If
 
+            lastCompactSize = Me.Size
+
             If lastWindowState <> Nothing Then
                 Me.WindowState = lastWindowState
             Else
@@ -1044,16 +1107,10 @@ Public Class mainForm
 
             Me.MinimumSize = New Size(900, 500)
 
-            If lastWidth > 0 Then
-                Me.Width = lastWidth
+            If lastNormalSize <> Nothing Then
+                Me.Size = lastNormalSize
             Else
-                Me.Width = 900
-            End If
-
-            If lastHeight > 0 Then
-                Me.Height = lastHeight
-            Else
-                Me.Height = 500
+                Me.Size = Me.MinimumSize
             End If
 
             Me.TopMost = False
@@ -1073,17 +1130,20 @@ Public Class mainForm
             mainContainer.Panel2Collapsed = True
             FTPServerToolStripMenuItem.Visible = False
             GreenshotToolStripMenuItem.Visible = False
+            AutoconnectToolStripMenuItem.Visible = False
 
             lastWindowState = Me.WindowState
             Me.WindowState = FormWindowState.Normal
 
+            lastNormalSize = Me.Size
+
             Me.MinimumSize = New Size(300, 500)
 
-            lastWidth = Me.Width
-            Me.Width = 300
-
-            lastHeight = Me.Height
-            Me.Height = 500
+            If lastCompactSize <> Nothing Then
+                Me.Size = lastCompactSize
+            Else
+                Me.Size = New Size(300, 600)
+            End If
 
             Me.TopMost = True
         End If
@@ -1140,7 +1200,7 @@ Public Class mainForm
 
         If My.Settings.showPreview = True Then
             If monitorElement IsNot Nothing Or monitorElement.Text <> "" Then
-                If DateDiff(DateInterval.Second, Convert.ToDateTime(monitorElement.SubItems(5).Text), Now) > 15 Then
+                If monitorElement.StateImageIndex = 0 Or monitorElement.StateImageIndex = 4 Then
                     Select Case monitorElement.SubItems(2).Text
                         Case "(connected)", "(module)", "(running)"
                             Dim PID As String = monitorElement.SubItems(3).Text
@@ -1179,10 +1239,10 @@ Public Class mainForm
                     End Select
                 End If
             Else
-                processPreview.Hide()
-                lastPid = 0
+                    processPreview.Hide()
+                    lastPid = 0
+                End If
             End If
-        End If
     End Sub
 
     Private Sub monitor_MouseLeave(sender As Object, e As EventArgs) Handles monitor.MouseLeave
@@ -1233,5 +1293,29 @@ Public Class mainForm
                 monitorDelNode(node.SubItems(0).Text, "0")
         End Select
     End Sub
+#End Region
+
+#Region "monitorContextMenu"
+    Private Sub MoveToNextScreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveToNextScreenToolStripMenuItem.Click
+        Try
+            Dim process As Process = Process.GetProcessById(ReturnProcessPID(ReturnSelectedProcess))
+            Dim processWindow As IntPtr = process.MainWindowHandle
+
+            MoveWindow(processWindow, Screen.PrimaryScreen.Bounds.Right + 1, 0, 640, 480, True)
+            ShowWindow(processWindow, 3)
+        Catch ex As Exception
+            statistics(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub contextMenuMonitor_Opened(sender As Object, e As EventArgs) Handles contextMenuMonitor.Opened
+        If monitorFunctions.ReturnSelectedProcess() Is Nothing Or monitorFunctions.IsSelectedProcessDead(monitorFunctions.ReturnSelectedProcess) Then
+            MoveToNextScreenToolStripMenuItem.Enabled = False
+        Else
+            MoveToNextScreenToolStripMenuItem.Enabled = True
+        End If
+    End Sub
+
+    Public Declare Auto Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
 #End Region
 End Class
