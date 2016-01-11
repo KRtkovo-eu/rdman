@@ -471,6 +471,9 @@ Module dataControl
                         For Each runningProcess As Process In listOfProcesses
                             If runningProcess.MainWindowTitle = "LaunchRDP - " + nodeIP + " - Remote Desktop Connection" Then
                                 mstsc = runningProcess
+                            Else
+                                mstsc = Nothing
+                                Throw New Exception("Remote Desktop Client unexpectedly crashed.")
                             End If
                         Next
                     Catch ex As Exception
