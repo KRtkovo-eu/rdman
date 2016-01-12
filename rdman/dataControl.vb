@@ -451,7 +451,7 @@ Module dataControl
 
                     Dim encryptedPassword As String = RdpEncrypt.encryptText(password)
 
-                    Dim textToRdpFile As String = My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath + "\RDPTemplate.rdp")
+                    Dim textToRdpFile As String = My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath + "\RDPTemplate.rdp") + vbNewLine
                     textToRdpFile += "username:s:" + username + vbNewLine
                     textToRdpFile += "domain:s:" + usernameDomain + vbNewLine
                     textToRdpFile += "password 51:b:" + encryptedPassword + vbNewLine
@@ -463,15 +463,6 @@ Module dataControl
 
                 mstsc = Process.Start(ProcessProperties)
 
-                If nodeConnectOver = False And Screen.AllScreens(UBound(Screen.AllScreens)).Bounds.Width > Screen.PrimaryScreen.Bounds.Width Then
-                    If nodeFullscreen = True Then
-                        nodeWidth = Screen.PrimaryScreen.Bounds.Width
-                        nodeHeight = Screen.PrimaryScreen.Bounds.Height
-                    End If
-
-                    mainForm.MoveWindow(mstsc.MainWindowHandle, Screen.PrimaryScreen.Bounds.Right + 1, 0, nodeWidth, nodeHeight, True)
-                End If
-
                 Dim state As String = "(connected)"
 
                 If application = True Then
@@ -481,6 +472,11 @@ Module dataControl
                 monitorNodeDetails = {nodeName, nodeAddressToConnect, state, mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
                 setMonitor(monitorNodeDetails, True, application)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
+
+                If nodeFullscreen = True Then
+                    Threading.Thread.Sleep(1000)
+                    mainForm.MoveToNextScreen(mstsc.MainWindowHandle)
+                End If
 
                 Return mstsc.Id
             Catch ex As Exception

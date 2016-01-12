@@ -16,7 +16,7 @@ Public Class mainForm
     Dim hasCsved As Boolean = False
     Dim hasFighter As Boolean = False
     Dim hasGreenshot As Boolean = False
-    Private Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
+    Public Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
     Private Const SW_RESTORE = 9
 #End Region
 
@@ -1310,15 +1310,9 @@ Public Class mainForm
 
 #Region "monitorContextMenu"
     Private Sub MoveToNextScreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveToNextScreenToolStripMenuItem.Click
-        Try
-            Dim process As Process = Process.GetProcessById(ReturnProcessPID(ReturnSelectedProcess))
-            Dim processWindow As IntPtr = process.MainWindowHandle
+        Dim process As Process = Process.GetProcessById(ReturnProcessPID(ReturnSelectedProcess))
 
-            MoveWindow(processWindow, Screen.PrimaryScreen.Bounds.Right + 1, 0, 640, 480, True)
-            ShowWindow(processWindow, 3)
-        Catch ex As Exception
-            statistics(ex.Message)
-        End Try
+        MoveToNextScreen(process.MainWindowHandle)
     End Sub
 
     Private Sub contextMenuMonitor_Opened(sender As Object, e As EventArgs) Handles contextMenuMonitor.Opened
@@ -1330,5 +1324,15 @@ Public Class mainForm
     End Sub
 
     Public Declare Auto Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
+
+    Public Sub MoveToNextScreen(ByVal processWindow As IntPtr)
+        Try
+            ShowWindow(processWindow, 1)
+            MoveWindow(processWindow, Screen.PrimaryScreen.Bounds.Right + 1, 0, 640, 480, True)
+            ShowWindow(processWindow, 3)
+        Catch ex As Exception
+            statistics(ex.Message)
+        End Try
+    End Sub
 #End Region
 End Class
