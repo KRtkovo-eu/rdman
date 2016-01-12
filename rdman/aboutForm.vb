@@ -35,7 +35,7 @@ Public Class aboutForm
         sources += "Greenshot team - Greenshot (GNU General Public License)" + vbNewLine + "[http://getgreenshot.org]"
         sources += vbNewLine
         sources += vbNewLine
-        sources += "Remko Weijnen - LaunchRDP (Mozilla Public License)" + vbNewLine + "[http://www.remkoweijnen.nl/]"
+        sources += "Justin Shepard - RdpEncrypt .NET class (MIT license)" + vbNewLine + "[https://github.com/justinshepard/rdplink]"
         sources += vbNewLine
         sources += vbNewLine
         sources += "The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:" + vbNewLine

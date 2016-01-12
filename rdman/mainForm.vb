@@ -397,7 +397,7 @@ Public Class mainForm
             Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP, False, "", "")
 
             If processPid > 1 Then
-                statistics("Remote session started on " + quickIP + ":3389 with PID=" + processPid.ToString)
+                statistics("Remote session started on " + quickIP + ":" + quickPort + " with PID=" + processPid.ToString)
             ElseIf processPid = 1 Then
                 statistics("[ERROR] Unable to connect to localhost.")
             Else
@@ -409,7 +409,12 @@ Public Class mainForm
     End Sub
 
     Private Sub lblPassword_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblPassword.LinkClicked
-        textboxPassword.UseSystemPasswordChar = False
+        If textboxPassword.UseSystemPasswordChar = False Then
+            textboxPassword.UseSystemPasswordChar = True
+        Else
+            textboxPassword.UseSystemPasswordChar = False
+        End If
+
         showPasswordTimer.Start()
     End Sub
 #End Region
@@ -509,14 +514,18 @@ Public Class mainForm
     End Sub
 
     Private Sub boxConnectOver_CheckedChanged(sender As Object, e As EventArgs) Handles boxConnectOver.CheckedChanged
+        Dim boxDescriptionWidth As Integer
+
         If boxConnectOver.Checked = True Then
             Me.groupResolutionSettings.Visible = False
             Me.groupConnectOver.Visible = True
             Me.boxCredentials.Visible = False
+            Me.boxDescription.Width = groupAdditionalInformations.Width - 12
         Else
             Me.groupResolutionSettings.Visible = True
             Me.groupConnectOver.Visible = False
             Me.boxCredentials.Visible = True
+            Me.boxDescription.Width = groupAdditionalInformations.Width - boxCredentials.Width - 28
         End If
     End Sub
 

@@ -1,9 +1,4 @@
-﻿Imports System
-Imports System.Runtime.InteropServices
-Imports System.Drawing
-Imports System.Drawing.Imaging
-Imports System.IO
-Imports System.Net
+﻿Imports System.Net
 
 Module dataControl
 #Region "Global variables"
@@ -444,9 +439,8 @@ Module dataControl
             Dim monitorNodeDetails As String()
             Try
                 'If MSTSC is used and username is filled, try to use stored credentials.
-                Dim launchRdp As String = My.Application.Info.DirectoryPath + "\modules\launchrdp\launchrdp.exe"
-
-                If username <> "" And nodeConnectOver = False And My.Computer.FileSystem.FileExists(launchRdp) Then
+                If username <> "" And nodeConnectOver = False Then
+                    Dim rdpFilePath As String = My.Application.Info.DirectoryPath + "\Remote Desktop Manager.rdp"
                     Dim usernameDomain As String = ""
 
                     'Parse username (get domain)
@@ -454,35 +448,24 @@ Module dataControl
                         usernameDomain = username.Substring(0, username.LastIndexOf("\"))
                         username = username.Substring(username.LastIndexOf("\") + 1)
                     End If
-                    If username.Contains(" ") Then
-                        username = ControlChars.Quote + username + ControlChars.Quote
-                    End If
 
-                    'Set LaunchRdp path and args
+                    Dim encryptedPassword As String = RdpEncrypt.encryptText(password)
 
-                    Dim launchRdpArgs As String = nodeIP + " " + nodePort + " " + username + " " + usernameDomain + " " + password + " 0 1 0"
+                    Dim textToRdpFile As String = "username:s:" + username + vbNewLine
+                    textToRdpFile += "domain:s:" + usernameDomain + vbNewLine
+                    textToRdpFile += "password 51:b:" + encryptedPassword + vbNewLine
+                    textToRdpFile += "disableremoteappcapscheck:i:1" + vbNewLine
+                    textToRdpFile += "bitmapcachepersistenable:i:0" + vbNewLine
+                    textToRdpFile += "administrative session:i:1" + vbNewLine
+                    textToRdpFile += "keyboardhook:i:1" + vbNewLine
+                    textToRdpFile += "negotiate security layer:i:1" + vbNewLine
 
-                    Try
-                        Process.Start(launchRdp, launchRdpArgs).WaitForExit()
-                        Threading.Thread.Sleep(2000)
+                    My.Computer.FileSystem.WriteAllText(rdpFilePath, textToRdpFile, False)
 
-                        Dim listOfProcesses As Process() = Process.GetProcesses()
-
-                        For Each runningProcess As Process In listOfProcesses
-                            If runningProcess.MainWindowTitle = "LaunchRDP - " + nodeIP + " - Remote Desktop Connection" Then
-                                mstsc = runningProcess
-                            Else
-                                mstsc = Nothing
-                                Throw New Exception("Remote Desktop Client unexpectedly crashed.")
-                            End If
-                        Next
-                    Catch ex As Exception
-                        statistics("Applying saved credentials failed. > " + ex.Message)
-                    End Try
-                Else
-                    mstsc = Process.Start(ProcessProperties)
+                    ProcessProperties.Arguments = ControlChars.Quote + rdpFilePath + ControlChars.Quote + " " + ProcessProperties.Arguments
                 End If
 
+                mstsc = Process.Start(ProcessProperties)
 
                 Dim state As String = "(connected)"
 
