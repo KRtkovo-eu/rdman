@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>461, 18</value>
-  </metadata>
   <metadata name="operatingSystemsIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>113, 17</value>
   </metadata>
@@ -128,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADw
-        TgAAAk1TRnQBSQFMAgEBBwEAAVABAwFQAQMBGAEAARgBAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFg
+        TgAAAk1TRnQBSQFMAgEBBwEAAVgBAwFYAQMBGAEAARgBAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFg
         AwABMAMAAQEBAAEYBgABNhIAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEA
         AewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEA
         AewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqGQAA/wB9QH3AfQB8QH1Ae8B8AH0
@@ -478,7 +475,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACQ
-        EgAAAk1TRnQBSQFMAgEBBQEAAZgBAAGYAQABDgEAAQ4BAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAE4
+        EgAAAk1TRnQBSQFMAgEBBQEAAaABAAGgAQABDgEAAQ4BAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAE4
         AwABHAMAAQEBAAEYBQABYAESGAAD9AH3AfAB4QHsAc4BlQHkAbcBXAHgAaIBJQHeAZkBEQHiAa0BRAHn
         AcIBeAHyAeMBxgHyAfAB7ocAA/QB7gHkAcsB4AGmATIB3QGVAQUB3QGTAQAB3QGTAQAB3QGTAQAB3QGT
         AQAB3QGTAQAB3wGbARYB6QHIAYcB8wHyAfGEAAH0AeYBzAHhAaIBJwHdAZMBAAHfAZ4BHAHnAb4BbAHt
@@ -560,6 +557,9 @@
         AfABHwHAAX8BAQH8AQcBAAs=
 </value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>461, 18</value>
+  </metadata>
   <metadata name="menuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -756,7 +756,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAG
-        gxoAAk1TRnQBSQFMAgEBBgEAAaABAwGgAQMBAAEBAQABAQT/ARkBAAj/AUIBTQE2BwABNgMAASgEAAEE
+        gxoAAk1TRnQBSQFMAgEBBgEAAagBAwGoAQMBAAEBAQABAQT/ARkBAAj/AUIBTQE2BwABNgMAASgEAAEE
         AwABAgIAAQEBAAEYBwABGBEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEA
         AewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEA
         AewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEAAewBqAEA
@@ -29722,9 +29722,6 @@
   </metadata>
   <metadata name="saveStatistics.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>682, 17</value>
-  </metadata>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>461, 18</value>
   </metadata>
   <metadata name="monitorTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>921, 17</value>

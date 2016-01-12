@@ -451,14 +451,10 @@ Module dataControl
 
                     Dim encryptedPassword As String = RdpEncrypt.encryptText(password)
 
-                    Dim textToRdpFile As String = "username:s:" + username + vbNewLine
+                    Dim textToRdpFile As String = My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath + "\RDPTemplate.rdp")
+                    textToRdpFile += "username:s:" + username + vbNewLine
                     textToRdpFile += "domain:s:" + usernameDomain + vbNewLine
                     textToRdpFile += "password 51:b:" + encryptedPassword + vbNewLine
-                    textToRdpFile += "disableremoteappcapscheck:i:1" + vbNewLine
-                    textToRdpFile += "bitmapcachepersistenable:i:0" + vbNewLine
-                    textToRdpFile += "administrative session:i:1" + vbNewLine
-                    textToRdpFile += "keyboardhook:i:1" + vbNewLine
-                    textToRdpFile += "negotiate security layer:i:1" + vbNewLine
 
                     My.Computer.FileSystem.WriteAllText(rdpFilePath, textToRdpFile, False)
 
@@ -466,6 +462,15 @@ Module dataControl
                 End If
 
                 mstsc = Process.Start(ProcessProperties)
+
+                If nodeConnectOver = False And Screen.AllScreens(UBound(Screen.AllScreens)).Bounds.Width > Screen.PrimaryScreen.Bounds.Width Then
+                    If nodeFullscreen = True Then
+                        nodeWidth = Screen.PrimaryScreen.Bounds.Width
+                        nodeHeight = Screen.PrimaryScreen.Bounds.Height
+                    End If
+
+                    mainForm.MoveWindow(mstsc.MainWindowHandle, Screen.PrimaryScreen.Bounds.Right + 1, 0, nodeWidth, nodeHeight, True)
+                End If
 
                 Dim state As String = "(connected)"
 

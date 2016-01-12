@@ -351,7 +351,7 @@ Partial Class mainForm
         '
         Me.contextMenuMonitor.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoveToNextScreenToolStripMenuItem})
         Me.contextMenuMonitor.Name = "contextMenuMonitor"
-        Me.contextMenuMonitor.Size = New System.Drawing.Size(181, 26)
+        Me.contextMenuMonitor.Size = New System.Drawing.Size(181, 48)
         '
         'MoveToNextScreenToolStripMenuItem
         '
