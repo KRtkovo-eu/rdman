@@ -474,7 +474,12 @@ Module dataControl
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
 
                 If nodeFullscreen = True Then
-                    mstsc.WaitForInputIdle(3000)
+                    Threading.Thread.Sleep(2000)
+
+                    If mstsc.MainWindowTitle.Contains(nodeIP) = False Then
+                        mstsc.WaitForInputIdle(3000)
+                    End If
+
                     mainForm.MoveToNextScreen(mstsc.MainWindowHandle)
                 End If
 
