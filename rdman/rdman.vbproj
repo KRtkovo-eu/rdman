@@ -31,7 +31,7 @@
     <SuiteName>rdman</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.9.1.0</ApplicationVersion>
+    <ApplicationVersion>10.0.0.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -87,10 +87,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>02B7E8D34C4549A4DA842416D8B5855E86421DDD</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D074F603AA9DFB2E17A8CAFDBC43F9A37EF9FEC1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>rdman_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -310,6 +311,7 @@
     <Content Include="sources.rdman">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="rdman_1_TemporaryKey.pfx" />
     <None Include="rdman_TemporaryKey.pfx" />
     <Content Include="RDPTemplate.rdp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

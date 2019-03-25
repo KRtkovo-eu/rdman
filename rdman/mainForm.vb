@@ -150,9 +150,6 @@ Public Class mainForm
             NewEmptySourcesDatabaseToolStripMenuItem_Click(sender, New System.EventArgs)
         Else
             LoadSources(sourcesDb)
-
-            'Make backup of actual db file, it overwrites file with same name.
-            IO.File.Copy(sourcesDb, sourcesDb + ".bak", True)
         End If
 
         'load empty node template
@@ -884,13 +881,6 @@ Public Class mainForm
             If IO.File.Exists(openSourceDb.FileName) Then
                 sourcesDb = openSourceDb.FileName
                 LoadSources(sourcesDb)
-
-                'Make backup of actual db file, it overwrites file with same name.
-                Try
-                    IO.File.Copy(sourcesDb, sourcesDb + ".bak", True)
-                Catch ex As Exception
-                    statistics(ex.Message)
-                End Try
             End If
         End If
     End Sub
