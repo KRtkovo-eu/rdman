@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Remote Desktop Manager technical preview (codename Bangkok)")>
+<Assembly: AssemblyTitle("Remote Desktop Manager")>
 <Assembly: AssemblyDescription("Remote Desktop Manager technical preview (codename Bangkok)")>
 <Assembly: AssemblyCompany("KRtkovo.eu design studio")> 
 <Assembly: AssemblyProduct("rdman")>

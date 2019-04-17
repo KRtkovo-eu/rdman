@@ -331,6 +331,10 @@ Module dataControl
         Else
             statistics("Loaded source [" + nodeName + "] (system: " + nodeSystem + " | IP or hostname: " + nodeIP + ")")
         End If
+
+
+        'Show modal dialog in main form
+        mainForm.ShowHideNodeSettings(True)
     End Sub
 
     Public Sub loadSourceData(ByVal nodeName As String)

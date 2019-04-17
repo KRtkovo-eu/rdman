@@ -119,7 +119,7 @@ boy> Oh, that's probably just in Bangkok."""
 
         'If MikroFTP is included, enable menu item
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe") = True Then
-            FTPServerToolStripMenuItem.Visible = True
+            FTPServerToolStripMenuItem1.Visible = True
             hasFTP = True
         End If
 
@@ -131,7 +131,7 @@ boy> Oh, that's probably just in Bangkok."""
 
         'If Greenshot is included, enable menu item
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\greenshot\Greenshot.exe") Then
-            GreenshotToolStripMenuItem.Visible = True
+            GreenshotToolStripMenuItem1.Visible = True
             hasGreenshot = True
         End If
 
@@ -153,6 +153,7 @@ boy> Oh, that's probably just in Bangkok."""
 
         'Hide "Additional settings" tab
         groupAdditionalInformations.Height = 25
+        ShowHideNodeSettings(False)
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -407,6 +408,7 @@ boy> Oh, that's probably just in Bangkok."""
 
     Private Sub sourcesList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles sourcesList.SelectedIndexChanged
         Dim nodeName As String = "(Add New Node)"
+        ShowHideNodeSettings(False)
 
         For Each item As ListViewItem In sourcesList.SelectedItems()
             If item.Text.Contains("[") And item.Text.Contains("]") Then
@@ -567,7 +569,7 @@ boy> Oh, that's probably just in Bangkok."""
         runModule(ProcessProperties, True)
     End Sub
 
-    Private Sub FTPServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FTPServerToolStripMenuItem.Click
+    Private Sub FTPServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FTPServerToolStripMenuItem1.Click
         If hasFTP = True Then
             ftpPath.SelectedPath = My.Application.Info.DirectoryPath + "\modules\mikroftp\share"
             If (ftpPath.ShowDialog = Windows.Forms.DialogResult.OK) Then
@@ -582,7 +584,7 @@ boy> Oh, that's probably just in Bangkok."""
         End If
     End Sub
 
-    Private Sub GreenshotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenshotToolStripMenuItem.Click
+    Private Sub GreenshotToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles GreenshotToolStripMenuItem1.Click
         If hasGreenshot = True Then
             Dim ProcessProperties As New ProcessStartInfo
 
@@ -913,6 +915,17 @@ boy> Oh, that's probably just in Bangkok."""
         commandValueInput.TextBox1.Text = ""
     End Sub
 
+    Private Sub ShowOutputConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowOutputConsoleToolStripMenuItem.Click
+        ' When clicked on button check its actual state and switch to opposite setting
+        If mainContainer.Panel2Collapsed = True Then
+            mainContainer.Panel2Collapsed = False
+            ShowOutputConsoleToolStripMenuItem.Checked = True
+        Else
+            mainContainer.Panel2Collapsed = True
+            ShowOutputConsoleToolStripMenuItem.Checked = False
+        End If
+    End Sub
+
     Public Sub MoveToNextScreen(ByVal processWindow As IntPtr)
         Try
             ShowWindow(processWindow, 1)
@@ -921,6 +934,14 @@ boy> Oh, that's probably just in Bangkok."""
         Catch ex As Exception
             statistics(ex.Message)
         End Try
+    End Sub
+
+    Public Sub ShowHideNodeSettings(ByVal show As Boolean)
+        If (show) Then
+            panel_NodeSettings.Show()
+        Else
+            panel_NodeSettings.Hide()
+        End If
     End Sub
 #End Region
 End Class
