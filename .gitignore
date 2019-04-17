@@ -470,3 +470,659 @@ rdman/bin/Debug/modules/putty/x64/PUTTYGEN\.EXE
 rdman/bin/Debug/modules/tightvnc/tvnviewer\.exe
 
 rdman/obj/Debug/rdman\.vbprojAssemblyReference\.cache
+
+rdman-bangkok/bin/Release/rdman-bangkok\.exe
+
+rdman-bangkok/bin/Release/rdman-bangkok\.exe\.config
+
+rdman-bangkok/bin/Release/rdman-bangkok\.pdb
+
+rdman-bangkok/obj/Release/rdman_bangkok\.baseForm\.resources
+
+rdman-bangkok/obj/Release/rdman_bangkok\.Properties\.Resources\.resources
+
+rdman-bangkok/obj/Release/rdman-bangkok\.csproj\.CoreCompileInputs\.cache
+
+rdman-bangkok/obj/Release/rdman-bangkok\.csproj\.FileListAbsolute\.txt
+
+rdman-bangkok/obj/Release/rdman-bangkok\.csproj\.GenerateResource\.cache
+
+rdman-bangkok/obj/Release/rdman-bangkok\.csprojAssemblyReference\.cache
+
+rdman-bangkok/obj/Release/rdman-bangkok\.exe
+
+rdman-bangkok/obj/Release/rdman-bangkok\.pdb
+
+rdman-bangkok/obj/Release/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92\.cs
+
+rdman-bangkok/obj/Release/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1\.cs
+
+rdman-bangkok/obj/Release/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3\.cs
+
+rdman\.iss
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/asciiGraphics/0\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/asciiGraphics/1\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/asciiGraphics/2\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/asciiGraphics/3\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/asciiGraphics/4\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/icons/android\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/icons/apple\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/icons/code\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/icons/linux\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/icons/unknown\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/icons/windows\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/LICENSE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/csved/backup\.uniCSVed\.ini
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/csved/uniCSVed\.dat
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/csved/uniCSVed\.exe
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/csved/uniCSVed\.ini
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/checksum\.MD5
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/greenshot-defaults\.ini
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/greenshot-fixed\.ini
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Greenshot\.exe
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Greenshot\.exe\.config
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/greenshot\.ini
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/GreenshotPlugin\.dll
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/installer\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/help-de-DE\.html
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/help-en-US\.html
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/help-nl-NL\.html
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/language-cs-CZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/language-de-DE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/language-en-US\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/language-nl-NL\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-cs-CZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-de-DE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-en-US\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-fr-FR\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-id-ID\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-it-IT\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-kab-DZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-ko-KR\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-lv-LV\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-pl-PL\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-pt-PT\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-ru-RU\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sk-SK\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sr-RS\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sv-SE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-uk-UA\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-zh-CN\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-zh-TW\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-cs-CZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-de-DE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-en-US\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-fr-FR\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-id-ID\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-it-IT\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-kab-DZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-ko-KR\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-lv-LV\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-nl-NL\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-pl-PL\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-pt-PT\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-ru-RU\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sk-SK\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sr-RS\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sv-SE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-uk-UA\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-zh-CN\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-zh-TW\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-cs-CZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-de-DE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-en-US\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-fr-FR\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-id-ID\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-it-IT\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-kab-DZ\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-ko-KR\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-lv-LV\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-nl-NL\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-pl-PL\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-pt-PT\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-ru-RU\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sk-SK\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sr-RS\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sv-SE\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-uk-UA\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-zh-CN\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-zh-TW\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/license\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/LinqBridge\.dll
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/log4net\.dll
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/log4net\.xml
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/Plugins/GreenshotOCRPlugin/GreenshotOCRCommand\.exe
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/greenshot/readme\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/mikroftp/mikroftp\.exe
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/mikroftp/share/welcome\.txt
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x32/PAGEANT\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x32/PLINK\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x32/PSCP\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x32/PSFTP\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x32/PUTTY\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x32/PUTTYGEN\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x64/PAGEANT\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x64/PLINK\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x64/PSCP\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x64/PSFTP\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x64/PUTTY\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/putty/x64/PUTTYGEN\.EXE
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/modules/tightvnc/tvnviewer\.exe
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/rdman_bangkok_technical_preview\.ico
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/rdman\.exe
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/rdman\.exe\.config
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/rdman\.exe\.manifest
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/RDPTemplate\.rdp
+
+rdman/bin/Release/app\.publish/Application Files/rdman_10_0_0_0/sources\.rdman
+
+rdman/bin/Release/app\.publish/rdman\.application
+
+rdman/bin/Release/modules/greenshot/Languages/help-de-DE\.html
+
+rdman/bin/Release/modules/greenshot/Languages/help-nl-NL\.html
+
+rdman/bin/Release/modules/greenshot/Languages/language-cs-CZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/language-de-DE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/language-nl-NL\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-cs-CZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-de-DE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-en-US\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-fr-FR\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-id-ID\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-it-IT\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-kab-DZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-ko-KR\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-lv-LV\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-pl-PL\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-pt-PT\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-ru-RU\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sk-SK\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sr-RS\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sv-SE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-uk-UA\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-zh-CN\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-zh-TW\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-cs-CZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-de-DE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-en-US\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-fr-FR\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-id-ID\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-it-IT\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-kab-DZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-ko-KR\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-lv-LV\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-nl-NL\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-pl-PL\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-pt-PT\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-ru-RU\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sk-SK\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sr-RS\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sv-SE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-uk-UA\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-zh-CN\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-zh-TW\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-cs-CZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-de-DE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-en-US\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-fr-FR\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-id-ID\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-it-IT\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-kab-DZ\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-ko-KR\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-lv-LV\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-nl-NL\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-pl-PL\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-pt-PT\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-ru-RU\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sk-SK\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sr-RS\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sv-SE\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-uk-UA\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-zh-CN\.xml
+
+rdman/bin/Release/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-zh-TW\.xml
+
+rdman/bin/Release/modules/greenshot/LinqBridge\.dll
+
+rdman/bin/Release/modules/greenshot/Plugins/GreenshotExternalCommandPlugin/GreenshotExternalCommandPlugin\.gsp
+
+rdman/bin/Release/modules/greenshot/Plugins/GreenshotImgurPlugin/GreenshotImgurPlugin\.gsp
+
+rdman/bin/Release/modules/greenshot/Plugins/GreenshotOCRPlugin/GreenshotOCRCommand\.exe
+
+rdman/bin/Release/modules/greenshot/Plugins/GreenshotOCRPlugin/GreenshotOCRCommand\.exe\.config
+
+rdman/bin/Release/modules/greenshot/Plugins/GreenshotOCRPlugin/GreenshotOCRPlugin\.gsp
+
+rdman/bin/Release/modules/greenshot/Plugins/GreenshotOfficePlugin/GreenshotOfficePlugin\.gsp
+
+rdman/bin/Release/modules/putty/x32/PAGEANT\.EXE
+
+rdman/bin/Release/modules/putty/x32/PLINK\.EXE
+
+rdman/bin/Release/modules/putty/x32/PSCP\.EXE
+
+rdman/bin/Release/modules/putty/x32/PSFTP\.EXE
+
+rdman/bin/Release/modules/putty/x32/PUTTY\.CHM
+
+rdman/bin/Release/modules/putty/x32/PUTTY\.EXE
+
+rdman/bin/Release/modules/putty/x32/PUTTYGEN\.EXE
+
+rdman/bin/Release/modules/putty/x64/PAGEANT\.EXE
+
+rdman/bin/Release/modules/putty/x64/PLINK\.EXE
+
+rdman/bin/Release/modules/putty/x64/PSCP\.EXE
+
+rdman/bin/Release/modules/putty/x64/PSFTP\.EXE
+
+rdman/bin/Release/modules/putty/x64/PUTTY\.CHM
+
+rdman/bin/Release/modules/putty/x64/PUTTY\.EXE
+
+rdman/bin/Release/modules/putty/x64/PUTTYGEN\.EXE
+
+rdman/bin/Release/modules/tightvnc/tvnviewer\.exe
+
+rdman/publish/Remote Desktop Manager/asciiGraphics/0\.txt
+
+rdman/publish/Remote Desktop Manager/asciiGraphics/1\.txt
+
+rdman/publish/Remote Desktop Manager/asciiGraphics/2\.txt
+
+rdman/publish/Remote Desktop Manager/asciiGraphics/3\.txt
+
+rdman/publish/Remote Desktop Manager/asciiGraphics/4\.txt
+
+rdman/publish/Remote Desktop Manager/icons/android\.ico
+
+rdman/publish/Remote Desktop Manager/icons/apple\.ico
+
+rdman/publish/Remote Desktop Manager/icons/code\.ico
+
+rdman/publish/Remote Desktop Manager/icons/linux\.ico
+
+rdman/publish/Remote Desktop Manager/icons/unknown\.ico
+
+rdman/publish/Remote Desktop Manager/icons/windows\.ico
+
+rdman/publish/Remote Desktop Manager/LICENSE
+
+rdman/publish/Remote Desktop Manager/modules/csved/backup\.uniCSVed\.ini
+
+rdman/publish/Remote Desktop Manager/modules/csved/uniCSVed\.dat
+
+rdman/publish/Remote Desktop Manager/modules/csved/uniCSVed\.exe
+
+rdman/publish/Remote Desktop Manager/modules/csved/uniCSVed\.ini
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/checksum\.MD5
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/greenshot-defaults\.ini
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/greenshot-fixed\.ini
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Greenshot\.exe
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Greenshot\.exe\.config
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/greenshot\.ini
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/GreenshotPlugin\.dll
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/installer\.txt
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/help-de-DE\.html
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/help-en-US\.html
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/help-nl-NL\.html
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/language-cs-CZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/language-de-DE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/language-en-US\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/language-nl-NL\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-cs-CZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-de-DE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-en-US\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-fr-FR\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-id-ID\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-it-IT\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-kab-DZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-ko-KR\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-lv-LV\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-pl-PL\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-pt-PT\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-ru-RU\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sk-SK\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sr-RS\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-sv-SE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-uk-UA\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-zh-CN\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotExternalCommandPlugin/language_externalcommandplugin-zh-TW\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-cs-CZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-de-DE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-en-US\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-fr-FR\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-id-ID\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-it-IT\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-kab-DZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-ko-KR\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-lv-LV\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-nl-NL\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-pl-PL\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-pt-PT\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-ru-RU\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sk-SK\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sr-RS\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-sv-SE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-uk-UA\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-zh-CN\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotImgurPlugin/language_imgurplugin-zh-TW\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-cs-CZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-de-DE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-en-US\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-fr-FR\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-id-ID\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-it-IT\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-kab-DZ\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-ko-KR\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-lv-LV\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-nl-NL\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-pl-PL\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-pt-PT\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-ru-RU\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sk-SK\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sr-RS\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-sv-SE\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-uk-UA\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-zh-CN\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Languages/Plugins/GreenshotOCRPlugin/language_ocrplugin-zh-TW\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/license\.txt
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/LinqBridge\.dll
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/log4net\.dll
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/log4net\.xml
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/Plugins/GreenshotOCRPlugin/GreenshotOCRCommand\.exe
+
+rdman/publish/Remote Desktop Manager/modules/greenshot/readme\.txt
+
+rdman/publish/Remote Desktop Manager/modules/mikroftp/mikroftp\.exe
+
+rdman/publish/Remote Desktop Manager/modules/mikroftp/share/welcome\.txt
+
+rdman/publish/Remote Desktop Manager/modules/putty/x32/PAGEANT\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x32/PLINK\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x32/PSCP\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x32/PSFTP\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x32/PUTTY\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x32/PUTTYGEN\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x64/PAGEANT\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x64/PLINK\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x64/PSCP\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x64/PSFTP\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x64/PUTTY\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/putty/x64/PUTTYGEN\.EXE
+
+rdman/publish/Remote Desktop Manager/modules/tightvnc/tvnviewer\.exe
+
+rdman/publish/Remote Desktop Manager/rdman_bangkok_technical_preview\.ico
+
+rdman/publish/Remote Desktop Manager/rdman\.application
+
+rdman/publish/Remote Desktop Manager/rdman\.exe
+
+rdman/publish/Remote Desktop Manager/rdman\.exe\.config
+
+rdman/publish/Remote Desktop Manager/rdman\.exe\.manifest
+
+rdman/publish/Remote Desktop Manager/RDPTemplate\.rdp
+
+rdman/publish/Remote Desktop Manager/sources\.rdman
