@@ -40,7 +40,7 @@ Partial Class aboutForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.White
+        Me.Label1.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.Label1.Location = New System.Drawing.Point(152, 55)
         Me.Label1.Name = "Label1"
@@ -51,7 +51,7 @@ Partial Class aboutForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.BackColor = System.Drawing.Color.LightSteelBlue
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(152, 122)
         Me.Label2.Name = "Label2"
@@ -62,23 +62,23 @@ Partial Class aboutForm
         'lblLicense
         '
         Me.lblLicense.AutoSize = True
-        Me.lblLicense.BackColor = System.Drawing.Color.White
+        Me.lblLicense.BackColor = System.Drawing.Color.LightSteelBlue
         Me.lblLicense.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLicense.LinkColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblLicense.LinkColor = System.Drawing.Color.DodgerBlue
         Me.lblLicense.Location = New System.Drawing.Point(244, 122)
         Me.lblLicense.Name = "lblLicense"
         Me.lblLicense.Size = New System.Drawing.Size(61, 13)
         Me.lblLicense.TabIndex = 3
         Me.lblLicense.TabStop = True
         Me.lblLicense.Text = "LinkLabel1"
-        Me.lblLicense.VisitedLinkColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblLicense.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'lblProducer
         '
         Me.lblProducer.AutoSize = True
-        Me.lblProducer.BackColor = System.Drawing.Color.White
+        Me.lblProducer.BackColor = System.Drawing.Color.LightSteelBlue
         Me.lblProducer.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProducer.LinkColor = System.Drawing.Color.LimeGreen
+        Me.lblProducer.LinkColor = System.Drawing.Color.GreenYellow
         Me.lblProducer.Location = New System.Drawing.Point(152, 82)
         Me.lblProducer.Name = "lblProducer"
         Me.lblProducer.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -86,12 +86,12 @@ Partial Class aboutForm
         Me.lblProducer.TabIndex = 4
         Me.lblProducer.TabStop = True
         Me.lblProducer.Text = "KRtkovo.eu"
-        Me.lblProducer.VisitedLinkColor = System.Drawing.Color.LimeGreen
+        Me.lblProducer.VisitedLinkColor = System.Drawing.Color.GreenYellow
         '
         'lblGitHub
         '
         Me.lblGitHub.AutoSize = True
-        Me.lblGitHub.BackColor = System.Drawing.Color.White
+        Me.lblGitHub.BackColor = System.Drawing.Color.LightSteelBlue
         Me.lblGitHub.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblGitHub.LinkColor = System.Drawing.Color.DarkOrange
         Me.lblGitHub.Location = New System.Drawing.Point(152, 102)
@@ -104,10 +104,10 @@ Partial Class aboutForm
         '
         'sourcesTextBox
         '
-        Me.sourcesTextBox.BackColor = System.Drawing.Color.White
+        Me.sourcesTextBox.BackColor = System.Drawing.Color.LightSteelBlue
         Me.sourcesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.sourcesTextBox.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.sourcesTextBox.ForeColor = System.Drawing.Color.Gray
+        Me.sourcesTextBox.ForeColor = System.Drawing.Color.DimGray
         Me.sourcesTextBox.Location = New System.Drawing.Point(154, 143)
         Me.sourcesTextBox.Name = "sourcesTextBox"
         Me.sourcesTextBox.ReadOnly = True
@@ -152,7 +152,7 @@ Partial Class aboutForm
         Me.clickEasterEgg.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.clickEasterEgg.Location = New System.Drawing.Point(129, 229)
         Me.clickEasterEgg.Name = "clickEasterEgg"
-        Me.clickEasterEgg.Size = New System.Drawing.Size(11, 11)
+        Me.clickEasterEgg.Size = New System.Drawing.Size(19, 11)
         Me.clickEasterEgg.TabIndex = 10
         Me.ToolTip1.SetToolTip(Me.clickEasterEgg, "You just lost the Game! ;-)")
         '

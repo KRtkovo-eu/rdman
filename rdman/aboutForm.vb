@@ -5,7 +5,7 @@ Public Class aboutForm
     Private Function getSourcesString() As String
         Dim sources As String = ""
 
-        sources += "Used sources of third parts:"
+        sources += "Used sources from third parties:"
         sources += vbNewLine
         sources += vbNewLine
         sources += "Double-J Design - Super Mono 3D Icons (CC Attribution 4.0)" + vbNewLine + "[http://doublejdesign.co.uk/]"
@@ -26,7 +26,7 @@ Public Class aboutForm
         sources += "Smitka development - MikroFTP 1.4.2013 (Freeware)" + vbNewLine + "[http://smitka.org/pc-elektro/mikroftp/]"
         sources += vbNewLine
         sources += vbNewLine
-        sources += "Simon Tatham - PuTTY 0.63 (MIT License)" + vbNewLine + "[http://putty.org/]"
+        sources += "Simon Tatham - PuTTY 0.71 (MIT License)" + vbNewLine + "[http://putty.org/]"
         sources += vbNewLine
         sources += vbNewLine
         sources += "Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)" + vbNewLine + "[http://www.codeproject.com/Articles/31026/Aviation-Fight]"
@@ -35,17 +35,27 @@ Public Class aboutForm
         sources += "Greenshot team - Greenshot (GNU General Public License)" + vbNewLine + "[http://getgreenshot.org]"
         sources += vbNewLine
         sources += vbNewLine
+        sources += "GlavSoft LLC - TightVnc Viewer (Freeware)" + vbNewLine + "[https://www.tightvnc.com/]"
+        sources += vbNewLine
+        sources += vbNewLine
         sources += "Justin Shepard - RdpEncrypt .NET class (MIT license)" + vbNewLine + "[https://github.com/justinshepard/rdplink]"
+        sources += vbNewLine
+        sources += vbNewLine
+        sources += "rawpixel.com - Girl power AddressOf floral background [https://www.freepik.com/free-vector/girl-power-floral-background-vector_3227340.htm]"
+        sources += vbNewLine
         sources += vbNewLine
         sources += vbNewLine
         sources += "The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:" + vbNewLine
         sources += "gigemboy - Easy Screen Capture Class [http://www.vbforums.com/showthread.php?385497-Easy-Screen-Capture-Class-Capture-Screen-Desktop-Region-Form-or-Controls]"
         sources += vbNewLine + "Updated with GetWindow function from HeWhoWas [http://www.vbforums.com/showthread.php?581842-VB-NET-Get-image-of-inactive-3rd-party-windows-controls]"
         sources += vbNewLine
+        sources += vbNewLine
         sources += "Bill - processAPI class [http://stackoverflow.com/a/2171744]"
+        sources += vbNewLine
         sources += vbNewLine
         sources += "Jose M. - processWindowState class [http://stackoverflow.com/a/2171744]"
         sources += vbNewLine
+
 
         Return sources
     End Function
