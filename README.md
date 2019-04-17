@@ -3,7 +3,7 @@
 
 Remote Desktop Manager (RDMan) is simple controller for Windows Remote Desktop Connection client (mstsc.exe) which helps you with storing many of remote nodes at one place and recognizable by image and name.
 
-![rdman_0_8_6_2](https://cloud.githubusercontent.com/assets/6234196/8649519/5d98485a-296b-11e5-9447-61ee48315c72.png)
+![rdman_10_0_0](https://raw.githubusercontent.com/KRtkovo-eu/rdman/develop-bangkok/rdman_10.0.0_preview1.png)
 
 * RDMan stores datas in semicolon separated csv database file.
 * RDMan is portable - without installation.
@@ -13,6 +13,7 @@ Remote Desktop Manager (RDMan) is simple controller for Windows Remote Desktop C
 * RDMan is open source, written in Visual Basic .NET and published under [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.txt)
 
 Author: [Ondřej Kotas](mailto:ok@krtkovo.eu), [KRtkovo.eu](http://krtkovo.eu/)
+GNU General Public License v3.0 - 2014-2019
 
 ---------------------------------------------------------------------------------------------
 Used sources of third parts:
@@ -44,8 +45,23 @@ Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)
 Greenshot team - Greenshot (GNU General Public License)
 [http://getgreenshot.org]
 
+GlavSoft LLC - TightVnc Viewer (Freeware)
+[https://www.tightvnc.com/]
+
+Justin Shepard - RdpEncrypt .NET class (MIT license)
+[https://github.com/justinshepard/rdplink]
+
+rawpixel.com - Girl power AddressOf floral background
+[https://www.freepik.com/free-vector/girl-power-floral-background-vector_3227340.htm]
+
 The license of following is not listed, so it is copyrighted work. But because the code was shared on developers forums as examples, I feel free to use them and modify, so I attach the authors and links to sources:
-gigemboy - Easy Screen Capture Class [http://www.vbforums.com/showthread.php?385497-Easy-Screen-Capture-Class-Capture-Screen-Desktop-Region-Form-or-Controls]
-Updated with GetWindow function from HeWhoWas [http://www.vbforums.com/showthread.php?581842-VB-NET-Get-image-of-inactive-3rd-party-windows-controls]
-Bill - processAPI class [http://stackoverflow.com/a/2171744]
-Jose M. - processWindowState class [http://stackoverflow.com/a/2171744]
+gigemboy - Easy Screen Capture Class
+[http://www.vbforums.com/showthread.php?385497-Easy-Screen-Capture-Class-Capture-Screen-Desktop-Region-Form-or-Controls]
+Updated with GetWindow function from HeWhoWas
+[http://www.vbforums.com/showthread.php?581842-VB-NET-Get-image-of-inactive-3rd-party-windows-controls]
+
+Bill - processAPI class
+[http://stackoverflow.com/a/2171744]
+
+Jose M. - processWindowState class
+[http://stackoverflow.com/a/2171744]

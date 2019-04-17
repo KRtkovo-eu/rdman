@@ -29,9 +29,6 @@ Public Class aboutForm
         sources += "Simon Tatham - PuTTY 0.71 (MIT License)" + vbNewLine + "[http://putty.org/]"
         sources += vbNewLine
         sources += vbNewLine
-        sources += "Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)" + vbNewLine + "[http://www.codeproject.com/Articles/31026/Aviation-Fight]"
-        sources += vbNewLine
-        sources += vbNewLine
         sources += "Greenshot team - Greenshot (GNU General Public License)" + vbNewLine + "[http://getgreenshot.org]"
         sources += vbNewLine
         sources += vbNewLine
