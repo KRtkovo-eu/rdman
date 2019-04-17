@@ -161,6 +161,9 @@ boy> Oh, that's probably just in Bangkok."""
 
         'Autoconnect
         dataControl.autoconnect()
+
+        'Hide "Additional settings" tab
+        groupAdditionalInformations.Height = 25
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -717,86 +720,6 @@ boy> Oh, that's probably just in Bangkok."""
 
     Dim lastWindowState As FormWindowState
     Dim lastNormalSize, lastCompactSize As Size
-
-    Public Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
-        If CompactModeToolStripMenuItem.Checked = True Then
-            CompactModeToolStripMenuItem.Checked = False
-            CompactModeToolStripMenuItem.BackColor = SystemColors.Control
-            CompactModeToolStripMenuItem.ForeColor = SystemColors.ControlText
-
-            boxSourcesPath.Visible = True
-            groupAdditionalInformations.Visible = True
-            groupButtons.Visible = True
-            groupConnectionSettings.Visible = True
-            AutoconnectToolStripMenuItem.Visible = True
-
-            If boxConnectOver.Checked = True Then
-                groupConnectOver.Visible = True
-            Else
-                groupResolutionSettings.Visible = True
-            End If
-
-            groupStatistics.Visible = True
-            mainContainer.Panel2Collapsed = False
-
-            If hasFTP = True Then
-                FTPServerToolStripMenuItem.Visible = True
-            End If
-
-            If hasGreenshot = True Then
-                GreenshotToolStripMenuItem.Visible = True
-            End If
-
-            lastCompactSize = Me.Size
-
-            If lastWindowState <> Nothing Then
-                Me.WindowState = lastWindowState
-            Else
-                Me.WindowState = FormWindowState.Normal
-            End If
-
-            Me.MinimumSize = New Size(900, 500)
-
-            If lastNormalSize <> Nothing Then
-                Me.Size = lastNormalSize
-            Else
-                Me.Size = Me.MinimumSize
-            End If
-
-            Me.TopMost = False
-        Else
-            CompactModeToolStripMenuItem.Checked = True
-            CompactModeToolStripMenuItem.BackColor = Color.DarkBlue
-            CompactModeToolStripMenuItem.ForeColor = Color.White
-
-            boxSourcesPath.Visible = False
-            groupAdditionalInformations.Visible = False
-            groupButtons.Visible = False
-            groupConnectionSettings.Visible = False
-            groupConnectOver.Visible = False
-            groupResolutionSettings.Visible = False
-            groupStatistics.Visible = False
-            mainContainer.Panel2Collapsed = True
-            FTPServerToolStripMenuItem.Visible = False
-            GreenshotToolStripMenuItem.Visible = False
-            AutoconnectToolStripMenuItem.Visible = False
-
-            lastWindowState = Me.WindowState
-            Me.WindowState = FormWindowState.Normal
-
-            lastNormalSize = Me.Size
-
-            Me.MinimumSize = New Size(300, 500)
-
-            If lastCompactSize <> Nothing Then
-                Me.Size = lastCompactSize
-            Else
-                Me.Size = New Size(300, 600)
-            End If
-
-            Me.TopMost = True
-        End If
-    End Sub
 
 #End Region
 

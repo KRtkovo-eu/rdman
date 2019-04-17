@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -118,7 +118,6 @@ Partial Class mainForm
         Me.ReportAnIssueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CompactModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutoconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuickConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
@@ -241,9 +240,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem1.StateImageIndex = 0
-        ListViewItem1.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        ListViewItem2.StateImageIndex = 0
+        ListViewItem2.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -396,7 +395,7 @@ Partial Class mainForm
         Me.groupStatistics.Size = New System.Drawing.Size(638, 166)
         Me.groupStatistics.TabIndex = 0
         Me.groupStatistics.TabStop = False
-        Me.groupStatistics.Text = "Statistics"
+        Me.groupStatistics.Text = "Output console"
         '
         'boxStatistics
         '
@@ -644,10 +643,10 @@ Partial Class mainForm
         Me.AdditionalSettingsLabel.LinkColor = System.Drawing.Color.DodgerBlue
         Me.AdditionalSettingsLabel.Location = New System.Drawing.Point(6, 3)
         Me.AdditionalSettingsLabel.Name = "AdditionalSettingsLabel"
-        Me.AdditionalSettingsLabel.Size = New System.Drawing.Size(106, 13)
+        Me.AdditionalSettingsLabel.Size = New System.Drawing.Size(162, 13)
         Me.AdditionalSettingsLabel.TabIndex = 6
         Me.AdditionalSettingsLabel.TabStop = True
-        Me.AdditionalSettingsLabel.Text = "Additional settings"
+        Me.AdditionalSettingsLabel.Text = "Node additional informations"
         Me.AdditionalSettingsLabel.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'boxPicture
@@ -907,7 +906,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem, Me.AutoconnectToolStripMenuItem, Me.QuickConnectToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.AutoconnectToolStripMenuItem, Me.QuickConnectToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -1103,13 +1102,6 @@ Partial Class mainForm
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.AboutToolStripMenuItem.Text = "&About Remote Desktop Manager"
         '
-        'CompactModeToolStripMenuItem
-        '
-        Me.CompactModeToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.CompactModeToolStripMenuItem.Name = "CompactModeToolStripMenuItem"
-        Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(96, 20)
-        Me.CompactModeToolStripMenuItem.Text = "&Compact mode"
-        '
         'AutoconnectToolStripMenuItem
         '
         Me.AutoconnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -1301,7 +1293,6 @@ Partial Class mainForm
     Friend WithEvents ReportAnIssueToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FTPServerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ftpPath As System.Windows.Forms.FolderBrowserDialog
-    Friend WithEvents CompactModeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblUsePutty As System.Windows.Forms.LinkLabel
     Friend WithEvents processPreviewHover As System.Windows.Forms.Timer
     Friend WithEvents pingAll As System.Windows.Forms.LinkLabel
