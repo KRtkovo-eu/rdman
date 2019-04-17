@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -47,7 +47,6 @@ Partial Class mainForm
         Me.boxSourcesPath = New System.Windows.Forms.LinkLabel()
         Me.groupStatistics = New System.Windows.Forms.GroupBox()
         Me.boxStatistics = New System.Windows.Forms.RichTextBox()
-        Me.statisticsCommandLine = New System.Windows.Forms.ComboBox()
         Me.boxCredentials = New System.Windows.Forms.GroupBox()
         Me.lblPassword = New System.Windows.Forms.LinkLabel()
         Me.textboxPassword = New System.Windows.Forms.TextBox()
@@ -243,9 +242,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem1.StateImageIndex = 0
-        ListViewItem1.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        ListViewItem2.StateImageIndex = 0
+        ListViewItem2.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -391,7 +390,6 @@ Partial Class mainForm
         'groupStatistics
         '
         Me.groupStatistics.Controls.Add(Me.boxStatistics)
-        Me.groupStatistics.Controls.Add(Me.statisticsCommandLine)
         Me.groupStatistics.Dock = System.Windows.Forms.DockStyle.Fill
         Me.groupStatistics.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.groupStatistics.Location = New System.Drawing.Point(0, 406)
@@ -412,30 +410,9 @@ Partial Class mainForm
         Me.boxStatistics.ReadOnly = True
         Me.boxStatistics.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.boxStatistics.ShowSelectionMargin = True
-        Me.boxStatistics.Size = New System.Drawing.Size(632, 126)
+        Me.boxStatistics.Size = New System.Drawing.Size(632, 145)
         Me.boxStatistics.TabIndex = 0
         Me.boxStatistics.Text = ""
-        '
-        'statisticsCommandLine
-        '
-        Me.statisticsCommandLine.AutoCompleteCustomSource.AddRange(New String() {"about", "autoconnect", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "password", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "username", "version", "viewer", "width"})
-        Me.statisticsCommandLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.statisticsCommandLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.statisticsCommandLine.BackColor = System.Drawing.Color.Black
-        Me.statisticsCommandLine.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.statisticsCommandLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.statisticsCommandLine.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.statisticsCommandLine.ForeColor = System.Drawing.Color.LawnGreen
-        Me.statisticsCommandLine.FormattingEnabled = True
-        Me.statisticsCommandLine.ItemHeight = 11
-        Me.statisticsCommandLine.Items.AddRange(New Object() {"about", "autoconnect", "clear", "cmd", "connect", "connectover", "description", "editsources", "environment", "exit", "exportsource", "ftp", "ftpserver", "fullscreen", "height", "help", "importsource", "ip", "loadsources", "monitorpid", "multimon", "name", "newnode", "nodeconnectover", "nodedescription", "nodefullscreen", "nodeheight", "nodeip", "nodemultimon", "nodename", "nodeport", "nodesystem", "nodesystemversion", "nodeviewerpath", "nodewidth", "password", "port", "putty", "quickconnect", "reloadsources", "run", "savenode", "savestats", "system", "username", "version", "viewer", "width"})
-        Me.statisticsCommandLine.Location = New System.Drawing.Point(3, 144)
-        Me.statisticsCommandLine.MaxDropDownItems = 5
-        Me.statisticsCommandLine.Name = "statisticsCommandLine"
-        Me.statisticsCommandLine.Size = New System.Drawing.Size(632, 19)
-        Me.statisticsCommandLine.Sorted = True
-        Me.statisticsCommandLine.TabIndex = 1
-        Me.statisticsCommandLine.Text = "Write command and launch it by pressing enter."
         '
         'boxCredentials
         '
@@ -1305,7 +1282,6 @@ Partial Class mainForm
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents boxFullscreen As System.Windows.Forms.CheckBox
     Friend WithEvents NewEmptySourcesDatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents statisticsCommandLine As System.Windows.Forms.ComboBox
     Friend WithEvents groupConnectOver As System.Windows.Forms.GroupBox
     Friend WithEvents buttonLocateViewer As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
