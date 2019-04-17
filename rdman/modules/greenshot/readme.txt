@@ -5,9 +5,185 @@ Apply text and shapes to the screenshot. Offers capture of window, region or ful
 
 CHANGE LOG:
 
-1.2.4.9-b4b6c65 RELEASE
-
 All details to our tickets can be found here: https://greenshot.atlassian.net
+
+1.2.10.6-c2414cf RELEASE
+
+Bugs fixed:
+* [BUG-2235] - Imgur authentication issues due to imgur api change
+* [BUG-2227] - NullReferenceException when accessing the Imgur History
+* [BUG-2225] - NullReferenceException when changing the color of text
+* [BUG-2219] - Korean is spelled incorrectly in the installer
+* [BUG-2213] - NullReferenceException in the Freehand tool
+* [BUG-2203] - ArgumentNullException in the Freehand tool
+* [BUG-2141] - Imgur authentication issues due to old embedded IE
+* [BUG-2172] - NullReferenceException when using the speech bubble
+* [BUG-2246] - Login issues with the Atlassian Jira Cloud
+
+Features:
+* [FEATURE-1064] - Added CTRL+Backspace & CTRL+A to the text tool
+ 
+
+Greenshot 1.2.9.129-569de71 RELEASE
+
+Bugs fixed:
+* [BUG-2051] - Scroll-lock button not usable as hotkey
+* [BUG-2056] - Cannot export to external command Paint.NET if .greenshot format is used
+* [BUG-2081] - Canvas resize (Ctrl + / Ctrl -) only works via numpad keys
+* [BUG-2093] - Shadow effects not rendering correctly on Windows 10
+* [BUG-2095] - 'Save as' doesn't remember last saved directory (after restart)
+* [BUG-2097] - Window border is not captured on Windows 10
+* [BUG-2102] - InvalidOperationException when selecting a color
+* [BUG-2104] - Speechbubble can't be used after copy/paste
+* [BUG-2105] - Window border is not captured on Windows 10
+* [BUG-2108] - Capture last region doesn't work
+* [BUG-2109] - Double-click on textbox causes NullReferenceException
+* [BUG-2111] - Drag and Drop image file on editor doesn't work
+* [BUG-2114] - Storage location reset to default if not available during start
+* [BUG-2115] - Error while trying to upload screen shot to Jira
+* [BUG-2116] - MemberAccessException when opening the color dialog
+* [BUG-2119] - crash on editing (dragged line)
+* [BUG-2120] - Greenshot Editor Canvas Changed to White Screen
+* [BUG-2121] - NullReferenceException when moving text
+* [BUG-2122] - Jira Plugin: Crash when uploading to Jira 
+* [BUG-2124] - Flickr plugin generates wrong image link
+* [BUG-2125] - Send to OneNote does not work
+* [BUG-2126] - MemberAccessException during un-DropShadow of Ellipse
+* [FEATURE-998] - Opening last capture in explorer should select/jump to the file
+* [FEATURE-992] - When reusing the editor, it is not brought to the front (second try)
+
+Added Taqbaylit as a new language.
+
+
+1.2.9.112-9bc62ac RELEASE
+
+
+This is a bugfix release for the Greenshot 1.2.9.104-3721c10 RELEASE
+
+Bugs fixed:
+* BUG-2065 OverflowException in the editor
+* BUG-2077 It's not possible to disable the update check
+* BUG-2080 Exception when opening the context menu
+* BUG-2089 Greenshot crashes when hotkey registration fails and OneDrive is not installed
+* BUG-2091 Greenshot .zip version has wrong log configuration
+
+Features added:
+* FEATURE-992 When reusing the editor, it is not brought to the front
+* FEATURE-995 Paste images inside Greenshot editor to the current cursor location
+* FEATURE-998 Opening last capture in explorer should select/jump to the file
+* FEATURE-1000 Set default focus on the OK-button in the Greenshot quality dialog
+
+Translations modified:
+* Nederlands by Stephan Paternotte
+
+
+1.2.9.104-3721c10 RELEASE
+
+Fixed bugs:
+* BUG-1762 Dropshadow & tornedge prompts for settings every time
+* BUG-1812 Editor opens outside the screen
+* BUG-1876 Already running message, multi user environment
+* BUG-1884 OCR text has trailing blank spaces
+* BUG-1887 Editor hangs on exit - hang time proportional to number of objects
+* BUG-1890 Slight cropping around window on Windows 10
+* BUG-1892 Greenshot saves blank JPG file with reduce colors
+* BUG-1894 Imgur remote server error 429
+* BUG-1896 JIRA Plugin doesn't work with JIRA Server v7.0
+* BUG-1898 Specify GPLv3 in the license text
+* BUG-1908 External Command, add commands at startup
+* BUG-1918 Editor Speechbubble Artifacts when shadow and transparent
+* BUG-1933 Greenshot Installer sets bad registry key permission
+* BUG-1935 Delay when pasting and ShapeShifter from FlameFusion is running
+* BUG-1941 Error when creating a speech bubble in the editor
+* BUG-1945 Failure starting Greenshot at system startup
+* BUG-1949 Can't delete Imgur upload
+* BUG-1965 Activation border around window is visible in the capture
+* BUG-1991 Greenshot portable (PAF) uses wrong log configuration
+* BUG-1992 OutputFilePath setting is wrong config used on a different system
+* BUG-2011 Editor issues when the font is gone or broken
+* BUG-2043 Fixed an issue which occured after wakeup from sleep
+* BUG-2059 The default frequency of update checks is now reduced from every day to every 14 days
+* BUG-2070 Installing Greenshot deletes everything in the target directory
+* BUG-2071 Authentication not completing with Box.com
+
+Added features:
+* FEATURE-863 The start value of the counters can now be changed
+* FEATURE-916 Added icon save format (capture will be resized to 16x16, 32x32, 48x48 or 256x256)
+* FEATURE-919 Added a way to increase the editor canvas size (use Ctrl + / Ctrl -)
+* FEATURE-945 Added environment variables resolving to the external command plugin
+* FEATURE-946 Updated to Inno-Setup 5.5.9 for improved installer security
+* FEATURE-958 Greenshot is now using code signing certificates
+
+Added or changed translation:
+* CatalÃ  by Gabriel Guix.
+* Nederlands by Stephan Paternotte
+
+
+1.2.8.14-b7c8384 RELEASE
+
+Changes for this release:
+This has Imgur improvements for the newer API version, this is a backport from Greenshot 1.2.9
+With the move to a new hosting platform, we also noticed our update checks are way to often, this needed to be reduced.
+
+
+1.2.8.12-cab854b Release 
+
+Bugs Resolved:
+
+BUG-1527 / BUG-1848 / BUG-1850 / BUG-1851 / BUG-1859 : Greenshot stops responding, hangs or crashes
+BUG-1843 / BUG-1844 / BUG-1846 : Imgur problems with authenticated uploads
+BUG-1864: Imgur link wasn't copied to the clipboard
+
+Features:
+FEATURE-896: Use Imgur with HTTPS (with changing the Imgur API from V2 to V3 this was already required for the upload anyway.)
+
+
+1.2.7.2-342a506 RELEASE
+
+Bugs Resolved:
+* BUG-1809: OverflowException when changing the windows input language
+* BUG-1835: Imgur: uploads were cancelled due to a timeout which was set too small
+* BUG-1833: Imgur: API-Key issues when using anonymous uploads
+* Github Pull 1: Fixed error calling external command. Thanks to viper3400
+
+
+1.2.6.7-359dcf3 RELEASE
+
+Bugs Resolved:
+* BUG-1769: Switched to OAuth 2 for Picasa Authentication, OAuth 1.x will be terminated as of 20th of April 2015.
+* BUG-1770: Fix problems when a font doesn't want to draw itself.
+* Bug 1774: Problems logging in to Box.com
+
+Features add:
+* FEATURE-838: Added support for dragging an image from google image search results directly into the editor.
+
+
+1.2.5.19-RELEASE-63412d3b9e29
+
+Bugs Resolved:
+* BUG-1578, BUG-1657: by default, Imgur plugin no longer passes title and filename to Imgur (for new installations, existing configuration files won't be affected)
+* BUG-1655: Greenshot uses the default proxy, even if the "use default proxy" check-box is not checked.
+* BUG-1730: File type in the Save-As dialog doesn't default to configured output format.
+* BUG-1735: Editor crashed when trying to scale down a screenshot with text element
+* BUG-1741: Fixed a bug in the confluence plug-in, error when searching for nothing, by improving the upload GUI.
+* BUG-1750: Filename pattern is now checked for invalid characters to avoid exception when saving directly.
+* BUG-1752: Fixed horizontal alignment for text boxes
+* BUG-1753: Fixed problem with saving/loading of the drop shadow & torn edge effects
+
+Languages:
+* Portuguese (Portugal): application translation updates + new translation for plugins and help, thanks to Luis Neves
+* Indonesian: translation updates, thanks to Afif Brika
+* Korean: application translation updates + new translation for plugins and help, thanks to Jin-Hwan Jeong
+* French: translation updates, thanks to thierry
+
+
+1.2.4.10-RELEASE-94d66e09eb89
+
+Bugs Resolved:
+* BUG-1724: Error when using "Alt + PrintScreen" after clicking system tray
+
+
+1.2.4.9-RELEASE-b4b6c6546d12
 
 Features:
 * Added the possibility to select the region to capture by using the keyboard, use the cursor keys to move the cursor (ctrl-key speeds up the movement) and the enter key to mark the start and ending.

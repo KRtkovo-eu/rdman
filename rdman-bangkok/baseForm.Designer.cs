@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(baseForm));
-            this.metroListView1 = new MetroFramework.Controls.MetroListView();
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadSourcesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,18 +62,6 @@
             this.AutoconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // metroListView1
-            // 
-            this.metroListView1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.metroListView1.FullRowSelect = true;
-            this.metroListView1.Location = new System.Drawing.Point(167, 175);
-            this.metroListView1.Name = "metroListView1";
-            this.metroListView1.OwnerDraw = true;
-            this.metroListView1.Size = new System.Drawing.Size(121, 97);
-            this.metroListView1.TabIndex = 0;
-            this.metroListView1.UseCompatibleStateImageBehavior = false;
-            this.metroListView1.UseSelectable = true;
             // 
             // menuBar
             // 
@@ -325,7 +312,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 597);
             this.Controls.Add(this.menuBar);
-            this.Controls.Add(this.metroListView1);
             this.Name = "baseForm";
             this.Text = "Form1";
             this.menuBar.ResumeLayout(false);
@@ -336,8 +322,6 @@
         }
 
         #endregion
-
-        private MetroFramework.Controls.MetroListView metroListView1;
         internal System.Windows.Forms.MenuStrip menuBar;
         internal System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem LoadSourcesDatabaseToolStripMenuItem;

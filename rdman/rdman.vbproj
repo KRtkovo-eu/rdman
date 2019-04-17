@@ -101,15 +101,6 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -241,13 +232,199 @@
     <Content Include="modules\greenshot\installer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="modules\greenshot\Languages\help-de-DE.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\greenshot\Languages\help-en-US.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\help-nl-NL.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\language-cs-CZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\language-de-DE.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\greenshot\Languages\language-en-US.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="modules\greenshot\Languages\language-nl-NL.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-cs-CZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-de-DE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-en-US.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-fr-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-id-ID.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-it-IT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-kab-DZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-ko-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-lv-LV.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-pl-PL.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-pt-PT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-ru-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-sk-SK.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-sr-RS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-sv-SE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-uk-UA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-zh-CN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotExternalCommandPlugin\language_externalcommandplugin-zh-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-cs-CZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-de-DE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-en-US.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-fr-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-id-ID.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-it-IT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-kab-DZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-ko-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-lv-LV.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-nl-NL.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-pl-PL.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-pt-PT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-ru-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-sk-SK.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-sr-RS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-sv-SE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-uk-UA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-zh-CN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotImgurPlugin\language_imgurplugin-zh-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-cs-CZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-de-DE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-en-US.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-fr-FR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-id-ID.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-it-IT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-kab-DZ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-ko-KR.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-lv-LV.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-nl-NL.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-pl-PL.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-pt-PT.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-ru-RU.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-sk-SK.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-sr-RS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-sv-SE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-uk-UA.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-zh-CN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\Languages\Plugins\GreenshotOCRPlugin\language_ocrplugin-zh-TW.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\greenshot\license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\greenshot\LinqBridge.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\greenshot\log4net.dll">
@@ -256,16 +433,10 @@
     <Content Include="modules\greenshot\log4net.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="modules\greenshot\Plugins\GreenshotOCRPlugin\GreenshotOCRCommand.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\greenshot\readme.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\putty\putty.chm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\putty\putty.cnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\putty\putty.hlp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\greenshot\checksum.MD5">
@@ -283,6 +454,27 @@
     <Content Include="modules\greenshot\greenshot.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="modules\greenshot\Plugins\GreenshotExternalCommandPlugin\GreenshotExternalCommandPlugin.gsp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="modules\greenshot\Plugins\GreenshotImgurPlugin\GreenshotImgurPlugin.gsp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="modules\greenshot\Plugins\GreenshotOCRPlugin\GreenshotOCRCommand.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="modules\greenshot\Plugins\GreenshotOCRPlugin\GreenshotOCRPlugin.gsp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="modules\greenshot\Plugins\GreenshotOfficePlugin\GreenshotOfficePlugin.gsp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="modules\putty\x32\PUTTY.CHM">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="modules\putty\x64\PUTTY.CHM">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -299,28 +491,48 @@
     <Content Include="modules\mikroftp\share\welcome.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="modules\putty\pageant.exe">
+    <Content Include="modules\putty\x32\PAGEANT.EXE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="modules\putty\plink.exe">
+    <Content Include="modules\putty\x32\PLINK.EXE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="modules\putty\pscp.exe">
+    <Content Include="modules\putty\x32\PSCP.EXE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="modules\putty\psftp.exe">
+    <Content Include="modules\putty\x32\PSFTP.EXE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="modules\putty\putty.exe">
+    <Content Include="modules\putty\x32\PUTTY.EXE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="modules\putty\puttygen.exe">
+    <Content Include="modules\putty\x32\PUTTYGEN.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\putty\x64\PAGEANT.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\putty\x64\PLINK.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\putty\x64\PSCP.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\putty\x64\PSFTP.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\putty\x64\PUTTY.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\putty\x64\PUTTYGEN.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\tightvnc\tvnviewer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sources.rdman">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
     <None Include="rdman_1_TemporaryKey.pfx" />
     <None Include="rdman_TemporaryKey.pfx" />
     <Content Include="RDPTemplate.rdp">
@@ -507,6 +719,7 @@
       <DefaultIcon>icons\code.ico</DefaultIcon>
     </FileAssociation>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -77,12 +77,10 @@ Public Class mainForm
 
         If My.Settings.consoleBgColor <> Nothing Then
             Me.boxStatistics.BackColor = My.Settings.consoleBgColor
-            Me.statisticsCommandLine.BackColor = My.Settings.consoleBgColor
         End If
 
         If My.Settings.consoleTextColor <> Nothing Then
             Me.boxStatistics.ForeColor = My.Settings.consoleTextColor
-            Me.statisticsCommandLine.ForeColor = My.Settings.consoleTextColor
         End If
 
         If My.Settings.consoleFontSize <> Nothing Then
@@ -92,21 +90,24 @@ Public Class mainForm
 
         Me.boxStatistics.Font = consoleFont
 
-        'Focus command line
-        Me.statisticsCommandLine.Focus()
-        Me.statisticsCommandLine.Text = ""
 
         'Set statistics default file name
         Me.saveStatistics.FileName = Today.ToString("yyyyMMdd")
 
         'Write to console
-        allahToConsole += My.Application.Info.Title + " shell [Version " + Me.ProductVersion + "]"
+        allahToConsole += My.Application.Info.Title + " stats [Version " + Me.ProductVersion + "]"
         allahToConsole += vbNewLine
         allahToConsole += "Published under " + My.Application.Info.Copyright
         allahToConsole += vbNewLine
-        allahToConsole += My.Application.Info.CompanyName + ", 2014-2016 [http://krtkovo.eu/]"
+        allahToConsole += My.Application.Info.CompanyName + ", 2014-2019 [http://krtkovo.eu/]"
         allahToConsole += vbNewLine + vbNewLine
-        allahToConsole += "Ich bin ein roboter!"
+        allahToConsole += """boy> And can I kiss you?
+girl> Yeah.
+boy> And that's a surcharge, isn't it?
+girl> Like what?
+boy> I thought kissing was the most expensive?
+girl> I do not know anything about that.
+boy> Oh, that's probably just in Bangkok."""
         allahToConsole += vbNewLine + vbNewLine
 
         boxStatistics.Text = allahToConsole
@@ -707,9 +708,7 @@ Public Class mainForm
             My.Settings.consoleTextColor = colorStatistics.btnTextColor.BackColor
             My.Settings.consoleFontSize = colorStatistics.fontSize.Value
             Me.boxStatistics.BackColor = My.Settings.consoleBgColor
-            Me.statisticsCommandLine.BackColor = My.Settings.consoleBgColor
             Me.boxStatistics.ForeColor = My.Settings.consoleTextColor
-            Me.statisticsCommandLine.ForeColor = My.Settings.consoleTextColor
 
             consoleFont = New Font("Lucida Console", My.Settings.consoleFontSize, FontStyle.Regular, GraphicsUnit.Point)
             Me.boxStatistics.Font = consoleFont

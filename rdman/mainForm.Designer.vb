@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -130,7 +130,6 @@ Partial Class mainForm
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.MetroToggle1 = New MetroFramework.Controls.MetroToggle()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -167,9 +166,9 @@ Partial Class mainForm
         'mainContainer.Panel2
         '
         Me.mainContainer.Panel2.Controls.Add(Me.groupStatistics)
-        Me.mainContainer.Panel2.Controls.Add(Me.boxCredentials)
-        Me.mainContainer.Panel2.Controls.Add(Me.groupConnectOver)
         Me.mainContainer.Panel2.Controls.Add(Me.groupResolutionSettings)
+        Me.mainContainer.Panel2.Controls.Add(Me.groupConnectOver)
+        Me.mainContainer.Panel2.Controls.Add(Me.boxCredentials)
         Me.mainContainer.Panel2.Controls.Add(Me.groupAdditionalInformations)
         Me.mainContainer.Panel2.Controls.Add(Me.groupConnectionSettings)
         Me.mainContainer.Size = New System.Drawing.Size(892, 572)
@@ -242,9 +241,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem2.StateImageIndex = 0
-        ListViewItem2.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        ListViewItem1.StateImageIndex = 0
+        ListViewItem1.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -422,7 +421,7 @@ Partial Class mainForm
         Me.boxCredentials.Controls.Add(Me.lblCredentialsUser)
         Me.boxCredentials.Dock = System.Windows.Forms.DockStyle.Top
         Me.boxCredentials.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxCredentials.Location = New System.Drawing.Point(0, 350)
+        Me.boxCredentials.Location = New System.Drawing.Point(0, 250)
         Me.boxCredentials.Name = "boxCredentials"
         Me.boxCredentials.Size = New System.Drawing.Size(638, 56)
         Me.boxCredentials.TabIndex = 7
@@ -477,7 +476,7 @@ Partial Class mainForm
         Me.groupConnectOver.Controls.Add(Me.boxViewerPath)
         Me.groupConnectOver.Dock = System.Windows.Forms.DockStyle.Top
         Me.groupConnectOver.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupConnectOver.Location = New System.Drawing.Point(0, 300)
+        Me.groupConnectOver.Location = New System.Drawing.Point(0, 306)
         Me.groupConnectOver.Name = "groupConnectOver"
         Me.groupConnectOver.Size = New System.Drawing.Size(638, 50)
         Me.groupConnectOver.TabIndex = 4
@@ -542,7 +541,7 @@ Partial Class mainForm
         Me.groupResolutionSettings.Controls.Add(Me.boxWidth)
         Me.groupResolutionSettings.Dock = System.Windows.Forms.DockStyle.Top
         Me.groupResolutionSettings.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 250)
+        Me.groupResolutionSettings.Location = New System.Drawing.Point(0, 356)
         Me.groupResolutionSettings.Name = "groupResolutionSettings"
         Me.groupResolutionSettings.Size = New System.Drawing.Size(638, 50)
         Me.groupResolutionSettings.TabIndex = 2
@@ -653,6 +652,7 @@ Partial Class mainForm
         '
         'boxPicture
         '
+        Me.boxPicture.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxPicture.Location = New System.Drawing.Point(508, 25)
         Me.boxPicture.Name = "boxPicture"
         Me.boxPicture.Size = New System.Drawing.Size(124, 124)
@@ -729,7 +729,6 @@ Partial Class mainForm
         '
         'groupConnectionSettings
         '
-        Me.groupConnectionSettings.Controls.Add(Me.MetroToggle1)
         Me.groupConnectionSettings.Controls.Add(Me.boxConnectOver)
         Me.groupConnectionSettings.Controls.Add(Me.boxPort)
         Me.groupConnectionSettings.Controls.Add(Me.lblPort)
@@ -752,7 +751,7 @@ Partial Class mainForm
         Me.boxConnectOver.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.boxConnectOver.AutoSize = True
         Me.boxConnectOver.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.boxConnectOver.Location = New System.Drawing.Point(439, 78)
+        Me.boxConnectOver.Location = New System.Drawing.Point(371, 25)
         Me.boxConnectOver.Name = "boxConnectOver"
         Me.boxConnectOver.Size = New System.Drawing.Size(94, 17)
         Me.boxConnectOver.TabIndex = 6
@@ -1174,17 +1173,6 @@ Partial Class mainForm
         '
         Me.showPasswordTimer.Interval = 5000
         '
-        'MetroToggle1
-        '
-        Me.MetroToggle1.AutoSize = True
-        Me.MetroToggle1.BackColor = System.Drawing.SystemColors.Control
-        Me.MetroToggle1.Location = New System.Drawing.Point(370, 26)
-        Me.MetroToggle1.Name = "MetroToggle1"
-        Me.MetroToggle1.Size = New System.Drawing.Size(80, 17)
-        Me.MetroToggle1.TabIndex = 7
-        Me.MetroToggle1.Text = "Off"
-        Me.MetroToggle1.UseSelectable = True
-        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1198,7 +1186,7 @@ Partial Class mainForm
         Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "mainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Remote Desktop Manager"
+        Me.Text = "Remote Desktop Manager technical preview (codename Bangkok)"
         Me.mainContainer.Panel1.ResumeLayout(False)
         Me.mainContainer.Panel2.ResumeLayout(False)
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1337,5 +1325,4 @@ Partial Class mainForm
     Friend WithEvents AutoconnectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AdditionalSettingsLabel As LinkLabel
     Friend WithEvents QuickConnectToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MetroToggle1 As MetroFramework.Controls.MetroToggle
 End Class
