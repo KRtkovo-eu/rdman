@@ -1,17 +1,18 @@
 ﻿Remote Desktop Manager
 ======================
 
-At the beginning, Remote Desktop Manager (RDMan) was just a simple wrapper for Windows Remote Desktop Connection client (mstsc.exe) which I wrote because another solution was nothing for me, also I needed to train my programming skills.
-As the time flows, my requirements was changing so now, Remote Desktop Manager is now wrapping also VNC or Putty, all on the one place!
+At the beginning, Remote Desktop Manager (RDMan) was just a simple wrapper for Windows Remote Desktop Connection client (mstsc.exe) which I wrote because another solution was nothing for me, also I needed to train my programming skills.       
+As the time flows, my requirements was changing so now, Remote Desktop Manager is now wrapping also VNC or Putty, all on the one place!             
 You can store different credentials and different settings for each record in sources list. And source can be literally everything - every application can be added and monitored by RDMan. This feature is very popular among users with multiple screens.
 
 ![rdman_10_0_0](https://raw.githubusercontent.com/KRtkovo-eu/rdman/develop-bangkok/rdman_10.0.0_preview1.png)
 
-* RDMan stores datas in semicolon separated csv database file.
+* RDMan stores datas in semicolon separated csv database file which can be easily modified by any kind of text editor.
 * RDMan is distributed also in portable version - without installation.
 * RDMan can run various viewers and applications with different parameters set.
 * RDMan installation includes Putty and VNC viewer.
 * RDMan can handle resolution for remote nodes connected through RDC or VNC.
+* RDMan is able to store credentials for RDC node.
 * RDMan is open source, written in Visual Basic .NET and published under [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.txt)
 
 Author: [Ondřej Kotas](mailto:ok@krtkovo.eu), [KRtkovo.eu](http://krtkovo.eu/)
