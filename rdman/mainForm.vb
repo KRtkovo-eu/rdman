@@ -14,7 +14,6 @@ Public Class mainForm
     Dim hasPutty As Boolean = False
     Dim hasFTP As Boolean = False
     Dim hasCsved As Boolean = False
-    Dim hasFighter As Boolean = False
     Dim hasGreenshot As Boolean = False
     Public Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
     Private Const SW_RESTORE = 9
@@ -130,20 +129,10 @@ boy> Oh, that's probably just in Bangkok."""
             hasPutty = True
         End If
 
-        'If Fighter is included, change control variable
-        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe") Then
-            hasFighter = True
-        End If
-
         'If Greenshot is included, enable menu item
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\greenshot\Greenshot.exe") Then
             GreenshotToolStripMenuItem.Visible = True
             hasGreenshot = True
-        End If
-
-        'Compact mode
-        If My.Settings.compactMode = True Then
-            CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
         End If
 
         'Check parameters for db path and load db
@@ -206,7 +195,6 @@ boy> Oh, that's probably just in Bangkok."""
         My.Settings.consoleFontSize = colorStatistics.fontSize.Value
         My.Settings.showPreview = Me.ShowpreviewToolStripMenuItem.Checked
         My.Settings.closeChilds = Me.KillChildProcessesOnCloseToolStripMenuItem.Checked
-        My.Settings.compactMode = Me.CompactModeToolStripMenuItem.Checked
         My.Settings.Save()
 
         If My.Settings.saveStats = True Then

@@ -129,6 +129,9 @@ Partial Class mainForm
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.ToolsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FTPServerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GreenshotToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -906,7 +909,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.AutoconnectToolStripMenuItem, Me.QuickConnectToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.AutoconnectToolStripMenuItem, Me.QuickConnectToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -917,8 +920,8 @@ Partial Class mainForm
         '
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadSourcesDatabaseToolStripMenuItem, Me.EditSourcesDatabaseToolStripMenuItem, Me.NewEmptySourcesDatabaseToolStripMenuItem, Me.ToolStripSeparator3, Me.AddNodeToolStripMenuItem, Me.ImportSourceToolStripMenuItem, Me.ExportSourceToolStripMenuItem, Me.SaveNodeToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveStatisticsToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
-        Me.ToolsToolStripMenuItem.Text = "&Tools"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.ToolsToolStripMenuItem.Text = "&File"
         '
         'LoadSourcesDatabaseToolStripMenuItem
         '
@@ -1003,8 +1006,8 @@ Partial Class mainForm
         '
         Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ShowpreviewToolStripMenuItem, Me.ToolStripSeparator4, Me.CheckForupdateOnStartToolStripMenuItem, Me.ToolStripSeparator5, Me.AskBeforeCloseToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.KillChildProcessesOnCloseToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
-        Me.OptionsToolStripMenuItem.Text = "&Options"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.OptionsToolStripMenuItem.Text = "&View"
         '
         'ColorOfStatisticsConsoleToolStripMenuItem
         '
@@ -1165,6 +1168,27 @@ Partial Class mainForm
         '
         Me.showPasswordTimer.Interval = 5000
         '
+        'ToolsToolStripMenuItem1
+        '
+        Me.ToolsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FTPServerToolStripMenuItem1, Me.GreenshotToolStripMenuItem1})
+        Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
+        Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(45, 20)
+        Me.ToolsToolStripMenuItem1.Text = "&Tools"
+        '
+        'FTPServerToolStripMenuItem1
+        '
+        Me.FTPServerToolStripMenuItem1.Name = "FTPServerToolStripMenuItem1"
+        Me.FTPServerToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.FTPServerToolStripMenuItem1.Text = "&FTP Server"
+        '
+        'GreenshotToolStripMenuItem1
+        '
+        Me.GreenshotToolStripMenuItem1.Image = CType(resources.GetObject("GreenshotToolStripMenuItem1.Image"), System.Drawing.Image)
+        Me.GreenshotToolStripMenuItem1.Name = "GreenshotToolStripMenuItem1"
+        Me.GreenshotToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.GreenshotToolStripMenuItem1.Text = "&Greenshot"
+        Me.GreenshotToolStripMenuItem1.ToolTipText = "Greenshot is application for easier making screenshots."
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1316,4 +1340,7 @@ Partial Class mainForm
     Friend WithEvents AutoconnectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AdditionalSettingsLabel As LinkLabel
     Friend WithEvents QuickConnectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents FTPServerToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents GreenshotToolStripMenuItem1 As ToolStripMenuItem
 End Class
