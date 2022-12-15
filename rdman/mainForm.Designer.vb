@@ -81,7 +81,6 @@ Partial Class mainForm
         Me.boxSystem = New System.Windows.Forms.ComboBox()
         Me.lblSystem = New System.Windows.Forms.Label()
         Me.groupConnectionSettings = New System.Windows.Forms.GroupBox()
-        Me.lblQuickConnect = New System.Windows.Forms.LinkLabel()
         Me.boxConnectOver = New System.Windows.Forms.CheckBox()
         Me.boxPort = New System.Windows.Forms.TextBox()
         Me.lblPort = New System.Windows.Forms.Label()
@@ -121,6 +120,7 @@ Partial Class mainForm
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompactModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutoconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuickConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
@@ -130,6 +130,7 @@ Partial Class mainForm
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.lblOpenInBrowser = New System.Windows.Forms.LinkLabel()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -816,7 +817,7 @@ Partial Class mainForm
         '
         'groupConnectionSettings
         '
-        Me.groupConnectionSettings.Controls.Add(Me.lblQuickConnect)
+        Me.groupConnectionSettings.Controls.Add(Me.lblOpenInBrowser)
         Me.groupConnectionSettings.Controls.Add(Me.boxConnectOver)
         Me.groupConnectionSettings.Controls.Add(Me.boxPort)
         Me.groupConnectionSettings.Controls.Add(Me.lblPort)
@@ -832,21 +833,6 @@ Partial Class mainForm
         Me.groupConnectionSettings.TabIndex = 0
         Me.groupConnectionSettings.TabStop = False
         Me.groupConnectionSettings.Text = "Connection settings"
-        '
-        'lblQuickConnect
-        '
-        Me.lblQuickConnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblQuickConnect.AutoSize = True
-        Me.lblQuickConnect.Font = New System.Drawing.Font("Segoe UI", 7.5!)
-        Me.lblQuickConnect.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.lblQuickConnect.Location = New System.Drawing.Point(394, 0)
-        Me.lblQuickConnect.Name = "lblQuickConnect"
-        Me.lblQuickConnect.Size = New System.Drawing.Size(71, 12)
-        Me.lblQuickConnect.TabIndex = 7
-        Me.lblQuickConnect.TabStop = True
-        Me.lblQuickConnect.Text = "Quick Connect"
-        Me.lblQuickConnect.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.lblQuickConnect.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'boxConnectOver
         '
@@ -946,7 +932,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem, Me.AutoconnectToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem, Me.AutoconnectToolStripMenuItem, Me.QuickConnectToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -1149,6 +1135,12 @@ Partial Class mainForm
         Me.AutoconnectToolStripMenuItem.Size = New System.Drawing.Size(119, 20)
         Me.AutoconnectToolStripMenuItem.Text = "Do &autoconnection"
         '
+        'QuickConnectToolStripMenuItem
+        '
+        Me.QuickConnectToolStripMenuItem.Name = "QuickConnectToolStripMenuItem"
+        Me.QuickConnectToolStripMenuItem.Size = New System.Drawing.Size(94, 20)
+        Me.QuickConnectToolStripMenuItem.Text = "&Quick Connect"
+        '
         'operatingSystemsImages
         '
         Me.operatingSystemsImages.ImageStream = CType(resources.GetObject("operatingSystemsImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -1197,6 +1189,21 @@ Partial Class mainForm
         'showPasswordTimer
         '
         Me.showPasswordTimer.Interval = 5000
+        '
+        'lblOpenInBrowser
+        '
+        Me.lblOpenInBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblOpenInBrowser.AutoSize = True
+        Me.lblOpenInBrowser.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.lblOpenInBrowser.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.lblOpenInBrowser.Location = New System.Drawing.Point(367, 0)
+        Me.lblOpenInBrowser.Name = "lblOpenInBrowser"
+        Me.lblOpenInBrowser.Size = New System.Drawing.Size(98, 12)
+        Me.lblOpenInBrowser.TabIndex = 8
+        Me.lblOpenInBrowser.TabStop = True
+        Me.lblOpenInBrowser.Text = "Open in WebBrowser"
+        Me.lblOpenInBrowser.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblOpenInBrowser.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'mainForm
         '
@@ -1336,7 +1343,6 @@ Partial Class mainForm
     Friend WithEvents pingProgressBar As System.Windows.Forms.ProgressBar
     Friend WithEvents notifyIconCompactMode As System.Windows.Forms.NotifyIcon
     Friend WithEvents cleanTerminated As System.Windows.Forms.LinkLabel
-    Friend WithEvents lblQuickConnect As System.Windows.Forms.LinkLabel
     Friend WithEvents buttonImport As System.Windows.Forms.Button
     Friend WithEvents buttonExport As System.Windows.Forms.Button
     Friend WithEvents ImportSourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1352,4 +1358,6 @@ Partial Class mainForm
     Friend WithEvents lblPassword As LinkLabel
     Friend WithEvents showPasswordTimer As Timer
     Friend WithEvents AutoconnectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuickConnectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblOpenInBrowser As LinkLabel
 End Class

@@ -359,39 +359,6 @@ Public Class mainForm
         LoadSources(sourcesDb)
     End Sub
 
-    Private Sub lblQuickConnect_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblQuickConnect.LinkClicked
-        commandValueInput.Height = 110
-        commandValueInput.TextBox1.Multiline = False
-        commandValueInput.TextBox1.Height = 20
-
-        commandValueInput.Text = "IP Address or hostname"
-        commandValueInput.TextBox1.Text = ""
-
-        commandValueInput.ShowDialog()
-
-        If commandValueInput.DialogResult = Windows.Forms.DialogResult.OK Then
-            Dim quickIP As String = commandValueInput.TextBox1.Text
-            Dim quickPort As String = "3389"
-
-            If quickIP.Contains(":") Then
-                quickPort = quickIP.Split(":").GetValue(1)
-                quickIP = quickIP.Split(":").GetValue(0)
-            End If
-
-            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP, False, "", "")
-
-            If processPid > 1 Then
-                statistics("Remote session started on " + quickIP + ":" + quickPort + " with PID=" + processPid.ToString)
-            ElseIf processPid = 1 Then
-                statistics("[ERROR] Unable to connect to localhost.")
-            Else
-                statistics("[ERROR] Unable to open remote session.")
-            End If
-        End If
-
-        commandValueInput.TextBox1.Text = ""
-    End Sub
-
     Private Sub lblPassword_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblPassword.LinkClicked
         If textboxPassword.UseSystemPasswordChar = False Then
             textboxPassword.UseSystemPasswordChar = True
@@ -1258,6 +1225,43 @@ Public Class mainForm
     End Sub
 
     Public Declare Auto Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
+
+    Private Sub QuickConnectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuickConnectToolStripMenuItem.Click
+        commandValueInput.Height = 110
+        commandValueInput.TextBox1.Multiline = False
+        commandValueInput.TextBox1.Height = 20
+
+        commandValueInput.Text = "IP Address or hostname"
+        commandValueInput.TextBox1.Text = ""
+
+        commandValueInput.ShowDialog()
+
+        If commandValueInput.DialogResult = Windows.Forms.DialogResult.OK Then
+            Dim quickIP As String = commandValueInput.TextBox1.Text
+            Dim quickPort As String = "3389"
+
+            If quickIP.Contains(":") Then
+                quickPort = quickIP.Split(":").GetValue(1)
+                quickIP = quickIP.Split(":").GetValue(0)
+            End If
+
+            Dim processPid As Integer = runRemote(quickIP, quickPort, True, "1024", "768", False, False, "", quickIP, False, "", "")
+
+            If processPid > 1 Then
+                statistics("Remote session started on " + quickIP + ":" + quickPort + " with PID=" + processPid.ToString)
+            ElseIf processPid = 1 Then
+                statistics("[ERROR] Unable to connect to localhost.")
+            Else
+                statistics("[ERROR] Unable to open remote session.")
+            End If
+        End If
+
+        commandValueInput.TextBox1.Text = ""
+    End Sub
+
+    Private Sub lblOpenInBrowser_Click(sender As Object, e As EventArgs) Handles lblOpenInBrowser.Click
+        System.Diagnostics.Process.Start("https://" + boxIP.Text)
+    End Sub
 
     Public Sub MoveToNextScreen(ByVal processWindow As IntPtr)
         Try
