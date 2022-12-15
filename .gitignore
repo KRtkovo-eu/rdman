@@ -8,3 +8,7 @@ rdman/bin/Release/app.publish/
 rdman/bin/Release/
 
 rdman/obj/Release/
+
+rdman/bin/Debug/
+
+rdman/obj/Debug/

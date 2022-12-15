@@ -68,6 +68,8 @@ Module dataControl
                 Return 3
             Case "Application"
                 Return 5
+            Case "WindowsServer"
+                Return 7
             Case Else
                 Return 4
         End Select

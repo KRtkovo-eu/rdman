@@ -269,6 +269,7 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "terminal.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(6, "add.ico")
+        Me.operatingSystemsIcons.Images.SetKeyName(7, "windows_server_icon.jpg")
         '
         'groupMonitor
         '
@@ -799,7 +800,7 @@ Partial Class mainForm
         Me.boxSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.boxSystem.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.boxSystem.FormattingEnabled = True
-        Me.boxSystem.Items.AddRange(New Object() {"Windows", "Linux", "Android", "MacOS", "other", "Application"})
+        Me.boxSystem.Items.AddRange(New Object() {"Windows", "Linux", "Android", "MacOS", "other", "Application", "WindowsServer"})
         Me.boxSystem.Location = New System.Drawing.Point(115, 21)
         Me.boxSystem.Name = "boxSystem"
         Me.boxSystem.Size = New System.Drawing.Size(237, 21)
@@ -1151,6 +1152,7 @@ Partial Class mainForm
         Me.operatingSystemsImages.Images.SetKeyName(3, "apple.png")
         Me.operatingSystemsImages.Images.SetKeyName(4, "unknown.png")
         Me.operatingSystemsImages.Images.SetKeyName(5, "terminal.png")
+        Me.operatingSystemsImages.Images.SetKeyName(6, "windows_server.jpg")
         '
         'openSourceDb
         '

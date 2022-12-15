@@ -721,6 +721,8 @@ Public Class mainForm
             Select Case item.ToLower
                 Case "w", "windows", "microsoft"
                     item = "windows"
+                Case "windowsserver"
+                    item = "windowsserver"
                 Case "l", "linux"
                     item = "linux"
                 Case "a", "android"
