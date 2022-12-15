@@ -102,7 +102,7 @@ Public Class mainForm
         allahToConsole += vbNewLine
         allahToConsole += "Published under " + My.Application.Info.Copyright
         allahToConsole += vbNewLine
-        allahToConsole += My.Application.Info.CompanyName + ", 2014-2016 [http://krtkovo.eu/]"
+        allahToConsole += My.Application.Info.CompanyName + ", 2014-2023 [http://krtkovo.eu/]"
         allahToConsole += vbNewLine + vbNewLine
         allahToConsole += "Ich bin ein roboter!"
         allahToConsole += vbNewLine + vbNewLine
