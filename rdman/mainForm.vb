@@ -12,9 +12,7 @@ Public Class mainForm
     Dim consoleFont As Font = New Font("Lucida Console", 8, FontStyle.Regular, GraphicsUnit.Point)
     Dim allahToConsole As String = ""
     Dim hasPutty As Boolean = False
-    Dim hasFTP As Boolean = False
     Dim hasCsved As Boolean = False
-    Dim hasFighter As Boolean = False
     Dim hasGreenshot As Boolean = False
     Public Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
     Private Const SW_RESTORE = 9
@@ -117,21 +115,10 @@ Public Class mainForm
             hasCsved = True
         End If
 
-        'If MikroFTP is included, enable menu item
-        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe") = True Then
-            FTPServerToolStripMenuItem.Visible = True
-            hasFTP = True
-        End If
-
         'If PuTTY is included, enable "Use PuTTY" link
         If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\putty\putty.exe") = True Then
             lblUsePutty.Visible = True
             hasPutty = True
-        End If
-
-        'If Fighter is included, change control variable
-        If IO.File.Exists(My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe") Then
-            hasFighter = True
         End If
 
         'If Greenshot is included, enable menu item
@@ -576,27 +563,6 @@ Public Class mainForm
                 Me.Close()
             Case "exportsource"
                 buttonExport_Click(Nothing, Nothing)
-            Case "fight"
-                If hasFighter = True Then
-                    Dim processProperties As ProcessStartInfo = New ProcessStartInfo
-                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!!")
-                    Thread.Sleep(1000)
-                    Me.Refresh()
-                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! .")
-                    Thread.Sleep(1000)
-                    Me.Refresh()
-                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! ..")
-                    Thread.Sleep(1000)
-                    Me.Refresh()
-                    statistics("Starting !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! ...")
-
-                    processProperties.FileName = My.Application.Info.DirectoryPath + "\modules\fighter\fighter.exe"
-
-                    runModule(processProperties, True)
-                    statistics("Started !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!! fight mode !!! FIGHT MODE !!!")
-                End If
-            Case "ftpserver", "ftp"
-                FTPServerToolStripMenuItem_Click(Nothing, New System.EventArgs)
             Case "help"
                 Dim help As String
 
@@ -622,8 +588,6 @@ Public Class mainForm
                 help += vbTab + "exit | Close this program."
                 help += vbNewLine
                 help += vbTab + "exportsource | Export source in separate file."
-                help += vbNewLine
-                help += vbTab + "ftpserver, ftp | Run FTP server module."
                 help += vbNewLine
                 help += vbTab + "help | Show this page."
                 help += vbNewLine
@@ -936,21 +900,6 @@ Public Class mainForm
         runModule(ProcessProperties, True)
     End Sub
 
-    Private Sub FTPServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FTPServerToolStripMenuItem.Click
-        If hasFTP = True Then
-            ftpPath.SelectedPath = My.Application.Info.DirectoryPath + "\modules\mikroftp\share"
-            If (ftpPath.ShowDialog = Windows.Forms.DialogResult.OK) Then
-                Dim ProcessProperties As New ProcessStartInfo
-
-                ProcessProperties.FileName = My.Application.Info.DirectoryPath + "\modules\mikroftp\mikroftp.exe"
-                ProcessProperties.Arguments = Chr(34) + ftpPath.SelectedPath + Chr(34)
-
-                statistics("Starting FTP Server module.")
-                runModule(ProcessProperties, True)
-            End If
-        End If
-    End Sub
-
     Private Sub GreenshotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenshotToolStripMenuItem.Click
         If hasGreenshot = True Then
             Dim ProcessProperties As New ProcessStartInfo
@@ -1102,10 +1051,6 @@ Public Class mainForm
             groupStatistics.Visible = True
             mainContainer.Panel2Collapsed = False
 
-            If hasFTP = True Then
-                FTPServerToolStripMenuItem.Visible = True
-            End If
-
             If hasGreenshot = True Then
                 GreenshotToolStripMenuItem.Visible = True
             End If
@@ -1141,7 +1086,6 @@ Public Class mainForm
             groupResolutionSettings.Visible = False
             groupStatistics.Visible = False
             mainContainer.Panel2Collapsed = True
-            FTPServerToolStripMenuItem.Visible = False
             GreenshotToolStripMenuItem.Visible = False
             AutoconnectToolStripMenuItem.Visible = False
 

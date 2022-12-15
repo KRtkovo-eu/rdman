@@ -113,7 +113,6 @@ Partial Class mainForm
         Me.AskBeforeCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveStatisticsOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KillChildProcessesOnCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FTPServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -309,6 +308,7 @@ Partial Class mainForm
         Me.monitor.FullRowSelect = True
         Me.monitor.GridLines = True
         Me.monitor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.monitor.HideSelection = False
         Me.monitor.Location = New System.Drawing.Point(3, 18)
         Me.monitor.Name = "monitor"
         Me.monitor.ShowGroups = False
@@ -351,12 +351,12 @@ Partial Class mainForm
         '
         Me.contextMenuMonitor.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoveToNextScreenToolStripMenuItem})
         Me.contextMenuMonitor.Name = "contextMenuMonitor"
-        Me.contextMenuMonitor.Size = New System.Drawing.Size(181, 48)
+        Me.contextMenuMonitor.Size = New System.Drawing.Size(182, 26)
         '
         'MoveToNextScreenToolStripMenuItem
         '
         Me.MoveToNextScreenToolStripMenuItem.Name = "MoveToNextScreenToolStripMenuItem"
-        Me.MoveToNextScreenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MoveToNextScreenToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.MoveToNextScreenToolStripMenuItem.Text = "Move to next screen"
         '
         'monitorStates
@@ -460,7 +460,7 @@ Partial Class mainForm
         Me.lblUsePutty.LinkColor = System.Drawing.Color.DodgerBlue
         Me.lblUsePutty.Location = New System.Drawing.Point(570, 24)
         Me.lblUsePutty.Name = "lblUsePutty"
-        Me.lblUsePutty.Size = New System.Drawing.Size(57, 13)
+        Me.lblUsePutty.Size = New System.Drawing.Size(59, 13)
         Me.lblUsePutty.TabIndex = 3
         Me.lblUsePutty.TabStop = True
         Me.lblUsePutty.Text = "Use PuTTY"
@@ -702,7 +702,7 @@ Partial Class mainForm
         Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.lblVersion.Location = New System.Drawing.Point(7, 52)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(49, 13)
+        Me.lblVersion.Size = New System.Drawing.Size(48, 13)
         Me.lblVersion.TabIndex = 2
         Me.lblVersion.Text = "Version:"
         '
@@ -946,7 +946,7 @@ Partial Class mainForm
         'menuBar
         '
         Me.menuBar.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.FTPServerToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem, Me.AutoconnectToolStripMenuItem})
+        Me.menuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.GreenshotToolStripMenuItem, Me.HelpToolStripMenuItem, Me.CompactModeToolStripMenuItem, Me.AutoconnectToolStripMenuItem})
         Me.menuBar.Location = New System.Drawing.Point(0, 0)
         Me.menuBar.Name = "menuBar"
         Me.menuBar.Size = New System.Drawing.Size(892, 24)
@@ -1093,13 +1093,6 @@ Partial Class mainForm
         Me.KillChildProcessesOnCloseToolStripMenuItem.Name = "KillChildProcessesOnCloseToolStripMenuItem"
         Me.KillChildProcessesOnCloseToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.KillChildProcessesOnCloseToolStripMenuItem.Text = "&Kill child processes on close"
-        '
-        'FTPServerToolStripMenuItem
-        '
-        Me.FTPServerToolStripMenuItem.Name = "FTPServerToolStripMenuItem"
-        Me.FTPServerToolStripMenuItem.Size = New System.Drawing.Size(70, 20)
-        Me.FTPServerToolStripMenuItem.Text = "&FTP Server"
-        Me.FTPServerToolStripMenuItem.Visible = False
         '
         'GreenshotToolStripMenuItem
         '
@@ -1335,7 +1328,6 @@ Partial Class mainForm
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents KillChildProcessesOnCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReportAnIssueToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents FTPServerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ftpPath As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents CompactModeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblUsePutty As System.Windows.Forms.LinkLabel

@@ -23,13 +23,7 @@ Public Class aboutForm
         sources += "Sam Francke - uniCSVed 1.1 (Cardware)" + vbNewLine + "[http://csved.sjfrancke.nl/]"
         sources += vbNewLine
         sources += vbNewLine
-        sources += "Smitka development - MikroFTP 1.4.2013 (Freeware)" + vbNewLine + "[http://smitka.org/pc-elektro/mikroftp/]"
-        sources += vbNewLine
-        sources += vbNewLine
         sources += "Simon Tatham - PuTTY 0.63 (MIT License)" + vbNewLine + "[http://putty.org/]"
-        sources += vbNewLine
-        sources += vbNewLine
-        sources += "Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)" + vbNewLine + "[http://www.codeproject.com/Articles/31026/Aviation-Fight]"
         sources += vbNewLine
         sources += vbNewLine
         sources += "Greenshot team - Greenshot (GNU General Public License)" + vbNewLine + "[http://getgreenshot.org]"
