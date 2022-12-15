@@ -656,7 +656,7 @@ Public Class mainForm
             Case "putty"
                 lblUsePutty_LinkClicked(Nothing, Nothing)
             Case "quickconnect"
-                lblQuickConnect_LinkClicked(Nothing, Nothing)
+                QuickConnectToolStripMenuItem_Click(Nothing, Nothing)
             Case "reloadsources"
                 LoadSources(sourcesDb)
             Case "run", "cmd"
