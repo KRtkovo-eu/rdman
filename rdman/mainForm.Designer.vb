@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 7)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
@@ -81,6 +81,7 @@ Partial Class mainForm
         Me.boxSystem = New System.Windows.Forms.ComboBox()
         Me.lblSystem = New System.Windows.Forms.Label()
         Me.groupConnectionSettings = New System.Windows.Forms.GroupBox()
+        Me.lblOpenInBrowser = New System.Windows.Forms.LinkLabel()
         Me.boxConnectOver = New System.Windows.Forms.CheckBox()
         Me.boxPort = New System.Windows.Forms.TextBox()
         Me.lblPort = New System.Windows.Forms.Label()
@@ -130,7 +131,6 @@ Partial Class mainForm
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.lblOpenInBrowser = New System.Windows.Forms.LinkLabel()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -268,8 +268,8 @@ Partial Class mainForm
         Me.operatingSystemsIcons.Images.SetKeyName(3, "apple.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(4, "unknown.ico")
         Me.operatingSystemsIcons.Images.SetKeyName(5, "terminal.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(6, "add.ico")
-        Me.operatingSystemsIcons.Images.SetKeyName(7, "windows_server_icon.jpg")
+        Me.operatingSystemsIcons.Images.SetKeyName(6, "windows_server_icon.jpg")
+        Me.operatingSystemsIcons.Images.SetKeyName(7, "add.ico")
         '
         'groupMonitor
         '
@@ -835,6 +835,21 @@ Partial Class mainForm
         Me.groupConnectionSettings.TabStop = False
         Me.groupConnectionSettings.Text = "Connection settings"
         '
+        'lblOpenInBrowser
+        '
+        Me.lblOpenInBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblOpenInBrowser.AutoSize = True
+        Me.lblOpenInBrowser.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.lblOpenInBrowser.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.lblOpenInBrowser.Location = New System.Drawing.Point(367, 0)
+        Me.lblOpenInBrowser.Name = "lblOpenInBrowser"
+        Me.lblOpenInBrowser.Size = New System.Drawing.Size(98, 12)
+        Me.lblOpenInBrowser.TabIndex = 8
+        Me.lblOpenInBrowser.TabStop = True
+        Me.lblOpenInBrowser.Text = "Open in WebBrowser"
+        Me.lblOpenInBrowser.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblOpenInBrowser.VisitedLinkColor = System.Drawing.Color.DodgerBlue
+        '
         'boxConnectOver
         '
         Me.boxConnectOver.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1191,21 +1206,6 @@ Partial Class mainForm
         'showPasswordTimer
         '
         Me.showPasswordTimer.Interval = 5000
-        '
-        'lblOpenInBrowser
-        '
-        Me.lblOpenInBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblOpenInBrowser.AutoSize = True
-        Me.lblOpenInBrowser.Font = New System.Drawing.Font("Segoe UI", 7.5!)
-        Me.lblOpenInBrowser.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.lblOpenInBrowser.Location = New System.Drawing.Point(367, 0)
-        Me.lblOpenInBrowser.Name = "lblOpenInBrowser"
-        Me.lblOpenInBrowser.Size = New System.Drawing.Size(98, 12)
-        Me.lblOpenInBrowser.TabIndex = 8
-        Me.lblOpenInBrowser.TabStop = True
-        Me.lblOpenInBrowser.Text = "Open in WebBrowser"
-        Me.lblOpenInBrowser.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.lblOpenInBrowser.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
         'mainForm
         '

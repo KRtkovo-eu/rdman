@@ -69,7 +69,7 @@ Module dataControl
             Case "Application"
                 Return 5
             Case "WindowsServer"
-                Return 7
+                Return 6
             Case Else
                 Return 4
         End Select
@@ -246,7 +246,7 @@ Module dataControl
     Public Sub LoadSources(ByVal sources As String)
         mainForm.sourcesList.Clear()
 
-        mainForm.sourcesList.Items.Add("(Add New Node)", 6)
+        mainForm.sourcesList.Items.Add("(Add New Node)", 7)
 
         nodes = csvArray(sources)
 
