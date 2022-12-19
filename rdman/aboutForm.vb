@@ -50,6 +50,8 @@ Public Class aboutForm
                 Me.lblGitHub.Text = "Checking new version..."
                 Me.Refresh()
 
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
                 Dim latest As String = "https://github.com/KRtkovo-eu/rdman/releases/latest"
                 Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(latest), HttpWebRequest)
                 Dim response As HttpWebResponse
