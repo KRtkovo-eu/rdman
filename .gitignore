@@ -12,3 +12,7 @@ rdman/obj/Release/
 rdman/bin/Debug/
 
 rdman/obj/Debug/
+
+publish/
+
+rdman/rdman_2_TemporaryKey.pfx

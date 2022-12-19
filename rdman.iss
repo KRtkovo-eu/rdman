@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.9.1"
-#define MyAppVersionText "v0.9.1"
+#define MyAppVersion "0.9.2"
+#define MyAppVersionText "v0.9.2"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -23,10 +23,10 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\git\rdman\LICENSE
-OutputDir=C:\git\rdman\rdman\publish
+LicenseFile=H:\_projects\rdman\rdman\LICENSE
+OutputDir=H:\_projects\rdman\publish
 OutputBaseFilename=Remote Desktop Manager {#MyAppVersionText} setup
-SetupIconFile=C:\git\rdman\rdman\icons\unknown.ico
+SetupIconFile=H:\_projects\rdman\rdman\icons\unknown.ico
 Compression=lzma
 SolidCompression=yes
 ChangesAssociations=yes
@@ -46,8 +46,8 @@ VersionInfoProductVersion={#MyAppVersion}
 VersionInfoProductTextVersion={#MyAppVersionText}
 ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x86 x64
-WizardImageFile=C:\git\rdman\installerBig.bmp
-WizardSmallImageFile=C:\git\rdman\installerSmall.bmp
+WizardImageFile=H:\_projects\rdman\installerBig.bmp
+WizardSmallImageFile=H:\_projects\rdman\installerSmall.bmp
 
 
 [Languages]
@@ -57,20 +57,17 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.application"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\rdman.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\sources.rdman"; DestDir: "{app}"; Flags: onlyifdoesntexist confirmoverwrite; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\RDPTemplate.rdp"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\asciiGraphics\*"; DestDir: "{app}\asciiGraphics"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\csved\*"; DestDir: "{app}\modules\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\mikroftp\*"; DestDir: "{app}\modules\mikroftp"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: MikroFTP
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\putty\*"; DestDir: "{app}\modules\putty"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Putty
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\fighter\*"; DestDir: "{app}\modules\fighter"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Fighter
-Source: "C:\git\rdman\rdman\publish\Remote Desktop Manager\modules\greenshot\*"; DestDir: "{app}\modules\greenshot"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Greenshot
+Source: "H:\_projects\rdman\rdman\bin\Release\rdman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\rdman.application"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\rdman.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\sources.rdman"; DestDir: "{app}"; Flags: onlyifdoesntexist confirmoverwrite; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\RDPTemplate.rdp"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\asciiGraphics\*"; DestDir: "{app}\asciiGraphics"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\modules\csved\*"; DestDir: "{app}\modules\csved"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: CSVed
+Source: "H:\_projects\rdman\rdman\bin\Release\modules\putty\*"; DestDir: "{app}\modules\putty"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Putty
+Source: "H:\_projects\rdman\rdman\bin\Release\modules\greenshot\*"; DestDir: "{app}\modules\greenshot"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: Greenshot
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -78,9 +75,7 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\modules\uniCSVed"; Filename: "{app}\modules\csved\uniCSVed.exe"; Components: CSVed
-Name: "{group}\modules\mikroFTP"; Filename: "{app}\modules\mikroftp\mikroftp.exe"; Components: MikroFTP
 Name: "{group}\modules\PuTTY"; Filename: "{app}\modules\putty\putty.exe"; Components: Putty
-Name: "{group}\modules\Aviation Fight"; Filename: "{app}\modules\fighter\fighter.exe"; Components: Fighter
 Name: "{group}\modules\Greenshot"; Filename: "{app}\modules\greenshot\Greenshot.exe"; Components: Greenshot
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
@@ -95,9 +90,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 
 [Components]
 Name: "RDMan"; Description: "Remote Desktop Manager"; Types: full custom compact; Flags: checkablealone fixed
-Name: "Fighter"; Description: "Celebration game bonus to one month since first release"; Types: full custom; Flags: fixed
 Name: "CSVed"; Description: "CSVed module for editing database"; Types: custom full
-Name: "MikroFTP"; Description: "MikroFTP server"; Types: custom full
 Name: "PuTTY"; Description: "PuTTY SSH and Telnet client"; Types: custom full
 Name: "Greenshot"; Description: "Greenshot module for simple screenshooting"; Types: custom full
 
