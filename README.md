@@ -3,7 +3,7 @@
 
 Remote Desktop Manager (RDMan) is simple controller for Windows Remote Desktop Connection client (mstsc.exe) which helps you with storing many of remote nodes at one place and recognizable by image and name.
 
-![rdman_0_8_6_2](https://cloud.githubusercontent.com/assets/6234196/8649519/5d98485a-296b-11e5-9447-61ee48315c72.png)
+![rdman_0_9_3](https://raw.githubusercontent.com/KRtkovo-eu/rdman/master/rdman_0.9.3.png
 
 * RDMan stores datas in semicolon separated csv database file.
 * RDMan is portable - without installation.
