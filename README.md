@@ -32,14 +32,8 @@ Paomedia - Sign add & Terminal icons (CC Attribution 3.0 unported)
 Sam Francke - uniCSVed 1.1 (Cardware)
 [http://csved.sjfrancke.nl/]
 
-Smitka development - MikroFTP 1.4.2013 (Freeware)
-[http://smitka.org/pc-elektro/mikroftp/]
-
 Simon Tatham - PuTTY 0.63 (MIT License)
 [http://putty.org/]
-
-Mohammad Reza Khosravi - Aviation Fight 2.0 (The Code Project Open License)
-[http://www.codeproject.com/Articles/31026/Aviation-Fight]
 
 Greenshot team - Greenshot (GNU General Public License)
 [http://getgreenshot.org]
