@@ -1141,21 +1141,22 @@ Partial Class mainForm
         '
         Me.CompactModeToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.CompactModeToolStripMenuItem.Name = "CompactModeToolStripMenuItem"
-        Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(96, 20)
-        Me.CompactModeToolStripMenuItem.Text = "&Compact mode"
+        Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
+        Me.CompactModeToolStripMenuItem.Text = "&Compact"
         '
         'AutoconnectToolStripMenuItem
         '
         Me.AutoconnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.AutoconnectToolStripMenuItem.Name = "AutoconnectToolStripMenuItem"
-        Me.AutoconnectToolStripMenuItem.Size = New System.Drawing.Size(119, 20)
-        Me.AutoconnectToolStripMenuItem.Text = "Do &autoconnection"
+        Me.AutoconnectToolStripMenuItem.Size = New System.Drawing.Size(120, 20)
+        Me.AutoconnectToolStripMenuItem.Text = "Do &Autoconnection"
         '
         'QuickConnectToolStripMenuItem
         '
+        Me.QuickConnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.QuickConnectToolStripMenuItem.Name = "QuickConnectToolStripMenuItem"
-        Me.QuickConnectToolStripMenuItem.Size = New System.Drawing.Size(94, 20)
-        Me.QuickConnectToolStripMenuItem.Text = "&Quick Connect"
+        Me.QuickConnectToolStripMenuItem.Size = New System.Drawing.Size(118, 20)
+        Me.QuickConnectToolStripMenuItem.Text = "&Quick RDP Connect"
         '
         'operatingSystemsImages
         '
