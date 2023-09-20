@@ -1,4 +1,5 @@
 ﻿Imports System.Net
+Imports RdpEncrypt
 
 Module dataControl
 #Region "Global variables"

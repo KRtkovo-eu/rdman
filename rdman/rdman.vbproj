@@ -122,7 +122,6 @@
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="ClipboardHelper.vb" />
-    <Compile Include="RdpEncrypt.vb" />
     <Compile Include="colorStatistics.Designer.vb">
       <DependentUpon>colorStatistics.vb</DependentUpon>
     </Compile>
@@ -296,9 +295,7 @@
     <Content Include="sources.rdman">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="rdman_1_TemporaryKey.pfx" />
     <None Include="rdman_2_TemporaryKey.pfx" />
-    <None Include="rdman_TemporaryKey.pfx" />
     <Content Include="RDPTemplate.rdp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -487,6 +484,10 @@
     <ProjectReference Include="..\AppBarHelper\AppBarHelper.csproj">
       <Project>{1dfb8eab-420b-4be4-96b9-4a549163be61}</Project>
       <Name>AppBarHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RdpEncrypt\RdpEncrypt.vbproj">
+      <Project>{9257171b-dbf3-439e-8b65-4913c14ef73a}</Project>
+      <Name>RdpEncrypt</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

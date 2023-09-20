@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "rdman", "rdman\rdman.vbproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBarHelper", "AppBarHelper\AppBarHelper.csproj", "{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RdpEncrypt", "RdpEncrypt\RdpEncrypt.vbproj", "{9257171B-DBF3-439E-8B65-4913C14EF73A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9257171B-DBF3-439E-8B65-4913C14EF73A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9257171B-DBF3-439E-8B65-4913C14EF73A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9257171B-DBF3-439E-8B65-4913C14EF73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9257171B-DBF3-439E-8B65-4913C14EF73A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

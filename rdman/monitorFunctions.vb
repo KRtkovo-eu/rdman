@@ -41,9 +41,12 @@ Module monitorFunctions
                     Case "(connected)"
                         Try
                             remoteSession = Process.GetProcessById(Convert.ToInt32(node(3)))
-                            If remoteSession.MainWindowHandle <> IntPtr.Zero Then
+                            If remoteSession.MainWindowHandle <> IntPtr.Zero And Not remoteSession.HasExited Then
                                 mainForm.monitor.Items(nodeId).StateImageIndex = 0
                             End If
+
+                            'Ask for some process data to catch ghost dead processes
+                            Dim x = remoteSession.PrivateMemorySize64
                         Catch
                             node(2) = "(disconnected)"
                             mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"

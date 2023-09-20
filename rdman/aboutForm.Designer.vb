@@ -42,6 +42,7 @@ Partial Class aboutForm
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(152, 55)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(53, 20)
@@ -53,6 +54,7 @@ Partial Class aboutForm
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.White
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(152, 122)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(92, 13)
@@ -65,7 +67,7 @@ Partial Class aboutForm
         Me.lblLicense.BackColor = System.Drawing.Color.White
         Me.lblLicense.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLicense.LinkColor = System.Drawing.Color.DeepSkyBlue
-        Me.lblLicense.Location = New System.Drawing.Point(244, 122)
+        Me.lblLicense.Location = New System.Drawing.Point(243, 122)
         Me.lblLicense.Name = "lblLicense"
         Me.lblLicense.Size = New System.Drawing.Size(61, 13)
         Me.lblLicense.TabIndex = 3
