@@ -1,4 +1,4 @@
-﻿Imports System.Security.Permissions
+Imports System.Security.Permissions
 Imports System.Windows.Forms.ListView
 Imports System.IO
 Imports rdman.processWindowState
@@ -1262,7 +1262,7 @@ Public Class mainForm
     End Sub
 
     Private Sub lblOpenInBrowser_Click(sender As Object, e As EventArgs) Handles lblOpenInBrowser.Click
-        System.Diagnostics.Process.Start("https://" + boxIP.Text)
+        ClipboardHelper.CopyTextToClipboard("https://" + boxIP.Text)
     End Sub
 
     Public Sub MoveToNextScreen(ByVal processWindow As IntPtr)

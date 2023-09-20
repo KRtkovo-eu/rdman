@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class mainForm
     Inherits System.Windows.Forms.Form
 
@@ -842,12 +842,12 @@ Partial Class mainForm
         Me.lblOpenInBrowser.AutoSize = True
         Me.lblOpenInBrowser.Font = New System.Drawing.Font("Segoe UI", 7.5!)
         Me.lblOpenInBrowser.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.lblOpenInBrowser.Location = New System.Drawing.Point(367, 0)
+        Me.lblOpenInBrowser.Location = New System.Drawing.Point(334, 0)
         Me.lblOpenInBrowser.Name = "lblOpenInBrowser"
-        Me.lblOpenInBrowser.Size = New System.Drawing.Size(98, 12)
+        Me.lblOpenInBrowser.Size = New System.Drawing.Size(131, 12)
         Me.lblOpenInBrowser.TabIndex = 8
         Me.lblOpenInBrowser.TabStop = True
-        Me.lblOpenInBrowser.Text = "Open in WebBrowser"
+        Me.lblOpenInBrowser.Text = "Copy node URL to clipboard"
         Me.lblOpenInBrowser.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.lblOpenInBrowser.VisitedLinkColor = System.Drawing.Color.DodgerBlue
         '
