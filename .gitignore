@@ -16,3 +16,9 @@ rdman/obj/Debug/
 publish/
 
 rdman/rdman_2_TemporaryKey.pfx
+
+AppBarHelper/bin/
+
+AppBarHelper/obj/
+
+AppBarHelper/.vs/

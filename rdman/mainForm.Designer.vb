@@ -1,4 +1,4 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class mainForm
     Inherits System.Windows.Forms.Form
 
@@ -120,6 +120,9 @@ Partial Class mainForm
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompactModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuickConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.operatingSystemsImages = New System.Windows.Forms.ImageList(Me.components)
         Me.openSourceDb = New System.Windows.Forms.OpenFileDialog()
         Me.saveStatistics = New System.Windows.Forms.SaveFileDialog()
@@ -129,9 +132,6 @@ Partial Class mainForm
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.ConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.QuickConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AutoconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -1145,6 +1145,28 @@ Partial Class mainForm
         Me.CompactModeToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CompactModeToolStripMenuItem.Text = "&Compact"
         '
+        'ConnectionToolStripMenuItem
+        '
+        Me.ConnectionToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ConnectionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.QuickConnectToolStripMenuItem, Me.AutoconnectToolStripMenuItem})
+        Me.ConnectionToolStripMenuItem.Name = "ConnectionToolStripMenuItem"
+        Me.ConnectionToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
+        Me.ConnectionToolStripMenuItem.Text = "Co&nnection"
+        '
+        'QuickConnectToolStripMenuItem
+        '
+        Me.QuickConnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.QuickConnectToolStripMenuItem.Name = "QuickConnectToolStripMenuItem"
+        Me.QuickConnectToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.QuickConnectToolStripMenuItem.Text = "&Quick RDP Connect"
+        '
+        'AutoconnectToolStripMenuItem
+        '
+        Me.AutoconnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.AutoconnectToolStripMenuItem.Name = "AutoconnectToolStripMenuItem"
+        Me.AutoconnectToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.AutoconnectToolStripMenuItem.Text = "&Autoconnect"
+        '
         'operatingSystemsImages
         '
         Me.operatingSystemsImages.ImageStream = CType(resources.GetObject("operatingSystemsImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -1194,28 +1216,6 @@ Partial Class mainForm
         'showPasswordTimer
         '
         Me.showPasswordTimer.Interval = 5000
-        '
-        'ConnectionToolStripMenuItem
-        '
-        Me.ConnectionToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ConnectionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.QuickConnectToolStripMenuItem, Me.AutoconnectToolStripMenuItem})
-        Me.ConnectionToolStripMenuItem.Name = "ConnectionToolStripMenuItem"
-        Me.ConnectionToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
-        Me.ConnectionToolStripMenuItem.Text = "Co&nnection"
-        '
-        'QuickConnectToolStripMenuItem
-        '
-        Me.QuickConnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.QuickConnectToolStripMenuItem.Name = "QuickConnectToolStripMenuItem"
-        Me.QuickConnectToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.QuickConnectToolStripMenuItem.Text = "&Quick RDP Connect"
-        '
-        'AutoconnectToolStripMenuItem
-        '
-        Me.AutoconnectToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.AutoconnectToolStripMenuItem.Name = "AutoconnectToolStripMenuItem"
-        Me.AutoconnectToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.AutoconnectToolStripMenuItem.Text = "&Autoconnect"
         '
         'mainForm
         '

@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "rdman", "rdman\rdman.vbproj", "{C3C73E1E-1FD1-4CC0-9BC3-81250BB7B0D6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBarHelper", "AppBarHelper\AppBarHelper.csproj", "{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBarHelper", "AppBarHelper.csproj", "{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C3C73E1E-1FD1-4CC0-9BC3-81250BB7B0D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3C73E1E-1FD1-4CC0-9BC3-81250BB7B0D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3C73E1E-1FD1-4CC0-9BC3-81250BB7B0D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3C73E1E-1FD1-4CC0-9BC3-81250BB7B0D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DFB8EAB-420B-4BE4-96B9-4A549163BE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E21147CA-FBD2-4832-9823-5BEF0AAEC4DC}
+		SolutionGuid = {ADC35D59-DA91-4BFD-991D-F2731F137529}
 	EndGlobalSection
 EndGlobal

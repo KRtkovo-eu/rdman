@@ -1,8 +1,11 @@
-Imports System.Security.Permissions
+﻿Imports System.Security.Permissions
 Imports System.Windows.Forms.ListView
 Imports System.IO
 Imports rdman.processWindowState
 Imports System.Threading
+Imports AppBarHelper
+Imports System.Net.WebRequestMethods
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
 
 Public Class mainForm
 #Region "Global variables"
@@ -16,6 +19,7 @@ Public Class mainForm
     Dim hasGreenshot As Boolean = False
     Public Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
     Private Const SW_RESTORE = 9
+    Dim appbar As AppBarHelper.AppBarHelper
 #End Region
 
 #Region "Form handle"
@@ -159,6 +163,8 @@ Public Class mainForm
                 End If
             End If
         End If
+
+        appbar = New AppBarHelper.AppBarHelper(Handle, Size, Location)
     End Sub
 
     Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -170,6 +176,10 @@ Public Class mainForm
         End If
 
         statistics("Exiting...")
+
+        If CompactModeToolStripMenuItem.Checked = True Then
+            CompactModeToolStripMenuItem_Click(sender, e)
+        End If
 
         If Me.WindowState = FormWindowState.Normal Then
             My.Settings.width = Me.Width
@@ -1022,6 +1032,8 @@ Public Class mainForm
                 Me.WindowState = FormWindowState.Normal
             End If
 
+            Me.FormBorderStyle = FormBorderStyle.Sizable
+
             Me.MinimumSize = New Size(900, 500)
 
             If lastNormalSize <> Nothing Then
@@ -1031,6 +1043,10 @@ Public Class mainForm
             End If
 
             Me.TopMost = False
+
+            Dim appbarLocSize As KeyValuePair(Of Size, Point) = appbar.ChangeFormPosition(AppBarHelper.AppBarHelper.AppBarEdges.Float, Size, Location)
+            Size = appbarLocSize.Key
+            Location = appbarLocSize.Value
         Else
             CompactModeToolStripMenuItem.Checked = True
             CompactModeToolStripMenuItem.BackColor = Color.DarkBlue
@@ -1050,6 +1066,7 @@ Public Class mainForm
 
             lastWindowState = Me.WindowState
             Me.WindowState = FormWindowState.Normal
+            Me.FormBorderStyle = FormBorderStyle.None
 
             lastNormalSize = Me.Size
 
@@ -1062,6 +1079,10 @@ Public Class mainForm
             End If
 
             Me.TopMost = True
+
+            Dim appbarLocSize As KeyValuePair(Of Size, Point) = appbar.ChangeFormPosition(AppBarHelper.AppBarHelper.AppBarEdges.Left, Size, Location)
+            Size = appbarLocSize.Key
+            Location = appbarLocSize.Value
         End If
     End Sub
 
@@ -1155,10 +1176,10 @@ Public Class mainForm
                     End Select
                 End If
             Else
-                    processPreview.Hide()
-                    lastPid = 0
-                End If
+                processPreview.Hide()
+                lastPid = 0
             End If
+        End If
     End Sub
 
     Private Sub monitor_MouseLeave(sender As Object, e As EventArgs) Handles monitor.MouseLeave
