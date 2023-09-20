@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Remote Desktop Manager"
-#define MyAppVersion "0.9.3"
-#define MyAppVersionText "v0.9.3"
+#define MyAppVersion "0.9.4"
+#define MyAppVersionText "v0.9.4"
 #define MyAppPublisher "KRtkovo.eu design studio"
 #define MyAppURL "http://github.com/KRtkovo-eu/rdman"
 #define MyAppExeName "rdman.exe"
@@ -60,6 +60,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "H:\_projects\rdman\rdman\bin\Release\rdman.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "H:\_projects\rdman\rdman\bin\Release\rdman.application"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "H:\_projects\rdman\rdman\bin\Release\rdman.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\AppBarHelper.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
+Source: "H:\_projects\rdman\rdman\bin\Release\RdpEncrypt.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "H:\_projects\rdman\rdman\bin\Release\sources.rdman"; DestDir: "{app}"; Flags: onlyifdoesntexist confirmoverwrite; Components: RDMan
 Source: "H:\_projects\rdman\rdman\bin\Release\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
 Source: "H:\_projects\rdman\rdman\bin\Release\RDPTemplate.rdp"; DestDir: "{app}"; Flags: ignoreversion; Components: RDMan
