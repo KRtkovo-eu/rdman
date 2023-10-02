@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 Imports RdpEncrypt
 
 Module dataControl
@@ -443,7 +444,7 @@ Module dataControl
             Try
                 'If MSTSC is used and username is filled, try to use stored credentials.
                 If username <> "" And nodeConnectOver = False Then
-                    Dim rdpFilePath As String = My.Application.Info.DirectoryPath + "\Remote Desktop Manager.rdp"
+                    Dim rdpFilePath As String = Path.GetTempPath() + "\" + nodeName + ".rdp" 'My.Application.Info.DirectoryPath + "\Remote Desktop Manager.rdp"
                     Dim usernameDomain As String = ""
 
                     'Parse username (get domain)
