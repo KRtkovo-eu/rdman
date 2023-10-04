@@ -50,6 +50,10 @@ Class MonitorFunctions
 
                             'Ask for some process data to catch ghost dead processes
                             Dim x = remoteSession.PrivateMemorySize64
+
+                            If remoteSession.ProcessName.Contains("mstsc") And remoteSession.MainWindowHandle = IntPtr.Zero And Not remoteSession.HasExited Then
+                                remoteSession.Kill()
+                            End If
                         Catch
                             node(2) = "(disconnected)"
                             mainForm.monitor.Items(nodeId).SubItems(2).Text = "(disconnected)"
@@ -86,6 +90,7 @@ Class MonitorFunctions
                             If remoteSession.MainWindowHandle <> IntPtr.Zero Then
                                 mainForm.monitor.Items(nodeId).StateImageIndex = 4
                             End If
+
                         Catch
                             node(2) = "(closed)"
                             mainForm.monitor.Items(nodeId).SubItems(2).Text = "(closed)"
