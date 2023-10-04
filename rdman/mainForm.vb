@@ -6,6 +6,7 @@ Imports System.Threading
 Imports AppBarHelper
 Imports System.Net.WebRequestMethods
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
+Imports System.Linq
 
 Public Class mainForm
 #Region "Global variables"
@@ -19,7 +20,9 @@ Public Class mainForm
     Dim hasGreenshot As Boolean = False
     Public Declare Function ShowWindow Lib "user32" (ByVal hWnd As System.IntPtr, ByVal nCmdShow As Long) As Long
     Private Const SW_RESTORE = 9
-    Dim appbar As AppBarHelper.AppBarHelper
+    Dim WithEvents compactWindow As AppBarHelper.CompactWindow = New AppBarHelper.CompactWindow(AddressOf commandGetValue, AddressOf dataControl.addProcessToMonitorByPid, AddressOf monitorFocusApplication)
+    Dim WithEvents monitorFunctions As MonitorFunctions = New MonitorFunctions()
+
 #End Region
 
 #Region "Form handle"
@@ -132,6 +135,7 @@ Public Class mainForm
         End If
 
         'Compact mode
+        UseSidebarAsCompactToolStripMenuItem.Checked = My.Settings.sidebarAsCompactMode
         If My.Settings.compactMode = True Then
             CompactModeToolStripMenuItem_Click(sender, New System.EventArgs)
         End If
@@ -151,6 +155,23 @@ Public Class mainForm
 
         'Autoconnect
         dataControl.autoconnect()
+
+        'Events
+
+    End Sub
+
+    Private Sub SourceAddedEvent(sender As Object, e As ItemsChangedArgs) Handles sourcesList.ItemAdded
+        compactWindow.HandleChangesInSources(sourcesList)
+    End Sub
+    Private Sub SourcesClearedEvent(sender As Object, e As EventArgs) Handles sourcesList.ItemsCleared
+        compactWindow.HandleSourcesCleared(sender, e)
+    End Sub
+    Private Sub SourceSelectedCompactEvent(sender As Object, e As String) Handles compactWindow.SourceSelected
+        loadSourceData(e)
+        buttonConnect_Click(Nothing, Nothing)
+    End Sub
+    Private Sub MonitorAddedEvent(sender As ListView) Handles monitorFunctions.MonitorRedraw
+        compactWindow.HandleChangesInMonitor(sender)
     End Sub
 
     Private Sub mainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -163,8 +184,6 @@ Public Class mainForm
                 End If
             End If
         End If
-
-        appbar = New AppBarHelper.AppBarHelper(Handle, Size, Location)
     End Sub
 
     Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -178,7 +197,7 @@ Public Class mainForm
         statistics("Exiting...")
 
         If CompactModeToolStripMenuItem.Checked = True Then
-            CompactModeToolStripMenuItem_Click(sender, e)
+            compactWindow.Close()
         End If
 
         If Me.WindowState = FormWindowState.Normal Then
@@ -200,6 +219,7 @@ Public Class mainForm
         My.Settings.showPreview = Me.ShowpreviewToolStripMenuItem.Checked
         My.Settings.closeChilds = Me.KillChildProcessesOnCloseToolStripMenuItem.Checked
         My.Settings.compactMode = Me.CompactModeToolStripMenuItem.Checked
+        My.Settings.sidebarAsCompactMode = Me.UseSidebarAsCompactToolStripMenuItem.Checked
         My.Settings.Save()
 
         If My.Settings.saveStats = True Then
@@ -207,7 +227,7 @@ Public Class mainForm
         End If
 
         If My.Settings.closeChilds = True Then
-            For Each element In monitorNodes
+            For Each element In monitorFunctions.monitorNodes
                 If element(2) = "(connected)" Or element(2) = "(module)" Or element(2) = "(running)" Then
                     Process.GetProcessById(Convert.ToInt32(element(3))).Kill()
                 End If
@@ -443,7 +463,7 @@ Public Class mainForm
     End Sub
 
     Private Sub pingAll_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles pingAll.LinkClicked
-        pingNodes()
+        monitorFunctions.pingNodes()
     End Sub
 
     Private Sub sourcesList_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles sourcesList.ItemChecked
@@ -622,7 +642,10 @@ Public Class mainForm
             Case "monitorpid"
                 Dim PID As String = commandGetValue("Select PID Of process", False, "")
 
-                addProcessToMonitorByPid(PID)
+                If PID <> "" Then
+                    addProcessToMonitorByPid(PID)
+                End If
+
             Case "newnode"
                 AddNodeToolStripMenuItem_Click(Nothing, New System.EventArgs())
             Case "nodeconnectover", "connectover"
@@ -697,7 +720,7 @@ Public Class mainForm
         End Select
     End Sub
 
-    Private Function commandGetValue(ByVal title As String, ByVal multiline As Boolean, ByVal value As String) As String
+    Public Function commandGetValue(ByVal title As String, ByVal multiline As Boolean, ByVal value As String) As String
         If multiline = True Then
             commandValueInput.Height = 140
             commandValueInput.TextBox1.Multiline = multiline
@@ -1000,89 +1023,101 @@ Public Class mainForm
 
     Public Sub CompactModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompactModeToolStripMenuItem.Click
         If CompactModeToolStripMenuItem.Checked = True Then
+            compactWindow.Minimize()
+
             CompactModeToolStripMenuItem.Checked = False
             CompactModeToolStripMenuItem.BackColor = SystemColors.Control
             CompactModeToolStripMenuItem.ForeColor = SystemColors.ControlText
 
-            boxSourcesPath.Visible = True
-            groupAdditionalInformations.Visible = True
-            groupButtons.Visible = True
-            groupConnectionSettings.Visible = True
-            AutoconnectToolStripMenuItem.Visible = True
+            If Not UseSidebarAsCompactToolStripMenuItem.Checked Then
+                boxSourcesPath.Visible = True
+                groupAdditionalInformations.Visible = True
+                groupButtons.Visible = True
+                groupConnectionSettings.Visible = True
+                AutoconnectToolStripMenuItem.Visible = True
 
-            If boxConnectOver.Checked = True Then
-                groupConnectOver.Visible = True
-            Else
-                groupResolutionSettings.Visible = True
+                If boxConnectOver.Checked = True Then
+                    groupConnectOver.Visible = True
+                Else
+                    groupResolutionSettings.Visible = True
+                End If
+
+                groupImage.Visible = True
+                groupStatistics.Visible = True
+                mainContainer.Panel2Collapsed = False
+
+                If hasGreenshot = True Then
+                    GreenshotToolStripMenuItem.Visible = True
+                End If
+
+                lastCompactSize = Me.Size
+
+                If lastWindowState <> Nothing Then
+                    Me.WindowState = lastWindowState
+                Else
+                    Me.WindowState = FormWindowState.Normal
+                End If
+
+                Me.FormBorderStyle = FormBorderStyle.Sizable
+
+                Me.MinimumSize = New Size(900, 500)
+
+                If lastNormalSize <> Nothing Then
+                    Me.Size = lastNormalSize
+                Else
+                    Me.Size = Me.MinimumSize
+                End If
+
+                Me.TopMost = False
+
+                'Dim appbarLocSize As KeyValuePair(Of Size, Point) = appbar.ChangeFormPosition(AppBarHelper.AppBarHelper.AppBarEdges.Float, Size, Location)
+                'Size = appbarLocSize.Key
+                'Location = appbarLocSize.Value
             End If
-
-            groupImage.Visible = True
-            groupStatistics.Visible = True
-            mainContainer.Panel2Collapsed = False
-
-            If hasGreenshot = True Then
-                GreenshotToolStripMenuItem.Visible = True
-            End If
-
-            lastCompactSize = Me.Size
-
-            If lastWindowState <> Nothing Then
-                Me.WindowState = lastWindowState
-            Else
-                Me.WindowState = FormWindowState.Normal
-            End If
-
-            Me.FormBorderStyle = FormBorderStyle.Sizable
-
-            Me.MinimumSize = New Size(900, 500)
-
-            If lastNormalSize <> Nothing Then
-                Me.Size = lastNormalSize
-            Else
-                Me.Size = Me.MinimumSize
-            End If
-
-            Me.TopMost = False
-
-            Dim appbarLocSize As KeyValuePair(Of Size, Point) = appbar.ChangeFormPosition(AppBarHelper.AppBarHelper.AppBarEdges.Float, Size, Location)
-            Size = appbarLocSize.Key
-            Location = appbarLocSize.Value
         Else
+            If Not compactWindow.IsShown Then
+                compactWindow.Show()
+            Else
+                compactWindow.Maximize()
+            End If
+
             CompactModeToolStripMenuItem.Checked = True
             CompactModeToolStripMenuItem.BackColor = Color.DarkBlue
             CompactModeToolStripMenuItem.ForeColor = Color.White
 
-            boxSourcesPath.Visible = False
-            groupAdditionalInformations.Visible = False
-            groupButtons.Visible = False
-            groupConnectionSettings.Visible = False
-            groupConnectOver.Visible = False
-            groupImage.Visible = False
-            groupResolutionSettings.Visible = False
-            groupStatistics.Visible = False
-            mainContainer.Panel2Collapsed = True
-            GreenshotToolStripMenuItem.Visible = False
-            AutoconnectToolStripMenuItem.Visible = False
+            If Not UseSidebarAsCompactToolStripMenuItem.Checked Then
+                boxSourcesPath.Visible = False
+                groupAdditionalInformations.Visible = False
+                groupButtons.Visible = False
+                groupConnectionSettings.Visible = False
+                groupConnectOver.Visible = False
+                groupImage.Visible = False
+                groupResolutionSettings.Visible = False
+                groupStatistics.Visible = False
+                mainContainer.Panel2Collapsed = True
+                GreenshotToolStripMenuItem.Visible = False
+                AutoconnectToolStripMenuItem.Visible = False
 
-            lastWindowState = Me.WindowState
-            Me.WindowState = FormWindowState.Normal
-            Me.FormBorderStyle = FormBorderStyle.None
+                lastWindowState = Me.WindowState
+                Me.WindowState = FormWindowState.Normal
+                Me.FormBorderStyle = FormBorderStyle.None
 
-            lastNormalSize = Me.Size
+                lastNormalSize = Me.Size
 
-            Me.MinimumSize = New Size(300, 500)
+                Me.MinimumSize = New Size(300, 500)
 
-            If lastCompactSize <> Nothing Then
-                Me.Size = lastCompactSize
-            Else
-                Me.Size = New Size(300, 600)
+                If lastCompactSize <> Nothing Then
+                    Me.Size = lastCompactSize
+                Else
+                    Me.Size = New Size(300, 600)
+                End If
+
+                Me.TopMost = True
+
+                'Dim appbarLocSize As KeyValuePair(Of Size, Point) = appbar.ChangeFormPosition(AppBarHelper.AppBarHelper.AppBarEdges.Left, Size, Location)
+                'Size = appbarLocSize.Key
+                'Location = appbarLocSize.Value
             End If
-
-            Me.TopMost = True
-
-            Dim appbarLocSize As KeyValuePair(Of Size, Point) = appbar.ChangeFormPosition(AppBarHelper.AppBarHelper.AppBarEdges.Left, Size, Location)
-            Size = appbarLocSize.Key
-            Location = appbarLocSize.Value
         End If
     End Sub
 
@@ -1091,7 +1126,7 @@ Public Class mainForm
 #Region "monitorHandle"
 
     Private Sub monitorTimer_Tick(sender As Object, e As EventArgs) Handles monitorTimer.Tick
-        monitorCheckStates()
+        monitorFunctions.monitorCheckStates()
     End Sub
 
     Public Sub monitor_DoubleClick(sender As Object, e As EventArgs) Handles monitor.DoubleClick
@@ -1113,9 +1148,9 @@ Public Class mainForm
                         End Try
                     End If
                 Case "(disconnected)", "(closed)"
-                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                    monitorFunctions.monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 Case "(failed)"
-                    monitorDelNode(node.SubItems(0).Text, "0")
+                    monitorFunctions.monitorDelNode(node.SubItems(0).Text, "0")
             End Select
         Next
     End Sub
@@ -1125,9 +1160,9 @@ Public Class mainForm
 
             Select Case node.SubItems(2).Text
                 Case "(disconnected)", "(closed)"
-                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                    monitorFunctions.monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 Case "(failed)"
-                    monitorDelNode(node.SubItems(0).Text, "0")
+                    monitorFunctions.monitorDelNode(node.SubItems(0).Text, "0")
             End Select
         Next
     End Sub
@@ -1141,7 +1176,7 @@ Public Class mainForm
                     Select Case monitorElement.SubItems(2).Text
                         Case "(connected)", "(module)", "(running)"
                             Dim PID As String = monitorElement.SubItems(3).Text
-                            Dim processImage As Image = getWindowScreenshot(PID)
+                            Dim processImage As Image = monitorFunctions.getWindowScreenshot(PID)
                             Dim xPos, yPos As Integer
                             Dim screenArea As Rectangle = Screen.GetWorkingArea(MousePosition)
 
@@ -1172,12 +1207,12 @@ Public Class mainForm
                             End If
                         Case Else
                             processPreview.Hide()
-                            lastPid = 0
+                            monitorFunctions.lastPid = 0
                     End Select
                 End If
             Else
                 processPreview.Hide()
-                lastPid = 0
+                monitorFunctions.lastPid = 0
             End If
         End If
     End Sub
@@ -1185,7 +1220,7 @@ Public Class mainForm
     Private Sub monitor_MouseLeave(sender As Object, e As EventArgs) Handles monitor.MouseLeave
         processPreview.Hide()
         processPreviewHover.Stop()
-        lastPid = 0
+        monitorFunctions.lastPid = 0
     End Sub
 
     Dim tickerItem As ListViewItem
@@ -1196,6 +1231,11 @@ Public Class mainForm
     Private Sub monitor_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles monitor.ItemMouseHover
         tickerItem = e.Item
         processPreviewHover.Start()
+    End Sub
+
+    Public Sub monitorFocusApplication(ByVal monitorText As String)
+        Dim matchingItem As ListViewItem = monitor.Items.Cast(Of ListViewItem)().FirstOrDefault(Function(x) x.Text = monitorText)
+        monitorFocusApplication(matchingItem)
     End Sub
 
     Public Sub monitorFocusApplication(node As ListViewItem)
@@ -1219,22 +1259,22 @@ Public Class mainForm
             Case "(disconnected)"
                 If MessageBox.Show("Do you want to reconnect to this remote session?", "Reconnect?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                     loadSourceData(node.SubItems(0).Text)
-                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                    monitorFunctions.monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                     buttonConnect_Click(Nothing, Nothing)
                 Else
-                    monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                    monitorFunctions.monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
                 End If
             Case "(closed)"
-                monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
+                monitorFunctions.monitorDelNode(node.SubItems(0).Text, node.SubItems(3).Text)
             Case "(failed)"
-                monitorDelNode(node.SubItems(0).Text, "0")
+                monitorFunctions.monitorDelNode(node.SubItems(0).Text, "0")
         End Select
     End Sub
 #End Region
 
 #Region "monitorContextMenu"
     Private Sub MoveToNextScreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveToNextScreenToolStripMenuItem.Click
-        Dim process As Process = Process.GetProcessById(ReturnProcessPID(ReturnSelectedProcess))
+        Dim process As Process = Process.GetProcessById(monitorFunctions.ReturnProcessPID(monitorFunctions.ReturnSelectedProcess))
 
         MoveToNextScreen(process.MainWindowHandle)
     End Sub
@@ -1295,5 +1335,13 @@ Public Class mainForm
             statistics(ex.Message)
         End Try
     End Sub
+
+    Private Sub UseSidebarAsCompactToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseSidebarAsCompactToolStripMenuItem.Click
+        UseSidebarAsCompactToolStripMenuItem.Checked = Not UseSidebarAsCompactToolStripMenuItem.Checked
+    End Sub
 #End Region
+
+    Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean, ByVal moduleRun As Boolean)
+        monitorFunctions.setMonitor(node, success, moduleRun)
+    End Sub
 End Class

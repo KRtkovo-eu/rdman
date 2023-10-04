@@ -23,18 +23,18 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 7)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("(Add New Node)", 7)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.mainContainer = New System.Windows.Forms.SplitContainer()
         Me.containerSourcesMonitor = New System.Windows.Forms.SplitContainer()
         Me.groupSourcesList = New System.Windows.Forms.GroupBox()
         Me.pingProgressBar = New System.Windows.Forms.ProgressBar()
         Me.pingAll = New System.Windows.Forms.LinkLabel()
-        Me.sourcesList = New System.Windows.Forms.ListView()
+        Me.sourcesList = New AppBarHelper.EventableListView()
         Me.operatingSystemsIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.groupMonitor = New System.Windows.Forms.GroupBox()
         Me.cleanTerminated = New System.Windows.Forms.LinkLabel()
-        Me.monitor = New System.Windows.Forms.ListView()
+        Me.monitor = New AppBarHelper.EventableListView()
         Me.columnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnIP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnState = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -132,6 +132,7 @@ Partial Class mainForm
         Me.processPreviewHover = New System.Windows.Forms.Timer(Me.components)
         Me.notifyIconCompactMode = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.showPasswordTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.UseSidebarAsCompactToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainContainer.Panel1.SuspendLayout()
         Me.mainContainer.Panel2.SuspendLayout()
@@ -243,9 +244,9 @@ Partial Class mainForm
         Me.sourcesList.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.sourcesList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.sourcesList.HideSelection = False
-        ListViewItem2.StateImageIndex = 0
-        ListViewItem2.Tag = ""
-        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        ListViewItem1.StateImageIndex = 0
+        ListViewItem1.Tag = ""
+        Me.sourcesList.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.sourcesList.LabelWrap = False
         Me.sourcesList.Location = New System.Drawing.Point(3, 18)
         Me.sourcesList.MultiSelect = False
@@ -1044,7 +1045,7 @@ Partial Class mainForm
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ShowpreviewToolStripMenuItem, Me.ToolStripSeparator4, Me.CheckForupdateOnStartToolStripMenuItem, Me.ToolStripSeparator5, Me.AskBeforeCloseToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.KillChildProcessesOnCloseToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ColorOfStatisticsConsoleToolStripMenuItem, Me.ShowpreviewToolStripMenuItem, Me.UseSidebarAsCompactToolStripMenuItem, Me.ToolStripSeparator4, Me.CheckForupdateOnStartToolStripMenuItem, Me.ToolStripSeparator5, Me.AskBeforeCloseToolStripMenuItem, Me.SaveStatisticsOnCloseToolStripMenuItem, Me.KillChildProcessesOnCloseToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "&Options"
@@ -1217,6 +1218,13 @@ Partial Class mainForm
         '
         Me.showPasswordTimer.Interval = 5000
         '
+        'UseSidebarAsCompactToolStripMenuItem
+        '
+        Me.UseSidebarAsCompactToolStripMenuItem.Enabled = False
+        Me.UseSidebarAsCompactToolStripMenuItem.Name = "UseSidebarAsCompactToolStripMenuItem"
+        Me.UseSidebarAsCompactToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.UseSidebarAsCompactToolStripMenuItem.Text = "Use sidebar as &Compact"
+        '
         'mainForm
         '
         Me.AcceptButton = Me.buttonConnect
@@ -1311,7 +1319,7 @@ Partial Class mainForm
     Friend WithEvents SaveStatisticsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents saveStatistics As System.Windows.Forms.SaveFileDialog
     Friend WithEvents SaveNodeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents sourcesList As System.Windows.Forms.ListView
+    Friend WithEvents sourcesList As AppBarHelper.EventableListView
     Friend WithEvents EditSourcesDatabaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -1331,7 +1339,7 @@ Partial Class mainForm
     Friend WithEvents SaveStatisticsOnCloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ColorOfStatisticsConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents monitor As System.Windows.Forms.ListView
+    Friend WithEvents monitor As AppBarHelper.EventableListView
     Friend WithEvents columnName As System.Windows.Forms.ColumnHeader
     Friend WithEvents columnIP As System.Windows.Forms.ColumnHeader
     Friend WithEvents columnState As System.Windows.Forms.ColumnHeader
@@ -1373,4 +1381,5 @@ Partial Class mainForm
     Friend WithEvents ConnectionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuickConnectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutoconnectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UseSidebarAsCompactToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -1,6 +1,7 @@
 ﻿Imports rdman.processWindowState
 
-Module monitorFunctions
+Class MonitorFunctions
+    Public Event MonitorRedraw(ByVal MonitorItems As ListView)
     Public monitorNodes As List(Of String()) = New List(Of String())
 
     Public Sub setMonitor(ByVal node As String(), ByVal success As Boolean)
@@ -29,6 +30,8 @@ Module monitorFunctions
                 listViewItem.SubItems.Add(node(x))
             Next
         End If
+
+        RaiseEvent MonitorRedraw(mainForm.monitor)
     End Sub
 
     Public Sub monitorCheckStates()
@@ -99,6 +102,8 @@ Module monitorFunctions
                 nodeId = nodeId + 1
             Next
         End If
+
+        RaiseEvent MonitorRedraw(mainForm.monitor)
     End Sub
 
     Public Sub monitorDelNode(ByVal nodeName As String, ByVal PID As String)
@@ -112,6 +117,8 @@ Module monitorFunctions
             End If
             nodeId = nodeId + 1
         Next
+
+        RaiseEvent MonitorRedraw(mainForm.monitor)
     End Sub
 
     Public lastPid As Integer
@@ -255,4 +262,4 @@ Module monitorFunctions
         failed
     End Enum
 #End Region
-End Module
+End Class

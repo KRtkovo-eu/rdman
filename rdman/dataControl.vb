@@ -246,17 +246,17 @@ Module dataControl
     End Sub
 
     Public Sub LoadSources(ByVal sources As String)
-        mainForm.sourcesList.Clear()
+        mainForm.sourcesList.Reload()
 
-        mainForm.sourcesList.Items.Add("(Add New Node)", 7)
+        mainForm.sourcesList.Add(New ListViewItem("(Add New Node)", 7))
 
         nodes = csvArray(sources)
 
         For Each element In nodes
             If element(2) <> "" Then
-                mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7)))
+                mainForm.sourcesList.Add(New ListViewItem(element(0) + " [" + element(1) + ":" + element(2) + "]", systemToIndexNum(element(7))))
             Else
-                mainForm.sourcesList.Items.Add(element(0) + " [" + element(1) + "]", systemToIndexNum(element(7)))
+                mainForm.sourcesList.Add(New ListViewItem(element(0) + " [" + element(1) + "]", systemToIndexNum(element(7))))
             End If
         Next
 
@@ -474,23 +474,23 @@ Module dataControl
                 End If
 
                 monitorNodeDetails = {nodeName, nodeAddressToConnect, state, mstsc.Id.ToString, ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
-                setMonitor(monitorNodeDetails, True, application)
+                mainForm.setMonitor(monitorNodeDetails, True, application)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
 
-                If nodeFullscreen = True Then
-                    Threading.Thread.Sleep(2000)
+                'If nodeFullscreen = True Then
+                '    Threading.Thread.Sleep(2000)
 
-                    If mstsc.MainWindowTitle.Contains(nodeIP) = False Then
-                        mstsc.WaitForInputIdle(3000)
-                    End If
-
-                    mainForm.MoveToNextScreen(mstsc.MainWindowHandle)
+                If mstsc.MainWindowTitle.Contains(nodeIP) = False Then
+                    mstsc.WaitForInputIdle(3000)
                 End If
+
+                '    mainForm.MoveToNextScreen(mstsc.MainWindowHandle)
+                'End If
 
                 Return mstsc.Id
             Catch ex As Exception
                 monitorNodeDetails = {nodeName, nodeAddressToConnect, "(failed)", "0", ProcessProperties.FileName.Substring(ProcessProperties.FileName.LastIndexOf("\") + 1) + " " + ProcessProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}
-                setMonitor(monitorNodeDetails, False)
+                mainForm.setMonitor(monitorNodeDetails, False, False)
                 statistics("Execution > " + ProcessProperties.FileName + " " + ProcessProperties.Arguments)
                 statistics("Unexpectedly ended with error: " + ex.Message)
                 Return 0
@@ -514,10 +514,10 @@ Module dataControl
                 status = "(running)"
             End If
 
-            setMonitor({moduleProperties.FileName.Substring(moduleProperties.FileName.LastIndexOf("\") + 1), "localhost", status, moduleProcess.Id.ToString, moduleProperties.FileName + " " + moduleProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+            mainForm.setMonitor({moduleProperties.FileName.Substring(moduleProperties.FileName.LastIndexOf("\") + 1), "localhost", status, moduleProcess.Id.ToString, moduleProperties.FileName + " " + moduleProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
             statistics("Execution > " + moduleProperties.FileName + " " + moduleProperties.Arguments)
         Catch ex As Exception
-            setMonitor({moduleProperties.FileName.Substring(moduleProperties.FileName.LastIndexOf("\") + 1), "localhost", "(closed)", "0", moduleProperties.FileName + " " + moduleProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
+            mainForm.setMonitor({moduleProperties.FileName.Substring(moduleProperties.FileName.LastIndexOf("\") + 1), "localhost", "(closed)", "0", moduleProperties.FileName + " " + moduleProperties.Arguments, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}, False, True)
             statistics("Execution > " + moduleProperties.FileName + " " + moduleProperties.Arguments)
             statistics("Unexpectedly ended... with error: " + ex.Message)
         End Try
@@ -529,7 +529,7 @@ Module dataControl
 
             moduleProcess = Process.GetProcessById(Convert.ToInt32(PID))
 
-            setMonitor({moduleProcess.ProcessName, "localhost", "(running)", PID, moduleProcess.ProcessName, moduleProcess.StartTime.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
+            mainForm.setMonitor({moduleProcess.ProcessName, "localhost", "(running)", PID, moduleProcess.ProcessName, moduleProcess.StartTime.ToString("yyyy/MM/dd HH:mm:ss")}, True, True)
             statistics("Process " + PID + " [" + moduleProcess.ProcessName + "] added to monitor.")
         Catch ex As Exception
             statistics(ex.Message)

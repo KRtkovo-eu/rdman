@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace AppBarHelper
 {
@@ -272,5 +273,63 @@ namespace AppBarHelper
             return ShellApi.RegisterWindowMessage(uniqueMessageString);
         }
         #endregion
+
+
+        public static Color GetAccentColor()
+        {
+            const String DWM_KEY = @"Software\Microsoft\Windows\DWM";
+            using (RegistryKey dwmKey = Registry.CurrentUser.OpenSubKey(DWM_KEY, RegistryKeyPermissionCheck.ReadSubTree))
+            {
+                const String KEY_EX_MSG = "The \"HKCU\\" + DWM_KEY + "\" registry key does not exist.";
+                if (dwmKey is null) throw new InvalidOperationException(KEY_EX_MSG);
+
+                Object accentColorObj = dwmKey.GetValue("AccentColor");
+                if (accentColorObj is Int32 accentColorDword)
+                {
+                    return ParseDWordColor(accentColorDword);
+                }
+                else
+                {
+                    const String VALUE_EX_MSG = "The \"HKCU\\" + DWM_KEY + "\\AccentColor\" registry key value could not be parsed as an ABGR color.";
+                    throw new InvalidOperationException(VALUE_EX_MSG);
+                }
+            }
+
+        }
+
+        private static Color ParseDWordColor(Int32 color)
+        {
+            Byte
+                a = (byte)((color >> 24) & 0xFF),
+                b = (byte)((color >> 16) & 0xFF),
+                g = (byte)((color >> 8) & 0xFF),
+                r = (byte)((color >> 0) & 0xFF);
+
+
+            return Color.FromArgb(a, r, g, b);
+        }
+
+        public static Color ChangeColorBrightness(Color color, float correctionFactor)
+        {
+            float red = (float)color.R;
+            float green = (float)color.G;
+            float blue = (float)color.B;
+
+            if (correctionFactor < 0)
+            {
+                correctionFactor = 1 + correctionFactor;
+                red *= correctionFactor;
+                green *= correctionFactor;
+                blue *= correctionFactor;
+            }
+            else
+            {
+                red = (255 - red) * correctionFactor + red;
+                green = (255 - green) * correctionFactor + green;
+                blue = (255 - blue) * correctionFactor + blue;
+            }
+
+            return Color.FromArgb(color.A, Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
+        }
     }
 }
