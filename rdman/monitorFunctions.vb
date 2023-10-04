@@ -51,7 +51,7 @@ Class MonitorFunctions
                             'Ask for some process data to catch ghost dead processes
                             Dim x = remoteSession.PrivateMemorySize64
 
-                            If remoteSession.ProcessName.Contains("mstsc") And remoteSession.MainWindowHandle = IntPtr.Zero And Not remoteSession.HasExited Then
+                            If remoteSession.ProcessName.Contains("mstsc") And (DateTime.Now - remoteSession.StartTime).TotalSeconds >= 60 And remoteSession.MainWindowHandle = IntPtr.Zero And Not remoteSession.HasExited Then
                                 remoteSession.Kill()
                             End If
                         Catch
