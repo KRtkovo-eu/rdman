@@ -152,10 +152,12 @@
             // 
             // PanelMonitored
             // 
-            this.PanelMonitored.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelMonitored.AutoSize = true;
+            this.PanelMonitored.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.PanelMonitored.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelMonitored.Location = new System.Drawing.Point(0, 0);
             this.PanelMonitored.Name = "PanelMonitored";
-            this.PanelMonitored.Size = new System.Drawing.Size(180, 519);
+            this.PanelMonitored.Size = new System.Drawing.Size(180, 0);
             this.PanelMonitored.TabIndex = 3;
             // 
             // monitorStates

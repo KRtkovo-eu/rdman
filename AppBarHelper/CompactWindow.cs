@@ -164,7 +164,7 @@ namespace AppBarHelper
                 {
                     NoFocusSourceButton myButton = new NoFocusSourceButton();
                     myButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-                    myButton.Dock = IsMonitor ? DockStyle.Top : DockStyle.Bottom;
+                    myButton.Dock = DockStyle.Bottom;
                     myButton.FlatAppearance.BorderSize = 0;
                     myButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                     myButton.ForeColor = System.Drawing.Color.White;
