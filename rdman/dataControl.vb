@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Windows.Forms
 Imports RdpEncrypt
 
 Module dataControl
@@ -413,7 +414,13 @@ Module dataControl
                 ProcessProperties.FileName = mstscPath
 
                 If nodeFullscreen = True Then
-                    If nodeMultimon = True Then
+                    Dim useWorkAreaFullscreen As Boolean = mainForm.CompactModeToolStripMenuItem.Checked AndAlso mainForm.UseSidebarAsCompactToolStripMenuItem.Checked
+
+                    If useWorkAreaFullscreen = True Then
+                        Dim availableWorkArea As Rectangle = Screen.PrimaryScreen.WorkingArea
+                        ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /w:" + availableWorkArea.Width.ToString() + " /h:" + availableWorkArea.Height.ToString()
+                        statistics("Compact mode sidebar detected. Fullscreen session is started in available work area " + availableWorkArea.Width.ToString() + "x" + availableWorkArea.Height.ToString() + ".")
+                    ElseIf nodeMultimon = True Then
                         ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /multimon"
                     Else
                         ProcessProperties.Arguments = "/v:" + nodeAddressToConnect + " /f"
