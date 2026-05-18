@@ -87,10 +87,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>636F9A63A595B684AC8E9C037B47231E488C6FBD</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>68B625BEAF4D884722E33360D8EC3A8928266695</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>rdman_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>rdman_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -301,6 +301,7 @@
     <Content Include="RDPTemplate.rdp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="rdman_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="asciiGraphics\4.txt">
